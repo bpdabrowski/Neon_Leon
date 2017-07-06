@@ -145,18 +145,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var coinAnimationNormal: SKAction!
     var coinAnimationSpecial: SKAction!
-    var platformMove: SKAction!
+    /*var platformMove: SKAction!
     var platformMoveBack: SKAction!
-    var platformSequence: SKAction!
+    var platformSequence: SKAction!*/
     
     
     //3
     override func didMove(to view: SKView) {
         coinAnimationNormal = setupAnimationWithPrefix("powerup05_", start: 1, end: 6, timePerFrame: 0.1)
         coinAnimationSpecial = setupAnimationWithPrefix("powerup01_", start: 1, end: 6, timePerFrame: 0.1)
-        platformMove = SKAction.moveBy(x: 200, y: 0, duration: 0.5)
+        /*platformMove = SKAction.moveBy(x: 200, y: 0, duration: 0.5)
         platformMoveBack = SKAction.moveBy(x: -200, y: 0, duration: 0.5)
-        platformSequence = SKAction.sequence([platformMove, platformMoveBack])
+        platformSequence = SKAction.sequence([platformMove, platformMoveBack])*/
         
         setupNodes()
         setupLevel()
@@ -355,7 +355,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     switch nodePhysicsBody.categoryBitMask {
                     case PhysicsCategory.PlatformNormal:
                         newNode = self.platform.copy() as! SKSpriteNode
-                        newNode.run(SKAction.repeatForever(self.platformSequence))
+                        //newNode.run(SKAction.repeatForever(self.platformSequence))
                     default:
                         newNode = node.copy() as! SKSpriteNode
                     }
