@@ -197,6 +197,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         touchCountLabel.zPosition = 100
         touchCountLabel.position = CGPoint(x: -300, y: 800)
         camera?.addChild(touchCountLabel)
+        
+        
     }
     
     func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
@@ -204,15 +206,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if playerState == .idle {
             if gesture.direction == UISwipeGestureRecognizerDirection.up {
                 if jumpState == .small {
-                    player.physicsBody?.isDynamic = true
+                    //player.physicsBody?.isDynamic = true
                     jumpLabel.text = "Jump"
                     jumpPlayer()
                 } else if jumpState == .medium {
-                    player.physicsBody?.isDynamic = true
+                    //player.physicsBody?.isDynamic = true
                     jumpLabel.text = "Boost"
                     boostPlayer()
                 } else if jumpState == .big {
-                    player.physicsBody?.isDynamic = true
+                    //player.physicsBody?.isDynamic = true
                     jumpLabel.text = "Super Boost"
                     superBoostPlayer()
                 }
@@ -298,8 +300,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody!.isDynamic = false
         player.physicsBody!.allowsRotation = false
         player.physicsBody!.categoryBitMask = PhysicsCategory.Player
-        player.physicsBody!.collisionBitMask = PhysicsCategory.PlatformNormal
-       
+        player.physicsBody!.collisionBitMask = 0//PhysicsCategory.PlatformNormal
+        
         playerTrail = addTrail(name: "PlayerTrail")
     }
     
@@ -349,7 +351,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //if gameState == .playing {
         
-            overlay.enumerateChildNodes(withName: "platform3") { (node, stop) in
+            /*overlay.enumerateChildNodes(withName: "platform3") { (node, stop) in
                 var newNode = SKSpriteNode()
                 if let nodePhysicsBody = node.physicsBody {
                     switch nodePhysicsBody.categoryBitMask {
@@ -364,7 +366,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     node.removeFromParent()
                 }
             }
-        //}
+        //}*/
     }
     
     func setupAnimationWithPrefix(_ prefix: String, start: Int, end: Int, timePerFrame: TimeInterval) -> SKAction {
@@ -625,6 +627,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             updateCollisionLava()
             updateExplosions(deltaTime)
             //updateRedAlert(deltaTime)
+            if playerState == .jump {
+                player.physicsBody?.affectedByGravity = true
+            }
         }
     }
     
@@ -857,7 +862,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        isFingerOnCat = true
+        //isFingerOnCat = true
 
         
         if gameState == .waitingForTap {
@@ -870,7 +875,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
          }
         
         if gameState == .playing {
-            if isFingerOnCat == true {
+            //if isFingerOnCat == true {
                 //updateTouchTime(deltaTime)
                 
                 let touch = touches.first
@@ -889,7 +894,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         touchCountLabel.text = "4"
                     }
                 }
-            }
+            //}
             
             /*
              When the screen is tapped one time make the player crouch a little bit
@@ -1013,8 +1018,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bomb.removeFromParent()
         run(soundExplosions[3])
         gameState = .playing
-        //player.physicsBody!.isDynamic = true
-        //superBoostPlayer()
+        player.physicsBody!.isDynamic = true
+        superBoostPlayer()
         playBackgroundMusic(name: "bgMusic.mp3")
         
         let alarm = SKAudioNode(fileNamed: "alarm.wav")
@@ -1063,6 +1068,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let playerPosition = fgNode.convert(player.position, to: scene!)
         let limitJoint = SKPhysicsJointLimit.joint(withBodyA: player.physicsBody!, bodyB: platform.physicsBody!, anchorA: platformPosition, anchorB: playerPosition)*/
         
+        //player.physicsBody?.affectedByGravity = true
+        
         let other = contact.bodyA.categoryBitMask ==
             PhysicsCategory.Player ? contact.bodyB : contact.bodyA
         switch other.categoryBitMask {
@@ -1079,14 +1086,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 run(soundBoost)
             }
         case PhysicsCategory.PlatformNormal:
-            player.physicsBody!.velocity.dy = 0
-            player.physicsBody!.isDynamic = true
-            playerState = .idle
+            if playerState == .jump {
+                player.physicsBody?.affectedByGravity = true
+            }
+            //playerState = .idle
             if let platform = other.node as? SKSpriteNode {
+                
+                
                 if player.physicsBody!.velocity.dy < 0 {
+                    player.physicsBody?.isDynamic = true
+                    player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                    //player.physicsBody?.angularVelocity = 0
+                    player.physicsBody?.affectedByGravity = false
+                    playerState = .idle
+                    print(playerState)
+                    //player.physicsBody!.velocity.dy = 0
+                    //player.physicsBody!.isDynamic = false
+                    //platformAction(platform, breakable: false)
                     
-                    platformAction(platform, breakable: false)
-                    
+                    //jumpPlayer()
                     run(soundJump)
                 }
             }
@@ -1101,7 +1119,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         default:
             break
             }
-
         }
     
     // MARK: - Particles
