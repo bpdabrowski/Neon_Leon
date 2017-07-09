@@ -629,7 +629,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             updateCollisionLava()
             updateExplosions(deltaTime)
             //updateRedAlert(deltaTime)
-            if playerState == .jump {
+            if playerState != .idle {
                 player.physicsBody?.affectedByGravity = true
             }
         }
@@ -941,29 +941,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if gameState == .playing/*isFingerOnCat*/ {
-            
-
-            
+        if playerState != .idle {
             let touch = touches.first
             let touchLocation = touch!.location(in: fgNode)
             let previousLocation = touch!.previousLocation(in: fgNode)
-            
-            //let playerConvert = convert(player.position, from: fgNode)
-            
-            //let cat = player/*childNode(withName: "cat_sleepy"/*playerCategoryName*/) as! SKSpriteNode*/
-            
-            // The players side to side speed is determined by the number to the right
             let catX = player.position.x + ((touchLocation.x - previousLocation.x) * 2.5)
-            
-            //catX = max(catX, player.size.width/2)
-            //catX = min(-playerConvert.x, size.width - player.size.width/2)
-            
             player.position = CGPoint(x: catX, y: player.position.y)
-            
-            //boostPlayer()
-            
-            
             
         }
     }
