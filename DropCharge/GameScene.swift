@@ -278,8 +278,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Place initial platform
         let initialPlatform = platform5Across.copy() as! SKSpriteNode
         var overlayPosition = player.position
+        
+        
         overlayPosition.y = player.position.y -
-            ((player.size.height * 0.5) +
+            ((player.size.height * 0.316) +
             (initialPlatform.size.height * 0.20))
         initialPlatform.position = overlayPosition
         fgNode.addChild(initialPlatform)
@@ -1099,7 +1101,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     //player.physicsBody?.angularVelocity = 0
                     player.physicsBody?.affectedByGravity = false
                     playerState = .idle
-                    print(playerState)
                     //player.physicsBody!.velocity.dy = 0
                     //player.physicsBody!.isDynamic = false
                     //platformAction(platform, breakable: false)
