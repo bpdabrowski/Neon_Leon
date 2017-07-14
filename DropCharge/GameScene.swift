@@ -145,33 +145,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var coinAnimationNormal: SKAction!
     var coinAnimationSpecial: SKAction!
-    /*var platformMove: SKAction!
-    var platformMoveBack: SKAction!
-    var platformSequence: SKAction!*/
-    
     
     //3
     override func didMove(to view: SKView) {
+        view.showsPhysics = true
+        
         coinAnimationNormal = setupAnimationWithPrefix("powerup05_", start: 1, end: 6, timePerFrame: 0.1)
         coinAnimationSpecial = setupAnimationWithPrefix("powerup01_", start: 1, end: 6, timePerFrame: 0.1)
-        /*platformMove = SKAction.moveBy(x: 200, y: 0, duration: 0.5)
-        platformMoveBack = SKAction.moveBy(x: -200, y: 0, duration: 0.5)
-        platformSequence = SKAction.sequence([platformMove, platformMoveBack])*/
         
         setupNodes()
         setupLevel()
         setupPlayer()
-        //platform.physicsBody?.friction = 999999999999
         
         let scale = SKAction.scale(to: 1.0, duration: 0.5)
         fgNode.childNode(withName: "Ready")!.run(scale)
         
-        //setupCoreMotion()
         physicsWorld.contactDelegate = self
         
         camera?.position = CGPoint(x: size.width/2, y: size.height/2)
         
-        //camera?.xScale = 2//setScale(0.75)
         playBackgroundMusic(name: "SpaceGame.caf")
         
         playerAnimationJump = setupAnimationWithPrefix("player01_jump_", start: 1, end: 4, timePerFrame: 0.1)
@@ -185,7 +177,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.view?.addGestureRecognizer(swipeUp)
         }
         
-        
+        //Make these actual Game Score Labels
         jumpLabel.fontColor = SKColor.white
         jumpLabel.fontSize = 50
         jumpLabel.zPosition = 100
@@ -206,15 +198,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if playerState == .idle {
             if gesture.direction == UISwipeGestureRecognizerDirection.up {
                 if jumpState == .small {
-                    //player.physicsBody?.isDynamic = true
                     jumpLabel.text = "Jump"
                     jumpPlayer()
                 } else if jumpState == .medium {
-                    //player.physicsBody?.isDynamic = true
                     jumpLabel.text = "Boost"
                     boostPlayer()
                 } else if jumpState == .big {
-                    //player.physicsBody?.isDynamic = true
                     jumpLabel.text = "Super Boost"
                     superBoostPlayer()
                 }
@@ -262,10 +251,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupLava()
         
         // Squash and Stretch Player
-        /*let squash = SKAction.scaleY(to: 0.85, duration: 0.25)
-        squash.timingMode = .easeOut
-        let stretch = SKAction.scaleY(to: 1.0, duration: 0.25)
-        stretch.timingMode = .easeIn*/
         let squash = SKAction.scaleX(to: 1.15, y: 0.85, duration: 0.25)
         squash.timingMode = .easeInEaseOut
         let stretch = SKAction.scaleX(to: 0.85, y: 1.15, duration: 0.25)
@@ -279,7 +264,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let initialPlatform = platform5Across.copy() as! SKSpriteNode
         var overlayPosition = player.position
         
-        
+        //Made platform height up to match the anchor point of the player.
+        //Changed ((player.size.height * 0.5) to ((player.size.height * 0.316)
         overlayPosition.y = player.position.y -
             ((player.size.height * 0.316) +
             (initialPlatform.size.height * 0.20))
@@ -298,29 +284,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setupPlayer() {
-        player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width * 0.3)
+        player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width * 0.25)
         player.physicsBody!.isDynamic = false
         player.physicsBody!.allowsRotation = false
         player.physicsBody!.categoryBitMask = PhysicsCategory.Player
-        player.physicsBody!.collisionBitMask = 0//PhysicsCategory.PlatformNormal
+        player.physicsBody!.collisionBitMask = 0
         
         playerTrail = addTrail(name: "PlayerTrail")
-    }
-    
-    func setupCoreMotion() {
-        motionManager.accelerometerUpdateInterval = 0.2
-        let queue = OperationQueue()
-        motionManager.startAccelerometerUpdates(to: queue,
-            withHandler:
-            {
-                accelerometerData, error in
-                guard let accelerometerData = accelerometerData else {
-                    return
-                }
-                let acceleration = accelerometerData.acceleration
-                self.xAcceleration = (CGFloat(acceleration.x) * 7.5/*0.75*/) +
-                    (self.xAcceleration * 0.25)
-            })
     }
     
     func setupLava() {
@@ -350,25 +320,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 node.removeFromParent()
             }
         }
-        
-        //if gameState == .playing {
-        
-            /*overlay.enumerateChildNodes(withName: "platform3") { (node, stop) in
-                var newNode = SKSpriteNode()
-                if let nodePhysicsBody = node.physicsBody {
-                    switch nodePhysicsBody.categoryBitMask {
-                    case PhysicsCategory.PlatformNormal:
-                        newNode = self.platform.copy() as! SKSpriteNode
-                        //newNode.run(SKAction.repeatForever(self.platformSequence))
-                    default:
-                        newNode = node.copy() as! SKSpriteNode
-                    }
-                    newNode.position = node.position
-                    overlay.addChild(newNode)
-                    node.removeFromParent()
-                }
-            }
-        //}*/
     }
     
     func setupAnimationWithPrefix(_ prefix: String, start: Int, end: Int, timePerFrame: TimeInterval) -> SKAction {
@@ -400,7 +351,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func updatePlayer() {
         
         // Set velocity based on core motion
-        player.physicsBody?.velocity.dx = xAcceleration * 1000.0
+        //player.physicsBody?.velocity.dx = xAcceleration * 1000.0
         
         // Wrap player around edges of screen
         var playerPosition = convert(player.position, from: fgNode)
@@ -427,7 +378,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         // Animate player
-        if playerState == .jump {
+        /*if playerState == .jump {
             if abs(player.physicsBody!.velocity.dx) > 100.0 {
                 if player.physicsBody!.velocity.dx > 0 {
                     runPlayerAnimation(playerAnimationSteerRight)
@@ -439,7 +390,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         } else if playerState == .fall {
             runPlayerAnimation(playerAnimationFall)
-        }
+        }*/
         }
     
     func updateCamera() {
