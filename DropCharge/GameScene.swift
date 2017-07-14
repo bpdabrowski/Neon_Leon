@@ -19,6 +19,7 @@ struct PhysicsCategory {
     static let CoinNormal: UInt32           = 0b1000 // 8
     static let CoinSpecial: UInt32          = 0b10000 // 16
     static let Edges: UInt32                = 0b100000 // 32
+    static let FallOff: UInt32              = 0b1000000 // 64
 }
 
 // MARK: - Game States
@@ -288,7 +289,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody!.isDynamic = false
         player.physicsBody!.allowsRotation = false
         player.physicsBody!.categoryBitMask = PhysicsCategory.Player
-        player.physicsBody!.collisionBitMask = 0
+        player.physicsBody!.collisionBitMask = PhysicsCategory.FallOff
+        
+        if playerState == .jump {
+            player.physicsBody!.collisionBitMask = 0
+        }
         
         playerTrail = addTrail(name: "PlayerTrail")
     }
@@ -669,25 +674,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addRandomForegroundOverlay() {
         let overlaySprite: SKSpriteNode!
         var flipH = false
-        let platformPercentage = 60
+        let platformPercentage = 100//60
         
         if Int.random(min: 1, max: 100) <= platformPercentage {
             if Int.random(min: 1, max: 100) <= 75 {
                 // Create standard platforms 75%
                 switch Int.random(min: 0, max: 3) {
                 case 0:
-                    overlaySprite = platformArrow
+                    overlaySprite = platform5Across//platformArrow
                 case 1:
                     overlaySprite = platform5Across
                 case 2:
-                    overlaySprite = platformDiagonal
+                    overlaySprite = platform5Across//platformDiagonal
                 case 3:
-                    overlaySprite = platformDiagonal
+                    overlaySprite = platform5Across//platformDiagonal
                     flipH = true
                 case 4:
-                    overlaySprite = platformDiamond
+                    overlaySprite = platform5Across//platformDiamond
                 default:
-                    overlaySprite = platformArrow
+                    overlaySprite = platform5Across//platformArrow
                 }
         } else {
                 // Create breakable platform 25%
