@@ -676,7 +676,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if Int.random(min: 1, max: 100) <= platformPercentage {
             if Int.random(min: 1, max: 100) <= 75 {
                 // Create standard platforms 75%
-                switch Int.random(min: 0, max: 3) {
+                switch Int.random(min: 0, max: 4) {
                 case 0:
                     overlaySprite = platformArrow
                 case 1:
