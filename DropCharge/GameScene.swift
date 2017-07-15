@@ -290,10 +290,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody!.allowsRotation = false
         player.physicsBody!.categoryBitMask = PhysicsCategory.Player
         player.physicsBody!.collisionBitMask = PhysicsCategory.FallOff
-        
-        if playerState == .jump {
-            player.physicsBody!.collisionBitMask = 0
-        }
+        player.physicsBody!.restitution = 0
         
         playerTrail = addTrail(name: "PlayerTrail")
     }
@@ -681,18 +678,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 // Create standard platforms 75%
                 switch Int.random(min: 0, max: 3) {
                 case 0:
-                    overlaySprite = platform5Across//platformArrow
+                    overlaySprite = platformArrow
                 case 1:
                     overlaySprite = platform5Across
                 case 2:
-                    overlaySprite = platform5Across//platformDiagonal
+                    overlaySprite = platformDiagonal
                 case 3:
-                    overlaySprite = platform5Across//platformDiagonal
+                    overlaySprite = platformDiagonal
                     flipH = true
                 case 4:
-                    overlaySprite = platform5Across//platformDiamond
+                    overlaySprite = platformDiamond
                 default:
-                    overlaySprite = platform5Across//platformArrow
+                    overlaySprite = platformArrow
                 }
         } else {
                 // Create breakable platform 25%
