@@ -20,6 +20,7 @@ struct PhysicsCategory {
     static let CoinSpecial: UInt32          = 0b10000 // 16
     static let Edges: UInt32                = 0b100000 // 32
     static let FallOff: UInt32              = 0b1000000 // 64
+    static let Spike: UInt32                = 0b10000000 // 128
 }
 
 // MARK: - Game States
@@ -314,6 +315,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 case PhysicsCategory.CoinSpecial:
                     newNode = self.coinSpecial.copy() as! SKSpriteNode
                     newNode.run(SKAction.repeatForever(self.coinAnimationSpecial))
+                default:
+                    newNode = node.copy() as! SKSpriteNode
+                }
+                newNode.position = node.position
+                overlay.addChild(newNode)
+                node.removeFromParent()
+            }
+        }
+        
+        overlay.enumerateChildNodes(withName: "p1") { (node, stop) in
+            var newNode = SKSpriteNode()
+            if let nodePhysicsBody = node.physicsBody {
+                switch nodePhysicsBody.categoryBitMask {
+                case PhysicsCategory.PlatformBreakable:
+                    newNode = self.platform.copy() as! SKSpriteNode
+                    
+                    //self.updatePlatform()
+                //newNode.run(SKAction.repeatForever(self.platformSequence))
                 default:
                     newNode = node.copy() as! SKSpriteNode
                 }
@@ -1053,6 +1072,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     run(soundBrick)
                 }
             }
+        case PhysicsCategory.Spike:
+                    gameOver()
+            
         default:
             break
             }
@@ -1085,7 +1107,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func explosion(intensity: CGFloat) -> SKEmitterNode {
         let emitter = SKEmitterNode()
-        let particleTexture = SKTexture(imageNamed: "spark")
+        let particleTexture = SKTexture(imageNamed: "Star")
         emitter.zPosition = 2
         emitter.particleTexture = particleTexture
         emitter.particleBirthRate = 4000 * intensity
@@ -1104,14 +1126,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         emitter.particleColorBlendFactor = 1
         emitter.particleBlendMode = SKBlendMode.add
         emitter.run(SKAction.removeFromParentAfterDelay(2.0))
-        
+    
         let sequence = SKKeyframeSequence(capacity: 5)
         sequence.addKeyframeValue(SKColor.white, time: 0)
-        sequence.addKeyframeValue(SKColor.yellow, time: 0.10)
-        sequence.addKeyframeValue(SKColor.orange, time: 0.15)
-        sequence.addKeyframeValue(SKColor.red, time: 0.75)
-        sequence.addKeyframeValue(SKColor.black, time: 0.95)
+        sequence.addKeyframeValue(SKColorWithRGB(122, g: 201, b: 67), time: 0.10) //green
+        sequence.addKeyframeValue(SKColorWithRGB(0, g: 230, b: 240), time: 0.15) //yellow
+        sequence.addKeyframeValue(SKColorWithRGB(255, g: 255, b: 0), time: 0.75) //blue
+        sequence.addKeyframeValue(SKColorWithRGB(255, g: 104, b: 0), time: 0.95) //orange
         emitter.particleColorSequence = sequence
+        
         
         return emitter
     }
