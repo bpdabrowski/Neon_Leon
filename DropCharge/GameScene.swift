@@ -56,6 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var backgroundOverlayTemplate: SKNode!
     var backgroundOverlayHeight: CGFloat!
     var player: SKSpriteNode!
+    var pinkPlatform: SKSpriteNode!
     
     //2
     var platform5Across: SKSpriteNode!
@@ -88,6 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let cameraNode = SKCameraNode()
     
     var lava: SKSpriteNode!
+    var laserRain: SKSpriteNode!
     
     var lastUpdateTimeInterval: TimeInterval = 0
     var deltaTime: TimeInterval = 0
@@ -148,12 +150,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var coinAnimationNormal: SKAction!
     var coinAnimationSpecial: SKAction!
     
+    var breakAnimation: SKAction!
+    
     //3
     override func didMove(to view: SKView) {
         view.showsPhysics = true
         
         coinAnimationNormal = setupAnimationWithPrefix("powerup05_", start: 1, end: 6, timePerFrame: 0.1)
         coinAnimationSpecial = setupAnimationWithPrefix("powerup01_", start: 1, end: 6, timePerFrame: 0.1)
+        breakAnimation = setupAnimationWithPrefix("NLPinkPlatform", start: 1, end: 2, timePerFrame: 0.1)
         
         setupNodes()
         setupLevel()
@@ -251,6 +256,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         setupLava()
+        setupBackground("BlueRain.sks")
+        setupBackground("GreenRain.sks")
+        setupBackground("YellowRain.sks")
+        setupBackground("OrangeRain.sks")
+        setupBackground("PinkRain.sks")
         
         // Squash and Stretch Player
         let squash = SKAction.scaleX(to: 1.15, y: 0.85, duration: 0.25)
@@ -298,10 +308,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setupLava() {
         lava = fgNode.childNode(withName: "Lava") as! SKSpriteNode
-        let emitter = SKEmitterNode(fileNamed: "Lava.sks")!
-        emitter.particlePositionRange = CGVector(dx: size.width * 1.125, dy: 0.0)
+        //let emitter = SKEmitterNode(fileNamed: "Lava.sks")!
+        //emitter.particlePositionRange = CGVector(dx: size.width * 1.125, dy: 0.0)
+        //emitter.advanceSimulationTime(3.0)
+        //lava.addChild(emitter)
+    }
+    
+    func setupBackground(_ fileName: String) {
+        let emitter = SKEmitterNode(fileNamed: fileName)!
+        emitter.particlePositionRange = CGVector(dx: size.width * 1.125, dy: size.height * 2)//505.0)
         emitter.advanceSimulationTime(3.0)
-        lava.addChild(emitter)
+        camera?.addChild(emitter)
     }
     
     func addAnimationToOverlay(overlay: SKSpriteNode) {
@@ -330,9 +347,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 switch nodePhysicsBody.categoryBitMask {
                 case PhysicsCategory.PlatformBreakable:
                     newNode = self.platform.copy() as! SKSpriteNode
-                    
-                    //self.updatePlatform()
-                //newNode.run(SKAction.repeatForever(self.platformSequence))
+                    newNode.size = CGSize(width: 320, height: 255)
+                    newNode.run(SKAction.repeatForever(self.breakAnimation))
+                    newNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 161, height: 74))
+                    newNode.physicsBody?.isDynamic = false
+                    newNode.physicsBody?.affectedByGravity = false
+                    newNode.physicsBody?.allowsRotation = false
+                    newNode.physicsBody!.categoryBitMask = PhysicsCategory.PlatformBreakable
+                    newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
                 default:
                     newNode = node.copy() as! SKSpriteNode
                 }
@@ -1048,8 +1070,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             //playerState = .idle
             if let platform = other.node as? SKSpriteNode {
-                
-                
                 if player.physicsBody!.velocity.dy < 0 {
                     player.physicsBody?.isDynamic = true
                     player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
@@ -1064,16 +1084,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     run(soundJump)
                 }
             }
+            
         case PhysicsCategory.PlatformBreakable:
             if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
-                    platformAction(platform, breakable: true)
+                    player.physicsBody?.isDynamic = true
+                    player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                    player.physicsBody?.affectedByGravity = false
+                    playerState = .idle
+                    //platformAction(platform, breakable: true)
+                    platform.physicsBody?.isDynamic = true
+                    platform.physicsBody?.allowsRotation = true
+                    platform.physicsBody?.affectedByGravity = true
+                    platform.run(SKAction.removeFromParentAfterDelay(2.0))
+                    
                     jumpPlayer()
-                    run(soundBrick)
+                    //run(soundBrick)
                 }
             }
-        case PhysicsCategory.Spike:
-                    gameOver()
+        /*case PhysicsCategory.Spike:
+                    gameOver()*/
             
         default:
             break

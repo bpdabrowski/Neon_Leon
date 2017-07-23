@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F21613761F203C2700378FD3 /* PinkRain.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21613751F203C2700378FD3 /* PinkRain.sks */; };
+		F21613781F203C3500378FD3 /* OrangeRain.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21613771F203C3500378FD3 /* OrangeRain.sks */; };
+		F216137A1F203C3F00378FD3 /* GreenRain.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21613791F203C3F00378FD3 /* GreenRain.sks */; };
+		F216137C1F203C4900378FD3 /* YellowRain.sks in Resources */ = {isa = PBXBuildFile; fileRef = F216137B1F203C4900378FD3 /* YellowRain.sks */; };
 		F22CBDFF1EB5422100627677 /* CollectSpecial.sks in Resources */ = {isa = PBXBuildFile; fileRef = F22CBDFE1EB5422100627677 /* CollectSpecial.sks */; };
+		F2306C2C1F1EEBDB00648B30 /* Background.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2306C2B1F1EEBDB00648B30 /* Background.sks */; };
+		F2306C2E1F1EED4C00648B30 /* BlueRain.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2306C2D1F1EED4C00648B30 /* BlueRain.sks */; };
 		F2751B021EB6A0D100B9F913 /* BrokenPlatform.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2751B011EB6A0D100B9F913 /* BrokenPlatform.sks */; };
 		F2751B041EB6A77B00B9F913 /* PlayerTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2751B031EB6A77B00B9F913 /* PlayerTrail.sks */; };
 		F2751B181EB6B47B00B9F913 /* alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2751B061EB6B47B00B9F913 /* alarm.wav */; };
@@ -72,7 +78,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F21613751F203C2700378FD3 /* PinkRain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PinkRain.sks; sourceTree = SOURCE_ROOT; };
+		F21613771F203C3500378FD3 /* OrangeRain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OrangeRain.sks; sourceTree = SOURCE_ROOT; };
+		F21613791F203C3F00378FD3 /* GreenRain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GreenRain.sks; sourceTree = SOURCE_ROOT; };
+		F216137B1F203C4900378FD3 /* YellowRain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = YellowRain.sks; sourceTree = SOURCE_ROOT; };
 		F22CBDFE1EB5422100627677 /* CollectSpecial.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CollectSpecial.sks; sourceTree = "<group>"; };
+		F2306C2B1F1EEBDB00648B30 /* Background.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background.sks; sourceTree = "<group>"; };
+		F2306C2D1F1EED4C00648B30 /* BlueRain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlueRain.sks; sourceTree = "<group>"; };
 		F2751B011EB6A0D100B9F913 /* BrokenPlatform.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BrokenPlatform.sks; sourceTree = "<group>"; };
 		F2751B031EB6A77B00B9F913 /* PlayerTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerTrail.sks; sourceTree = "<group>"; };
 		F2751B061EB6B47B00B9F913 /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm.wav; sourceTree = "<group>"; };
@@ -258,11 +270,17 @@
 			isa = PBXGroup;
 			children = (
 				F2BE38481EB52F6900EF28F2 /* Lava.sks */,
+				F2306C2B1F1EEBDB00648B30 /* Background.sks */,
 				F2BE384A1EB536BC00EF28F2 /* SmokeTrail.sks */,
 				F2BE384C1EB53C2D00EF28F2 /* CollectNormal.sks */,
 				F22CBDFE1EB5422100627677 /* CollectSpecial.sks */,
 				F2751B011EB6A0D100B9F913 /* BrokenPlatform.sks */,
 				F2751B031EB6A77B00B9F913 /* PlayerTrail.sks */,
+				F21613791F203C3F00378FD3 /* GreenRain.sks */,
+				F21613771F203C3500378FD3 /* OrangeRain.sks */,
+				F2306C2D1F1EED4C00648B30 /* BlueRain.sks */,
+				F21613751F203C2700378FD3 /* PinkRain.sks */,
+				F216137B1F203C4900378FD3 /* YellowRain.sks */,
 			);
 			name = Particles;
 			sourceTree = "<group>";
@@ -339,9 +357,11 @@
 				F2751B1E1EB6B47C00B9F913 /* coin1.wav in Resources */,
 				F2DBB4171EB2DC3E0089DF2A /* CoinSDiagonal.sks in Resources */,
 				F2751B271EB6B47C00B9F913 /* player_die.wav in Resources */,
+				F21613781F203C3500378FD3 /* OrangeRain.sks in Resources */,
 				F2DBB4091EB03ADB0089DF2A /* BreakDiagonal.sks in Resources */,
 				F2DBB4051EB038590089DF2A /* PlatformDiagonal.sks in Resources */,
 				F2B335051EA4425C007801AC /* GameScene.sks in Resources */,
+				F216137C1F203C4900378FD3 /* YellowRain.sks in Resources */,
 				F2751B041EB6A77B00B9F913 /* PlayerTrail.sks in Resources */,
 				F2751B211EB6B47C00B9F913 /* explosion1.wav in Resources */,
 				F2B335101EA4425C007801AC /* Assets.xcassets in Resources */,
@@ -349,6 +369,7 @@
 				F2751B1D1EB6B47C00B9F913 /* brick.caf in Resources */,
 				F2C7DA581EFB5E3800571F22 /* Platform.sks in Resources */,
 				F2DBB4071EB03AA70089DF2A /* BreakArrow.sks in Resources */,
+				F216137A1F203C3F00378FD3 /* GreenRain.sks in Resources */,
 				F2DBB4031EB037E30089DF2A /* PlatformArrow.sks in Resources */,
 				F2DBB3FB1EB0365F0089DF2A /* Break5Across.sks in Resources */,
 				F2751B231EB6B47C00B9F913 /* explosion3.wav in Resources */,
@@ -357,6 +378,8 @@
 				F2751B1F1EB6B47C00B9F913 /* coin4.wav in Resources */,
 				F2B335131EA4425C007801AC /* LaunchScreen.storyboard in Resources */,
 				F2BE384D1EB53C2D00EF28F2 /* CollectNormal.sks in Resources */,
+				F2306C2E1F1EED4C00648B30 /* BlueRain.sks in Resources */,
+				F21613761F203C2700378FD3 /* PinkRain.sks in Resources */,
 				F2B335071EA4425C007801AC /* Actions.sks in Resources */,
 				F22CBDFF1EB5422100627677 /* CollectSpecial.sks in Resources */,
 				F2751B1A1EB6B47C00B9F913 /* bgMusic.mp3 in Resources */,
@@ -372,6 +395,7 @@
 				F2DBB4131EB03C520089DF2A /* CoinSCross.sks in Resources */,
 				F2751B2D1EB806EB00B9F913 /* CoinSpecial.sks in Resources */,
 				F2751B021EB6A0D100B9F913 /* BrokenPlatform.sks in Resources */,
+				F2306C2C1F1EEBDB00648B30 /* Background.sks in Resources */,
 				F2DBB40F1EB03BC80089DF2A /* CoinCross.sks in Resources */,
 				F2DBB4111EB03C240089DF2A /* CoinS5Across.sks in Resources */,
 			);
