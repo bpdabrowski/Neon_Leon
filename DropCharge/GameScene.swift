@@ -60,7 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var pinkPlatform: SKSpriteNode!
     
     //2
-    var platform5Across: SKSpriteNode!
+    var startPlatform: SKSpriteNode!
     var coinArrow: SKSpriteNode!
     var coin5Across: SKSpriteNode!
     var coinS5Across: SKSpriteNode!
@@ -77,6 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var coinSDiagonal: SKSpriteNode!
     var mediumJump: SKSpriteNode!
     var secondTest: SKSpriteNode!
+    var itemCatalog: SKSpriteNode!
     
     var lastOverlayPosition = CGPoint.zero
     var lastOverlayHeight: CGFloat = 0.0
@@ -261,7 +262,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //fgNode.childNode(withName: "Bomb")?.run(SKAction.hide())
         
         
-        platform5Across = loadForegroundOverlayTemplate("Platform5Across")
+        startPlatform = loadForegroundOverlayTemplate("StartPlatform")
         platformArrow = loadForegroundOverlayTemplate("PlatformArrow")
         platformDiagonal = loadForegroundOverlayTemplate("PlatformDiagonal")
         platformDiamond = loadForegroundOverlayTemplate("PlatformDiamond")
@@ -270,6 +271,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         breakDiagonal = loadForegroundOverlayTemplate("BreakDiagonal")
         mediumJump = loadForegroundOverlayTemplate("MediumJump")
         secondTest = loadForegroundOverlayTemplate("SecondTest")
+        itemCatalog = loadForegroundOverlayTemplate("ItemCatalog")
+        
         
         coin = loadCoin("Coin")
         coinSpecial = loadCoin("CoinSpecial")
@@ -309,7 +312,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setupLevel() {
         // Place initial platform
-        let initialPlatform = platform5Across.copy() as! SKSpriteNode
+        let initialPlatform = startPlatform.copy() as! SKSpriteNode
         var overlayPosition = player.position
         
         //Made platform height up to match the anchor point of the player.
@@ -847,37 +850,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if Int.random(min: 1, max: 100) <= platformPercentage {
             if Int.random(min: 1, max: 100) <= 75 {
                 // Create standard platforms 75%
-                switch Int.random(min: 0, max: 3) {
+                switch Int.random(min: 0, max: 1) {
                 case 0:
-                    overlaySprite = mediumJump//platformArrow
+                    overlaySprite = itemCatalog
                 case 1:
-                    overlaySprite = secondTest//platform5Across
+                    overlaySprite = itemCatalog
                 case 2:
-                    overlaySprite = mediumJump//platformDiagonal
+                    overlaySprite = mediumJump
                     flipH = true
                 case 3:
-                    overlaySprite = secondTest//platformDiagonal
+                    overlaySprite = secondTest
                     flipH = true
                 /*case 4:
                     overlaySprite = mediumJump//platformDiamond*/
                 default:
-                    overlaySprite = mediumJump//platformArrow
+                    overlaySprite = mediumJump
                 }
         } else {
                 // Create breakable platform 25%
-                switch Int.random(min: 0, max: 3) {
+                switch Int.random(min: 0, max: 1) {
                 case 0:
-                    overlaySprite = mediumJump//breakArrow
+                    overlaySprite = itemCatalog
                 case 1:
-                    overlaySprite = secondTest//break5Across
+                    overlaySprite = itemCatalog
                 case 2:
-                    overlaySprite = mediumJump//breakDiagonal
+                    overlaySprite = mediumJump
                     flipH = true
                 case 3:
-                    overlaySprite = secondTest//breakDiagonal
+                    overlaySprite = secondTest
                     flipH = true
                 default:
-                    overlaySprite = mediumJump//breakArrow
+                    overlaySprite = mediumJump
                 }
             }
         } else {
