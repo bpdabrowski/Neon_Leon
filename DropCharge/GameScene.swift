@@ -166,7 +166,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //3
     override func didMove(to view: SKView) {
-        //  view.showsPhysics = true
+        view.showsPhysics = true
         
         lightningAnimation = setupAnimationWithPrefix("BottomLightning", start: 1, end: 4, timePerFrame: 0.2)
         coinAnimationNormal = setupAnimationWithPrefix("powerup05_", start: 1, end: 6, timePerFrame: 0.1)
@@ -336,6 +336,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody!.isDynamic = false
         player.physicsBody!.allowsRotation = false
         player.physicsBody!.categoryBitMask = PhysicsCategory.Player
+        player.physicsBody!.collisionBitMask = 0
         //player.physicsBody!.collisionBitMask = PhysicsCategory.FallOff
         player.physicsBody!.restitution = 0
         

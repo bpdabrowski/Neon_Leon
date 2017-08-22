@@ -62,7 +62,6 @@
 		F2B335591EA6F92D007801AC /* SKTEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3354D1EA6F92D007801AC /* SKTEffects.swift */; };
 		F2B3355A1EA6F92D007801AC /* SKTTimingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3354E1EA6F92D007801AC /* SKTTimingFunctions.swift */; };
 		F2B3355B1EA6F92D007801AC /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3354F1EA6F92D007801AC /* Vector3.swift */; };
-		F2B51B561F480C5E00C74CAC /* Hero-1.0.0-alpha.4 in Resources */ = {isa = PBXBuildFile; fileRef = F2B51B551F480C5E00C74CAC /* Hero-1.0.0-alpha.4 */; };
 		F2BE38491EB52F6900EF28F2 /* Lava.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2BE38481EB52F6900EF28F2 /* Lava.sks */; };
 		F2BE384B1EB536BC00EF28F2 /* SmokeTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2BE384A1EB536BC00EF28F2 /* SmokeTrail.sks */; };
 		F2BE384D1EB53C2D00EF28F2 /* CollectNormal.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2BE384C1EB53C2D00EF28F2 /* CollectNormal.sks */; };
@@ -141,7 +140,6 @@
 		F2B3354D1EA6F92D007801AC /* SKTEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTEffects.swift; sourceTree = "<group>"; };
 		F2B3354E1EA6F92D007801AC /* SKTTimingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTTimingFunctions.swift; sourceTree = "<group>"; };
 		F2B3354F1EA6F92D007801AC /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
-		F2B51B551F480C5E00C74CAC /* Hero-1.0.0-alpha.4 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Hero-1.0.0-alpha.4"; path = "../../../../Downloads/Hero-1.0.0-alpha.4"; sourceTree = "<group>"; };
 		F2BE38481EB52F6900EF28F2 /* Lava.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Lava.sks; sourceTree = "<group>"; };
 		F2BE384A1EB536BC00EF28F2 /* SmokeTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SmokeTrail.sks; sourceTree = "<group>"; };
 		F2BE384C1EB53C2D00EF28F2 /* CollectNormal.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CollectNormal.sks; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 				F2B335041EA4425C007801AC /* GameScene.sks */,
 				F2B335061EA4425C007801AC /* Actions.sks */,
 				F2B335081EA4425C007801AC /* GameScene.swift */,
-				F2B51B551F480C5E00C74CAC /* Hero-1.0.0-alpha.4 */,
 				F2751B051EB6B47B00B9F913 /* sounds */,
 				F2BE38471EB52F2200EF28F2 /* Particles */,
 				F2B3350A1EA4425C007801AC /* GameViewController.swift */,
@@ -414,7 +411,6 @@
 				F2751B221EB6B47C00B9F913 /* explosion2.wav in Resources */,
 				F21613841F2529B800378FD3 /* Lightning.sks in Resources */,
 				F2751B1C1EB6B47C00B9F913 /* boost.wav in Resources */,
-				F2B51B561F480C5E00C74CAC /* Hero-1.0.0-alpha.4 in Resources */,
 				F2DBB40B1EB03AFF0089DF2A /* Coin5Across.sks in Resources */,
 				F2DBB4131EB03C520089DF2A /* CoinSCross.sks in Resources */,
 				F2751B2D1EB806EB00B9F913 /* CoinSpecial.sks in Resources */,
