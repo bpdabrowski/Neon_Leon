@@ -172,7 +172,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lightningAnimation = setupAnimationWithPrefix("BottomLightning", start: 1, end: 4, timePerFrame: 0.2)
         coinAnimationNormal = setupAnimationWithPrefix("powerup05_", start: 1, end: 6, timePerFrame: 0.1)
         coinAnimationSpecial = setupAnimationWithPrefix("powerup01_", start: 1, end: 6, timePerFrame: 0.1)
-        breakAnimation = setupAnimationWithPrefix("NLPinkPlatform", start: 1, end: 2, timePerFrame: 0.1)
+        breakAnimation = setupAnimationWithPrefix("PinkPlatform_", start: 1, end: 2, timePerFrame: 0.1)
         poisonBeakerMove = SKAction.moveBy(x: -200, y: 0, duration: 0.5)
         poisonBeakerSequence = SKAction.sequence([poisonBeakerMove, poisonBeakerMove.reversed()])
         
@@ -649,7 +649,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 2
         let bottomOfScreenYFg = convert(CGPoint(x: 0, y: bottomOfScreenY), to: fgNode).y
         // 3
-        let lavaVelocityY = CGFloat(120)
+        let lavaVelocityY = CGFloat(0) //DEBUG - CHANGED LAVA STEP FROM 120 TO 1000
         let lavaStep = lavaVelocityY * CGFloat(dt)
         var newLavaPositionY = lava.position.y + lavaStep
         // 4
