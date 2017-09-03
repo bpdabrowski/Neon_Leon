@@ -342,6 +342,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody!.collisionBitMask = 0
         //player.physicsBody!.collisionBitMask = PhysicsCategory.FallOff
         player.physicsBody!.restitution = 0
+        player.physicsBody!.affectedByGravity = false //DEBUG - Turned off player gravity
         
         playerTrail = addTrail(name: "PlayerTrail")
     }
@@ -402,7 +403,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 overlay.addChild(newNode)
                 node.removeFromParent()
             }
+            
         }
+        
+        /*overlay.enumerateChildNodes(withName: "standardPlatform") { (node, stop) in
+            var newNode = SKSpriteNode()
+            if let nodePhysicsBody = node.physicsBody {
+                switch nodePhysicsBody.categoryBitMask {
+                case PhysicsCategory.PlatformBreakable:
+                    //newNode = self.platform.copy() as! SKSpriteNode
+                    newNode = SKSpriteNode(imageNamed: "StandardPlatform")
+                    newNode.size = CGSize(width: 211, height: 147)
+                    //newNode.run(SKAction.repeatForever(self.breakAnimation))
+                    newNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 128, height: 64))
+                    newNode.physicsBody?.isDynamic = false
+                    newNode.physicsBody?.affectedByGravity = false
+                    newNode.physicsBody?.allowsRotation = false
+                    newNode.physicsBody!.categoryBitMask = PhysicsCategory.PlatformBreakable
+                    newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
+                default:
+                    newNode = node.copy() as! SKSpriteNode
+                }
+                newNode.position = node.position
+                overlay.addChild(newNode)
+                node.removeFromParent()
+            }
+            
+        }*/
         
        overlay.enumerateChildNodes(withName: "PoisonBeaker") { (node, stop) in
             var newNode = SKSpriteNode()
