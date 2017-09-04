@@ -167,7 +167,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //3
     override func didMove(to view: SKView) {
-        view.showsPhysics = true
+        //view.showsPhysics = true
         
         lightningAnimation = setupAnimationWithPrefix("BottomLightning", start: 1, end: 4, timePerFrame: 0.2)
         coinAnimationNormal = setupAnimationWithPrefix("powerup05_", start: 1, end: 6, timePerFrame: 0.1)
@@ -395,6 +395,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     newNode.physicsBody?.affectedByGravity = false
                     newNode.physicsBody?.allowsRotation = false
                     newNode.physicsBody!.categoryBitMask = PhysicsCategory.PlatformBreakable
+                    newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
+                case PhysicsCategory.Spikes:
+                    let spikeBodyTexture = SKTexture(imageNamed: "SpikeOutline")
+                    newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 198, height: 108))
+                    newNode.physicsBody?.isDynamic = false
+                    newNode.physicsBody?.affectedByGravity = false
+                    newNode.physicsBody?.allowsRotation = false
+                    newNode.physicsBody!.categoryBitMask = PhysicsCategory.Spikes
                     newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
                 default:
                     newNode = node.copy() as! SKSpriteNode
@@ -700,7 +708,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     ]))
             }
             boostPlayer()
-            screenShakeByAmt(50)
+            //screenShakeByAmt(50) - DEBUG: Removed it because it was hard to see everytime I hit lava.
             lives -= 1
             if lives <= 0 {
                 gameOver()
