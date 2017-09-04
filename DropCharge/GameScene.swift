@@ -167,7 +167,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //3
     override func didMove(to view: SKView) {
-        //view.showsPhysics = true
+        view.showsPhysics = true
         
         lightningAnimation = setupAnimationWithPrefix("BottomLightning", start: 1, end: 4, timePerFrame: 0.2)
         coinAnimationNormal = setupAnimationWithPrefix("powerup05_", start: 1, end: 6, timePerFrame: 0.1)
@@ -388,7 +388,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 switch nodePhysicsBody.categoryBitMask {
                 case PhysicsCategory.PlatformBreakable:
                     //newNode = self.platform.copy() as! SKSpriteNode
-                    newNode.size = CGSize(width: 320, height: 255)
+                    newNode.size = CGSize(width: 215, height: 150)
                     newNode.run(SKAction.repeatForever(self.breakAnimation))
                     newNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 128, height: 64))
                     newNode.physicsBody?.isDynamic = false
