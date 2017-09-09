@@ -167,7 +167,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //3
     override func didMove(to view: SKView) {
-        view.showsPhysics = true
+        //view.showsPhysics = true
         
         lightningAnimation = setupAnimationWithPrefix("BottomLightning", start: 1, end: 4, timePerFrame: 0.2)
         coinAnimationNormal = setupAnimationWithPrefix("powerup05_", start: 1, end: 6, timePerFrame: 0.1)
@@ -180,8 +180,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupLevel()
         setupPlayer()
         
-        let scale = SKAction.scale(to: 1.0, duration: 0.5)
-        fgNode.childNode(withName: "Ready")!.run(scale)
+        /*let scale = SKAction.scale(to: 1.0, duration: 0.5)
+        fgNode.childNode(withName: "Ready")!.run(scale)*/
         
         physicsWorld.contactDelegate = self
         
@@ -1207,6 +1207,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fgNode.childNode(withName: "Ready")!.run(
             SKAction.sequence(
                 [SKAction.wait(forDuration: 0.2), scale]))
+        fgNode.childNode(withName: "Dimmer")!.run(SKAction.scale(to: 0, duration: 0.2))
 
         /*let bomb = fgNode.childNode(withName: "Bomb")!
         let bombBlast = explosion(intensity: 2.0)
@@ -1244,9 +1245,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.run(SKAction.sequence([moveUp, moveDown]))*/
         // 4
         let gameOverSprite = SKSpriteNode(imageNamed: "GameOver")
-        gameOverSprite.position = camera!.position
+        gameOverSprite.size = CGSize(width: 1175, height: 265)
+        gameOverSprite.position = camera!.position + CGPoint(x:0, y:400)
         gameOverSprite.zPosition = 10
         addChild(gameOverSprite)
+        
+        let restartButton = SKSpriteNode(imageNamed: "RestartButton")
+        restartButton.size = CGSize(width: 336, height: 332)
+        restartButton.position = camera!.position + CGPoint(x:-300, y:-600)
+        restartButton.zPosition = 10
+        addChild(restartButton)
+        
+        let dimmerSprite = SKSpriteNode(imageNamed: "Dimmer")
+        //dimmerSprite.size = CGSize(width:1526, height:2071)
+        dimmerSprite.position = camera!.position
+        dimmerSprite.zPosition = 9
+        addChild(dimmerSprite)
         
         //player = SKSpriteNode(imageNamed: "NLDeadCat")
         //addChild(player)
