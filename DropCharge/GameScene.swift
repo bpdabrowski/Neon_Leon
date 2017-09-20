@@ -128,6 +128,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var playerAnimationJump: SKAction!
     var playerAnimationFall: SKAction!
+    var playerAnimationPlatform: SKAction!
     var playerAnimationSteerLeft: SKAction!
     var playerAnimationSteerRight: SKAction!
     var currentPlayerAnimation: SKAction?
@@ -167,7 +168,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //3
     override func didMove(to view: SKView) {
-        //view.showsPhysics = true
+        view.showsPhysics = true
         
         lightningAnimation = setupAnimationWithPrefix("BottomLightning", start: 1, end: 4, timePerFrame: 0.2)
         coinAnimationNormal = setupAnimationWithPrefix("powerup05_", start: 1, end: 6, timePerFrame: 0.1)
@@ -189,8 +190,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         playBackgroundMusic(name: "SpaceGame.caf")
         
-        playerAnimationJump = setupAnimationWithPrefix("NLCat_Jump_", start: 1, end: 4, timePerFrame: 0.1)
-        playerAnimationFall = setupAnimationWithPrefix("NLCat_Fall_", start: 1, end: 4, timePerFrame: 0.1)
+        playerAnimationJump = setupAnimationWithPrefix("NLCat_Jump_", start: 1, end: 4, timePerFrame: 0.025)
+        playerAnimationFall = setupAnimationWithPrefix("NLCat_Fall_", start: 2, end: 7, timePerFrame: 0.025)
+        playerAnimationPlatform = setupAnimationWithPrefix("NLCat_Platform_", start: 3, end: 5, timePerFrame: 0.025)
         playerAnimationSteerLeft = setupAnimationWithPrefix("player01_steerleft_", start: 1, end: 2, timePerFrame: 0.1)
         playerAnimationSteerRight = setupAnimationWithPrefix("player01_steerright_", start: 1, end: 2, timePerFrame: 0.1)
         
@@ -302,12 +304,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupBackground("PinkRain.sks")*/
         
         // Squash and Stretch Player
-        let squash = SKAction.scaleX(to: 1.15, y: 0.85, duration: 0.25)
+        /*let squash = SKAction.scaleX(to: 1.15, y: 0.85, duration: 0.25)
         squash.timingMode = .easeInEaseOut
         let stretch = SKAction.scaleX(to: 0.85, y: 1.15, duration: 0.25)
         stretch.timingMode = .easeInEaseOut
         
-        squashAndStetch = SKAction.sequence([squash, stretch])
+        squashAndStetch = SKAction.sequence([squash, stretch])*/
     }
     
     func setupLevel() {
@@ -582,10 +584,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if playerTrail.particleBirthRate == 0 {
                 playerTrail.particleBirthRate = 200
             }
-            player.run(squashAndStetch)
+            //player.run(squashAndStetch)
         } else if player.physicsBody!.velocity.dy > CGFloat(0.0) && playerState != .jump {
             playerState = .jump
-            player.run(squashAndStetch)
+            //player.run(squashAndStetch)
         }
         
         // Animate player
@@ -599,9 +601,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             } else {
                 runPlayerAnimation(playerAnimationJump)
             }
-        } else if playerState == .fall {
-            runPlayerAnimation(playerAnimationFall)
-        }
+            } else if playerState == .fall {
+                runPlayerAnimation(playerAnimationFall)
+            } else if playerState == .idle {
+                runPlayerAnimation(playerAnimationPlatform)
+            }
         }
     
     func updateCamera() {
@@ -1244,13 +1248,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         moveDown.timingMode = .easeIn
         player.run(SKAction.sequence([moveUp, moveDown]))*/
         // 4
-        let gameOverSprite = SKSpriteNode(imageNamed: "GameOver")
-        gameOverSprite.size = CGSize(width: 1175, height: 265)
+        let gameOverSprite = SKSpriteNode(imageNamed: "GameOver2")
+        gameOverSprite.size = CGSize(width: 1018, height: 368)
         gameOverSprite.position = camera!.position + CGPoint(x:0, y:400)
         gameOverSprite.zPosition = 10
         addChild(gameOverSprite)
         
-        let restartButton = SKSpriteNode(imageNamed: "RestartButton")
+        let restartButton = SKSpriteNode(imageNamed: "RestartButton2")
         restartButton.size = CGSize(width: 336, height: 332)
         restartButton.position = camera!.position + CGPoint(x:-300, y:-600)
         restartButton.zPosition = 10
@@ -1420,7 +1424,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let trail = SKEmitterNode(fileNamed: name)!
         trail.zPosition = -1
         trail.targetNode = fgNode
-        player.addChild(trail)
+        //player.addChild(trail)
         return trail
     }
     
