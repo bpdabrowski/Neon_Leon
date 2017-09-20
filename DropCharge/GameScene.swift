@@ -191,8 +191,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playBackgroundMusic(name: "SpaceGame.caf")
         
         playerAnimationJump = setupAnimationWithPrefix("NLCat_Jump_", start: 1, end: 4, timePerFrame: 0.025)
-        playerAnimationFall = setupAnimationWithPrefix("NLCat_Fall_", start: 2, end: 7, timePerFrame: 0.025)
-        playerAnimationPlatform = setupAnimationWithPrefix("NLCat_Platform_", start: 3, end: 5, timePerFrame: 0.025)
+        playerAnimationFall = setupAnimationWithPrefix("NLCat_Fall_", start: 1, end: 6, timePerFrame: 0.025)
+        playerAnimationPlatform = setupAnimationWithPrefix("NLCat_Platform_", start: 1, end: 3, timePerFrame: 0.025)
         playerAnimationSteerLeft = setupAnimationWithPrefix("player01_steerleft_", start: 1, end: 2, timePerFrame: 0.1)
         playerAnimationSteerRight = setupAnimationWithPrefix("player01_steerright_", start: 1, end: 2, timePerFrame: 0.1)
         
