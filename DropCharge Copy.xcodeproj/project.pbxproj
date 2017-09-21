@@ -20,7 +20,6 @@
 		F22CBDFF1EB5422100627677 /* CollectSpecial.sks in Resources */ = {isa = PBXBuildFile; fileRef = F22CBDFE1EB5422100627677 /* CollectSpecial.sks */; };
 		F2306C2C1F1EEBDB00648B30 /* Background.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2306C2B1F1EEBDB00648B30 /* Background.sks */; };
 		F2306C2E1F1EED4C00648B30 /* BlueRain.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2306C2D1F1EED4C00648B30 /* BlueRain.sks */; };
-		F236E66B1F56431900ECE8FE /* ItemCatalog.sks in Resources */ = {isa = PBXBuildFile; fileRef = F236E66A1F56431900ECE8FE /* ItemCatalog.sks */; };
 		F2751B021EB6A0D100B9F913 /* BrokenPlatform.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2751B011EB6A0D100B9F913 /* BrokenPlatform.sks */; };
 		F2751B041EB6A77B00B9F913 /* PlayerTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2751B031EB6A77B00B9F913 /* PlayerTrail.sks */; };
 		F2751B181EB6B47B00B9F913 /* alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2751B061EB6B47B00B9F913 /* alarm.wav */; };
@@ -67,6 +66,7 @@
 		F2BE384B1EB536BC00EF28F2 /* SmokeTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2BE384A1EB536BC00EF28F2 /* SmokeTrail.sks */; };
 		F2BE384D1EB53C2D00EF28F2 /* CollectNormal.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2BE384C1EB53C2D00EF28F2 /* CollectNormal.sks */; };
 		F2C7DA581EFB5E3800571F22 /* Platform.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2C7DA571EFB5E3800571F22 /* Platform.sks */; };
+		F2CB02831F734AA2005C28CF /* ItemCatalog.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2CB02821F734AA2005C28CF /* ItemCatalog.sks */; };
 		F2DBB3FB1EB0365F0089DF2A /* Break5Across.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2DBB3FA1EB0365F0089DF2A /* Break5Across.sks */; };
 		F2DBB3FD1EB036A10089DF2A /* CoinSArrow.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2DBB3FC1EB036A10089DF2A /* CoinSArrow.sks */; };
 		F2DBB4031EB037E30089DF2A /* PlatformArrow.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2DBB4021EB037E30089DF2A /* PlatformArrow.sks */; };
@@ -97,7 +97,6 @@
 		F22CBDFE1EB5422100627677 /* CollectSpecial.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CollectSpecial.sks; sourceTree = "<group>"; };
 		F2306C2B1F1EEBDB00648B30 /* Background.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background.sks; sourceTree = "<group>"; };
 		F2306C2D1F1EED4C00648B30 /* BlueRain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlueRain.sks; sourceTree = "<group>"; };
-		F236E66A1F56431900ECE8FE /* ItemCatalog.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = ItemCatalog.sks; path = ../../../.Trash/ItemCatalog.sks; sourceTree = "<group>"; };
 		F2751B011EB6A0D100B9F913 /* BrokenPlatform.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BrokenPlatform.sks; sourceTree = "<group>"; };
 		F2751B031EB6A77B00B9F913 /* PlayerTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerTrail.sks; sourceTree = "<group>"; };
 		F2751B061EB6B47B00B9F913 /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm.wav; sourceTree = "<group>"; };
@@ -146,6 +145,7 @@
 		F2BE384A1EB536BC00EF28F2 /* SmokeTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SmokeTrail.sks; sourceTree = "<group>"; };
 		F2BE384C1EB53C2D00EF28F2 /* CollectNormal.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CollectNormal.sks; sourceTree = "<group>"; };
 		F2C7DA571EFB5E3800571F22 /* Platform.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Platform.sks; sourceTree = "<group>"; };
+		F2CB02821F734AA2005C28CF /* ItemCatalog.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ItemCatalog.sks; sourceTree = "<group>"; };
 		F2DBB3FA1EB0365F0089DF2A /* Break5Across.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Break5Across.sks; sourceTree = "<group>"; };
 		F2DBB3FC1EB036A10089DF2A /* CoinSArrow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CoinSArrow.sks; sourceTree = "<group>"; };
 		F2DBB4021EB037E30089DF2A /* PlatformArrow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlatformArrow.sks; sourceTree = "<group>"; };
@@ -176,10 +176,10 @@
 		F21AAE261F4BB77A00B41405 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
-				F236E66A1F56431900ECE8FE /* ItemCatalog.sks */,
 				F2B3353F1EA44D01007801AC /* StartPlatform.sks */,
 				F216137D1F24F3E000378FD3 /* MediumJump.sks */,
 				F2DE52791F37A9380062CCEF /* SecondTest.sks */,
+				F2CB02821F734AA2005C28CF /* ItemCatalog.sks */,
 			);
 			name = Levels;
 			path = ..;
@@ -418,7 +418,7 @@
 				F2DBB40D1EB03B4C0089DF2A /* CoinDiagonal.sks in Resources */,
 				F216137E1F24F3E000378FD3 /* MediumJump.sks in Resources */,
 				F2751B181EB6B47B00B9F913 /* alarm.wav in Resources */,
-				F236E66B1F56431900ECE8FE /* ItemCatalog.sks in Resources */,
+				F2CB02831F734AA2005C28CF /* ItemCatalog.sks in Resources */,
 				F2DBB3FD1EB036A10089DF2A /* CoinSArrow.sks in Resources */,
 				F2751B201EB6B47C00B9F913 /* DrownFireBug.mp3 in Resources */,
 				F2751B221EB6B47C00B9F913 /* explosion2.wav in Resources */,

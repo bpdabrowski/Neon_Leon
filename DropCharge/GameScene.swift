@@ -247,7 +247,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if playerState == .jump {
             if gesture.direction == UISwipeGestureRecognizerDirection.left {
                 print("left")
-                player.xScale = -abs(xScale)
+                //player.xScale = -abs(xScale)
             } else if gesture.direction == UISwipeGestureRecognizerDirection.right {
                 print("right")
             }
@@ -400,7 +400,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
                 case PhysicsCategory.Spikes:
                     let spikeBodyTexture = SKTexture(imageNamed: "SpikeOutline")
-                    newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 198, height: 108))
+                    newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 196, height: 13))
                     newNode.physicsBody?.isDynamic = false
                     newNode.physicsBody?.affectedByGravity = false
                     newNode.physicsBody?.allowsRotation = false
@@ -596,6 +596,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if player.physicsBody!.velocity.dx > 0 {
                     //runPlayerAnimation(playerAnimationSteerRight)
                 } else {
+                    //player.xScale = -1.0
+                    //player.xScale = -abs(player.xScale)
                     //runPlayerAnimation(playerAnimationSteerLeft)
                 }
             } else {
@@ -1158,8 +1160,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let touch = touches.first
             let touchLocation = touch!.location(in: fgNode)
             let previousLocation = touch!.previousLocation(in: fgNode)
-            let catX = player.position.x + ((touchLocation.x - previousLocation.x) * 2.5)
+            let touchDifference = touchLocation.x - previousLocation.x
+            let catX = player.position.x + ((touchDifference) * 2.5)
             player.position = CGPoint(x: catX, y: player.position.y)
+            print(touchDifference)
+            if touchDifference <= 0 {
+                player.xScale = -abs(player.xScale)
+            } else {
+                player.xScale = abs(player.xScale)
+            }
             
         }
     }
