@@ -8,13 +8,14 @@
 import SpriteKit
 import GameplayKit
 import CoreMotion
-
+//import Lottie
+import AVFoundation
 
 
 struct PhysicsCategory {
     static let None: UInt32                 = 0
     static let Player: UInt32               = 0b1 // 1
-    static let PlatformNormal: UInt32       = 0b10 // 2
+    static let PlatformMiddle: UInt32       = 0b10 // 2
     static let PlatformBreakable: UInt32    = 0b100 // 4
     static let CoinNormal: UInt32           = 0b1000 // 8
     static let CoinSpecial: UInt32          = 0b10000 // 16
@@ -22,6 +23,8 @@ struct PhysicsCategory {
     static let FallOff: UInt32              = 0b1000000 // 64
     static let Poison: UInt32               = 0b10000000 // 128
     static let Spikes: UInt32               = 0b100000000 // 256
+    static let PlatformHigh: UInt32         = 0b1000000000 // 512
+    static let PlatformLow: UInt32          = 0b10000000000 // 1024
 }
 
 // MARK: - Game States
@@ -45,6 +48,13 @@ enum JumpState: Int {
     case small = 1
     case medium = 2
     case big = 3
+}
+
+enum PlatformStatus: Int {
+    case none = 0
+    case low = 1
+    case middle = 2
+    case high = 3
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -86,6 +96,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameState = GameStatus.waitingForTap
     var playerState = PlayerStatus.idle
     var jumpState = JumpState.noJump
+    var platformState = PlatformStatus.none
     
     let motionManager = CMMotionManager()
     var xAcceleration = CGFloat(0)
@@ -164,12 +175,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var platformProbes: SKSpriteNode!
     
+    //let animationView = LOTAnimationView(name: "TestNL")
+    
+    var avPlayer: AVPlayer!
+    var video: SKVideoNode!
+    
     //var powerBar: SKSpriteNode!
     
     //3
     override func didMove(to view: SKView) {
         view.showsPhysics = true
         
+        /*animationView.frame = CGRect(x: 0, y: 0, width: 1018, height: 337)
+        animationView.loopAnimation = false
+        
+        view.addSubview(animationView)
+        animationView.layer.zPosition = 999
+        animationView.play()*/
+    
         lightningAnimation = setupAnimationWithPrefix("BottomLightning", start: 1, end: 4, timePerFrame: 0.2)
         coinAnimationNormal = setupAnimationWithPrefix("powerup05_", start: 1, end: 6, timePerFrame: 0.1)
         coinAnimationSpecial = setupAnimationWithPrefix("powerup01_", start: 1, end: 6, timePerFrame: 0.1)
@@ -180,6 +203,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupNodes()
         setupLevel()
         setupPlayer()
+        findChild()
+        
         
         /*let scale = SKAction.scale(to: 1.0, duration: 0.5)
         fgNode.childNode(withName: "Ready")!.run(scale)*/
@@ -192,7 +217,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         playerAnimationJump = setupAnimationWithPrefix("NLCat_Jump_", start: 1, end: 4, timePerFrame: 0.025)
         playerAnimationFall = setupAnimationWithPrefix("NLCat_Fall_", start: 1, end: 6, timePerFrame: 0.025)
-        playerAnimationPlatform = setupAnimationWithPrefix("NLCat_Platform_", start: 1, end: 3, timePerFrame: 0.025)
+        playerAnimationPlatform = setupAnimationWithPrefix("NLCat_Platform_", start: 1, end: 4, timePerFrame: 0.025)
         playerAnimationSteerLeft = setupAnimationWithPrefix("player01_steerleft_", start: 1, end: 2, timePerFrame: 0.1)
         playerAnimationSteerRight = setupAnimationWithPrefix("player01_steerright_", start: 1, end: 2, timePerFrame: 0.1)
         
@@ -225,6 +250,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
     }
+    
     
     func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         
@@ -313,6 +339,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setupLevel() {
+        /*let overlayScene = SKScene(fileNamed: fileName)!
+        let overlayTemplate = overlayScene.childNode(withName: "Overlay")
+        return overlayTemplate as! SKSpriteNode*/
+        
+
+        
         // Place initial platform
         let initialPlatform = startPlatform.copy() as! SKSpriteNode
         var overlayPosition = player.position
@@ -334,10 +366,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addRandomForegroundOverlay()
         }
         
+        /*let fileUrl = Bundle.main.url(forResource: "Title_1", withExtension: "mov")!
+        avPlayer = AVPlayer(url: fileUrl)
+        video = SKVideoNode(avPlayer: avPlayer)
+        
+        video.name = "TitleVideo"
+        video.size = CGSize(width: 1018, height: 368)
+        video.position = CGPoint(x: 0, y: 515)
+        video.zPosition = 1000
+        fgNode.addChild(video)
+        video.play()*/
+    }
+    
+    func findChild() {
+        if (fgNode.childNode(withName: "TitleVideo") != nil) {
+            print("Added to Scene")
+        } else {
+            print("nope")
+        }
     }
     
     func setupPlayer() {
-        player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width * 0.25)
+        //let catTexture = SKTexture(imageNamed: "NLCat_Jump_1")
+        //player.physicsBody = SKPhysicsBody(texture: catTexture, size: CGSize(width: 200, height: 170))
+        player.physicsBody = SKPhysicsBody(circleOfRadius: 60, center: CGPoint(x: 0.5, y: 0.25))
+        //(circleOfRadius: player.size.width * 0.25)
         player.physicsBody!.isDynamic = false
         player.physicsBody!.allowsRotation = false
         player.physicsBody!.categoryBitMask = PhysicsCategory.Player
@@ -400,7 +453,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
                 case PhysicsCategory.Spikes:
                     let spikeBodyTexture = SKTexture(imageNamed: "SpikeOutline")
-                    newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 196, height: 13))
+                    newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 196, height: 15))
                     newNode.physicsBody?.isDynamic = false
                     newNode.physicsBody?.affectedByGravity = false
                     newNode.physicsBody?.allowsRotation = false
@@ -808,22 +861,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func setPlayerVelocity(_ amount:CGFloat) {
         player.physicsBody!.velocity.dy =
             max(player.physicsBody!.velocity.dy, amount * gameGain)
+        print(player.physicsBody!.velocity.dy)
     }
     
     func jumpPlayer() {
         setPlayerVelocity(400)
-        //tapCount = 0
     }
     
     func boostPlayer() {
         setPlayerVelocity(800)
-        screenShakeByAmt(40)
-        //tapCount = 0
+        //screenShakeByAmt(40)
     }
     
     func superBoostPlayer() {
         setPlayerVelocity(1200)
-        //tapCount = 0
     }
     
     // MARK: - Overlay nodes
@@ -1047,7 +1098,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
          self.view?.presentScene(newScene!, transition: reveal)
          }
         
-        let greenPowerBar = SKSpriteNode(imageNamed: "GreenPower")
+        /*let greenPowerBar = SKSpriteNode(imageNamed: "GreenPower")
         let yellowPowerBar = SKSpriteNode(imageNamed: "YellowPower")
         let redPowerBar = SKSpriteNode(imageNamed: "RedPower")
         
@@ -1061,57 +1112,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         greenPowerBar.zPosition = 100
         yellowPowerBar.zPosition = 100
-        redPowerBar.zPosition = 100
+        redPowerBar.zPosition = 100*/
         
         if gameState == .playing {
-            //if isFingerOnCat == true {
-                //updateTouchTime(deltaTime)
-                
                 let touch = touches.first
                 tapCount = touch!.tapCount
                 
-                
-                if playerState == .idle {
-                    if tapCount == 2 {
-                        camera?.addChild(greenPowerBar)
-                        greenPowerBar.run(SKAction.scale(to: 1, duration: 0.1))
-                        jumpState = .small
-                        //touchCountLabel.text = "2"
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                            greenPowerBar.run(SKAction.scale(to: 0, duration: 0.5))
-                        })
-                    } else if tapCount == 3 {
-                        camera?.addChild(yellowPowerBar)
-                        yellowPowerBar.run(SKAction.scale(to: 1, duration: 0.1))
-                        jumpState = .medium
-                        //touchCountLabel.text = "3"
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                            yellowPowerBar.run(SKAction.scale(to: 0, duration: 0.5))
-                        })
-                    } else if tapCount == 4 {
-                        camera?.addChild(redPowerBar)
-                        redPowerBar.run(SKAction.scale(to: 1, duration: 0.1))
-                        jumpState = .big
-                        //touchCountLabel.text = "4"
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                            redPowerBar.run(SKAction.scale(to: 0, duration: 0.5))
-                        })
+                if playerState == .idle && platformState == .high {
+                    //camera?.addChild(redPowerBar)
+                    //camera?.addChild(yellowPowerBar)
+                    //camera?.addChild(greenPowerBar)
+                    //redPowerBar.run(SKAction.scale(to: 1, duration: 0.1))
+                    if tapCount == 1 {
+                        superBoostPlayer()
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                        //greenPowerBar.run(SKAction.scaleX(by: 1, y: 1, duration: 1))
-                        //yellowPowerBar.run(SKAction.scaleX(to: 0, duration: 1))
-                        //redPowerBar.run(SKAction.scaleX(to: 0, duration: 1))
-                        
-                        greenPowerBar.removeFromParent()
-                        yellowPowerBar.removeFromParent()
-                        redPowerBar.removeFromParent()
-                    })
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                        
-                    })
-                }
-            //}
+                } else if playerState == .idle && platformState == .middle {
+                    //camera?.addChild(yellowPowerBar)
+                    //yellowPowerBar.run(SKAction.scale(to: 1, duration: 0.1))
+                    if tapCount == 1 {
+                        boostPlayer()
+                    }
+                } else if playerState == .idle && platformState == .low {
+                   // camera?.addChild(greenPowerBar)
+                    //greenPowerBar.run(SKAction.scale(to: 1, duration: 0.1))
+                    if tapCount == 1 {
+                        jumpPlayer()
+                    }
+            }
             
             /*
              When the screen is tapped one time make the player crouch a little bit
@@ -1163,7 +1190,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let touchDifference = touchLocation.x - previousLocation.x
             let catX = player.position.x + ((touchDifference) * 2.5)
             player.position = CGPoint(x: catX, y: player.position.y)
-            print(touchDifference)
+            //print(touchDifference)
             if touchDifference <= 0 {
                 player.xScale = -abs(player.xScale)
             } else {
@@ -1183,7 +1210,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         isFingerOnCat = false
     }
-    /*override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    /*override func(_ touches: Set<UITouch>, with event: UIEvent?) {
         if gameState == .waitingForTap {
             bombDrop()
         } else if gameState == .gameOver {
@@ -1229,6 +1256,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bomb.removeFromParent()
         run(soundExplosions[3])*/
         gameState = .playing
+        playerState = .idle
+        platformState = .high
         player.physicsBody!.isDynamic = true
         //superBoostPlayer()
         playBackgroundMusic(name: "bgMusic.mp3")
@@ -1291,12 +1320,65 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.removeFromParent()
     }
     
+    func setupLights(lights: Int) {
+        let greenPowerBar = SKSpriteNode(imageNamed: "GreenPower")
+        let yellowPowerBar = SKSpriteNode(imageNamed: "YellowPower")
+        let redPowerBar = SKSpriteNode(imageNamed: "RedPower")
+        
+        greenPowerBar.position = CGPoint(x: 0, y: 1000)
+        yellowPowerBar.position = CGPoint(x: 0, y: 975)
+        redPowerBar.position = CGPoint(x: 0, y: 950)
+        
+        greenPowerBar.setScale(1)
+        yellowPowerBar.setScale(1)
+        redPowerBar.setScale(1)
+        
+        greenPowerBar.zPosition = 100
+        yellowPowerBar.zPosition = 100
+        redPowerBar.zPosition = 100
+        
+        if lights == 1 {
+            camera?.addChild(greenPowerBar)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                greenPowerBar.removeFromParent()
+            })
+        } else if lights == 2 {
+            camera?.addChild(greenPowerBar)
+            camera?.addChild(yellowPowerBar)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                greenPowerBar.removeFromParent()
+                yellowPowerBar.removeFromParent()
+            })
+        } else if lights == 3 {
+            camera?.addChild(greenPowerBar)
+            camera?.addChild(yellowPowerBar)
+            camera?.addChild(redPowerBar)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                greenPowerBar.removeFromParent()
+                yellowPowerBar.removeFromParent()
+                redPowerBar.removeFromParent()
+            })
+        }
+    }
+    
+    func playerPlatformSettings() {
+        player.physicsBody?.isDynamic = true
+        player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+        player.physicsBody?.affectedByGravity = false
+        playerState = .idle
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         /*let platformPosition = fgNode.convert(platform.position, to: scene!)
         let playerPosition = fgNode.convert(player.position, to: scene!)
         let limitJoint = SKPhysicsJointLimit.joint(withBodyA: player.physicsBody!, bodyB: platform.physicsBody!, anchorA: platformPosition, anchorB: playerPosition)*/
         
         //player.physicsBody?.affectedByGravity = true
+        
+
         
         let other = contact.bodyA.categoryBitMask ==
             PhysicsCategory.Player ? contact.bodyB : contact.bodyA
@@ -1313,23 +1395,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 boostPlayer()
                 run(soundBoost)
             }
-        case PhysicsCategory.PlatformNormal:
+            
+        case PhysicsCategory.PlatformLow:
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
-            //playerState = .idle
+            setupLights(lights: 1)
             if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
-                    player.physicsBody?.isDynamic = true
-                    player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                    //player.physicsBody?.angularVelocity = 0
-                    player.physicsBody?.affectedByGravity = false
-                    playerState = .idle
-                    //player.physicsBody!.velocity.dy = 0
-                    //player.physicsBody!.isDynamic = false
-                    //platformAction(platform, breakable: false)
-                    
-                    //jumpPlayer()
+                    playerPlatformSettings()
+                    platformState = .low
+                    run(soundJump)
+                }
+            }
+            
+        case PhysicsCategory.PlatformMiddle:
+            if playerState == .jump {
+                player.physicsBody?.affectedByGravity = true
+            }
+            setupLights(lights: 2)
+            if let platform = other.node as? SKSpriteNode {
+                if player.physicsBody!.velocity.dy < 0 {
+                    playerPlatformSettings()
+                    platformState = .middle
+                    run(soundJump)
+                }
+            }
+            
+        case PhysicsCategory.PlatformHigh:
+            if playerState == .jump {
+                player.physicsBody?.affectedByGravity = true
+            }
+            setupLights(lights: 3)
+            if let platform = other.node as? SKSpriteNode {
+                if player.physicsBody!.velocity.dy < 0 {
+                    playerPlatformSettings()
+                    platformState = .high
                     run(soundJump)
                 }
             }
