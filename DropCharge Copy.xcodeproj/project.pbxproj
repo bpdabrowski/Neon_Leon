@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6C9D73158FBC07125E3BCF53 /* Pods_DropCharge_Copy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51AC3D22A631D8719DBB0237 /* Pods_DropCharge_Copy.framework */; };
-		F21613761F203C2700378FD3 /* PinkRain.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21613751F203C2700378FD3 /* PinkRain.sks */; };
-		F21613781F203C3500378FD3 /* OrangeRain.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21613771F203C3500378FD3 /* OrangeRain.sks */; };
-		F216137A1F203C3F00378FD3 /* GreenRain.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21613791F203C3F00378FD3 /* GreenRain.sks */; };
-		F216137C1F203C4900378FD3 /* YellowRain.sks in Resources */ = {isa = PBXBuildFile; fileRef = F216137B1F203C4900378FD3 /* YellowRain.sks */; };
 		F216137E1F24F3E000378FD3 /* MediumJump.sks in Resources */ = {isa = PBXBuildFile; fileRef = F216137D1F24F3E000378FD3 /* MediumJump.sks */; };
 		F21613801F251DBA00378FD3 /* Poison.sks in Resources */ = {isa = PBXBuildFile; fileRef = F216137F1F251DBA00378FD3 /* Poison.sks */; };
 		F21613821F2520FB00378FD3 /* PoisonExplode.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21613811F2520FB00378FD3 /* PoisonExplode.sks */; };
@@ -19,7 +15,7 @@
 		F21AAE221F4A42B700B41405 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F21AAE211F4A42B700B41405 /* Assets.xcassets */; };
 		F22CBDFF1EB5422100627677 /* CollectSpecial.sks in Resources */ = {isa = PBXBuildFile; fileRef = F22CBDFE1EB5422100627677 /* CollectSpecial.sks */; };
 		F2306C2C1F1EEBDB00648B30 /* Background.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2306C2B1F1EEBDB00648B30 /* Background.sks */; };
-		F2306C2E1F1EED4C00648B30 /* BlueRain.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2306C2D1F1EED4C00648B30 /* BlueRain.sks */; };
+		F258C6721F904D16004EB80E /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F258C6711F904D15004EB80E /* Button.swift */; };
 		F2751B021EB6A0D100B9F913 /* BrokenPlatform.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2751B011EB6A0D100B9F913 /* BrokenPlatform.sks */; };
 		F2751B041EB6A77B00B9F913 /* PlayerTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2751B031EB6A77B00B9F913 /* PlayerTrail.sks */; };
 		F2751B181EB6B47B00B9F913 /* alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2751B061EB6B47B00B9F913 /* alarm.wav */; };
@@ -42,6 +38,10 @@
 		F2751B291EB6B47C00B9F913 /* tickTock.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2751B171EB6B47B00B9F913 /* tickTock.wav */; };
 		F2751B2B1EB805B100B9F913 /* Coin.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2751B2A1EB805B100B9F913 /* Coin.sks */; };
 		F2751B2D1EB806EB00B9F913 /* CoinSpecial.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2751B2C1EB806EB00B9F913 /* CoinSpecial.sks */; };
+		F2A930E11FA6AA0500748C09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2CA79651F80411A00BDBF33 /* LaunchScreen.storyboard */; };
+		F2AF7D031FA4084A00DC5D2A /* NeonTubes2.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2AF7D021FA4084A00DC5D2A /* NeonTubes2.otf */; };
+		F2AF7D061FA528D400DC5D2A /* SpikeSpark.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2AF7D041FA528D400DC5D2A /* SpikeSpark.sks */; };
+		F2AF7D071FA528D400DC5D2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2AF7D051FA528D400DC5D2A /* Assets.xcassets */; };
 		F2B335031EA4425C007801AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B335021EA4425C007801AC /* AppDelegate.swift */; };
 		F2B335051EA4425C007801AC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B335041EA4425C007801AC /* GameScene.sks */; };
 		F2B335071EA4425C007801AC /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B335061EA4425C007801AC /* Actions.sks */; };
@@ -87,10 +87,6 @@
 		51AC3D22A631D8719DBB0237 /* Pods_DropCharge_Copy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DropCharge_Copy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB352C1679BB2A3392DF649 /* Pods-DropCharge Copy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropCharge Copy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DropCharge Copy/Pods-DropCharge Copy.debug.xcconfig"; sourceTree = "<group>"; };
 		E42A71C11A7E5A323EC7ECC7 /* Pods-DropCharge Copy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropCharge Copy.release.xcconfig"; path = "Pods/Target Support Files/Pods-DropCharge Copy/Pods-DropCharge Copy.release.xcconfig"; sourceTree = "<group>"; };
-		F21613751F203C2700378FD3 /* PinkRain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PinkRain.sks; sourceTree = SOURCE_ROOT; };
-		F21613771F203C3500378FD3 /* OrangeRain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OrangeRain.sks; sourceTree = SOURCE_ROOT; };
-		F21613791F203C3F00378FD3 /* GreenRain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GreenRain.sks; sourceTree = SOURCE_ROOT; };
-		F216137B1F203C4900378FD3 /* YellowRain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = YellowRain.sks; sourceTree = SOURCE_ROOT; };
 		F216137D1F24F3E000378FD3 /* MediumJump.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MediumJump.sks; path = DropCharge/MediumJump.sks; sourceTree = "<group>"; };
 		F216137F1F251DBA00378FD3 /* Poison.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Poison.sks; sourceTree = "<group>"; };
 		F21613811F2520FB00378FD3 /* PoisonExplode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PoisonExplode.sks; sourceTree = "<group>"; };
@@ -98,7 +94,7 @@
 		F21AAE211F4A42B700B41405 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F22CBDFE1EB5422100627677 /* CollectSpecial.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CollectSpecial.sks; sourceTree = "<group>"; };
 		F2306C2B1F1EEBDB00648B30 /* Background.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background.sks; sourceTree = "<group>"; };
-		F2306C2D1F1EED4C00648B30 /* BlueRain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlueRain.sks; sourceTree = "<group>"; };
+		F258C6711F904D15004EB80E /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		F2751B011EB6A0D100B9F913 /* BrokenPlatform.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BrokenPlatform.sks; sourceTree = "<group>"; };
 		F2751B031EB6A77B00B9F913 /* PlayerTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerTrail.sks; sourceTree = "<group>"; };
 		F2751B061EB6B47B00B9F913 /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm.wav; sourceTree = "<group>"; };
@@ -121,6 +117,9 @@
 		F2751B171EB6B47B00B9F913 /* tickTock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tickTock.wav; sourceTree = "<group>"; };
 		F2751B2A1EB805B100B9F913 /* Coin.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Coin.sks; sourceTree = "<group>"; };
 		F2751B2C1EB806EB00B9F913 /* CoinSpecial.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CoinSpecial.sks; sourceTree = "<group>"; };
+		F2AF7D021FA4084A00DC5D2A /* NeonTubes2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NeonTubes2.otf; sourceTree = "<group>"; };
+		F2AF7D041FA528D400DC5D2A /* SpikeSpark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SpikeSpark.sks; sourceTree = "<group>"; };
+		F2AF7D051FA528D400DC5D2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2B334FF1EA4425C007801AC /* DropCharge Copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DropCharge Copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2B335021EA4425C007801AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2B335041EA4425C007801AC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -231,6 +230,14 @@
 			path = sounds;
 			sourceTree = "<group>";
 		};
+		F2AF7D011FA4083100DC5D2A /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				F2AF7D021FA4084A00DC5D2A /* NeonTubes2.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		F2B334F61EA4425C007801AC = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +260,7 @@
 		F2B335011EA4425C007801AC /* DropCharge */ = {
 			isa = PBXGroup;
 			children = (
+				F2AF7D011FA4083100DC5D2A /* Font */,
 				F2B335431EA6F92D007801AC /* SKTUtils */,
 				F2B3353E1EA44CCD007801AC /* Scene Files (Delete) */,
 				F21AAE261F4BB77A00B41405 /* Levels */,
@@ -260,6 +268,7 @@
 				F2B335041EA4425C007801AC /* GameScene.sks */,
 				F2B335061EA4425C007801AC /* Actions.sks */,
 				F2B335081EA4425C007801AC /* GameScene.swift */,
+				F258C6711F904D15004EB80E /* Button.swift */,
 				F2751B051EB6B47B00B9F913 /* sounds */,
 				F2BE38471EB52F2200EF28F2 /* Particles */,
 				F2B3350A1EA4425C007801AC /* GameViewController.swift */,
@@ -325,12 +334,9 @@
 				F21613831F2529B800378FD3 /* Lightning.sks */,
 				F2751B011EB6A0D100B9F913 /* BrokenPlatform.sks */,
 				F2751B031EB6A77B00B9F913 /* PlayerTrail.sks */,
-				F21613791F203C3F00378FD3 /* GreenRain.sks */,
-				F21613771F203C3500378FD3 /* OrangeRain.sks */,
-				F2306C2D1F1EED4C00648B30 /* BlueRain.sks */,
-				F21613751F203C2700378FD3 /* PinkRain.sks */,
-				F216137B1F203C4900378FD3 /* YellowRain.sks */,
 				F216137F1F251DBA00378FD3 /* Poison.sks */,
+				F2AF7D041FA528D400DC5D2A /* SpikeSpark.sks */,
+				F2AF7D051FA528D400DC5D2A /* Assets.xcassets */,
 			);
 			name = Particles;
 			sourceTree = "<group>";
@@ -404,6 +410,7 @@
 				F2751B241EB6B47C00B9F913 /* explosion4.wav in Resources */,
 				F2BE384B1EB536BC00EF28F2 /* SmokeTrail.sks in Resources */,
 				F2751B281EB6B47C00B9F913 /* SpaceGame.caf in Resources */,
+				F2A930E11FA6AA0500748C09 /* LaunchScreen.storyboard in Resources */,
 				F2751B1B1EB6B47C00B9F913 /* bombDrop.wav in Resources */,
 				F2B335421EA44E74007801AC /* CoinArrow.sks in Resources */,
 				F2DBB4151EB2CA7A0089DF2A /* PlatformDiamond.sks in Resources */,
@@ -412,11 +419,9 @@
 				F2751B1E1EB6B47C00B9F913 /* coin1.wav in Resources */,
 				F2DBB4171EB2DC3E0089DF2A /* CoinSDiagonal.sks in Resources */,
 				F2751B271EB6B47C00B9F913 /* player_die.wav in Resources */,
-				F21613781F203C3500378FD3 /* OrangeRain.sks in Resources */,
 				F2DBB4091EB03ADB0089DF2A /* BreakDiagonal.sks in Resources */,
 				F2DBB4051EB038590089DF2A /* PlatformDiagonal.sks in Resources */,
 				F2B335051EA4425C007801AC /* GameScene.sks in Resources */,
-				F216137C1F203C4900378FD3 /* YellowRain.sks in Resources */,
 				F2751B041EB6A77B00B9F913 /* PlayerTrail.sks in Resources */,
 				F2751B211EB6B47C00B9F913 /* explosion1.wav in Resources */,
 				F2751B2B1EB805B100B9F913 /* Coin.sks in Resources */,
@@ -424,16 +429,14 @@
 				F2751B1D1EB6B47C00B9F913 /* brick.caf in Resources */,
 				F2C7DA581EFB5E3800571F22 /* Platform.sks in Resources */,
 				F2DBB4071EB03AA70089DF2A /* BreakArrow.sks in Resources */,
-				F216137A1F203C3F00378FD3 /* GreenRain.sks in Resources */,
 				F2DBB4031EB037E30089DF2A /* PlatformArrow.sks in Resources */,
 				F2DBB3FB1EB0365F0089DF2A /* Break5Across.sks in Resources */,
 				F2751B231EB6B47C00B9F913 /* explosion3.wav in Resources */,
 				F2751B191EB6B47C00B9F913 /* attribution.txt in Resources */,
 				F2751B261EB6B47C00B9F913 /* nitro.wav in Resources */,
 				F2751B1F1EB6B47C00B9F913 /* coin4.wav in Resources */,
+				F2AF7D031FA4084A00DC5D2A /* NeonTubes2.otf in Resources */,
 				F2BE384D1EB53C2D00EF28F2 /* CollectNormal.sks in Resources */,
-				F2306C2E1F1EED4C00648B30 /* BlueRain.sks in Resources */,
-				F21613761F203C2700378FD3 /* PinkRain.sks in Resources */,
 				F2B335071EA4425C007801AC /* Actions.sks in Resources */,
 				F21AAE221F4A42B700B41405 /* Assets.xcassets in Resources */,
 				F22CBDFF1EB5422100627677 /* CollectSpecial.sks in Resources */,
@@ -448,9 +451,11 @@
 				F2751B201EB6B47C00B9F913 /* DrownFireBug.mp3 in Resources */,
 				F2751B221EB6B47C00B9F913 /* explosion2.wav in Resources */,
 				F21613841F2529B800378FD3 /* Lightning.sks in Resources */,
+				F2AF7D071FA528D400DC5D2A /* Assets.xcassets in Resources */,
 				F2751B1C1EB6B47C00B9F913 /* boost.wav in Resources */,
 				F2DBB40B1EB03AFF0089DF2A /* Coin5Across.sks in Resources */,
 				F2DBB4131EB03C520089DF2A /* CoinSCross.sks in Resources */,
+				F2AF7D061FA528D400DC5D2A /* SpikeSpark.sks in Resources */,
 				F2751B2D1EB806EB00B9F913 /* CoinSpecial.sks in Resources */,
 				F2751B021EB6A0D100B9F913 /* BrokenPlatform.sks in Resources */,
 				F2306C2C1F1EEBDB00648B30 /* Background.sks in Resources */,
@@ -517,6 +522,7 @@
 				F2B335091EA4425C007801AC /* GameScene.swift in Sources */,
 				F2B335511EA6F92D007801AC /* CGPoint+Extensions.swift in Sources */,
 				F2B3355A1EA6F92D007801AC /* SKTTimingFunctions.swift in Sources */,
+				F258C6721F904D16004EB80E /* Button.swift in Sources */,
 				F2B335591EA6F92D007801AC /* SKTEffects.swift in Sources */,
 				F2B335551EA6F92D007801AC /* SKAction+SpecialEffects.swift in Sources */,
 				F2B335521EA6F92D007801AC /* CGVector+Extensions.swift in Sources */,

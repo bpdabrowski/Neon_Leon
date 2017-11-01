@@ -10,6 +10,7 @@ import GameplayKit
 import CoreMotion
 //import Lottie
 import AVFoundation
+import StoreKit
 
 
 struct PhysicsCategory {
@@ -126,8 +127,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var platform: SKSpriteNode!
     
-    let touchCountLabel = SKLabelNode(fontNamed: "DiwanMishafi")
-    let jumpLabel = SKLabelNode(fontNamed: "DiwanMishafi")
+    let scoreLabel = SKLabelNode(fontNamed: "NeonTubes2-Regular")
+    var highScoreLabel = SKLabelNode(fontNamed: "NeonTubes2-Regular")
+    var score = 0
+    var highScore = UserDefaults().integer(forKey: "HIGHSCORE")
+    
+    let jumpLabel = SKLabelNode(fontNamed: "NeonTubes2-Regular")
     
     
     let soundExplosions = [
@@ -182,9 +187,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //var powerBar: SKSpriteNode!
     
+    var playButton: Button!
+    var reviewButton: Button!
+    var noAdsStart: Button!
+    
+    var lightningOff: SKSpriteNode!
+    var lightningOff2: SKSpriteNode!
+    var lightningOff3: SKSpriteNode!
+    
+    var bluePlatformAnimation: SKAction!
+    var yellowPlatformAnimation: SKAction!
+    var pinkPlatformAnimation: SKAction!
+    var startPlatformAnimation: SKAction!
+    
+    let userDefaults = UserDefaults.standard
+    
+    /*required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        addObservers()
+    }*/
+    
     //3
     override func didMove(to view: SKView) {
-        view.showsPhysics = true
+        view.showsPhysics = false
+        
+        addObservers()
         
         /*animationView.frame = CGRect(x: 0, y: 0, width: 1018, height: 337)
         animationView.loopAnimation = false
@@ -192,18 +219,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         view.addSubview(animationView)
         animationView.layer.zPosition = 999
         animationView.play()*/
-    
-        lightningAnimation = setupAnimationWithPrefix("BottomLightning", start: 1, end: 4, timePerFrame: 0.2)
         coinAnimationNormal = setupAnimationWithPrefix("powerup05_", start: 1, end: 6, timePerFrame: 0.1)
         coinAnimationSpecial = setupAnimationWithPrefix("powerup01_", start: 1, end: 6, timePerFrame: 0.1)
-        breakAnimation = setupAnimationWithPrefix("PinkPlatform_", start: 1, end: 2, timePerFrame: 0.1)
+        //breakAnimation = setupAnimationWithPrefix("PinkPlatformLt_", start: 1, end: 2, timePerFrame: 0.1)
         poisonBeakerMove = SKAction.moveBy(x: -200, y: 0, duration: 0.5)
         poisonBeakerSequence = SKAction.sequence([poisonBeakerMove, poisonBeakerMove.reversed()])
+
         
         setupNodes()
         setupLevel()
         setupPlayer()
-        findChild()
+        //findChild()
         
         
         /*let scale = SKAction.scale(to: 1.0, duration: 0.5)
@@ -227,6 +253,63 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.view?.addGestureRecognizer(swipeUp)
         }
         
+        lightningOff = SKSpriteNode(imageNamed: "Lightning_00000")
+        lightningOff.size = CGSize(width: 300, height: 311)
+        lightningOff.zPosition = 4
+        lightningOff.position = CGPoint(x: -150, y: 900)
+        camera?.addChild(lightningOff)
+        
+        lightningOff2 = lightningOff.copy() as! SKSpriteNode
+        lightningOff2.position = CGPoint(x: 0, y: 900)
+        camera?.addChild(lightningOff2)
+        
+        lightningOff3 = lightningOff.copy() as! SKSpriteNode
+        lightningOff3.position = CGPoint(x: 150, y: 900)
+        camera?.addChild(lightningOff3)
+        
+        /*let lightning1 = setupButton(pictureBase: "Lightning_00000",
+                                     pictureWidth: 300,
+                                     pictureHeight: 311,
+                                     buttonPositionX: -150,
+                                     buttonPositionY: 900)
+        
+        let lightning2 = setupButton(pictureBase: "Lightning_00000",
+                                     pictureWidth: 300,
+                                     pictureHeight: 311,
+                                     buttonPositionX: 0,
+                                     buttonPositionY: 900)
+        
+        let lightning3 = setupButton(pictureBase: "Lightning_00000",
+                                     pictureWidth: 300,
+                                     pictureHeight: 311,
+                                     buttonPositionX: 150,
+                                     buttonPositionY: 900)
+        camera?.addChild(lightning1)*/
+        
+        let animationLoopUp = setupAnimationWithPrefix("Lightning_000",
+                                                     start: 1,
+                                                     end: 30,
+                                                     timePerFrame: 0.02)
+        
+        let animationLoopDown = setupAnimationWithPrefix("Lightning_000",
+                                                         start: 31,
+                                                         end: 45,
+                                                         timePerFrame: 0.04)
+        
+        let wait5 = SKAction.wait(forDuration: 5)
+        let wait3 = SKAction.wait(forDuration: 3)
+        let wait2 = SKAction.wait(forDuration: 2)
+        let wait1 = SKAction.wait(forDuration: 1)
+        
+        let lightning1Sequence = SKAction.sequence([animationLoopUp, wait5, animationLoopDown, wait1])
+        let lightning2Sequence = SKAction.sequence([wait1, animationLoopUp, wait3, animationLoopDown, wait2])
+        let lightning3Sequence = SKAction.sequence([wait2, animationLoopUp, wait1, animationLoopDown, wait3])
+        
+        lightningOff.run(SKAction.repeatForever(lightning1Sequence), withKey: "lightning1")
+        lightningOff2.run(SKAction.repeatForever(lightning2Sequence), withKey: "lightning2")
+        lightningOff3.run(SKAction.repeatForever(lightning3Sequence), withKey: "lightning3")
+        
+        
         //Make these actual Game Score Labels
         jumpLabel.fontColor = SKColor.white
         jumpLabel.fontSize = 50
@@ -234,11 +317,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         jumpLabel.position = CGPoint(x: 300, y: 800)
         camera?.addChild(jumpLabel)
         
-        touchCountLabel.fontColor = SKColor.white
-        touchCountLabel.fontSize = 100
-        touchCountLabel.zPosition = 100
-        touchCountLabel.position = CGPoint(x: -300, y: 800)
-        camera?.addChild(touchCountLabel)
+        scoreLabel.fontColor = SKColor.white
+        scoreLabel.fontSize = 150
+        scoreLabel.zPosition = 6
+        scoreLabel.position = CGPoint(x: 0, y: 650)//(x: 475, y: 850)
+        camera?.addChild(scoreLabel)
+        
+        //let scoreText = String(format: "%02d", score)
+        
+
+        
+
+        
+
         
         /*if jumpState == .small {
             powerBarColor("GreenPower")
@@ -291,30 +382,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         startPlatform = loadForegroundOverlayTemplate("StartPlatform")
-        platformArrow = loadForegroundOverlayTemplate("PlatformArrow")
+        /*platformArrow = loadForegroundOverlayTemplate("PlatformArrow")
         platformDiagonal = loadForegroundOverlayTemplate("PlatformDiagonal")
         platformDiamond = loadForegroundOverlayTemplate("PlatformDiamond")
         break5Across = loadForegroundOverlayTemplate("Break5Across")
         breakArrow = loadForegroundOverlayTemplate("BreakArrow")
-        breakDiagonal = loadForegroundOverlayTemplate("BreakDiagonal")
+        breakDiagonal = loadForegroundOverlayTemplate("BreakDiagonal")*/
         mediumJump = loadForegroundOverlayTemplate("MediumJump")
         secondTest = loadForegroundOverlayTemplate("SecondTest")
         itemCatalog = loadForegroundOverlayTemplate("ItemCatalog")
         
         
-        coin = loadCoin("Coin")
-        coinSpecial = loadCoin("CoinSpecial")
+        /*coin = loadCoin("Coin")
+        coinSpecial = loadCoin("CoinSpecial")*/
         
-        platform = loadPlatform("Platform")
+        //platform = loadPlatform("Platform")
         
-        coinArrow = loadCoinOverlayTemplate("CoinArrow")
+        /*coinArrow = loadCoinOverlayTemplate("CoinArrow")
         coin5Across = loadCoinOverlayTemplate("Coin5Across")
         coinS5Across = loadCoinOverlayTemplate("CoinS5Across")
         coinCross = loadCoinOverlayTemplate("CoinCross")
         coinSCross = loadCoinOverlayTemplate("CoinSCross")
         coinSArrow = loadCoinOverlayTemplate("CoinSArrow")
         coinDiagonal = loadCoinOverlayTemplate("CoinDiagonal")
-        coinSDiagonal = loadCoinOverlayTemplate("CoinSDiagonal")
+        coinSDiagonal = loadCoinOverlayTemplate("CoinSDiagonal")*/
         
         addChild(cameraNode)
         camera = cameraNode
@@ -323,6 +414,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         setupLava()
         setupBackground("Background.sks")
+        
+        playButton = Button(defaultButtonImage: "PlayButton_00000", activeButtonImage: "PlayButton_00024", buttonAction: startGame)
+        playButton.position = CGPoint(x: 0, y: -150)
+        playButton.alpha = 0.01
+        playButton.zPosition = 10
+        fgNode.addChild(playButton)
+        
+        reviewButton = Button(defaultButtonImage: "ReviewStar_00000", activeButtonImage: "ReviewStar_00030", buttonAction: appStorePage)
+        reviewButton.position = CGPoint(x: -385, y: -700)
+        reviewButton.alpha = 0.01
+        reviewButton.zPosition = 10
+        fgNode.addChild(reviewButton)
+        
+        noAdsStart = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00000", buttonAction: removeAds)
+        noAdsStart.position = CGPoint(x: 385, y: -700)
+        noAdsStart.alpha = 0.01
+        noAdsStart.zPosition = 10
+        fgNode.addChild(noAdsStart)
+        
         /*setupBackground("BlueRain.sks")
         setupBackground("GreenRain.sks")
         setupBackground("YellowRain.sks")
@@ -338,15 +448,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         squashAndStetch = SKAction.sequence([squash, stretch])*/
     }
     
+    func appStorePage() {
+        print("Put in link to App page")
+    }
+    
+    func requestReview() {
+        SKStoreReviewController.requestReview()
+    }
+    
     func setupLevel() {
         /*let overlayScene = SKScene(fileNamed: fileName)!
         let overlayTemplate = overlayScene.childNode(withName: "Overlay")
         return overlayTemplate as! SKSpriteNode*/
-        
+        /*overlay.enumerateChildNodes(withName: "PlatformMid") { (node, stop) in
+            var newNode = SKSpriteNode()
+            self.yellowPlatformAnimation = self.setupAnimationWithPrefix("YellowPlatform_000",
+                                                                         start: 1,
+                                                                         end: 80,
+                                                                         timePerFrame: 0.05)
+            newNode = SKSpriteNode(imageNamed: "YellowPlatform_00000")
+            newNode.run(SKAction.repeatForever(self.yellowPlatformAnimation))
+            newNode.size = CGSize(width: 350, height: 27)
+            newNode.zPosition = 1
+            newNode.position = node.position
+            overlay.addChild(newNode)
+            node.removeFromParent()
+        }*/
 
         
         // Place initial platform
         let initialPlatform = startPlatform.copy() as! SKSpriteNode
+        startPlatformAnimation = setupAnimationWithPrefix("StartPlatform_000",
+                                                                    start: 1,
+                                                                    end: 30,
+                                                                    timePerFrame: 0.05)
+        
+        initialPlatform.size = CGSize(width: 1536, height: 300)
+        initialPlatform.zPosition = 1
+        
         var overlayPosition = player.position
         
         //Made platform height up to match the anchor point of the player.
@@ -356,6 +495,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             (initialPlatform.size.height * 0.20))
         initialPlatform.position = overlayPosition
         fgNode.addChild(initialPlatform)
+        initialPlatform.isPaused = false
+        initialPlatform.run(SKAction.repeatForever(startPlatformAnimation))
         lastOverlayPosition = overlayPosition
         lastOverlayHeight = initialPlatform.size.height / 2.0
         
@@ -378,13 +519,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         video.play()*/
     }
     
-    func findChild() {
+    /*func findChild() {
         if (fgNode.childNode(withName: "TitleVideo") != nil) {
             print("Added to Scene")
         } else {
             print("nope")
         }
-    }
+    }*/
     
     func setupPlayer() {
         //let catTexture = SKTexture(imageNamed: "NLCat_Jump_1")
@@ -404,10 +545,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setupLava() {
         lava = fgNode.childNode(withName: "Lava") as! SKSpriteNode
-        //let emitter = SKEmitterNode(fileNamed: "Lava.sks")!
-        //emitter.particlePositionRange = CGVector(dx: size.width * 1.125, dy: 0.0)
-        //emitter.advanceSimulationTime(3.0)
-        //lava.addChild(emitter)
+        let emitter = SKEmitterNode(fileNamed: "SpikeSpark.sks")!
+        emitter.particlePositionRange = CGVector(dx: size.width * 1.125, dy: 0.0)
+        emitter.advanceSimulationTime(3.0)
+        lava.addChild(emitter)
     }
     
     func setupBackground(_ fileName: String) {
@@ -546,6 +687,92 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 node.removeFromParent()
             }
         }
+        
+        /*overlay.enumerateChildNodes(withName: "PlatformLow") { (node, stop) in
+            var newNode = SKSpriteNode()
+            if let nodePhysicsBody = node.physicsBody {
+                switch nodePhysicsBody.categoryBitMask {
+                case PhysicsCategory.PlatformLow:
+                    newNode = SKSpriteNode(imageNamed: "BluePlatform_00000")
+                    newNode.run(SKAction.repeatForever(self.poisonBeakerSequence))
+                    newNode.size = CGSize(width: 200, height: 15)
+                    newNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 200, height: 15))
+                    
+                    //newNode = self.platform.copy() as! SKSpriteNode
+                    newNode.physicsBody?.isDynamic = false
+                    newNode.physicsBody?.affectedByGravity = false
+                    newNode.physicsBody?.allowsRotation = false
+                    
+                    newNode.zPosition = 99
+                    
+                    
+                    /*newNode =  SKSpriteNode(imageNamed: "NLPoisonBeaker")
+                    newNode.size = CGSize(width: 148.5, height: 187.5)
+                    //newNode.run(SKAction.repeatForever(self.breakAnimation))
+                    newNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 93.75, height: 127.5))
+                    newNode.physicsBody?.isDynamic = false
+                    newNode.physicsBody?.affectedByGravity = false
+                    newNode.physicsBody?.allowsRotation = false
+                    newNode.physicsBody!.categoryBitMask = PhysicsCategory.Poison
+                    newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
+                    newNode.run(SKAction.repeatForever(self.poisonBeakerSequence))
+                    let emitter = SKEmitterNode(fileNamed: "Poison")!
+                    newNode.addChild(emitter)*/
+                    
+                default:
+                    newNode = node.copy() as! SKSpriteNode
+                }
+                newNode.position = node.position
+                overlay.addChild(newNode)
+                node.removeFromParent()
+            }
+        }*/
+        
+        overlay.enumerateChildNodes(withName: "PlatformLow") { (node, stop) in
+                    var newNode = SKSpriteNode()
+                    self.bluePlatformAnimation = self.setupAnimationWithPrefix("BluePlatformLt_000",
+                                                                         start: 1,
+                                                                         end: 80,
+                                                                         timePerFrame: 0.05)
+                    newNode = SKSpriteNode(imageNamed: "BluePlatformLt_00000")
+                    newNode.run(SKAction.repeatForever(self.bluePlatformAnimation))
+                    newNode.size = CGSize(width: 350, height: 27)
+                    newNode.zPosition = 1
+                    newNode.position = node.position
+                    overlay.addChild(newNode)
+                    node.removeFromParent()
+        }
+        
+        overlay.enumerateChildNodes(withName: "PlatformMid") { (node, stop) in
+            var newNode = SKSpriteNode()
+            self.yellowPlatformAnimation = self.setupAnimationWithPrefix("YellowPlatformLt_000",
+                                                                       start: 1,
+                                                                       end: 80,
+                                                                       timePerFrame: 0.05)
+            newNode = SKSpriteNode(imageNamed: "YellowPlatformLt_00000")
+            newNode.run(SKAction.repeatForever(self.yellowPlatformAnimation))
+            newNode.size = CGSize(width: 350, height: 27)
+            newNode.zPosition = 1
+            newNode.position = node.position
+            overlay.addChild(newNode)
+            node.removeFromParent()
+        }
+        
+        overlay.enumerateChildNodes(withName: "PlatformHigh") { (node, stop) in
+            var newNode = SKSpriteNode()
+            self.pinkPlatformAnimation = self.setupAnimationWithPrefix("PinkPlatformLt_000",
+                                                                       start: 1,
+                                                                       end: 80,
+                                                                       timePerFrame: 0.02)
+            newNode = SKSpriteNode(imageNamed: "PinkPlatformLt_00000")
+            newNode.run(SKAction.repeatForever(self.pinkPlatformAnimation))
+            newNode.size = CGSize(width: 350, height: 27)
+            newNode.zPosition = 1
+            newNode.position = node.position
+            overlay.addChild(newNode)
+            node.removeFromParent()
+        }
+
         
     }
     
@@ -743,7 +970,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 2
         let bottomOfScreenYFg = convert(CGPoint(x: 0, y: bottomOfScreenY), to: fgNode).y
         // 3
-        let lavaVelocityY = CGFloat(0) //DEBUG - CHANGED LAVA STEP FROM 120 TO 1000
+        let lavaVelocityY = CGFloat(200) //DEBUG - CHANGED LAVA STEP FROM 120 TO 1000
         let lavaStep = lavaVelocityY * CGFloat(dt)
         var newLavaPositionY = lava.position.y + lavaStep
         // 4
@@ -830,6 +1057,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        
+
+        
         // 1
         if lastUpdateTimeInterval > 0 {
             deltaTime = currentTime - lastUpdateTimeInterval
@@ -850,6 +1080,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             updateCollisionLava()
             updateExplosions(deltaTime)
             //updateRedAlert(deltaTime)
+            if platformState == .low || platformState == .middle || platformState == .high {
+                scoreLabel.text = "\(score)"
+                //print("Platform state is set")
+            }
             if playerState != .idle {
                 player.physicsBody?.affectedByGravity = true
             }
@@ -861,7 +1095,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func setPlayerVelocity(_ amount:CGFloat) {
         player.physicsBody!.velocity.dy =
             max(player.physicsBody!.velocity.dy, amount * gameGain)
-        print(player.physicsBody!.velocity.dy)
+        //print(player.physicsBody!.velocity.dy)
     }
     
     func jumpPlayer() {
@@ -932,6 +1166,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         addAnimationToOverlay(overlay: foregroundOverlay)
         fgNode.addChild(foregroundOverlay)
+        
+        foregroundOverlay.isPaused = false
     }
     
     func addRandomForegroundOverlay() {
@@ -1083,20 +1319,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }*/
     }
     
+    func showNewScene() {
+        if gameState == .gameOver {
+            let newScene = GameScene(fileNamed: "GameScene")
+            newScene!.scaleMode = .aspectFill
+            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+            self.view?.presentScene(newScene!, transition: reveal)
+            /*score = 0
+            scoreLabel.text = String(format: "Score : %i", score)*/
+            // Requests user to make a review after losing, doesn't happen everytime. It is controlled by Apple.
+            requestReview()
+        }
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         //isFingerOnCat = true
 
         
-        if gameState == .waitingForTap {
-            startGame()
+        /*if gameState == .waitingForTap {
+            //startGame()
          //bombDrop()
          }else if gameState == .gameOver {
-         let newScene = GameScene(fileNamed: "GameScene")
-         newScene!.scaleMode = .aspectFill
-         let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-         self.view?.presentScene(newScene!, transition: reveal)
-         }
+            showNewScene()
+         }*/
         
         /*let greenPowerBar = SKSpriteNode(imageNamed: "GreenPower")
         let yellowPowerBar = SKSpriteNode(imageNamed: "YellowPower")
@@ -1240,7 +1486,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func startGame() {
         
-        gameState = .waitingForBomb
+        //gameState = .waitingForBomb
         // Scale out title & ready label
         let scale = SKAction.scale(to: 0, duration: 0.4)
         fgNode.childNode(withName: "Title")!.run(scale)
@@ -1248,6 +1494,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             SKAction.sequence(
                 [SKAction.wait(forDuration: 0.2), scale]))
         fgNode.childNode(withName: "Dimmer")!.run(SKAction.scale(to: 0, duration: 0.2))
+        fgNode.childNode(withName: "Star")!.run(SKAction.scale(to: 0, duration: 0.2))
+        fgNode.childNode(withName: "NoAds")!.run(SKAction.scale(to: 0, duration: 0.2))
+        
+        playButton.removeFromParent()
+        reviewButton.removeFromParent()
+        noAdsStart.removeFromParent()
 
         /*let bomb = fgNode.childNode(withName: "Bomb")!
         let bombBlast = explosion(intensity: 2.0)
@@ -1262,6 +1514,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //superBoostPlayer()
         playBackgroundMusic(name: "bgMusic.mp3")
         
+        let lightningBack = SKSpriteNode(imageNamed: "Lightning_00000")
+        lightningBack.size = CGSize(width: 300, height: 311)
+        lightningBack.zPosition = 4
+        lightningBack.position = CGPoint(x: -150, y: 900)
+        camera?.addChild(lightningBack)
+        
+        let lightningBack2 = lightningBack.copy() as! SKSpriteNode
+        lightningBack2.position = CGPoint(x: 0, y: 900)
+        camera?.addChild(lightningBack2)
+        
+        let lightningBack3 = lightningBack.copy() as! SKSpriteNode
+        lightningBack3.position = CGPoint(x: 150, y: 900)
+        camera?.addChild(lightningBack3)
+        
+        lightningOff.removeFromParent()
+        lightningOff2.removeFromParent()
+        lightningOff3.removeFromParent()
+        
+        /*lightningOff.removeAction(forKey: "lightning1")
+        lightningOff2.removeAction(forKey: "lightning2")
+        lightningOff3.removeAction(forKey: "lightning3")*/
+        
+        
         let alarm = SKAudioNode(fileNamed: "alarm.wav")
         alarm.name = "alarm"
         alarm.autoplayLooped = true
@@ -1270,14 +1545,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //screenShakeByAmt(100)
     }
     
+    func buttonAnimation(animationBase: String, start: Int, end: Int, foreverStart: Int, foreverEnd: Int, startTimePerFrame: Double, foreverTimePerFrame: Double) -> SKAction{
+        let startAction = setupAnimationWithPrefix(animationBase,
+                                                   start: start,
+                                                   end: end,
+                                                   timePerFrame: startTimePerFrame)
+        
+        let repeatAction = setupAnimationWithPrefix(animationBase,
+                                                    start: foreverStart,
+                                                    end: foreverEnd,
+                                                    timePerFrame: foreverTimePerFrame)
+        
+        let foreverAction = SKAction.repeatForever(repeatAction)
+        let sequence = SKAction.sequence([startAction, foreverAction])
+        
+        return sequence
+        
+
+    }
+    
+    func setupButton(pictureBase: String, pictureWidth: Int, pictureHeight: Int, buttonPositionX: Int, buttonPositionY: Int, zPosition: CGFloat) -> SKSpriteNode {
+        let button = SKSpriteNode(imageNamed: pictureBase)
+        button.size = CGSize(width: pictureWidth, height: pictureHeight)
+        button.position = CGPoint(x: buttonPositionX, y:buttonPositionY)
+        button.zPosition = zPosition
+        
+        return button
+    }
+    
     func gameOver() {
-        // 1
+        
         gameState = .gameOver
         playerState = .dead
-        // 2
+        
         physicsWorld.contactDelegate = nil
         player.physicsBody?.isDynamic = false
-        // 3
+        
         /*let moveUp = SKAction.moveBy(x: 0.0, y: size.height/2.0, duration: 0.5)
         moveUp.timingMode = .easeOut
         let moveDown = SKAction.moveBy(x: 0.0,
@@ -1285,23 +1588,82 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                        duration: 1.0)
         moveDown.timingMode = .easeIn
         player.run(SKAction.sequence([moveUp, moveDown]))*/
-        // 4
-        let gameOverSprite = SKSpriteNode(imageNamed: "GameOver2")
+        
+        /*let gameOverSprite = SKSpriteNode(imageNamed: "GameOver2")
         gameOverSprite.size = CGSize(width: 1018, height: 368)
         gameOverSprite.position = camera!.position + CGPoint(x:0, y:400)
         gameOverSprite.zPosition = 10
-        addChild(gameOverSprite)
+        addChild(gameOverSprite)*/
         
-        let restartButton = SKSpriteNode(imageNamed: "RestartButton2")
-        restartButton.size = CGSize(width: 336, height: 332)
-        restartButton.position = camera!.position + CGPoint(x:-300, y:-600)
-        restartButton.zPosition = 10
-        addChild(restartButton)
+        let restartButton = setupButton(pictureBase: "RestartButton_00010", pictureWidth: 335, pictureHeight: 357, buttonPositionX: -385, buttonPositionY: -600, zPosition: 8)
+        
+        let restartButtonAnimation = buttonAnimation(animationBase: "RestartButton_000", start: 11, end: 45, foreverStart: 46, foreverEnd: 60, startTimePerFrame: 0.024, foreverTimePerFrame: 0.024)
+        
+        let restartButtonTransparent = Button(defaultButtonImage: "RestartButton_00010", activeButtonImage: "RestartButton_00030", buttonAction: showNewScene)
+        restartButtonTransparent.position = CGPoint(x: -385, y: -600)
+        restartButtonTransparent.alpha = 0.01
+        restartButtonTransparent.zPosition = 10
+        
+        camera?.addChild(restartButtonTransparent)
+        camera?.addChild(restartButton)
+        restartButton.run(restartButtonAnimation)
+        
+        
+        let gameOverLabel = setupButton(pictureBase: "GameOver_00000", pictureWidth: 1100, pictureHeight: 600, buttonPositionX: 0, buttonPositionY: 575, zPosition: 8)
+        
+        let gameOverAnimation = buttonAnimation(animationBase: "GameOver_000", start: 1, end: 19, foreverStart: 20, foreverEnd: 35, startTimePerFrame: 0.024, foreverTimePerFrame: 0.024)
+        
+        camera?.addChild(gameOverLabel)
+        gameOverLabel.run(gameOverAnimation)
+        
+        let noAdsButton = setupButton(pictureBase: "NoAds_00000", pictureWidth: 335, pictureHeight: 357, buttonPositionX: 385, buttonPositionY: -600, zPosition: 8)
+        
+        let noAdsButtonAnimation = buttonAnimation(animationBase: "NoAds_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 43, startTimePerFrame: 0.024, foreverTimePerFrame: 0.024)
+        
+        let noAdsButtonTransparent = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00000", buttonAction: removeAds)
+        
+        noAdsButtonTransparent.position = CGPoint(x: 385, y: -600)
+        noAdsButtonTransparent.alpha = 0.01
+        noAdsButtonTransparent.zPosition = 10
+        
+        camera?.addChild(noAdsButtonTransparent)
+        camera?.addChild(noAdsButton)
+        noAdsButton.run(noAdsButtonAnimation)
+        
+        
+        //Restart Button
+        /*buttonAnimation(animationBase: "RestartButton_000",
+                        pictureBase: "RestartButton_00010",
+                        start: 11,
+                        end: 45,
+                        foreverStart: 46,
+                        foreverEnd: 60,
+                        startTimePerFrame: 0.024,
+                        foreverTimePerFrame: 0.071,
+                        pictureWidth: 500,
+                        pictureHeight: 533,
+                        buttonPositionX: -300,
+                        buttonPositionY: -600)*/
+        
+        //Game Over Label
+        /*buttonAnimation(animationBase: "GameOver_000",
+                        pictureBase: "GameOver_00000",
+                        start: 1,
+                        end: 19,
+                        foreverStart: 20,
+                        foreverEnd: 35,
+                        startTimePerFrame: 0.024,
+                        foreverTimePerFrame: 0.071,
+                        pictureWidth: 1100,
+                        pictureHeight: 600,
+                        buttonPositionX: 0,
+                        buttonPositionY: 400)*/
+        
         
         let dimmerSprite = SKSpriteNode(imageNamed: "Dimmer")
         //dimmerSprite.size = CGSize(width:1526, height:2071)
         dimmerSprite.position = camera!.position
-        dimmerSprite.zPosition = 9
+        dimmerSprite.zPosition = 7
         addChild(dimmerSprite)
         
         //player = SKSpriteNode(imageNamed: "NLDeadCat")
@@ -1313,53 +1675,121 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         let blast = explosion(intensity: 3.0)
-        blast.position = gameOverSprite.position
+        blast.position = camera!.position + CGPoint(x: 0, y: 400)
         blast.zPosition = 11
         addChild(blast)
         run(soundExplosions[3])
         player.removeFromParent()
+        
+        highScoreLabel.fontSize = 200
+        highScoreLabel.position = CGPoint(x: 0, y:0)
+        highScoreLabel.zPosition = 8
+        highScoreLabel.text = "BEST: \(UserDefaults().integer(forKey: "HIGHSCORE"))"
+        camera?.addChild(highScoreLabel)
+        
+        print("BEST: \(UserDefaults().integer(forKey: "HIGHSCORE"))")
+        
     }
     
     func setupLights(lights: Int) {
-        let greenPowerBar = SKSpriteNode(imageNamed: "GreenPower")
-        let yellowPowerBar = SKSpriteNode(imageNamed: "YellowPower")
-        let redPowerBar = SKSpriteNode(imageNamed: "RedPower")
+        //Lightning 1
+        let lightning1 = setupButton(pictureBase: "Lightning_00000", pictureWidth: 300, pictureHeight: 311, buttonPositionX: -150, buttonPositionY: 900, zPosition: 6)
         
-        greenPowerBar.position = CGPoint(x: 0, y: 1000)
-        yellowPowerBar.position = CGPoint(x: 0, y: 975)
-        redPowerBar.position = CGPoint(x: 0, y: 950)
+        let animationLoop = setupAnimationWithPrefix("Lightning_000",
+                                                   start: 1,
+                                                   end: 45,
+                                                   timePerFrame: 0.024)
         
-        greenPowerBar.setScale(1)
-        yellowPowerBar.setScale(1)
-        redPowerBar.setScale(1)
+        /*let lightning1Animation = buttonAnimation(animationBase: "Lightning_000", start: 1, end: 17, foreverStart: 18, foreverEnd: 30, startTimePerFrame: 0.024, foreverTimePerFrame: 0.071)*/
         
-        greenPowerBar.zPosition = 100
-        yellowPowerBar.zPosition = 100
-        redPowerBar.zPosition = 100
+        //Lightning 2
+        let lightning2 = setupButton(pictureBase: "Lightning_00000", pictureWidth: 300, pictureHeight: 311, buttonPositionX: 0, buttonPositionY: 900, zPosition: 6)
+        
+        /*let lightning2Animation = buttonAnimation(animationBase: "Lightning_000", start: 1, end: 17, foreverStart: 18, foreverEnd: 30, startTimePerFrame: 0.024, foreverTimePerFrame: 0.071)*/
+        
+        //Lightning 3
+        let lightning3 = setupButton(pictureBase: "Lightning_00000", pictureWidth: 300, pictureHeight: 311, buttonPositionX: 150, buttonPositionY: 900, zPosition: 6)
+        
+        /*let lightning3Animation = buttonAnimation(animationBase: "Lightning_000", start: 1, end: 17, foreverStart: 18, foreverEnd: 30, startTimePerFrame: 0.024, foreverTimePerFrame: 0.071)*/
         
         if lights == 1 {
-            camera?.addChild(greenPowerBar)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                greenPowerBar.removeFromParent()
+            camera?.addChild(lightning1)
+            lightning1.run(animationLoop)
+            /*let lightning1 = buttonAnimation(animationBase: "Lightning_000",
+                            pictureBase: "Lightning_00000",
+                            start: 1,
+                            end: 5,
+                            foreverStart: 6,
+                            foreverEnd: 17,
+                            startTimePerFrame: 0.024,
+                            foreverTimePerFrame: 0.071,
+                            pictureWidth: 300,
+                            pictureHeight: 311,
+                            buttonPositionX: -50,
+                            buttonPositionY: 650)*/
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                lightning1.removeFromParent()
+                //greenPowerBar.removeFromParent()
             })
         } else if lights == 2 {
-            camera?.addChild(greenPowerBar)
-            camera?.addChild(yellowPowerBar)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                greenPowerBar.removeFromParent()
-                yellowPowerBar.removeFromParent()
+            camera?.addChild(lightning1)
+            lightning1.run(animationLoop)
+            
+            camera?.addChild(lightning2)
+            lightning2.run(animationLoop)
+            //lightning2.run(lightning2Animation)
+            /*buttonAnimation(animationBase: "Lightning_000",
+                            pictureBase: "Lightning_00000",
+                            start: 1,
+                            end: 5,
+                            foreverStart: 6,
+                            foreverEnd: 17,
+                            startTimePerFrame: 0.024,
+                            foreverTimePerFrame: 0.071,
+                            pictureWidth: 300,
+                            pictureHeight: 311,
+                            buttonPositionX: 0,
+                            buttonPositionY: 650)*/
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                lightning1.removeFromParent()
+                lightning2.removeFromParent()
+                //greenPowerBar.removeFromParent()
+                //yellowPowerBar.removeFromParent()
             })
         } else if lights == 3 {
-            camera?.addChild(greenPowerBar)
-            camera?.addChild(yellowPowerBar)
-            camera?.addChild(redPowerBar)
+            //Lightning 3
+            camera?.addChild(lightning1)
+            lightning1.run(animationLoop)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                greenPowerBar.removeFromParent()
-                yellowPowerBar.removeFromParent()
-                redPowerBar.removeFromParent()
+            camera?.addChild(lightning2)
+            lightning2.run(animationLoop)
+            
+            camera?.addChild(lightning3)
+            lightning3.run(animationLoop)
+           /* buttonAnimation(animationBase: "Lightning_000",
+                            pictureBase: "Lightning_00000",
+                            start: 1,
+                            end: 5,
+                            foreverStart: 6,
+                            foreverEnd: 17,
+                            startTimePerFrame: 0.024,
+                            foreverTimePerFrame: 0.071,
+                            pictureWidth: 300,
+                            pictureHeight: 311,
+                            buttonPositionX: 50,
+                            buttonPositionY: 650)*/
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                lightning1.removeFromParent()
+                lightning2.removeFromParent()
+                lightning3.removeFromParent()
+                //greenPowerBar.removeFromParent()
+                //yellowPowerBar.removeFromParent()
+                //redPowerBar.removeFromParent()
             })
         }
     }
@@ -1377,7 +1807,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let limitJoint = SKPhysicsJointLimit.joint(withBodyA: player.physicsBody!, bodyB: platform.physicsBody!, anchorA: platformPosition, anchorB: playerPosition)*/
         
         //player.physicsBody?.affectedByGravity = true
-        
 
         
         let other = contact.bodyA.categoryBitMask ==
@@ -1406,6 +1835,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     playerPlatformSettings()
                     platformState = .low
                     run(soundJump)
+                    score += 1
                 }
             }
             
@@ -1419,6 +1849,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     playerPlatformSettings()
                     platformState = .middle
                     run(soundJump)
+                    score += 1
                 }
             }
             
@@ -1432,6 +1863,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     playerPlatformSettings()
                     platformState = .high
                     run(soundJump)
+                    score += 1
                 }
             }
             
@@ -1449,6 +1881,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     platform.run(SKAction.removeFromParentAfterDelay(2.0))
                     
                     boostPlayer()
+                    
                     //run(soundBrick)
                 }
             }
@@ -1469,7 +1902,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         default:
             break
             }
+        
+        if score > userDefaults.integer(forKey: "HIGHSCORE") {
+            saveHighScore()
         }
+    }
+    
+    func saveHighScore() {
+        UserDefaults().set(score, forKey: "HIGHSCORE")
+        //print("\(UserDefaults().integer(forKey: "HIGHSCORE"))")
+    }
     
     // MARK: - Particles
     
@@ -1601,6 +2043,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sprite.run(action)
     }
     
+    func removeAds() {
+        print("Put in remove ads code when you buy iTunes Connect")
+    }
+    
     /*func addLimitJoint(pos: CGPoint, ropeLength: Int, start: Int) {
         var startPos: Int = 0
         if start == 0 {
@@ -1628,5 +2074,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let joint = SKPhysicsJointLimit.joint(withBodyA: anchor.physicsBody!, bodyB: player.physicsBody!, anchorA: anchor.position, anchorB: player.position)
         
     }*/
+}
 
+// MARK: - Notifications
+extension GameScene {
+    func applicationDidBecomeActive() {
+        print("* applicationDidBecomeActive")
+    }
+    
+    func applicationWillResignActive() {
+        print("* applicationWillResignActive")
+    }
+    
+    func applicationDidEnterBackground() {
+        print("* applicationDidEnterBackground")
+    }
+    
+    func addObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(forName: .UIApplicationDidBecomeActive,
+                                       object: nil,
+                                       queue: nil) { [weak self] _ in
+                                        self?.applicationDidBecomeActive()
+        }
+        notificationCenter.addObserver(forName: .UIApplicationWillResignActive,
+                                       object: nil,
+                                       queue: nil) { [weak self] _ in
+                                        self?.applicationWillResignActive()
+        }
+        notificationCenter.addObserver(forName: .UIApplicationWillResignActive,
+                                       object: nil,
+                                       queue: nil) { [weak self] _ in
+                                        self?.applicationDidEnterBackground()
+        }
+    }
 }
