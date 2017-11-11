@@ -110,7 +110,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastUpdateTimeInterval: TimeInterval = 0
     var deltaTime: TimeInterval = 0
     
-    var lives = 999999
+    var lives = 1
     
     let soundBombDrop = SKAction.playSoundFileNamed("bombDrop.wav", waitForCompletion: true)
     let soundSuperBoost = SKAction.playSoundFileNamed("nitro.wav", waitForCompletion: false)
@@ -128,7 +128,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var platform: SKSpriteNode!
     
     let scoreLabel = SKLabelNode(fontNamed: "NeonTubes2-Regular")
-    var highScoreLabel = SKLabelNode(fontNamed: "NeonTubes2-Regular")
     var score = 0
     var highScore = UserDefaults().integer(forKey: "HIGHSCORE")
     
@@ -244,8 +243,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playerAnimationJump = setupAnimationWithPrefix("NLCat_Jump_", start: 1, end: 4, timePerFrame: 0.025)
         playerAnimationFall = setupAnimationWithPrefix("NLCat_Fall_", start: 1, end: 6, timePerFrame: 0.025)
         playerAnimationPlatform = setupAnimationWithPrefix("NLCat_Platform_", start: 1, end: 4, timePerFrame: 0.025)
-        playerAnimationSteerLeft = setupAnimationWithPrefix("player01_steerleft_", start: 1, end: 2, timePerFrame: 0.1)
-        playerAnimationSteerRight = setupAnimationWithPrefix("player01_steerright_", start: 1, end: 2, timePerFrame: 0.1)
+        //playerAnimationSteerLeft = setupAnimationWithPrefix("player01_steerleft_", start: 1, end: 2, timePerFrame: 0.1)
+        //playerAnimationSteerRight = setupAnimationWithPrefix("player01_steerright_", start: 1, end: 2, timePerFrame: 0.1)
         
         if playerState == .idle {
             let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
@@ -318,8 +317,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         camera?.addChild(jumpLabel)
         
         scoreLabel.fontColor = SKColor.white
-        scoreLabel.fontSize = 150
-        scoreLabel.zPosition = 6
+        scoreLabel.fontSize = 200
+        scoreLabel.zPosition = 8 //6
         scoreLabel.position = CGPoint(x: 0, y: 650)//(x: 475, y: 850)
         camera?.addChild(scoreLabel)
         
@@ -486,15 +485,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initialPlatform.size = CGSize(width: 1536, height: 300)
         initialPlatform.zPosition = 1
         
-        var overlayPosition = player.position
+        var overlayPosition = CGPoint(x: 0, y: 0)//player.position
         
         //Made platform height up to match the anchor point of the player.
         //Changed ((player.size.height * 0.5) to ((player.size.height * 0.316)
-        overlayPosition.y = player.position.y -
+        overlayPosition.y = -120/*player.position.y -
             ((player.size.height * 0.316) +
-            (initialPlatform.size.height * 0.20))
-        initialPlatform.position = overlayPosition
+            (initialPlatform.size.height * 0.20))*/
+        initialPlatform.position = CGPoint(x: 0, y: 0)//overlayPosition
         fgNode.addChild(initialPlatform)
+        print("*** Overlay Position (\(initialPlatform.position.x),\(initialPlatform.position.y))")
         initialPlatform.isPaused = false
         initialPlatform.run(SKAction.repeatForever(startPlatformAnimation))
         lastOverlayPosition = overlayPosition
@@ -545,10 +545,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setupLava() {
         lava = fgNode.childNode(withName: "Lava") as! SKSpriteNode
-        let emitter = SKEmitterNode(fileNamed: "SpikeSpark.sks")!
+        /*let emitter = SKEmitterNode(fileNamed: "SpikeSpark.sks")!
         emitter.particlePositionRange = CGVector(dx: size.width * 1.125, dy: 0.0)
         emitter.advanceSimulationTime(3.0)
-        lava.addChild(emitter)
+        lava.addChild(emitter)*/
     }
     
     func setupBackground(_ fileName: String) {
@@ -594,7 +594,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
                 case PhysicsCategory.Spikes:
                     let spikeBodyTexture = SKTexture(imageNamed: "SpikeOutline")
-                    newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 196, height: 15))
+                    newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 196, height: 120))
                     newNode.physicsBody?.isDynamic = false
                     newNode.physicsBody?.affectedByGravity = false
                     newNode.physicsBody?.allowsRotation = false
@@ -733,10 +733,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     self.bluePlatformAnimation = self.setupAnimationWithPrefix("BluePlatformLt_000",
                                                                          start: 1,
                                                                          end: 80,
-                                                                         timePerFrame: 0.05)
+                                                                         timePerFrame: 0.02)
                     newNode = SKSpriteNode(imageNamed: "BluePlatformLt_00000")
                     newNode.run(SKAction.repeatForever(self.bluePlatformAnimation))
-                    newNode.size = CGSize(width: 350, height: 27)
+                    newNode.size = CGSize(width: 350, height: 216)
                     newNode.zPosition = 1
                     newNode.position = node.position
                     overlay.addChild(newNode)
@@ -748,10 +748,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.yellowPlatformAnimation = self.setupAnimationWithPrefix("YellowPlatformLt_000",
                                                                        start: 1,
                                                                        end: 80,
-                                                                       timePerFrame: 0.05)
+                                                                       timePerFrame: 0.02)
             newNode = SKSpriteNode(imageNamed: "YellowPlatformLt_00000")
             newNode.run(SKAction.repeatForever(self.yellowPlatformAnimation))
-            newNode.size = CGSize(width: 350, height: 27)
+            newNode.size = CGSize(width: 350, height: 216)
             newNode.zPosition = 1
             newNode.position = node.position
             overlay.addChild(newNode)
@@ -766,7 +766,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                                        timePerFrame: 0.02)
             newNode = SKSpriteNode(imageNamed: "PinkPlatformLt_00000")
             newNode.run(SKAction.repeatForever(self.pinkPlatformAnimation))
-            newNode.size = CGSize(width: 350, height: 27)
+            newNode.size = CGSize(width: 350, height: 216)
             newNode.zPosition = 1
             newNode.position = node.position
             overlay.addChild(newNode)
@@ -970,7 +970,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 2
         let bottomOfScreenYFg = convert(CGPoint(x: 0, y: bottomOfScreenY), to: fgNode).y
         // 3
-        let lavaVelocityY = CGFloat(200) //DEBUG - CHANGED LAVA STEP FROM 120 TO 1000
+        let lavaVelocityY = CGFloat(400) //DEBUG - CHANGED LAVA STEP FROM 120 TO 1000
         let lavaStep = lavaVelocityY * CGFloat(dt)
         var newLavaPositionY = lava.position.y + lavaStep
         // 4
@@ -979,8 +979,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lava.position.y = newLavaPositionY
     }
     
-    func updateCollisionLava() {
-        if player.position.y < lava.position.y + 180 {
+    /*func updateCollisionLava() {
+        if player.position.y < lava.position.y - 500 {
             if playerState != .lava {
                 playerState = .lava
                 playerTrail.particleBirthRate = 0
@@ -1001,7 +1001,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 run(soundGameOver)
             }
         }
-    }
+    }*/
     
     func updateExplosions(_ dt: TimeInterval) {
         timeSinceLastExplosion += dt
@@ -1057,9 +1057,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        
-
-        
         // 1
         if lastUpdateTimeInterval > 0 {
             deltaTime = currentTime - lastUpdateTimeInterval
@@ -1077,7 +1074,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             updateLevel()
             updatePlayer()
             updateLava(deltaTime)
-            updateCollisionLava()
+            //updateCollisionLava()
             updateExplosions(deltaTime)
             //updateRedAlert(deltaTime)
             if platformState == .low || platformState == .middle || platformState == .high {
@@ -1088,27 +1085,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 player.physicsBody?.affectedByGravity = true
             }
         }
+        
+        //print("\(player.position.y)")
     }
     
 
     
-    func setPlayerVelocity(_ amount:CGFloat) {
+    func setPlayerVelocity(_ amount: CGFloat) {
         player.physicsBody!.velocity.dy =
             max(player.physicsBody!.velocity.dy, amount * gameGain)
         //print(player.physicsBody!.velocity.dy)
     }
     
     func jumpPlayer() {
-        setPlayerVelocity(400)
+        setPlayerVelocity(400) //400 to go 250 px
     }
     
     func boostPlayer() {
-        setPlayerVelocity(800)
+        setPlayerVelocity(550)
         //screenShakeByAmt(40)
     }
     
     func superBoostPlayer() {
-        setPlayerVelocity(1200)
+        setPlayerVelocity(650)
     }
     
     // MARK: - Overlay nodes
@@ -1323,7 +1322,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if gameState == .gameOver {
             let newScene = GameScene(fileNamed: "GameScene")
             newScene!.scaleMode = .aspectFill
-            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+            let reveal = SKTransition.doorsOpenHorizontal(withDuration: 1.0)//SKTransition.flipHorizontal(withDuration: 0.5)
             self.view?.presentScene(newScene!, transition: reveal)
             /*score = 0
             scoreLabel.text = String(format: "Score : %i", score)*/
@@ -1429,20 +1428,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if playerState != .idle {
-            let touch = touches.first
-            let touchLocation = touch!.location(in: fgNode)
-            let previousLocation = touch!.previousLocation(in: fgNode)
-            let touchDifference = touchLocation.x - previousLocation.x
-            let catX = player.position.x + ((touchDifference) * 2.5)
-            player.position = CGPoint(x: catX, y: player.position.y)
-            //print(touchDifference)
-            if touchDifference <= 0 {
-                player.xScale = -abs(player.xScale)
-            } else {
-                player.xScale = abs(player.xScale)
+        if playerState != .dead {
+            if playerState != .idle {
+                let touch = touches.first
+                let touchLocation = touch!.location(in: fgNode)
+                let previousLocation = touch!.previousLocation(in: fgNode)
+                let touchDifference = touchLocation.x - previousLocation.x
+                let catX = player.position.x + ((touchDifference) * 2.5)
+                player.position = CGPoint(x: catX, y: player.position.y)
+                //print(touchDifference)
+                if touchDifference <= 0 {
+                    player.xScale = -abs(player.xScale)
+                } else {
+                    player.xScale = abs(player.xScale)
+                }
             }
-            
         }
     }
     
@@ -1500,6 +1500,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playButton.removeFromParent()
         reviewButton.removeFromParent()
         noAdsStart.removeFromParent()
+        
+
 
         /*let bomb = fgNode.childNode(withName: "Bomb")!
         let bombBlast = explosion(intensity: 2.0)
@@ -1509,7 +1511,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         run(soundExplosions[3])*/
         gameState = .playing
         playerState = .idle
-        platformState = .high
+        
+        let randomNum = Int.random(min: 1, max: 3)
+        
+        switch randomNum {
+        case 1:
+            platformState = .low
+            print("Platform State: \(platformState)")
+        case 2:
+            platformState = .middle
+            print("Platform State: \(platformState)")
+        case 3:
+            platformState = .high
+            print("Platform State: \(platformState)")
+        default:
+            platformState = .none
+        }
+        /*if randomNum == 1 {
+            platformState = .low
+            print("PlatformState: \(randomNum)")
+        } else if randomNum == 2 {
+            platformState = .middle
+            print("PlatformState: \(randomNum)")
+        } else if randomNum == 3 {
+            platformState = .high
+            print("PlatformState: \(randomNum)")
+        }*/
+        //platformState = .low
         player.physicsBody!.isDynamic = true
         //superBoostPlayer()
         playBackgroundMusic(name: "bgMusic.mp3")
@@ -1581,114 +1609,135 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = nil
         player.physicsBody?.isDynamic = false
         
-        /*let moveUp = SKAction.moveBy(x: 0.0, y: size.height/2.0, duration: 0.5)
-        moveUp.timingMode = .easeOut
-        let moveDown = SKAction.moveBy(x: 0.0,
-                                       y: -(size.height * 1.5),
-                                       duration: 1.0)
-        moveDown.timingMode = .easeIn
-        player.run(SKAction.sequence([moveUp, moveDown]))*/
+        let playerAnimationOff = setupAnimationWithPrefix("NLCat_Off_", start: 1, end: 7, timePerFrame: 0.05)
+        player.run(playerAnimationOff)
         
-        /*let gameOverSprite = SKSpriteNode(imageNamed: "GameOver2")
-        gameOverSprite.size = CGSize(width: 1018, height: 368)
-        gameOverSprite.position = camera!.position + CGPoint(x:0, y:400)
-        gameOverSprite.zPosition = 10
-        addChild(gameOverSprite)*/
+        let moveUp = SKAction.moveBy(x: 0.0, y: 100/*size.height/2.0*/, duration: 0.5)
+         moveUp.timingMode = .easeOut
+         let moveDown = SKAction.moveBy(x: 0.0,
+         y: -(size.height * 1.5),
+         duration: 1.0)
+         moveDown.timingMode = .easeIn
+         player.run(SKAction.sequence([moveUp, moveDown]))
         
-        let restartButton = setupButton(pictureBase: "RestartButton_00010", pictureWidth: 335, pictureHeight: 357, buttonPositionX: -385, buttonPositionY: -600, zPosition: 8)
-        
-        let restartButtonAnimation = buttonAnimation(animationBase: "RestartButton_000", start: 11, end: 45, foreverStart: 46, foreverEnd: 60, startTimePerFrame: 0.024, foreverTimePerFrame: 0.024)
-        
-        let restartButtonTransparent = Button(defaultButtonImage: "RestartButton_00010", activeButtonImage: "RestartButton_00030", buttonAction: showNewScene)
-        restartButtonTransparent.position = CGPoint(x: -385, y: -600)
-        restartButtonTransparent.alpha = 0.01
-        restartButtonTransparent.zPosition = 10
-        
-        camera?.addChild(restartButtonTransparent)
-        camera?.addChild(restartButton)
-        restartButton.run(restartButtonAnimation)
+        //let playerPosition = convert(player.position, from: fgNode)
+        //let catOff = SKSpriteNode(imageNamed:"CatOff_00000")
+        //let blast = explosion(intensity: 3.0)
+        //catOff.position = playerPosition//camera!.position + CGPoint(x: 0, y: 400)
+        //catOff.zPosition = 11
+        //addChild(catOff)
+        //run(soundExplosions[3])
         
         
-        let gameOverLabel = setupButton(pictureBase: "GameOver_00000", pictureWidth: 1100, pictureHeight: 600, buttonPositionX: 0, buttonPositionY: 575, zPosition: 8)
+
         
-        let gameOverAnimation = buttonAnimation(animationBase: "GameOver_000", start: 1, end: 19, foreverStart: 20, foreverEnd: 35, startTimePerFrame: 0.024, foreverTimePerFrame: 0.024)
-        
-        camera?.addChild(gameOverLabel)
-        gameOverLabel.run(gameOverAnimation)
-        
-        let noAdsButton = setupButton(pictureBase: "NoAds_00000", pictureWidth: 335, pictureHeight: 357, buttonPositionX: 385, buttonPositionY: -600, zPosition: 8)
-        
-        let noAdsButtonAnimation = buttonAnimation(animationBase: "NoAds_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 43, startTimePerFrame: 0.024, foreverTimePerFrame: 0.024)
-        
-        let noAdsButtonTransparent = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00000", buttonAction: removeAds)
-        
-        noAdsButtonTransparent.position = CGPoint(x: 385, y: -600)
-        noAdsButtonTransparent.alpha = 0.01
-        noAdsButtonTransparent.zPosition = 10
-        
-        camera?.addChild(noAdsButtonTransparent)
-        camera?.addChild(noAdsButton)
-        noAdsButton.run(noAdsButtonAnimation)
-        
-        
-        //Restart Button
-        /*buttonAnimation(animationBase: "RestartButton_000",
-                        pictureBase: "RestartButton_00010",
-                        start: 11,
-                        end: 45,
-                        foreverStart: 46,
-                        foreverEnd: 60,
-                        startTimePerFrame: 0.024,
-                        foreverTimePerFrame: 0.071,
-                        pictureWidth: 500,
-                        pictureHeight: 533,
-                        buttonPositionX: -300,
-                        buttonPositionY: -600)*/
-        
-        //Game Over Label
-        /*buttonAnimation(animationBase: "GameOver_000",
-                        pictureBase: "GameOver_00000",
-                        start: 1,
-                        end: 19,
-                        foreverStart: 20,
-                        foreverEnd: 35,
-                        startTimePerFrame: 0.024,
-                        foreverTimePerFrame: 0.071,
-                        pictureWidth: 1100,
-                        pictureHeight: 600,
-                        buttonPositionX: 0,
-                        buttonPositionY: 400)*/
-        
-        
-        let dimmerSprite = SKSpriteNode(imageNamed: "Dimmer")
-        //dimmerSprite.size = CGSize(width:1526, height:2071)
-        dimmerSprite.position = camera!.position
-        dimmerSprite.zPosition = 7
-        addChild(dimmerSprite)
-        
-        //player = SKSpriteNode(imageNamed: "NLDeadCat")
-        //addChild(player)
-        
-        playBackgroundMusic(name: "SpaceGame.caf")
-        if let alarm = childNode(withName: "alarm") {
-            alarm.removeFromParent()
-        }
-        
-        let blast = explosion(intensity: 3.0)
-        blast.position = camera!.position + CGPoint(x: 0, y: 400)
-        blast.zPosition = 11
-        addChild(blast)
-        run(soundExplosions[3])
-        player.removeFromParent()
-        
-        highScoreLabel.fontSize = 200
-        highScoreLabel.position = CGPoint(x: 0, y:0)
-        highScoreLabel.zPosition = 8
-        highScoreLabel.text = "BEST: \(UserDefaults().integer(forKey: "HIGHSCORE"))"
-        camera?.addChild(highScoreLabel)
-        
-        print("BEST: \(UserDefaults().integer(forKey: "HIGHSCORE"))")
-        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            
+            let smoothAction = SKAction.scale(to: 1, duration: 0.25)
+            
+            /*let gameOverSprite = SKSpriteNode(imageNamed: "GameOver2")
+            gameOverSprite.size = CGSize(width: 1018, height: 368)
+            gameOverSprite.position = camera!.position + CGPoint(x:0, y:400)
+            gameOverSprite.zPosition = 10
+            addChild(gameOverSprite)*/
+            
+            let restartButton = self.setupButton(pictureBase: "RestartButton_00040", pictureWidth: 335, pictureHeight: 357, buttonPositionX: -600/*-385*/, buttonPositionY: -600, zPosition: 8)
+            
+            let restartButtonAnimation = self.buttonAnimation(animationBase: "RestartButton_000", start: 40, end: 45, foreverStart: 46, foreverEnd: 60, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
+            
+            let restartButtonTransparent = Button(defaultButtonImage: "RestartButton_00010", activeButtonImage: "RestartButton_00030", buttonAction: self.showNewScene)
+            restartButtonTransparent.position = CGPoint(x: -385, y: -600)
+            restartButtonTransparent.alpha = 0.01
+            restartButtonTransparent.zPosition = 10
+            
+            let restartMove = SKAction.moveBy(x: 215, y: 0, duration: 0.5)
+            
+            self.camera?.addChild(restartButtonTransparent)
+            self.camera?.addChild(restartButton)
+                //restartButton.setScale(0)
+            restartButton.run(SKAction.sequence([restartMove,restartButtonAnimation]))
+            
+            
+            let gameOverLabel = self.setupButton(pictureBase: "GameOver_00000", pictureWidth: 1100, pictureHeight: 600, buttonPositionX: 0, buttonPositionY: 1100/*575*/, zPosition: 8)
+            
+            let gameOverAnimation = self.buttonAnimation(animationBase: "GameOver_000", start: 1, end: 19, foreverStart: 20, foreverEnd: 35, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
+            
+            let gameOverMove = SKAction.moveBy(x: 0, y: -675, duration: 0.5)
+            
+            self.camera?.addChild(gameOverLabel)
+            gameOverLabel.run(SKAction.sequence([gameOverMove,gameOverAnimation]))
+            
+            let noAdsButton = self.setupButton(pictureBase: "NoAds_00000", pictureWidth: 335, pictureHeight: 357, buttonPositionX: 600, buttonPositionY: -600, zPosition: 8)
+            
+            let noAdsButtonAnimation = self.buttonAnimation(animationBase: "NoAds_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 43, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
+            
+            let noAdsButtonTransparent = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00000", buttonAction: self.removeAds)
+            
+            noAdsButtonTransparent.position = CGPoint(x: 385, y: -600)
+            noAdsButtonTransparent.alpha = 0.01
+            noAdsButtonTransparent.zPosition = 10
+            
+            let noAdsMove = SKAction.moveBy(x: -215, y: 0, duration: 0.5)
+            
+            self.camera?.addChild(noAdsButtonTransparent)
+            self.camera?.addChild(noAdsButton)
+            noAdsButton.run(SKAction.sequence([noAdsMove,noAdsButtonAnimation]))
+            
+            //let dimmerSpriteMove = SKAction.moveTo(y: 1024, duration: 0.5)
+            let dimmerSprite = SKSpriteNode(imageNamed: "Dimmer")
+            //dimmerSprite.size = CGSize(width:1526, height:2071)
+            dimmerSprite.position = self.camera!.position
+            dimmerSprite.zPosition = 7
+            //dimmerSprite.setScale(0)
+            self.addChild(dimmerSprite)
+            //dimmerSprite.run(dimmerSpriteMove)
+            
+            
+            //Restart Button
+            /*buttonAnimation(animationBase: "RestartButton_000",
+                            pictureBase: "RestartButton_00010",
+                            start: 11,
+                            end: 45,
+                            foreverStart: 46,
+                            foreverEnd: 60,
+                            startTimePerFrame: 0.024,
+                            foreverTimePerFrame: 0.071,
+                            pictureWidth: 500,
+                            pictureHeight: 533,
+                            buttonPositionX: -300,
+                            buttonPositionY: -600)*/
+            
+            //Game Over Label
+            /*buttonAnimation(animationBase: "GameOver_000",
+                            pictureBase: "GameOver_00000",
+                            start: 1,
+                            end: 19,
+                            foreverStart: 20,
+                            foreverEnd: 35,
+                            startTimePerFrame: 0.024,
+                            foreverTimePerFrame: 0.071,
+                            pictureWidth: 1100,
+                            pictureHeight: 600,
+                            buttonPositionX: 0,
+                            buttonPositionY: 400)*/
+            
+            
+            
+            //player = SKSpriteNode(imageNamed: "NLDeadCat")
+            //addChild(player)
+            
+            self.playBackgroundMusic(name: "SpaceGame.caf")
+            if let alarm = self.childNode(withName: "alarm") {
+                alarm.removeFromParent()
+            }
+            
+            let highScoreLabel = SKLabelNode(fontNamed: "NeonTubes2-Regular")
+            highScoreLabel.fontSize = 200
+            highScoreLabel.position = CGPoint(x: 0, y: -125)
+            highScoreLabel.zPosition = 8
+            highScoreLabel.text = "BEST: \(UserDefaults().integer(forKey: "HIGHSCORE"))"
+            self.camera?.addChild(highScoreLabel)
+            })
     }
     
     func setupLights(lights: Int) {
@@ -2107,5 +2156,11 @@ extension GameScene {
                                        queue: nil) { [weak self] _ in
                                         self?.applicationDidEnterBackground()
         }
+    }
+    
+    func distance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
+        let xDist = a.x - b.x
+        let yDist = a.y - b.y
+        return CGFloat(sqrt((xDist * xDist) + (yDist * yDist)))
     }
 }
