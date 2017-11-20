@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6C9D73158FBC07125E3BCF53 /* Pods_DropCharge_Copy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51AC3D22A631D8719DBB0237 /* Pods_DropCharge_Copy.framework */; };
-		F216137E1F24F3E000378FD3 /* MediumJump.sks in Resources */ = {isa = PBXBuildFile; fileRef = F216137D1F24F3E000378FD3 /* MediumJump.sks */; };
+		F216137E1F24F3E000378FD3 /* Level2.sks in Resources */ = {isa = PBXBuildFile; fileRef = F216137D1F24F3E000378FD3 /* Level2.sks */; };
 		F21613801F251DBA00378FD3 /* Poison.sks in Resources */ = {isa = PBXBuildFile; fileRef = F216137F1F251DBA00378FD3 /* Poison.sks */; };
 		F21613821F2520FB00378FD3 /* PoisonExplode.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21613811F2520FB00378FD3 /* PoisonExplode.sks */; };
 		F21613841F2529B800378FD3 /* Lightning.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21613831F2529B800378FD3 /* Lightning.sks */; };
@@ -80,14 +80,14 @@
 		F2DBB4131EB03C520089DF2A /* CoinSCross.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2DBB4121EB03C520089DF2A /* CoinSCross.sks */; };
 		F2DBB4151EB2CA7A0089DF2A /* PlatformDiamond.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2DBB4141EB2CA7A0089DF2A /* PlatformDiamond.sks */; };
 		F2DBB4171EB2DC3E0089DF2A /* CoinSDiagonal.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2DBB4161EB2DC3E0089DF2A /* CoinSDiagonal.sks */; };
-		F2DE527A1F37A9380062CCEF /* SecondTest.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2DE52791F37A9380062CCEF /* SecondTest.sks */; };
+		F2DE527A1F37A9380062CCEF /* Level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2DE52791F37A9380062CCEF /* Level1.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		51AC3D22A631D8719DBB0237 /* Pods_DropCharge_Copy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DropCharge_Copy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB352C1679BB2A3392DF649 /* Pods-DropCharge Copy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropCharge Copy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DropCharge Copy/Pods-DropCharge Copy.debug.xcconfig"; sourceTree = "<group>"; };
 		E42A71C11A7E5A323EC7ECC7 /* Pods-DropCharge Copy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropCharge Copy.release.xcconfig"; path = "Pods/Target Support Files/Pods-DropCharge Copy/Pods-DropCharge Copy.release.xcconfig"; sourceTree = "<group>"; };
-		F216137D1F24F3E000378FD3 /* MediumJump.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MediumJump.sks; path = DropCharge/MediumJump.sks; sourceTree = "<group>"; };
+		F216137D1F24F3E000378FD3 /* Level2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level2.sks; path = DropCharge/Level2.sks; sourceTree = "<group>"; };
 		F216137F1F251DBA00378FD3 /* Poison.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Poison.sks; sourceTree = "<group>"; };
 		F21613811F2520FB00378FD3 /* PoisonExplode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PoisonExplode.sks; sourceTree = "<group>"; };
 		F21613831F2529B800378FD3 /* Lightning.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Lightning.sks; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 		F2DBB4121EB03C520089DF2A /* CoinSCross.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CoinSCross.sks; sourceTree = "<group>"; };
 		F2DBB4141EB2CA7A0089DF2A /* PlatformDiamond.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlatformDiamond.sks; sourceTree = "<group>"; };
 		F2DBB4161EB2DC3E0089DF2A /* CoinSDiagonal.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CoinSDiagonal.sks; sourceTree = "<group>"; };
-		F2DE52791F37A9380062CCEF /* SecondTest.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = SecondTest.sks; path = DropCharge/SecondTest.sks; sourceTree = "<group>"; };
+		F2DE52791F37A9380062CCEF /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level1.sks; path = DropCharge/Level1.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,8 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				F2B3353F1EA44D01007801AC /* StartPlatform.sks */,
-				F216137D1F24F3E000378FD3 /* MediumJump.sks */,
-				F2DE52791F37A9380062CCEF /* SecondTest.sks */,
+				F216137D1F24F3E000378FD3 /* Level2.sks */,
+				F2DE52791F37A9380062CCEF /* Level1.sks */,
 				F2CB02821F734AA2005C28CF /* ItemCatalog.sks */,
 			);
 			name = Levels;
@@ -425,7 +425,7 @@
 				F2751B041EB6A77B00B9F913 /* PlayerTrail.sks in Resources */,
 				F2751B211EB6B47C00B9F913 /* explosion1.wav in Resources */,
 				F2751B2B1EB805B100B9F913 /* Coin.sks in Resources */,
-				F2DE527A1F37A9380062CCEF /* SecondTest.sks in Resources */,
+				F2DE527A1F37A9380062CCEF /* Level1.sks in Resources */,
 				F2751B1D1EB6B47C00B9F913 /* brick.caf in Resources */,
 				F2C7DA581EFB5E3800571F22 /* Platform.sks in Resources */,
 				F2DBB4071EB03AA70089DF2A /* BreakArrow.sks in Resources */,
@@ -444,7 +444,7 @@
 				F2B335401EA44D01007801AC /* StartPlatform.sks in Resources */,
 				F2751B291EB6B47C00B9F913 /* tickTock.wav in Resources */,
 				F2DBB40D1EB03B4C0089DF2A /* CoinDiagonal.sks in Resources */,
-				F216137E1F24F3E000378FD3 /* MediumJump.sks in Resources */,
+				F216137E1F24F3E000378FD3 /* Level2.sks in Resources */,
 				F2751B181EB6B47B00B9F913 /* alarm.wav in Resources */,
 				F2CB02831F734AA2005C28CF /* ItemCatalog.sks in Resources */,
 				F2DBB3FD1EB036A10089DF2A /* CoinSArrow.sks in Resources */,

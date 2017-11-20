@@ -26,6 +26,7 @@ struct PhysicsCategory {
     static let Spikes: UInt32               = 0b100000000 // 256
     static let PlatformHigh: UInt32         = 0b1000000000 // 512
     static let PlatformLow: UInt32          = 0b10000000000 // 1024
+    static let noSpikePlatform: UInt32      = 0b100000000000 // 2048
 }
 
 // MARK: - Game States
@@ -89,6 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var mediumJump: SKSpriteNode!
     var secondTest: SKSpriteNode!
     var itemCatalog: SKSpriteNode!
+    var level1: SKSpriteNode!
     
     var lastOverlayPosition = CGPoint.zero
     var lastOverlayHeight: CGFloat = 0.0
@@ -198,6 +200,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var yellowPlatformAnimation: SKAction!
     var pinkPlatformAnimation: SKAction!
     var startPlatformAnimation: SKAction!
+    var lightningTrapAnimation: SKAction!
     
     let userDefaults = UserDefaults.standard
     
@@ -319,7 +322,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.fontColor = SKColor.white
         scoreLabel.fontSize = 200
         scoreLabel.zPosition = 8 //6
-        scoreLabel.position = CGPoint(x: 0, y: 650)//(x: 475, y: 850)
+        scoreLabel.position = CGPoint(x: 0, y: 600)//(x: 475, y: 850)
         camera?.addChild(scoreLabel)
         
         //let scoreText = String(format: "%02d", score)
@@ -386,10 +389,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         platformDiamond = loadForegroundOverlayTemplate("PlatformDiamond")
         break5Across = loadForegroundOverlayTemplate("Break5Across")
         breakArrow = loadForegroundOverlayTemplate("BreakArrow")
-        breakDiagonal = loadForegroundOverlayTemplate("BreakDiagonal")*/
+        breakDiagonal = loadForegroundOverlayTemplate("BreakDiagonal")
         mediumJump = loadForegroundOverlayTemplate("MediumJump")
-        secondTest = loadForegroundOverlayTemplate("SecondTest")
+        secondTest = loadForegroundOverlayTemplate("SecondTest")*/
         itemCatalog = loadForegroundOverlayTemplate("ItemCatalog")
+        level1 = loadForegroundOverlayTemplate("Level1")
         
         
         /*coin = loadCoin("Coin")
@@ -535,7 +539,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody!.isDynamic = false
         player.physicsBody!.allowsRotation = false
         player.physicsBody!.categoryBitMask = PhysicsCategory.Player
-        player.physicsBody!.collisionBitMask = 0
+        player.physicsBody!.collisionBitMask = PhysicsCategory.noSpikePlatform
         //player.physicsBody!.collisionBitMask = PhysicsCategory.FallOff
         player.physicsBody!.restitution = 0
         player.physicsBody!.affectedByGravity = false //DEBUG - Turned off player gravity
@@ -578,11 +582,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        overlay.enumerateChildNodes(withName: "p1") { (node, stop) in
+        overlay.enumerateChildNodes(withName: "SpikeOutline") { (node, stop) in
             var newNode = SKSpriteNode()
             if let nodePhysicsBody = node.physicsBody {
                 switch nodePhysicsBody.categoryBitMask {
-                case PhysicsCategory.PlatformBreakable:
+                /*case PhysicsCategory.PlatformBreakable:
                     //newNode = self.platform.copy() as! SKSpriteNode
                     newNode.size = CGSize(width: 215, height: 150)
                     newNode.run(SKAction.repeatForever(self.breakAnimation))
@@ -591,10 +595,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     newNode.physicsBody?.affectedByGravity = false
                     newNode.physicsBody?.allowsRotation = false
                     newNode.physicsBody!.categoryBitMask = PhysicsCategory.PlatformBreakable
-                    newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
+                    newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player*/
                 case PhysicsCategory.Spikes:
                     let spikeBodyTexture = SKTexture(imageNamed: "SpikeOutline")
-                    newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 196, height: 120))
+                    newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 190/*196*/, height: 95/*120*/))
                     newNode.physicsBody?.isDynamic = false
                     newNode.physicsBody?.affectedByGravity = false
                     newNode.physicsBody?.allowsRotation = false
@@ -731,8 +735,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         overlay.enumerateChildNodes(withName: "PlatformLow") { (node, stop) in
                     var newNode = SKSpriteNode()
                     self.bluePlatformAnimation = self.setupAnimationWithPrefix("BluePlatformLt_000",
-                                                                         start: 1,
-                                                                         end: 80,
+                                                                         start: 15,
+                                                                         end: 45,
                                                                          timePerFrame: 0.02)
                     newNode = SKSpriteNode(imageNamed: "BluePlatformLt_00000")
                     newNode.run(SKAction.repeatForever(self.bluePlatformAnimation))
@@ -746,8 +750,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         overlay.enumerateChildNodes(withName: "PlatformMid") { (node, stop) in
             var newNode = SKSpriteNode()
             self.yellowPlatformAnimation = self.setupAnimationWithPrefix("YellowPlatformLt_000",
-                                                                       start: 1,
-                                                                       end: 80,
+                                                                       start: 00,
+                                                                       end: 30,
                                                                        timePerFrame: 0.02)
             newNode = SKSpriteNode(imageNamed: "YellowPlatformLt_00000")
             newNode.run(SKAction.repeatForever(self.yellowPlatformAnimation))
@@ -761,8 +765,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         overlay.enumerateChildNodes(withName: "PlatformHigh") { (node, stop) in
             var newNode = SKSpriteNode()
             self.pinkPlatformAnimation = self.setupAnimationWithPrefix("PinkPlatformLt_000",
-                                                                       start: 1,
-                                                                       end: 80,
+                                                                       start: 30,
+                                                                       end: 60,
                                                                        timePerFrame: 0.02)
             newNode = SKSpriteNode(imageNamed: "PinkPlatformLt_00000")
             newNode.run(SKAction.repeatForever(self.pinkPlatformAnimation))
@@ -770,6 +774,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             newNode.zPosition = 1
             newNode.position = node.position
             overlay.addChild(newNode)
+            node.removeFromParent()
+        }
+        
+        overlay.enumerateChildNodes(withName: "LightningTrap") { (node, stop) in
+            var newNode = SKSpriteNode()
+            self.lightningTrapAnimation = self.setupAnimationWithPrefix("LightningTrap_000",
+                                                                       start: 1,
+                                                                       end: 30,
+                                                                       timePerFrame: 0.02)
+            newNode = SKSpriteNode(imageNamed: "LightningTrap_00000")
+            newNode.run(SKAction.repeatForever(self.lightningTrapAnimation))
+            newNode.size = CGSize(width: 380, height: 90)
+            newNode.zPosition = 1
+            newNode.zRotation = 48
+            newNode.position = node.position
+            overlay.addChild(newNode)
+            
+            newNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 265, height: 30))
+            newNode.physicsBody?.isDynamic = false
+            newNode.physicsBody?.affectedByGravity = false
+            newNode.physicsBody?.allowsRotation = false
+            newNode.physicsBody!.categoryBitMask = PhysicsCategory.Spikes
+            newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
+            
             node.removeFromParent()
         }
 
@@ -970,7 +998,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 2
         let bottomOfScreenYFg = convert(CGPoint(x: 0, y: bottomOfScreenY), to: fgNode).y
         // 3
-        let lavaVelocityY = CGFloat(400) //DEBUG - CHANGED LAVA STEP FROM 120 TO 1000
+        let lavaVelocityY = CGFloat(200) //DEBUG - CHANGED LAVA STEP FROM 120 TO 1000
         let lavaStep = lavaVelocityY * CGFloat(dt)
         var newLavaPositionY = lava.position.y + lavaStep
         // 4
@@ -1179,9 +1207,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 // Create standard platforms 75%
                 switch Int.random(min: 0, max: 1) {
                 case 0:
-                    overlaySprite = itemCatalog
+                    overlaySprite = level1
                 case 1:
-                    overlaySprite = itemCatalog
+                    overlaySprite = level1
                 case 2:
                     overlaySprite = mediumJump
                     flipH = true
@@ -1197,9 +1225,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 // Create breakable platform 25%
                 switch Int.random(min: 0, max: 1) {
                 case 0:
-                    overlaySprite = itemCatalog
+                    overlaySprite = level1
                 case 1:
-                    overlaySprite = itemCatalog
+                    overlaySprite = level1
                 case 2:
                     overlaySprite = mediumJump
                     flipH = true
@@ -1612,13 +1640,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let playerAnimationOff = setupAnimationWithPrefix("NLCat_Off_", start: 1, end: 7, timePerFrame: 0.05)
         player.run(playerAnimationOff)
         
-        let moveUp = SKAction.moveBy(x: 0.0, y: 100/*size.height/2.0*/, duration: 0.5)
+        let wait = SKAction.wait(forDuration: 0.3)
+        let moveUp = SKAction.moveBy(x: 0.0, y: 200/*size.height/2.0*/, duration: 0.2)
          moveUp.timingMode = .easeOut
          let moveDown = SKAction.moveBy(x: 0.0,
          y: -(size.height * 1.5),
          duration: 1.0)
          moveDown.timingMode = .easeIn
-         player.run(SKAction.sequence([moveUp, moveDown]))
+         player.run(SKAction.sequence([wait, moveUp, moveDown]))
         
         //let playerPosition = convert(player.position, from: fgNode)
         //let catOff = SKSpriteNode(imageNamed:"CatOff_00000")
@@ -1662,7 +1691,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let gameOverAnimation = self.buttonAnimation(animationBase: "GameOver_000", start: 1, end: 19, foreverStart: 20, foreverEnd: 35, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
             
-            let gameOverMove = SKAction.moveBy(x: 0, y: -675, duration: 0.5)
+            let gameOverMove = SKAction.moveBy(x: 0, y: -725, duration: 0.5)
             
             self.camera?.addChild(gameOverLabel)
             gameOverLabel.run(SKAction.sequence([gameOverMove,gameOverAnimation]))
@@ -1733,7 +1762,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let highScoreLabel = SKLabelNode(fontNamed: "NeonTubes2-Regular")
             highScoreLabel.fontSize = 200
-            highScoreLabel.position = CGPoint(x: 0, y: -125)
+            highScoreLabel.position = CGPoint(x: 0, y: -175)
             highScoreLabel.zPosition = 8
             highScoreLabel.text = "BEST: \(UserDefaults().integer(forKey: "HIGHSCORE"))"
             self.camera?.addChild(highScoreLabel)
