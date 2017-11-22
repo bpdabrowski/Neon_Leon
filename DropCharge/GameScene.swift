@@ -91,6 +91,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var secondTest: SKSpriteNode!
     var itemCatalog: SKSpriteNode!
     var level1: SKSpriteNode!
+    var level2: SKSpriteNode!
     
     var lastOverlayPosition = CGPoint.zero
     var lastOverlayHeight: CGFloat = 0.0
@@ -322,7 +323,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.fontColor = SKColor.white
         scoreLabel.fontSize = 200
         scoreLabel.zPosition = 8 //6
-        scoreLabel.position = CGPoint(x: 0, y: 600)//(x: 475, y: 850)
+        scoreLabel.position = CGPoint(x: 0, y: 700)//(x: 475, y: 850)
         camera?.addChild(scoreLabel)
         
         //let scoreText = String(format: "%02d", score)
@@ -394,6 +395,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         secondTest = loadForegroundOverlayTemplate("SecondTest")*/
         itemCatalog = loadForegroundOverlayTemplate("ItemCatalog")
         level1 = loadForegroundOverlayTemplate("Level1")
+        level2 = loadForegroundOverlayTemplate("Level2")
         
         
         /*coin = loadCoin("Coin")
@@ -544,7 +546,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody!.restitution = 0
         player.physicsBody!.affectedByGravity = false //DEBUG - Turned off player gravity
         
-        playerTrail = addTrail(name: "PlayerTrail")
+        //playerTrail = addTrail(name: "PlayerTrail")
     }
     
     func setupLava() {
@@ -887,11 +889,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player.position.x = playerPosition.x
         }
         // Check player state
+        //Turn this back on when you want to add player trail
         if player.physicsBody!.velocity.dy < CGFloat(0.0) && playerState != .fall {
             playerState = .fall
-            if playerTrail.particleBirthRate == 0 {
+            /*if playerTrail.particleBirthRate == 0 {
                 playerTrail.particleBirthRate = 200
-            }
+            }*/
             //player.run(squashAndStetch)
         } else if player.physicsBody!.velocity.dy > CGFloat(0.0) && playerState != .jump {
             playerState = .jump
@@ -1007,19 +1010,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lava.position.y = newLavaPositionY
     }
     
-    /*func updateCollisionLava() {
+    func updateCollisionLava() {
         if player.position.y < lava.position.y - 500 {
             if playerState != .lava {
                 playerState = .lava
                 playerTrail.particleBirthRate = 0
-                let smokeTrail = addTrail(name: "SmokeTrail")
+                /*let smokeTrail = addTrail(name: "SmokeTrail")
                 run(SKAction.sequence([
                     soundHitLava,
                     SKAction.wait(forDuration: 3.0),
                     SKAction.run() {
                         self.removeTrail(trail: smokeTrail)
                     }
-                    ]))
+                    ]))*/
             }
             boostPlayer()
             //screenShakeByAmt(50) - DEBUG: Removed it because it was hard to see everytime I hit lava.
@@ -1029,7 +1032,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 run(soundGameOver)
             }
         }
-    }*/
+    }
     
     func updateExplosions(_ dt: TimeInterval) {
         timeSinceLastExplosion += dt
@@ -1209,7 +1212,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 case 0:
                     overlaySprite = level1
                 case 1:
-                    overlaySprite = level1
+                    overlaySprite = level2
                 case 2:
                     overlaySprite = mediumJump
                     flipH = true
@@ -1227,7 +1230,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 case 0:
                     overlaySprite = level1
                 case 1:
-                    overlaySprite = level1
+                    overlaySprite = level2
                 case 2:
                     overlaySprite = mediumJump
                     flipH = true
@@ -1573,15 +1576,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let lightningBack = SKSpriteNode(imageNamed: "Lightning_00000")
         lightningBack.size = CGSize(width: 300, height: 311)
         lightningBack.zPosition = 4
-        lightningBack.position = CGPoint(x: -150, y: 900)
+        lightningBack.position = CGPoint(x: -150, y: 1000)
         camera?.addChild(lightningBack)
         
         let lightningBack2 = lightningBack.copy() as! SKSpriteNode
-        lightningBack2.position = CGPoint(x: 0, y: 900)
+        lightningBack2.position = CGPoint(x: 0, y: 1000)
         camera?.addChild(lightningBack2)
         
         let lightningBack3 = lightningBack.copy() as! SKSpriteNode
-        lightningBack3.position = CGPoint(x: 150, y: 900)
+        lightningBack3.position = CGPoint(x: 150, y: 1000)
         camera?.addChild(lightningBack3)
         
         lightningOff.removeFromParent()
@@ -1687,7 +1690,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             restartButton.run(SKAction.sequence([restartMove,restartButtonAnimation]))
             
             
-            let gameOverLabel = self.setupButton(pictureBase: "GameOver_00000", pictureWidth: 1100, pictureHeight: 600, buttonPositionX: 0, buttonPositionY: 1100/*575*/, zPosition: 8)
+            let gameOverLabel = self.setupButton(pictureBase: "GameOver_00000", pictureWidth: 1100, pictureHeight: 600, buttonPositionX: -50, buttonPositionY: 1100/*575*/, zPosition: 8)
             
             let gameOverAnimation = self.buttonAnimation(animationBase: "GameOver_000", start: 1, end: 19, foreverStart: 20, foreverEnd: 35, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
             
@@ -1892,13 +1895,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch other.categoryBitMask {
         case PhysicsCategory.CoinNormal:
             if let coin = other.node as? SKSpriteNode {
-                emitParticles(name: "CollectNormal", sprite: coin)
+                //emitParticles(name: "CollectNormal", sprite: coin)
                 jumpPlayer()
                 run(soundCoin)
             }
         case PhysicsCategory.CoinSpecial:
             if let coin = other.node as? SKSpriteNode {
-                emitParticles(name: "CollectSpecial", sprite: coin)
+                //emitParticles(name: "CollectSpecial", sprite: coin)
                 boostPlayer()
                 run(soundBoost)
             }
@@ -2050,13 +2053,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return emitter
     }
     
-    func addTrail(name: String) -> SKEmitterNode {
+    /*func addTrail(name: String) -> SKEmitterNode {
         let trail = SKEmitterNode(fileNamed: name)!
         trail.zPosition = -1
         trail.targetNode = fgNode
         //player.addChild(trail)
         return trail
-    }
+    }*/
     
     func removeTrail(trail: SKEmitterNode) {
         trail.numParticlesToEmit = 1
@@ -2111,7 +2114,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sprite.run(action)
         
         if breakable == true {
-            emitParticles(name: "BrokenPlatform", sprite: sprite)
+            //emitParticles(name: "BrokenPlatform", sprite: sprite)
         }
     }
     
