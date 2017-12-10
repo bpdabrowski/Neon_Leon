@@ -17,7 +17,7 @@
                BlueprintIdentifier = "F2B334FE1EA4425C007801AC"
                BuildableName = "DropCharge Copy.app"
                BlueprintName = "DropCharge Copy"
-               ReferencedContainer = "container:DropCharge Copy.xcodeproj">
+               ReferencedContainer = "container:Neon Leon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,7 +36,7 @@
             BlueprintIdentifier = "F2B334FE1EA4425C007801AC"
             BuildableName = "DropCharge Copy.app"
             BlueprintName = "DropCharge Copy"
-            ReferencedContainer = "container:DropCharge Copy.xcodeproj">
+            ReferencedContainer = "container:Neon Leon.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -60,7 +60,7 @@
             BlueprintIdentifier = "F2B334FE1EA4425C007801AC"
             BuildableName = "DropCharge Copy.app"
             BlueprintName = "DropCharge Copy"
-            ReferencedContainer = "container:DropCharge Copy.xcodeproj">
+            ReferencedContainer = "container:Neon Leon.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -79,7 +79,7 @@
             BlueprintIdentifier = "F2B334FE1EA4425C007801AC"
             BuildableName = "DropCharge Copy.app"
             BlueprintName = "DropCharge Copy"
-            ReferencedContainer = "container:DropCharge Copy.xcodeproj">
+            ReferencedContainer = "container:Neon Leon.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

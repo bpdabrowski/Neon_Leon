@@ -73,25 +73,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //2
     var startPlatform: SKSpriteNode!
-    var coinArrow: SKSpriteNode!
-    var coin5Across: SKSpriteNode!
-    var coinS5Across: SKSpriteNode!
-    var coinCross: SKSpriteNode!
-    var coinSCross: SKSpriteNode!
-    var break5Across: SKSpriteNode!
-    var breakArrow: SKSpriteNode!
-    var platformArrow: SKSpriteNode!
-    var coinSArrow: SKSpriteNode!
-    var platformDiagonal: SKSpriteNode!
-    var platformDiamond: SKSpriteNode!
-    var breakDiagonal: SKSpriteNode!
-    var coinDiagonal: SKSpriteNode!
-    var coinSDiagonal: SKSpriteNode!
-    var mediumJump: SKSpriteNode!
-    var secondTest: SKSpriteNode!
     var itemCatalog: SKSpriteNode!
     var level1: SKSpriteNode!
     var level2: SKSpriteNode!
+    var level3: SKSpriteNode!
+    var level4: SKSpriteNode!
     
     var lastOverlayPosition = CGPoint.zero
     var lastOverlayHeight: CGFloat = 0.0
@@ -115,18 +101,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var lives = 1
     
-    let soundBombDrop = SKAction.playSoundFileNamed("bombDrop.wav", waitForCompletion: true)
-    let soundSuperBoost = SKAction.playSoundFileNamed("nitro.wav", waitForCompletion: false)
-    let soundTickTock = SKAction.playSoundFileNamed("tickTock.wav", waitForCompletion: true)
     let soundBoost = SKAction.playSoundFileNamed("boost.wav", waitForCompletion: false)
     let soundJump = SKAction.playSoundFileNamed("jump.wav", waitForCompletion: false)
     let soundCoin = SKAction.playSoundFileNamed("coin1.wav", waitForCompletion: false)
-    let soundBrick = SKAction.playSoundFileNamed("brick.caf", waitForCompletion: false)
-    let soundHitLava = SKAction.playSoundFileNamed("DrownFireBug.mp3", waitForCompletion: false)
-    let soundGameOver = SKAction.playSoundFileNamed("player_die.wav", waitForCompletion: false)
-    
-    var coin: SKSpriteNode!
-    var coinSpecial: SKSpriteNode!
     
     var platform: SKSpriteNode!
     
@@ -259,15 +236,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lightningOff = SKSpriteNode(imageNamed: "Lightning_00000")
         lightningOff.size = CGSize(width: 300, height: 311)
         lightningOff.zPosition = 4
-        lightningOff.position = CGPoint(x: -150, y: 900)
+        lightningOff.position = CGPoint(x: -150, y: 1000)
         camera?.addChild(lightningOff)
         
         lightningOff2 = lightningOff.copy() as! SKSpriteNode
-        lightningOff2.position = CGPoint(x: 0, y: 900)
+        lightningOff2.position = CGPoint(x: 0, y: 1000)
         camera?.addChild(lightningOff2)
         
         lightningOff3 = lightningOff.copy() as! SKSpriteNode
-        lightningOff3.position = CGPoint(x: 150, y: 900)
+        lightningOff3.position = CGPoint(x: 150, y: 1000)
         camera?.addChild(lightningOff3)
         
         /*let lightning1 = setupButton(pictureBase: "Lightning_00000",
@@ -396,6 +373,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         itemCatalog = loadForegroundOverlayTemplate("ItemCatalog")
         level1 = loadForegroundOverlayTemplate("Level1")
         level2 = loadForegroundOverlayTemplate("Level2")
+        level3 = loadForegroundOverlayTemplate("Level3")
+        level4 = loadForegroundOverlayTemplate("Level4")
         
         
         /*coin = loadCoin("Coin")
@@ -454,7 +433,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func appStorePage() {
-        print("Put in link to App page")
+        let url = URL(string: "itms://itunes.apple.com/us/app/apple-store/id375380948?mt=8")
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.canOpenURL(url!)
+        }
     }
     
     func requestReview() {
@@ -565,25 +549,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addAnimationToOverlay(overlay: SKSpriteNode) {
-        overlay.enumerateChildNodes(withName: "Coin") { (node, stop) in
-            var newNode = SKSpriteNode()
-            if let nodePhysicsBody = node.physicsBody {
-                switch nodePhysicsBody.categoryBitMask {
-                case PhysicsCategory.CoinNormal:
-                    newNode = self.coin.copy() as! SKSpriteNode
-                    newNode.run(SKAction.repeatForever(self.coinAnimationNormal))
-                case PhysicsCategory.CoinSpecial:
-                    newNode = self.coinSpecial.copy() as! SKSpriteNode
-                    newNode.run(SKAction.repeatForever(self.coinAnimationSpecial))
-                default:
-                    newNode = node.copy() as! SKSpriteNode
-                }
-                newNode.position = node.position
-                overlay.addChild(newNode)
-                node.removeFromParent()
-            }
-        }
-        
         overlay.enumerateChildNodes(withName: "SpikeOutline") { (node, stop) in
             var newNode = SKSpriteNode()
             if let nodePhysicsBody = node.physicsBody {
@@ -600,7 +565,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player*/
                 case PhysicsCategory.Spikes:
                     let spikeBodyTexture = SKTexture(imageNamed: "SpikeOutline")
-                    newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 190/*196*/, height: 95/*120*/))
+                    newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 190/*196*/, height: 115/*120*/))
                     newNode.physicsBody?.isDynamic = false
                     newNode.physicsBody?.affectedByGravity = false
                     newNode.physicsBody?.allowsRotation = false
@@ -745,7 +710,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     newNode.size = CGSize(width: 350, height: 216)
                     newNode.zPosition = 1
                     newNode.position = node.position
+            
                     overlay.addChild(newNode)
+                    print("PF Low: \(node.position)")
                     node.removeFromParent()
         }
         
@@ -760,7 +727,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             newNode.size = CGSize(width: 350, height: 216)
             newNode.zPosition = 1
             newNode.position = node.position
+            
             overlay.addChild(newNode)
+            print("PF Mid: \(node.position)")
             node.removeFromParent()
         }
         
@@ -775,7 +744,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             newNode.size = CGSize(width: 350, height: 216)
             newNode.zPosition = 1
             newNode.position = node.position
+            
             overlay.addChild(newNode)
+            print("PF High: \(node.position)")
             node.removeFromParent()
         }
         
@@ -923,7 +894,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func updateCamera() {
         
-        guard let camera = camera, let view = view else { return }
+        //guard let camera = camera, let view = view else { return }
         
         // 1
         let cameraTarget = convert(player.position, from: fgNode)
@@ -932,14 +903,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let lavaPos = convert(lava.position, from: fgNode)
         targetPositionY = max(targetPositionY, lavaPos.y)
         // 3
-        let diff = targetPositionY - camera/*!*/.position.y
+        let diff = targetPositionY - (camera?/*!*/.position.y)!
         //4
         let cameraLagFactor = CGFloat(0.2)
         let lagDiff = diff * cameraLagFactor
-        let newCameraPositionY = camera/*!*/.position.y + lagDiff
+        let newCameraPositionY = (camera?/*!*/.position.y)! + lagDiff
         
         // 5
-        camera/*!*/.position.y = newCameraPositionY
+        camera?/*!*/.position.y = newCameraPositionY
         
         if player.parent == platform {
             print("platform is child of player")
@@ -1029,7 +1000,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             lives -= 1
             if lives <= 0 {
                 gameOver()
-                run(soundGameOver)
+                //run(soundGameOver)
             }
         }
     }
@@ -1117,7 +1088,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        //print("\(player.position.y)")
+        print("\(player.position.y)")
     }
     
 
@@ -1138,7 +1109,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func superBoostPlayer() {
-        setPlayerVelocity(650)
+        setPlayerVelocity(655)
     }
     
     // MARK: - Overlay nodes
@@ -1162,7 +1133,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return platformTemplate as! SKSpriteNode
     }
     
-    func loadCoinOverlayTemplate(_ fileName: String) -> SKSpriteNode {
+    /*func loadCoinOverlayTemplate(_ fileName: String) -> SKSpriteNode {
         //1
         let overlayTemplate = loadForegroundOverlayTemplate(fileName)
         //2
@@ -1182,7 +1153,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         })
         //5
         return overlayTemplate
-    }
+    }*/
     
     //2
     func createForegroundOverlay(_ overlayTemplate: SKSpriteNode, flipX: Bool) {
@@ -1208,77 +1179,45 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if Int.random(min: 1, max: 100) <= platformPercentage {
             if Int.random(min: 1, max: 100) <= 75 {
                 // Create standard platforms 75%
-                switch Int.random(min: 0, max: 1) {
+                switch Int.random(min: 0, max: 5) {
                 case 0:
                     overlaySprite = level1
                 case 1:
                     overlaySprite = level2
                 case 2:
-                    overlaySprite = mediumJump
-                    flipH = true
+                    overlaySprite = level3
                 case 3:
-                    overlaySprite = secondTest
-                    flipH = true
-                /*case 4:
-                    overlaySprite = mediumJump//platformDiamond*/
+                    overlaySprite = level1
+                    //flipH = true
+                case 4:
+                    overlaySprite = level3
+                    //flipH = true
+                case 5:
+                    overlaySprite = level4
                 default:
-                    overlaySprite = mediumJump
+                    overlaySprite = level1
                 }
-        } else {
+            } else {
                 // Create breakable platform 25%
-                switch Int.random(min: 0, max: 1) {
-                case 0:
-                    overlaySprite = level1
-                case 1:
-                    overlaySprite = level2
-                case 2:
-                    overlaySprite = mediumJump
-                    flipH = true
-                case 3:
-                    overlaySprite = secondTest
-                    flipH = true
-                default:
-                    overlaySprite = mediumJump
-                }
-            }
-        } else {
-            if Int.random(min:1, max: 100) <= 75 {
-                // Create standard coins 75%
                 switch Int.random(min: 0, max: 4) {
                 case 0:
-                    overlaySprite = coinArrow
+                    overlaySprite = level1
                 case 1:
-                    overlaySprite = coin5Across
+                    overlaySprite = level2
                 case 2:
-                    overlaySprite = coinDiagonal
+                    overlaySprite = level3
+                    //flipH = true
                 case 3:
-                    overlaySprite = coinDiagonal
-                    flipH = true
+                    overlaySprite = level1
+                    //flipH = true
                 case 4:
-                    overlaySprite = coinCross
+                    overlaySprite = level4
                 default:
-                    overlaySprite = coinArrow
+                    overlaySprite = level1
+                }
             }
-        } else {
-            // Create special coins 25%
-            switch Int.random(min: 0, max: 4) {
-            case 0:
-                overlaySprite = coinSArrow
-            case 1:
-                overlaySprite = coinS5Across
-            case 2:
-                overlaySprite = coinSDiagonal
-            case 3:
-                overlaySprite = coinSDiagonal
-                flipH = true
-            case 4:
-                overlaySprite = coinSCross
-            default:
-                overlaySprite = coinSArrow
-            }
+            createForegroundOverlay(overlaySprite, flipX: flipH)
         }
-    }
-        createForegroundOverlay(overlaySprite, flipX: flipH)
     }
     
     //3
@@ -1465,7 +1404,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let touchLocation = touch!.location(in: fgNode)
                 let previousLocation = touch!.previousLocation(in: fgNode)
                 let touchDifference = touchLocation.x - previousLocation.x
-                let catX = player.position.x + ((touchDifference) * 2.5)
+                let catX = player.position.x + ((touchDifference) * 1.25)
                 player.position = CGPoint(x: catX, y: player.position.y)
                 //print(touchDifference)
                 if touchDifference <= 0 {
@@ -1543,7 +1482,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameState = .playing
         playerState = .idle
         
-        let randomNum = Int.random(min: 1, max: 3)
+        let randomNum = 3//Int.random(min: 1, max: 3)
         
         switch randomNum {
         case 1:
@@ -1774,7 +1713,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setupLights(lights: Int) {
         //Lightning 1
-        let lightning1 = setupButton(pictureBase: "Lightning_00000", pictureWidth: 300, pictureHeight: 311, buttonPositionX: -150, buttonPositionY: 900, zPosition: 6)
+        let lightning1 = setupButton(pictureBase: "Lightning_00000", pictureWidth: 300, pictureHeight: 311, buttonPositionX: -150, buttonPositionY: 1000, zPosition: 6)
         
         let animationLoop = setupAnimationWithPrefix("Lightning_000",
                                                    start: 1,
@@ -1784,12 +1723,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /*let lightning1Animation = buttonAnimation(animationBase: "Lightning_000", start: 1, end: 17, foreverStart: 18, foreverEnd: 30, startTimePerFrame: 0.024, foreverTimePerFrame: 0.071)*/
         
         //Lightning 2
-        let lightning2 = setupButton(pictureBase: "Lightning_00000", pictureWidth: 300, pictureHeight: 311, buttonPositionX: 0, buttonPositionY: 900, zPosition: 6)
+        let lightning2 = setupButton(pictureBase: "Lightning_00000", pictureWidth: 300, pictureHeight: 311, buttonPositionX: 0, buttonPositionY: 1000, zPosition: 6)
         
         /*let lightning2Animation = buttonAnimation(animationBase: "Lightning_000", start: 1, end: 17, foreverStart: 18, foreverEnd: 30, startTimePerFrame: 0.024, foreverTimePerFrame: 0.071)*/
         
         //Lightning 3
-        let lightning3 = setupButton(pictureBase: "Lightning_00000", pictureWidth: 300, pictureHeight: 311, buttonPositionX: 150, buttonPositionY: 900, zPosition: 6)
+        let lightning3 = setupButton(pictureBase: "Lightning_00000", pictureWidth: 300, pictureHeight: 311, buttonPositionX: 150, buttonPositionY: 1000, zPosition: 6)
         
         /*let lightning3Animation = buttonAnimation(animationBase: "Lightning_000", start: 1, end: 17, foreverStart: 18, foreverEnd: 30, startTimePerFrame: 0.024, foreverTimePerFrame: 0.071)*/
         
@@ -1917,6 +1856,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     platformState = .low
                     run(soundJump)
                     score += 1
+                    print("*Low: \(player.position.y)")
                 }
             }
             
@@ -1931,6 +1871,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     platformState = .middle
                     run(soundJump)
                     score += 1
+                    print("*Middle: \(player.position.y)")
                 }
             }
             
@@ -1945,6 +1886,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     platformState = .high
                     run(soundJump)
                     score += 1
+                    print("*High: \(player.position.y)")
                 }
             }
             
