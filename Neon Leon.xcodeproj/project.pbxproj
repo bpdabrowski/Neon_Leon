@@ -7,13 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6C9D73158FBC07125E3BCF53 /* Pods_DropCharge_Copy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51AC3D22A631D8719DBB0237 /* Pods_DropCharge_Copy.framework */; };
+		8B1BA74D9E267DB990570075 /* Pods_Neon_Leon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD3A69155B661F1E3B24F2C /* Pods_Neon_Leon.framework */; };
+		F213C2921FDCF76300B941D8 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		F213C2931FDCF76500B941D8 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		F216137E1F24F3E000378FD3 /* Level2.sks in Resources */ = {isa = PBXBuildFile; fileRef = F216137D1F24F3E000378FD3 /* Level2.sks */; };
 		F21613801F251DBA00378FD3 /* Poison.sks in Resources */ = {isa = PBXBuildFile; fileRef = F216137F1F251DBA00378FD3 /* Poison.sks */; };
-		F21613821F2520FB00378FD3 /* PoisonExplode.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21613811F2520FB00378FD3 /* PoisonExplode.sks */; };
 		F21AAE221F4A42B700B41405 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F21AAE211F4A42B700B41405 /* Assets.xcassets */; };
+		F21DE7341FEC9C5400D97E9C /* SwiftyAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DE7331FEC9C5400D97E9C /* SwiftyAd.swift */; };
+		F21DE7401FF2056100D97E9C /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DE73F1FF2056100D97E9C /* Tutorial.swift */; };
+		F21DE7421FF3152C00D97E9C /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DE7411FF3152C00D97E9C /* MainMenu.swift */; };
+		F21DE7441FF3153D00D97E9C /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21DE7431FF3153D00D97E9C /* MainMenu.sks */; };
+		F21DE7461FF41EDF00D97E9C /* Tutorial.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21DE7451FF41EDF00D97E9C /* Tutorial.sks */; };
+		F22208CF1FE74C24000FF105 /* LightningExplode.sks in Resources */ = {isa = PBXBuildFile; fileRef = F22208CE1FE74C24000FF105 /* LightningExplode.sks */; };
+		F22208D11FE74D99000FF105 /* InvincibleTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = F22208D01FE74D99000FF105 /* InvincibleTrail.sks */; };
+		F22208D31FE9F1F1000FF105 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F22208D21FE9F1F0000FF105 /* GoogleService-Info.plist */; };
 		F2306C2C1F1EEBDB00648B30 /* Background.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2306C2B1F1EEBDB00648B30 /* Background.sks */; };
 		F258C6721F904D16004EB80E /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F258C6711F904D15004EB80E /* Button.swift */; };
+		F2660EB21FDDBFD8008CE74F /* Level5.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EB11FDDBFD8008CE74F /* Level5.sks */; };
+		F2660EB41FDDD6E4008CE74F /* Level6.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EB31FDDD6E4008CE74F /* Level6.sks */; };
+		F2660EB61FDDE8FB008CE74F /* Level7.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EB51FDDE8FB008CE74F /* Level7.sks */; };
+		F2660EB81FDDF455008CE74F /* Level8.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EB71FDDF455008CE74F /* Level8.sks */; };
+		F2660EBA1FDDFAEA008CE74F /* Level9.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EB91FDDFAEA008CE74F /* Level9.sks */; };
+		F2660EBC1FDE046C008CE74F /* Level10.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EBB1FDE046C008CE74F /* Level10.sks */; };
+		F2660EC01FE63CEB008CE74F /* CatNipRoar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F2660EBF1FE63CEB008CE74F /* CatNipRoar.mp3 */; };
 		F2704C5C1FCE605000799629 /* Level3.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2704C5B1FCE605000799629 /* Level3.sks */; };
 		F2704C601FCF942200799629 /* Level4.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2704C5F1FCF942200799629 /* Level4.sks */; };
 		F2704C621FD0F58F00799629 /* Test.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2704C611FD0F58F00799629 /* Test.sks */; };
@@ -49,17 +65,31 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		51AC3D22A631D8719DBB0237 /* Pods_DropCharge_Copy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DropCharge_Copy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EB352C1679BB2A3392DF649 /* Pods-DropCharge Copy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropCharge Copy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DropCharge Copy/Pods-DropCharge Copy.debug.xcconfig"; sourceTree = "<group>"; };
-		E42A71C11A7E5A323EC7ECC7 /* Pods-DropCharge Copy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropCharge Copy.release.xcconfig"; path = "Pods/Target Support Files/Pods-DropCharge Copy/Pods-DropCharge Copy.release.xcconfig"; sourceTree = "<group>"; };
-		F216137D1F24F3E000378FD3 /* Level2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level2.sks; path = DropCharge/Level2.sks; sourceTree = "<group>"; };
+		49F45A333F5EAF0FFD0E515F /* Pods-Neon Leon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neon Leon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Neon Leon/Pods-Neon Leon.debug.xcconfig"; sourceTree = "<group>"; };
+		8FD3A69155B661F1E3B24F2C /* Pods_Neon_Leon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Neon_Leon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC1242CCEE1E2EAA302E7193 /* Pods-Neon Leon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neon Leon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Neon Leon/Pods-Neon Leon.release.xcconfig"; sourceTree = "<group>"; };
+		F216137D1F24F3E000378FD3 /* Level2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level2.sks; path = "Neon Leon/Levels/Level2.sks"; sourceTree = "<group>"; };
 		F216137F1F251DBA00378FD3 /* Poison.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Poison.sks; sourceTree = "<group>"; };
-		F21613811F2520FB00378FD3 /* PoisonExplode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PoisonExplode.sks; sourceTree = "<group>"; };
 		F21AAE211F4A42B700B41405 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F21DE7331FEC9C5400D97E9C /* SwiftyAd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyAd.swift; path = "../../SwiftyAd-master/SwiftyAd.swift"; sourceTree = "<group>"; };
+		F21DE73F1FF2056100D97E9C /* Tutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tutorial.swift; path = ../../../../.Trash/Tutorial.swift; sourceTree = "<group>"; };
+		F21DE7411FF3152C00D97E9C /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		F21DE7431FF3153D00D97E9C /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
+		F21DE7451FF41EDF00D97E9C /* Tutorial.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Tutorial.sks; sourceTree = "<group>"; };
+		F22208CE1FE74C24000FF105 /* LightningExplode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = LightningExplode.sks; path = "../../2D_Apple_Games_by_Tutorials_3.0/17-juice-up-your-game/final/DropCharge/DropCharge/Particles/LightningExplode.sks"; sourceTree = "<group>"; };
+		F22208D01FE74D99000FF105 /* InvincibleTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = InvincibleTrail.sks; path = "../../2D_Apple_Games_by_Tutorials_3.0/17-juice-up-your-game/final/DropCharge/DropCharge/Particles/InvincibleTrail.sks"; sourceTree = "<group>"; };
+		F22208D21FE9F1F0000FF105 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F2306C2B1F1EEBDB00648B30 /* Background.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background.sks; sourceTree = "<group>"; };
 		F258C6711F904D15004EB80E /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
-		F2704C5B1FCE605000799629 /* Level3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level3.sks; path = DropCharge/Level3.sks; sourceTree = "<group>"; };
-		F2704C5F1FCF942200799629 /* Level4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level4.sks; path = DropCharge/Level4.sks; sourceTree = "<group>"; };
+		F2660EB11FDDBFD8008CE74F /* Level5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level5.sks; path = "Neon Leon/Levels/Level5.sks"; sourceTree = "<group>"; };
+		F2660EB31FDDD6E4008CE74F /* Level6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level6.sks; path = "Neon Leon/Levels/Level6.sks"; sourceTree = "<group>"; };
+		F2660EB51FDDE8FB008CE74F /* Level7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level7.sks; path = "Neon Leon/Levels/Level7.sks"; sourceTree = "<group>"; };
+		F2660EB71FDDF455008CE74F /* Level8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level8.sks; path = "Neon Leon/Levels/Level8.sks"; sourceTree = "<group>"; };
+		F2660EB91FDDFAEA008CE74F /* Level9.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level9.sks; sourceTree = "<group>"; };
+		F2660EBB1FDE046C008CE74F /* Level10.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level10.sks; sourceTree = "<group>"; };
+		F2660EBF1FE63CEB008CE74F /* CatNipRoar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CatNipRoar.mp3; path = "../../../../../Creative Cloud Files/Neon Leon/CatNipRoar.mp3"; sourceTree = "<group>"; };
+		F2704C5B1FCE605000799629 /* Level3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level3.sks; path = "Neon Leon/Levels/Level3.sks"; sourceTree = "<group>"; };
+		F2704C5F1FCF942200799629 /* Level4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level4.sks; path = "Neon Leon/Levels/Level4.sks"; sourceTree = "<group>"; };
 		F2704C611FD0F58F00799629 /* Test.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Test.sks; sourceTree = "<group>"; };
 		F2751B071EB6B47B00B9F913 /* attribution.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = attribution.txt; sourceTree = "<group>"; };
 		F2751B0A1EB6B47B00B9F913 /* boost.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = boost.wav; sourceTree = "<group>"; };
@@ -68,7 +98,7 @@
 		F2751B131EB6B47B00B9F913 /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
 		F2AF7D021FA4084A00DC5D2A /* NeonTubes2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NeonTubes2.otf; sourceTree = "<group>"; };
 		F2AF7D051FA528D400DC5D2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F2B334FF1EA4425C007801AC /* DropCharge Copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DropCharge Copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2B334FF1EA4425C007801AC /* Neon Leon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Neon Leon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2B335021EA4425C007801AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2B335041EA4425C007801AC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		F2B335061EA4425C007801AC /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -76,7 +106,7 @@
 		F2B3350A1EA4425C007801AC /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		F2B3350D1EA4425C007801AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F2B335141EA4425C007801AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F2B3353F1EA44D01007801AC /* StartPlatform.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = StartPlatform.sks; path = DropCharge/StartPlatform.sks; sourceTree = "<group>"; };
+		F2B3353F1EA44D01007801AC /* StartPlatform.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = StartPlatform.sks; path = "Neon Leon/StartPlatform.sks"; sourceTree = "<group>"; };
 		F2B335441EA6F92D007801AC /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		F2B335451EA6F92D007801AC /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		F2B335461EA6F92D007801AC /* CGVector+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extensions.swift"; sourceTree = "<group>"; };
@@ -91,7 +121,7 @@
 		F2B3354F1EA6F92D007801AC /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
 		F2CA79661F80411A00BDBF33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ../../DropCharge/DropCharge/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2CB02821F734AA2005C28CF /* ItemCatalog.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ItemCatalog.sks; sourceTree = "<group>"; };
-		F2DE52791F37A9380062CCEF /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level1.sks; path = DropCharge/Level1.sks; sourceTree = "<group>"; };
+		F2DE52791F37A9380062CCEF /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level1.sks; path = "Neon Leon/Levels/Level1.sks"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,26 +129,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C9D73158FBC07125E3BCF53 /* Pods_DropCharge_Copy.framework in Frameworks */,
+				8B1BA74D9E267DB990570075 /* Pods_Neon_Leon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		53F125F7D7847FCF9F676C27 /* Pods */ = {
+		4213D0E337CADDC5614E6242 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5EB352C1679BB2A3392DF649 /* Pods-DropCharge Copy.debug.xcconfig */,
-				E42A71C11A7E5A323EC7ECC7 /* Pods-DropCharge Copy.release.xcconfig */,
+				49F45A333F5EAF0FFD0E515F /* Pods-Neon Leon.debug.xcconfig */,
+				EC1242CCEE1E2EAA302E7193 /* Pods-Neon Leon.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		84752BDE15A08B62FC32019E /* Frameworks */ = {
+		F0B6E5B2521858C1ABBF9C70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				51AC3D22A631D8719DBB0237 /* Pods_DropCharge_Copy.framework */,
+				8FD3A69155B661F1E3B24F2C /* Pods_Neon_Leon.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -127,11 +157,17 @@
 			isa = PBXGroup;
 			children = (
 				F2B3353F1EA44D01007801AC /* StartPlatform.sks */,
+				F2660EBB1FDE046C008CE74F /* Level10.sks */,
+				F2660EB91FDDFAEA008CE74F /* Level9.sks */,
+				F2660EB71FDDF455008CE74F /* Level8.sks */,
+				F2660EB51FDDE8FB008CE74F /* Level7.sks */,
+				F2660EB31FDDD6E4008CE74F /* Level6.sks */,
+				F2660EB11FDDBFD8008CE74F /* Level5.sks */,
 				F2704C5F1FCF942200799629 /* Level4.sks */,
-				F2704C611FD0F58F00799629 /* Test.sks */,
 				F2704C5B1FCE605000799629 /* Level3.sks */,
 				F216137D1F24F3E000378FD3 /* Level2.sks */,
 				F2DE52791F37A9380062CCEF /* Level1.sks */,
+				F2704C611FD0F58F00799629 /* Test.sks */,
 				F2CB02821F734AA2005C28CF /* ItemCatalog.sks */,
 			);
 			name = Levels;
@@ -141,6 +177,7 @@
 		F2751B051EB6B47B00B9F913 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				F2660EBF1FE63CEB008CE74F /* CatNipRoar.mp3 */,
 				F2751B071EB6B47B00B9F913 /* attribution.txt */,
 				F2751B0A1EB6B47B00B9F913 /* boost.wav */,
 				F2751B0C1EB6B47B00B9F913 /* coin1.wav */,
@@ -162,40 +199,46 @@
 			isa = PBXGroup;
 			children = (
 				F21AAE211F4A42B700B41405 /* Assets.xcassets */,
-				F2B335011EA4425C007801AC /* DropCharge */,
+				F2B335011EA4425C007801AC /* Neon Leon */,
 				F2B335001EA4425C007801AC /* Products */,
-				53F125F7D7847FCF9F676C27 /* Pods */,
-				84752BDE15A08B62FC32019E /* Frameworks */,
+				4213D0E337CADDC5614E6242 /* Pods */,
+				F0B6E5B2521858C1ABBF9C70 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		F2B335001EA4425C007801AC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F2B334FF1EA4425C007801AC /* DropCharge Copy.app */,
+				F2B334FF1EA4425C007801AC /* Neon Leon.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F2B335011EA4425C007801AC /* DropCharge */ = {
+		F2B335011EA4425C007801AC /* Neon Leon */ = {
 			isa = PBXGroup;
 			children = (
 				F2AF7D011FA4083100DC5D2A /* Font */,
 				F2B335431EA6F92D007801AC /* SKTUtils */,
 				F21AAE261F4BB77A00B41405 /* Levels */,
-				F2B335021EA4425C007801AC /* AppDelegate.swift */,
 				F2B335041EA4425C007801AC /* GameScene.sks */,
-				F2B335061EA4425C007801AC /* Actions.sks */,
 				F2B335081EA4425C007801AC /* GameScene.swift */,
+				F2B335061EA4425C007801AC /* Actions.sks */,
+				F2B335021EA4425C007801AC /* AppDelegate.swift */,
 				F258C6711F904D15004EB80E /* Button.swift */,
-				F2751B051EB6B47B00B9F913 /* sounds */,
-				F2BE38471EB52F2200EF28F2 /* Particles */,
+				F21DE7331FEC9C5400D97E9C /* SwiftyAd.swift */,
 				F2B3350A1EA4425C007801AC /* GameViewController.swift */,
+				F21DE7411FF3152C00D97E9C /* MainMenu.swift */,
+				F21DE7431FF3153D00D97E9C /* MainMenu.sks */,
 				F2B3350C1EA4425C007801AC /* Main.storyboard */,
+				F21DE7451FF41EDF00D97E9C /* Tutorial.sks */,
+				F21DE73F1FF2056100D97E9C /* Tutorial.swift */,
 				F2CA79651F80411A00BDBF33 /* LaunchScreen.storyboard */,
 				F2B335141EA4425C007801AC /* Info.plist */,
+				F22208D21FE9F1F0000FF105 /* GoogleService-Info.plist */,
+				F2751B051EB6B47B00B9F913 /* sounds */,
+				F2BE38471EB52F2200EF28F2 /* Particles */,
 			);
-			path = DropCharge;
+			path = "Neon Leon";
 			sourceTree = "<group>";
 		};
 		F2B335431EA6F92D007801AC /* SKTUtils */ = {
@@ -220,8 +263,9 @@
 		F2BE38471EB52F2200EF28F2 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				F22208D01FE74D99000FF105 /* InvincibleTrail.sks */,
+				F22208CE1FE74C24000FF105 /* LightningExplode.sks */,
 				F2306C2B1F1EEBDB00648B30 /* Background.sks */,
-				F21613811F2520FB00378FD3 /* PoisonExplode.sks */,
 				F216137F1F251DBA00378FD3 /* Poison.sks */,
 				F2AF7D051FA528D400DC5D2A /* Assets.xcassets */,
 			);
@@ -231,24 +275,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F2B334FE1EA4425C007801AC /* DropCharge Copy */ = {
+		F2B334FE1EA4425C007801AC /* Neon Leon */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F2B335171EA4425C007801AC /* Build configuration list for PBXNativeTarget "DropCharge Copy" */;
+			buildConfigurationList = F2B335171EA4425C007801AC /* Build configuration list for PBXNativeTarget "Neon Leon" */;
 			buildPhases = (
-				C7FD5A5B76BE000E731C5B9E /* [CP] Check Pods Manifest.lock */,
+				3919B14546322995F869D805 /* [CP] Check Pods Manifest.lock */,
 				F2B334FB1EA4425C007801AC /* Sources */,
 				F2B334FC1EA4425C007801AC /* Frameworks */,
 				F2B334FD1EA4425C007801AC /* Resources */,
-				86F48F18AB4CE6061616D540 /* [CP] Embed Pods Frameworks */,
-				A6445B52E3265EA251E76B57 /* [CP] Copy Pods Resources */,
+				078162777C8AC8DDA0030560 /* [CP] Embed Pods Frameworks */,
+				D8AB286FE0E791D63B9D68EB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "DropCharge Copy";
+			name = "Neon Leon";
 			productName = DropCharge;
-			productReference = F2B334FF1EA4425C007801AC /* DropCharge Copy.app */;
+			productReference = F2B334FF1EA4425C007801AC /* Neon Leon.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -281,7 +325,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F2B334FE1EA4425C007801AC /* DropCharge Copy */,
+				F2B334FE1EA4425C007801AC /* Neon Leon */,
 			);
 		};
 /* End PBXProject section */
@@ -291,16 +335,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F213C2931FDCF76500B941D8 /* (null) in Resources */,
 				F21613801F251DBA00378FD3 /* Poison.sks in Resources */,
-				F21613821F2520FB00378FD3 /* PoisonExplode.sks in Resources */,
 				F2751B251EB6B47C00B9F913 /* jump.wav in Resources */,
 				F2A930E11FA6AA0500748C09 /* LaunchScreen.storyboard in Resources */,
+				F2660EB61FDDE8FB008CE74F /* Level7.sks in Resources */,
 				F2704C5C1FCE605000799629 /* Level3.sks in Resources */,
 				F2704C621FD0F58F00799629 /* Test.sks in Resources */,
 				F2B3350E1EA4425C007801AC /* Main.storyboard in Resources */,
+				F22208D31FE9F1F1000FF105 /* GoogleService-Info.plist in Resources */,
+				F2660EBC1FDE046C008CE74F /* Level10.sks in Resources */,
 				F2751B1E1EB6B47C00B9F913 /* coin1.wav in Resources */,
 				F2B335051EA4425C007801AC /* GameScene.sks in Resources */,
+				F2660EBA1FDDFAEA008CE74F /* Level9.sks in Resources */,
+				F21DE7461FF41EDF00D97E9C /* Tutorial.sks in Resources */,
 				F2DE527A1F37A9380062CCEF /* Level1.sks in Resources */,
+				F213C2921FDCF76300B941D8 /* (null) in Resources */,
+				F2660EB81FDDF455008CE74F /* Level8.sks in Resources */,
 				F2751B191EB6B47C00B9F913 /* attribution.txt in Resources */,
 				F2751B1F1EB6B47C00B9F913 /* coin4.wav in Resources */,
 				F2AF7D031FA4084A00DC5D2A /* NeonTubes2.otf in Resources */,
@@ -308,10 +359,16 @@
 				F21AAE221F4A42B700B41405 /* Assets.xcassets in Resources */,
 				F2B335401EA44D01007801AC /* StartPlatform.sks in Resources */,
 				F216137E1F24F3E000378FD3 /* Level2.sks in Resources */,
+				F2660EC01FE63CEB008CE74F /* CatNipRoar.mp3 in Resources */,
+				F22208D11FE74D99000FF105 /* InvincibleTrail.sks in Resources */,
+				F22208CF1FE74C24000FF105 /* LightningExplode.sks in Resources */,
+				F2660EB41FDDD6E4008CE74F /* Level6.sks in Resources */,
+				F2660EB21FDDBFD8008CE74F /* Level5.sks in Resources */,
 				F2CB02831F734AA2005C28CF /* ItemCatalog.sks in Resources */,
 				F2704C601FCF942200799629 /* Level4.sks in Resources */,
 				F2AF7D071FA528D400DC5D2A /* Assets.xcassets in Resources */,
 				F2751B1C1EB6B47C00B9F913 /* boost.wav in Resources */,
+				F21DE7441FF3153D00D97E9C /* MainMenu.sks in Resources */,
 				F2306C2C1F1EEBDB00648B30 /* Background.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,22 +376,45 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		86F48F18AB4CE6061616D540 /* [CP] Embed Pods Frameworks */ = {
+		078162777C8AC8DDA0030560 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Neon Leon/Pods-Neon Leon-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DropCharge Copy/Pods-DropCharge Copy-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Neon Leon/Pods-Neon Leon-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A6445B52E3265EA251E76B57 /* [CP] Copy Pods Resources */ = {
+		3919B14546322995F869D805 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Neon Leon-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8AB286FE0E791D63B9D68EB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -346,22 +426,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DropCharge Copy/Pods-DropCharge Copy-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C7FD5A5B76BE000E731C5B9E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Neon Leon/Pods-Neon Leon-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -377,12 +442,15 @@
 				F258C6721F904D16004EB80E /* Button.swift in Sources */,
 				F2B335591EA6F92D007801AC /* SKTEffects.swift in Sources */,
 				F2B335551EA6F92D007801AC /* SKAction+SpecialEffects.swift in Sources */,
+				F21DE7341FEC9C5400D97E9C /* SwiftyAd.swift in Sources */,
 				F2B335521EA6F92D007801AC /* CGVector+Extensions.swift in Sources */,
+				F21DE7401FF2056100D97E9C /* Tutorial.swift in Sources */,
 				F2B335541EA6F92D007801AC /* SKAction+Extensions.swift in Sources */,
 				F2B335561EA6F92D007801AC /* SKColor+Extensions.swift in Sources */,
 				F2B3350B1EA4425C007801AC /* GameViewController.swift in Sources */,
 				F2B335531EA6F92D007801AC /* Int+Extensions.swift in Sources */,
 				F2B335571EA6F92D007801AC /* SKNode+Extensions.swift in Sources */,
+				F21DE7421FF3152C00D97E9C /* MainMenu.swift in Sources */,
 				F2B335581EA6F92D007801AC /* SKTAudio.swift in Sources */,
 				F2B335501EA6F92D007801AC /* CGFloat+Extensions.swift in Sources */,
 				F2B3355B1EA6F92D007801AC /* Vector3.swift in Sources */,
@@ -509,28 +577,28 @@
 		};
 		F2B335181EA4425C007801AC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EB352C1679BB2A3392DF649 /* Pods-DropCharge Copy.debug.xcconfig */;
+			baseConfigurationReference = 49F45A333F5EAF0FFD0E515F /* Pods-Neon Leon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2T6B5WZ44S;
-				INFOPLIST_FILE = DropCharge/Info.plist;
+				INFOPLIST_FILE = "Neon Leon/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BDCreative.NeonLeon;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Neon Leon";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		F2B335191EA4425C007801AC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E42A71C11A7E5A323EC7ECC7 /* Pods-DropCharge Copy.release.xcconfig */;
+			baseConfigurationReference = EC1242CCEE1E2EAA302E7193 /* Pods-Neon Leon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2T6B5WZ44S;
-				INFOPLIST_FILE = DropCharge/Info.plist;
+				INFOPLIST_FILE = "Neon Leon/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BDCreative.NeonLeon;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Neon Leon";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -547,7 +615,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F2B335171EA4425C007801AC /* Build configuration list for PBXNativeTarget "DropCharge Copy" */ = {
+		F2B335171EA4425C007801AC /* Build configuration list for PBXNativeTarget "Neon Leon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F2B335181EA4425C007801AC /* Debug */,
