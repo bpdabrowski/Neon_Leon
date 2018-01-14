@@ -96,6 +96,7 @@
 		F2751B0C1EB6B47B00B9F913 /* coin1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin1.wav; sourceTree = "<group>"; };
 		F2751B0D1EB6B47B00B9F913 /* coin4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin4.wav; sourceTree = "<group>"; };
 		F2751B131EB6B47B00B9F913 /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
+		F2A550B5200BF9E6000B4159 /* MouseExplode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MouseExplode.sks; path = "/Users/macair/Desktop/Swift/Neon Leon/Neon Leon/MouseExplode.sks"; sourceTree = "<absolute>"; };
 		F2AF7D021FA4084A00DC5D2A /* NeonTubes2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NeonTubes2.otf; sourceTree = "<group>"; };
 		F2AF7D051FA528D400DC5D2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2B334FF1EA4425C007801AC /* Neon Leon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Neon Leon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -263,6 +264,7 @@
 		F2BE38471EB52F2200EF28F2 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				F2A550B5200BF9E6000B4159 /* MouseExplode.sks */,
 				F22208D01FE74D99000FF105 /* InvincibleTrail.sks */,
 				F22208CE1FE74C24000FF105 /* LightningExplode.sks */,
 				F2306C2B1F1EEBDB00648B30 /* Background.sks */,
