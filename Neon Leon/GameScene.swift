@@ -69,7 +69,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var backgroundOverlayHeight: CGFloat!
     var player: SKSpriteNode!
     
-    var pinkPlatform: SKSpriteNode!
+    //var pinkPlatform: SKSpriteNode!
     var startPlatform: SKSpriteNode!
     
     var level1: SKSpriteNode!
@@ -129,8 +129,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerAnimationFall: SKAction!
     var playerAnimationPlatform: SKAction!
     var currentPlayerAnimation: SKAction?
-    //var playerAnimationSteerLeft: SKAction!
-    //var playerAnimationSteerRight: SKAction!
     
     var playerTrail: SKEmitterNode!
     var poisonTrail: SKEmitterNode!
