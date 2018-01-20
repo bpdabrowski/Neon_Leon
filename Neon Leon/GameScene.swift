@@ -577,7 +577,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             newNode.physicsBody?.affectedByGravity = false
             newNode.physicsBody?.allowsRotation = false
             newNode.physicsBody!.categoryBitMask = PhysicsCategory.Mouse
-            newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player | PhysicsCategory.Invincible
+            newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
         
             node.removeFromParent()
         }
