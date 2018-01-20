@@ -17,8 +17,6 @@ class MainMenu: SKScene {
     var tutorialButton: Button!
     let lightBuzz = SKAction.playSoundFileNamed("NeonLightBuzz.mp3", waitForCompletion: false)
     
-    //var gameScene = GameScene()
-    
     override func didMove(to view: SKView) {
         setupNodes()
         run(lightBuzz)
@@ -27,13 +25,13 @@ class MainMenu: SKScene {
     func showGameScene() {
         let newScene = GameScene(fileNamed: "GameScene")
         newScene!.scaleMode = .aspectFill
-        let reveal = SKTransition.fade(withDuration: 1.0)//SKTransition.flipHorizontal(withDuration: 0.5)
+        let reveal = SKTransition.fade(withDuration: 1.0)
         self.view?.presentScene(newScene!, transition: reveal)
     }
     
     func setupNodes() {
         playButton = Button(defaultButtonImage: "PlayButton_00000", activeButtonImage: "PlayButton_00024", buttonAction: showGameScene)
-        playButton.position = CGPoint(x: 788, y: 854)//(x: 0, y: -150)
+        playButton.position = CGPoint(x: 788, y: 854)
         playButton.alpha = 0.01
         playButton.zPosition = 10
         addChild(playButton)
@@ -69,7 +67,7 @@ class MainMenu: SKScene {
     func showTutorialScene() {
         let tutorialScene = GameScene(fileNamed: "Tutorial")
         tutorialScene!.scaleMode = .aspectFill
-        let fade = SKTransition.fade(withDuration: 1.0)//SKTransition.flipHorizontal(withDuration: 0.5)
+        let fade = SKTransition.fade(withDuration: 1.0)
         self.view?.presentScene(tutorialScene!, transition: fade)
     }
     

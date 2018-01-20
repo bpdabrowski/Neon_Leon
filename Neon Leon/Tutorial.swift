@@ -19,7 +19,7 @@ class Tutorial: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let newScene = GameScene(fileNamed: "MainMenu")
         newScene!.scaleMode = .aspectFill
-        let fade = SKTransition.fade(withDuration: 0.5)//SKTransition.flipHorizontal(withDuration: 0.5)
+        let fade = SKTransition.fade(withDuration: 0.5)
         self.view?.presentScene(newScene!, transition: fade)
     }
 }
