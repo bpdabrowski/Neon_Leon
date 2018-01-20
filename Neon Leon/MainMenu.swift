@@ -15,11 +15,13 @@ class MainMenu: SKScene {
     var reviewButton: Button!
     var noAdsButton: Button!
     var tutorialButton: Button!
+    let lightBuzz = SKAction.playSoundFileNamed("NeonLightBuzz.mp3", waitForCompletion: false)
     
     //var gameScene = GameScene()
     
     override func didMove(to view: SKView) {
         setupNodes()
+        run(lightBuzz)
     }
     
     func showGameScene() {
@@ -73,6 +75,16 @@ class MainMenu: SKScene {
     
     func removeAds() {
         print("Put in remove ads code when you buy iTunes Connect")
+    }
+    
+    func playBackgroundMusic(name: String) {
+        if let backgroundMusic = childNode(withName: "backgroundMusic") {
+            backgroundMusic.removeFromParent()
+        }
+        let music = SKAudioNode(fileNamed: name)
+        music.name = "backgroundMusic"
+        music.autoplayLooped = true
+        addChild(music)
     }
     
 }
