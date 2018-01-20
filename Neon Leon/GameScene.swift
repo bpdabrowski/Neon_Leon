@@ -69,7 +69,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var backgroundOverlayHeight: CGFloat!
     var player: SKSpriteNode!
     
-    var pinkPlatform: SKSpriteNode!
+    //var pinkPlatform: SKSpriteNode!
     var startPlatform: SKSpriteNode!
     
     var level1: SKSpriteNode!
