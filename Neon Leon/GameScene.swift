@@ -338,7 +338,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initialPlatform.size = CGSize(width: 1536, height: 300)
         initialPlatform.zPosition = 1
         
-        var overlayPosition = CGPoint(x: 0, y: 0)//player.position
+        var overlayPosition = CGPoint(x: 0, y: 0)
         
         //Made platform height up to match the anchor point of the player.
         //Changed ((player.size.height * 0.5) to ((player.size.height * 0.316)
@@ -1206,8 +1206,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-        
-            let smoothAction = SKAction.scale(to: 1, duration: 0.25)
             
             let restartButton = self.setupButton(pictureBase: "RestartButton_00040", pictureWidth: 335, pictureHeight: 357, buttonPositionX: -600, buttonPositionY: -600, zPosition: 8)
             
@@ -1400,7 +1398,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 player.physicsBody?.affectedByGravity = true
             }
             setupLights(lights: 1)
-            if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .low
@@ -1408,42 +1405,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     jumpPlayer()
                     run(soundJump)
                 }
-            }
             
         case PhysicsCategory.BackupMiddle:
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
             setupLights(lights: 2)
-            if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .middle
                     run(soundJump)
                     boostPlayer()
                 }
-            }
             
         case PhysicsCategory.BackupHigh:
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
             setupLights(lights: 3)
-            if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .high
                     superBoostPlayer()
                     run(soundJump)
                 }
-            }
             
         case PhysicsCategory.Spikes:
-            if let spike = other.node as? SKSpriteNode {
                     notification.notificationOccurred(.error)
                     gameOver()
                     run(electricute)
-            }
+            
         case PhysicsCategory.Lava:
             if invincible == false {
                 gameOver()
