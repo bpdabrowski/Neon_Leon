@@ -129,8 +129,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerAnimationFall: SKAction!
     var playerAnimationPlatform: SKAction!
     var currentPlayerAnimation: SKAction?
-    //var playerAnimationSteerLeft: SKAction!
-    //var playerAnimationSteerRight: SKAction!
     
     var playerTrail: SKEmitterNode!
     var poisonTrail: SKEmitterNode!
