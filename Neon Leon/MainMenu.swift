@@ -15,11 +15,9 @@ class MainMenu: SKScene {
     var reviewButton: Button!
     var noAdsButton: Button!
     var tutorialButton: Button!
-    let lightBuzz = SKAction.playSoundFileNamed("NeonLightBuzz.mp3", waitForCompletion: false)
     
     override func didMove(to view: SKView) {
         setupNodes()
-        run(lightBuzz)
     }
     
     func showGameScene() {

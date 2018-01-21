@@ -33,9 +33,9 @@ struct PhysicsCategory {
 // MARK: - Game States
 enum GameStatus: Int {
     case waitingForTap = 0
-    case waitingForBomb = 1
-    case playing = 2
-    case gameOver = 3
+    //case waitingForBomb = 1
+    case playing = 1
+    case gameOver = 2
 }
 
 enum PlayerStatus: Int {
@@ -103,7 +103,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let soundBoost = SKAction.playSoundFileNamed("boost.wav", waitForCompletion: false)
     let soundJump = SKAction.playSoundFileNamed("jump.wav", waitForCompletion: false)
     let soundCoin = SKAction.playSoundFileNamed("coin1.wav", waitForCompletion: false)
-    let catNipRoar = SKAction.playSoundFileNamed("CatNipRoar.mp3", waitForCompletion: false)
     let mouseHit = SKAction.playSoundFileNamed("CoinCollect.mp3", waitForCompletion: false)
     let highScoreSound = SKAction.playSoundFileNamed("New Record.mp3", waitForCompletion: false)
     let electricute = SKAction.playSoundFileNamed("GameOver.mp3", waitForCompletion: false)
@@ -267,30 +266,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
-        
-        if playerState == .idle {
-            if gesture.direction == UISwipeGestureRecognizerDirection.up {
-                if jumpState == .small {
-                    jumpPlayer()
-                } else if jumpState == .medium {
-                    boostPlayer()
-                } else if jumpState == .big {
-                    superBoostPlayer()
-                }
-                jumpState = .noJump
-            }
-        }
-        
-        if playerState == .jump {
-            if gesture.direction == UISwipeGestureRecognizerDirection.left {
-                print("left")
-            } else if gesture.direction == UISwipeGestureRecognizerDirection.right {
-                print("right")
-            }
-        }
-    }
-    
     func setupNodes() {
         let worldNode = childNode(withName: "World")!
         bgNode = worldNode.childNode(withName: "Background")!
@@ -319,12 +294,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         setupLava()
         setupBackground("Background.sks")
-    }
-    
-
-    
-    func requestReview() {
-        SKStoreReviewController.requestReview()
     }
     
     func setupLevel() {
@@ -1117,11 +1086,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lightningOff2.removeFromParent()
         lightningOff3.removeFromParent()
         
-        let alarm = SKAudioNode(fileNamed: "alarm.wav")
-        alarm.name = "alarm"
-        alarm.autoplayLooped = true
-        addChild(alarm)
-        
         pointerHand = SKSpriteNode(imageNamed: "PointerHand")
         pointerHand.zPosition = 100
         pointerHand.position = CGPoint(x: -250, y: -650)
@@ -1168,8 +1132,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let sequence = SKAction.sequence([startAction, foreverAction])
         
         return sequence
-        
-
     }
     
     func setupButton(pictureBase: String, pictureWidth: Int, pictureHeight: Int, buttonPositionX: Int, buttonPositionY: Int, zPosition: CGFloat) -> SKSpriteNode {
@@ -1192,8 +1154,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let playerAnimationOff = setupAnimationWithPrefix("NLCat_Off_", start: 1, end: 7, timePerFrame: 0.05)
         player.run(playerAnimationOff)
         
-        let wait = SKAction.wait(forDuration: 0.3)
-        let moveUp = SKAction.moveBy(x: 0.0, y: 200/*size.height/2.0*/, duration: 0.2)
+         let wait = SKAction.wait(forDuration: 0.3)
+         let moveUp = SKAction.moveBy(x: 0.0, y: 200, duration: 0.2)
          moveUp.timingMode = .easeOut
          let moveDown = SKAction.moveBy(x: 0.0,
          y: -(size.height * 1.5),
@@ -1269,10 +1231,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     SwiftyAd.shared.showInterstitial(from: viewController, withInterval: 5)
                 }
             }
-            
+        })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
             // Requests user to make a review after losing, doesn't happen everytime. It is controlled by Apple.
-            self.requestReview()
-            })
+            SKStoreReviewController.requestReview()
+        })
     }
     
     func setupLights(lights: Int) {
@@ -1325,6 +1289,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func playerPlatformSettings() {
+        // When this is turned off, the player doesn't jump to the correct height
         player.physicsBody?.isDynamic = true
         player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
         player.physicsBody?.affectedByGravity = false
@@ -1460,8 +1425,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             run(highScoreSound)
         }
     }
-    
-    // MARK: - Particles
+
     func didEnd(_ contact: SKPhysicsContact) {
         let other = contact.bodyA.categoryBitMask ==
             PhysicsCategory.Player ? contact.bodyB : contact.bodyA
@@ -1479,43 +1443,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         default:
             break
             }
-
-            
- 
         }
-    
-    func explosion(intensity: CGFloat) -> SKEmitterNode {
-        let emitter = SKEmitterNode()
-        let particleTexture = SKTexture(imageNamed: "Lightning_00028")
-        emitter.zPosition = 2
-        emitter.particleTexture = particleTexture
-        emitter.particleBirthRate = 4000 * intensity
-        emitter.numParticlesToEmit = Int(400 * intensity)
-        emitter.particleLifetime = 2.0
-        emitter.emissionAngle = CGFloat(90.0).degreesToRadians()
-        emitter.emissionAngleRange = CGFloat(360.0).degreesToRadians()
-        emitter.particleSpeed = 600 * intensity
-        emitter.particleSpeedRange = 1000 * intensity
-        emitter.particleAlpha = 1.0
-        emitter.particleAlphaRange = 0.25
-        emitter.particleScale = 1.2
-        emitter.particleScaleRange = 2.0
-        emitter.particleScaleSpeed = -1.5
-        emitter.particleColorBlendFactor = 1
-        emitter.particleBlendMode = SKBlendMode.add
-        emitter.run(SKAction.removeFromParentAfterDelay(2.0))
-    
-        let sequence = SKKeyframeSequence(capacity: 5)
-        sequence.addKeyframeValue(SKColor.white, time: 0)
-        sequence.addKeyframeValue(SKColorWithRGB(122, g: 201, b: 67), time: 0.10) //green
-        sequence.addKeyframeValue(SKColorWithRGB(0, g: 230, b: 240), time: 0.15) //yellow
-        sequence.addKeyframeValue(SKColorWithRGB(255, g: 255, b: 0), time: 0.75) //blue
-        sequence.addKeyframeValue(SKColorWithRGB(255, g: 104, b: 0), time: 0.95) //orange
-        emitter.particleColorSequence = sequence
-        
-        
-        return emitter
-    }
     
     func addTrail(name: String) -> SKEmitterNode {
         let trail = SKEmitterNode(fileNamed: name)!
@@ -1549,18 +1477,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fgNode.addChild(particles)
         particles.run(SKAction.removeFromParentAfterDelay(1.0))
         sprite.run(SKAction.sequence([SKAction.scale(to: 0.0, duration: 0.5), SKAction.removeFromParent()]))
-    }
-    
-    func screenShakeByAmt(_ amt: CGFloat) {
-        let worldNode = childNode(withName: "World")!
-        worldNode.position = CGPoint(x: size.width / 2.0, y: size.height / 2.0)
-        worldNode.removeAction(forKey: "shake")
-        
-        let amount = CGPoint(x: 0, y: -(amt * gameGain))
-        
-        let action = SKAction.screenShakeWithNode(worldNode, amount: amount, oscillations: 10, duration: 2.0)
-        
-        worldNode.run(action, withKey: "shake")
     }
     
     func isNodeVisible(_ node: SKNode, positionY: CGFloat) -> Bool {
