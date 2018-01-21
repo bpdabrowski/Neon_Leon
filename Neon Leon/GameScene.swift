@@ -199,7 +199,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         view.showsPhysics = true
         
-        addObservers()
+        // Add this back when you want to enable pausing
+        //addObservers()
         
         coinAnimationNormal = setupAnimationWithPrefix("powerup05_", start: 1, end: 6, timePerFrame: 0.1)
         coinAnimationSpecial = setupAnimationWithPrefix("powerup01_", start: 1, end: 6, timePerFrame: 0.1)
@@ -379,7 +380,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 catNipBullet.removeFromParent()
             }
             
-            print("Cat Nip Category: \(String(describing: catNipBullet.physicsBody?.categoryBitMask))")
+            //print("Cat Nip Category: \(String(describing: catNipBullet.physicsBody?.categoryBitMask))")
         }
     
     
@@ -442,7 +443,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                                          start: 15,
                                                                          end: 45,
                                                                          timePerFrame: 0.02)
-                    newNode = SKSpriteNode(imageNamed: "BluePlatformLt_00000")
+                    newNode = SKSpriteNode(imageNamed: "BluePlatformLt_00015")
                     newNode.run(SKAction.repeatForever(self.bluePlatformAnimation))
                     newNode.size = CGSize(width: 350, height: 216)
                     newNode.zPosition = 1
@@ -466,7 +467,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                                        start: 00,
                                                                        end: 30,
                                                                        timePerFrame: 0.02)
-            newNode = SKSpriteNode(imageNamed: "YellowPlatformLt_00000")
+            newNode = SKSpriteNode(imageNamed: "YellowPlatformLt_0000")
             newNode.run(SKAction.repeatForever(self.yellowPlatformAnimation))
             newNode.size = CGSize(width: 350, height: 216)
             newNode.zPosition = 1
@@ -490,7 +491,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                                        start: 30,
                                                                        end: 60,
                                                                        timePerFrame: 0.02)
-            newNode = SKSpriteNode(imageNamed: "PinkPlatformLt_00000")
+            newNode = SKSpriteNode(imageNamed: "PinkPlatformLt_00030")
             newNode.run(SKAction.repeatForever(self.pinkPlatformAnimation))
             newNode.size = CGSize(width: 350, height: 216)
             newNode.zPosition = 1
@@ -1433,9 +1434,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 emitParticles(name: "MouseExplode", sprite: mouse)
                 run(mouseHit)
                 score += 3
-                print("Player Category: \(String(describing: player.physicsBody?.categoryBitMask))")
-                print("Mouse Category: \(String(describing: mouse.physicsBody?.categoryBitMask))")
                 mouse.removeFromParent()
+                
+                //print("Player Category: \(String(describing: player.physicsBody?.categoryBitMask))")
+                //print("Mouse Category: \(String(describing: mouse.physicsBody?.categoryBitMask))")
             }
             
         default:
@@ -1490,8 +1492,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 }
 
 // MARK: - Notifications
+
+
+
 extension GameScene {
-    func applicationDidBecomeActive() {
+    // Add this back when you want to enable pausing
+    
+    /*func applicationDidBecomeActive() {
         print("* applicationDidBecomeActive")
     }
     
@@ -1520,7 +1527,7 @@ extension GameScene {
                                        queue: nil) { [weak self] _ in
                                         self?.applicationDidEnterBackground()
         }
-    }
+    }*/
     
     func distance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
         let xDist = a.x - b.x
