@@ -212,8 +212,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         camera?.position = CGPoint(x: size.width/2, y: size.height/2)
         
-        playBackgroundMusic(name: "Spacebased2.mp3")
-        
         playerAnimationJump = setupAnimationWithPrefix("NLCat_Jump_", start: 1, end: 4, timePerFrame: 0.025)
         playerAnimationFall = setupAnimationWithPrefix("NLCat_Fall_", start: 1, end: 6, timePerFrame: 0.025)
         playerAnimationPlatform = setupAnimationWithPrefix("NLCat_Platform_", start: 1, end: 4, timePerFrame: 0.025)
@@ -1457,16 +1455,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func removeTrail(trail: SKEmitterNode) {
         trail.numParticlesToEmit = 1
         trail.run(SKAction.removeFromParentAfterDelay(1.0))
-    }
-    
-    func playBackgroundMusic(name: String) {
-        if let backgroundMusic = childNode(withName: "backgroundMusic") {
-            backgroundMusic.removeFromParent()
-        }
-        let music = SKAudioNode(fileNamed: name)
-        music.name = "backgroundMusic"
-        music.autoplayLooped = true
-        addChild(music)
     }
     
     func emitParticles(name: String, sprite: SKSpriteNode) {

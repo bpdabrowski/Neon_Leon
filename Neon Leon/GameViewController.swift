@@ -11,10 +11,13 @@ import SpriteKit
 import GameplayKit
 import Firebase
 import GoogleMobileAds
+import AVFoundation
 
 extension Notification.Name {
     static let showAd = Notification.Name(rawValue: "NotificationShowAd")
 }
+
+var backgroundMusicPlayer: AVAudioPlayer?
 
 class GameViewController: UIViewController, GADBannerViewDelegate {
     
@@ -32,6 +35,18 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
                 // Present the scene
                 view.presentScene(scene)
                 
+            }
+            
+            let path = Bundle.main.path(forResource: "Spacebased_Full.mp3", ofType: nil)!
+            let url = URL(fileURLWithPath: path)
+            
+            do {
+                backgroundMusicPlayer = try AVAudioPlayer(contentsOf: url)
+                backgroundMusicPlayer?.numberOfLoops = -1
+                backgroundMusicPlayer?.prepareToPlay()
+                backgroundMusicPlayer?.play()
+            } catch {
+                // couldn't load file
             }
             
             view.ignoresSiblingOrder = true
