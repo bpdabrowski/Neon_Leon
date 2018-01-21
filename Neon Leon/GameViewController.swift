@@ -11,27 +11,18 @@ import SpriteKit
 import GameplayKit
 import Firebase
 import GoogleMobileAds
+import AVFoundation
 
 extension Notification.Name {
     static let showAd = Notification.Name(rawValue: "NotificationShowAd")
 }
 
+var backgroundMusicPlayer: AVAudioPlayer?
+
 class GameViewController: UIViewController, GADBannerViewDelegate {
-    
-    //var bannerView: GADBannerView!
-    //let request = GADRequest()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       /* bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        
-        addBannerViewToView(bannerView)
-        
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
-        bannerView.delegate = self*/
         
         SwiftyAd.shared.showBanner(from: self)
         
@@ -46,35 +37,24 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
                 
             }
             
+            let path = Bundle.main.path(forResource: "Spacebased_Full.mp3", ofType: nil)!
+            let url = URL(fileURLWithPath: path)
+            
+            do {
+                backgroundMusicPlayer = try AVAudioPlayer(contentsOf: url)
+                backgroundMusicPlayer?.numberOfLoops = -1
+                backgroundMusicPlayer?.prepareToPlay()
+                backgroundMusicPlayer?.play()
+            } catch {
+                // couldn't load file
+            }
+            
             view.ignoresSiblingOrder = true
             
-            view.showsFPS = true
-            view.showsNodeCount = true
+            view.showsFPS = false
+            view.showsNodeCount = false
         }
     }
-
-    
-    /*func addBannerViewToView(_ bannerView: GADBannerView) {
-        bannerView.translatesAutoresizingMaskIntoConstraints = false
-        view?.addSubview(bannerView)
-        view?.addConstraints(
-            [NSLayoutConstraint(item: bannerView,
-                                attribute: .bottom,
-                                relatedBy: .equal,
-                                toItem: bottomLayoutGuide,
-                                attribute: .top,
-                                multiplier: 1,
-                                constant: 0),
-             NSLayoutConstraint(item: bannerView,
-                                attribute: .centerX,
-                                relatedBy: .equal,
-                                toItem: view,
-                                attribute: .centerX,
-                                multiplier: 1,
-                                constant: 0)
-                
-            ])
-    }*/
 
     override var shouldAutorotate: Bool {
         return true
