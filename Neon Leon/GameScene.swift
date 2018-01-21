@@ -197,7 +197,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var didLand = false
     
     override func didMove(to view: SKView) {
-        view.showsPhysics = true
+        view.showsPhysics = false
         
         // Add this back when you want to enable pausing
         //addObservers()
