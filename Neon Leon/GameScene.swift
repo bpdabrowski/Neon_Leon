@@ -1015,8 +1015,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func showNewScene() {
             let newScene = GameScene(fileNamed: "GameScene")
             newScene!.scaleMode = .aspectFill
-            let fade = SKTransition.fade(withDuration: 0.5)//SKTransition.flipHorizontal(withDuration: 0.5)
+            let fade = SKTransition.fade(withDuration: 0.5)
             self.view?.presentScene(newScene!, transition: fade)
+    }
+    
+    func showMainMenu() {
+        let newScene = GameScene(fileNamed: "MainMenu")
+        newScene!.scaleMode = .aspectFill
+        let fade = SKTransition.fade(withDuration: 0.5)
+        self.view?.presentScene(newScene!, transition: fade)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -1208,6 +1215,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.camera?.addChild(noAdsButtonTransparent)
             self.camera?.addChild(noAdsButton)
             noAdsButton.run(SKAction.sequence([noAdsMove,noAdsButtonAnimation]))
+            
+            let mainMenuButton = self.setupButton(pictureBase: "HomeButton_00030", pictureWidth: 200, pictureHeight: 200, buttonPositionX: 0, buttonPositionY: -505, zPosition: 8)
+            
+            let mainMenuButtonAnimation = self.buttonAnimation(animationBase: "HomeButton_000", start: 30, end: 31, foreverStart: 32, foreverEnd: 60, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
+            
+            let mainMenuButtonTransparent = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: self.showMainMenu)
+            
+            mainMenuButtonTransparent.position = CGPoint(x: 0, y: -505)
+            mainMenuButtonTransparent.alpha = 0.01
+            mainMenuButtonTransparent.zPosition = 10
+            
+            let mainMenuMove = SKAction.moveBy(x: 0, y: 0, duration: 0.5)
+            
+            self.camera?.addChild(mainMenuButtonTransparent)
+            self.camera?.addChild(mainMenuButton)
+            mainMenuButton.run(SKAction.sequence([mainMenuMove,mainMenuButtonAnimation]))
             
             let dimmerSprite = SKSpriteNode(imageNamed: "Dimmer")
             dimmerSprite.position = self.camera!.position

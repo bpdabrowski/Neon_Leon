@@ -29,7 +29,7 @@ class MainMenu: SKScene {
     
     func setupNodes() {
         playButton = Button(defaultButtonImage: "PlayButton_00000", activeButtonImage: "PlayButton_00024", buttonAction: showGameScene)
-        playButton.position = CGPoint(x: 788, y: 854)
+        playButton.position = CGPoint(x: 768, y: 854)
         playButton.alpha = 0.01
         playButton.zPosition = 10
         addChild(playButton)
@@ -46,7 +46,7 @@ class MainMenu: SKScene {
         noAdsButton.zPosition = 10
         addChild(noAdsButton)
         
-        tutorialButton = Button(defaultButtonImage: "Lightbulb_00030", activeButtonImage: "Lightbulb_00031", buttonAction: showTutorialScene)
+        tutorialButton = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: showTutorialScene)
         tutorialButton.position = CGPoint(x: 768, y: 510)
         tutorialButton.alpha = 0.01
         tutorialButton.zPosition = 10
