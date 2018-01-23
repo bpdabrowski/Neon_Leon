@@ -19,7 +19,7 @@ struct PhysicsCategory {
     static let PlatformMiddle: UInt32       = 0b10 // 2
     static let BackupLow: UInt32            = 0b100 // 4
     static let Lava: UInt32                 = 0b1000 // 8
-    static let CatNip: UInt32               = 0b10000 // 16
+    static let powerUp: UInt32               = 0b10000 // 16
     static let BackupMiddle: UInt32         = 0b100000 // 32
     static let BackupHigh: UInt32           = 0b1000000 // 64
     static let Mouse: UInt32                = 0b10000000 // 128
@@ -122,10 +122,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var invincibleTrailAttached = false
 
     var deadFishTimeSinceLastShot: TimeInterval = 0
-    var catNipTimeSinceLastShot: TimeInterval = 0
+    var powerUpTimeSinceLastShot: TimeInterval = 0
     var invincibleTime: TimeInterval = 0
     var deadFishNextShot: TimeInterval = 1.0
-    var catNipNextShot: TimeInterval = 1.0
+    var powerUpNextShot: TimeInterval = 1.0
     
     let gameGain: CGFloat = 2.5
     
@@ -176,7 +176,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var invincible = false //Invincible
     
-    var catNipBullet: SKSpriteNode!
+    var powerUpBullet: SKSpriteNode!
     var deadFishBullet: SKSpriteNode!
     
     var onPlatform = false
@@ -351,36 +351,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func spawnPowerUp(moveDuration: TimeInterval) {
        
-            catNipBullet = SKSpriteNode(imageNamed: "Lightning_00028")
+            powerUpBullet = SKSpriteNode(imageNamed: "Lightning_00028")
             
-            catNipBullet.position = CGPoint(
+            powerUpBullet.position = CGPoint(
                 x: random(min: 300, max: 500),
                 y: self.size.height + camera!.position.y - 768)
         
-            catNipBullet.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 128, height: 128))
-            catNipBullet.physicsBody?.affectedByGravity = false
-            catNipBullet.physicsBody?.isDynamic = false
-            catNipBullet.physicsBody?.allowsRotation = true
-            catNipBullet.physicsBody?.categoryBitMask = PhysicsCategory.CatNip
-            catNipBullet.physicsBody?.contactTestBitMask = PhysicsCategory.Player
-            catNipBullet.physicsBody?.collisionBitMask = 0
-            catNipBullet.zPosition = 6
-            catNipBullet.yScale = 0.75
-            catNipBullet.xScale = 0.75
-            addChild(catNipBullet)
+            powerUpBullet.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 128, height: 128))
+            powerUpBullet.physicsBody?.affectedByGravity = false
+            powerUpBullet.physicsBody?.isDynamic = false
+            powerUpBullet.physicsBody?.allowsRotation = true
+            powerUpBullet.physicsBody?.categoryBitMask = PhysicsCategory.powerUp
+            powerUpBullet.physicsBody?.contactTestBitMask = PhysicsCategory.Player
+            powerUpBullet.physicsBody?.collisionBitMask = 0
+            powerUpBullet.zPosition = 6
+            powerUpBullet.yScale = 0.75
+            powerUpBullet.xScale = 0.75
+            addChild(powerUpBullet)
             
             let moveVector = CGVector(dx: 0, dy: -3000)
-            let catNipBulletMoveAction = SKAction.move(by: moveVector, duration: moveDuration)
-            let catNipBulletRepeat = SKAction.repeatForever(catNipBulletMoveAction)
-            catNipBullet.run(catNipBulletRepeat)
+            let powerUpBulletMoveAction = SKAction.move(by: moveVector, duration: moveDuration)
+            let powerUpBulletRepeat = SKAction.repeatForever(powerUpBulletMoveAction)
+            powerUpBullet.run(powerUpBulletRepeat)
             
-            catNipBullet.run(SKAction.repeatForever(SKAction.rotate(byAngle: .pi/4.0, duration: 0.25)))
+            powerUpBullet.run(SKAction.repeatForever(SKAction.rotate(byAngle: .pi/4.0, duration: 0.25)))
             
-            if !isNodeVisible(catNipBullet, positionY: catNipBullet.position.y) {
-                catNipBullet.removeFromParent()
+            if !isNodeVisible(powerUpBullet, positionY: powerUpBullet.position.y) {
+                powerUpBullet.removeFromParent()
             }
             
-            //print("Cat Nip Category: \(String(describing: catNipBullet.physicsBody?.categoryBitMask))")
+            //print("Cat Nip Category: \(String(describing: powerUpBullet.physicsBody?.categoryBitMask))")
         }
     
     
@@ -695,30 +695,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func updatePowerUp(_ dt: TimeInterval) {
-        catNipTimeSinceLastShot += dt
+        powerUpTimeSinceLastShot += dt
         
-        var catNipMoveDuration = 0.0
-        if catNipTimeSinceLastShot > catNipNextShot {
+        var powerUpMoveDuration = 0.0
+        if powerUpTimeSinceLastShot > powerUpNextShot {
             switch score {
             case 0...14:
-                catNipNextShot = TimeInterval(CGFloat.random(min: 5, max: 10))
-                catNipMoveDuration = 5.0
+                powerUpNextShot = TimeInterval(CGFloat.random(min: 5, max: 10))
+                powerUpMoveDuration = 5.0
             case 15...30:
-                catNipNextShot = TimeInterval(CGFloat.random(min: 3, max: 5))
-                catNipMoveDuration = 3.0
+                powerUpNextShot = TimeInterval(CGFloat.random(min: 3, max: 5))
+                powerUpMoveDuration = 3.0
             case 31...60:
-                catNipNextShot = TimeInterval(CGFloat.random(min: 3, max: 5))
-                catNipMoveDuration = 4.0
+                powerUpNextShot = TimeInterval(CGFloat.random(min: 3, max: 5))
+                powerUpMoveDuration = 4.0
             case 61...:
-                catNipNextShot = TimeInterval(CGFloat.random(min: 3, max: 5))
-                catNipMoveDuration = 5.0
+                powerUpNextShot = TimeInterval(CGFloat.random(min: 3, max: 5))
+                powerUpMoveDuration = 5.0
             default:
                 fatalError()
             }
             
-            catNipTimeSinceLastShot = 0
+            powerUpTimeSinceLastShot = 0
             
-            spawnPowerUp(moveDuration: catNipMoveDuration)
+            spawnPowerUp(moveDuration: powerUpMoveDuration)
         }
     }
     
@@ -1114,6 +1114,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.superBoostPlayer()
         })
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+            self.pointerHand.run(fadeOut)
+        })
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
             self.pointerHand.removeFromParent()
         })
@@ -1322,14 +1326,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let other = contact.bodyA.categoryBitMask ==
             PhysicsCategory.Player ? contact.bodyB : contact.bodyA
         switch other.categoryBitMask {
-        case PhysicsCategory.CatNip:
+        case PhysicsCategory.powerUp:
             if invincible == false {
                 invincible = true
-                emitParticles(name: "LightningExplode", sprite: catNipBullet)
+                emitParticles(name: "LightningExplode", sprite: powerUpBullet)
                 player.physicsBody?.categoryBitMask = PhysicsCategory.Invincible
                 run(powerUp)
                 notification.notificationOccurred(.warning)
-                catNipBullet.removeFromParent()
+                powerUpBullet.removeFromParent()
             }
             
         case PhysicsCategory.PlatformLow:
