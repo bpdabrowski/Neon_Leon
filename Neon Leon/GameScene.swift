@@ -821,7 +821,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if invincible == true {
                 invincibleTime += dt
                 print("\(invincibleTime)")
-            if invincibleTime > 5 { //Invincible
+            if invincibleTime > 7 { //Invincible
                 invincible = false
                 player.physicsBody?.categoryBitMask = PhysicsCategory.Player
                 invincibleTime = 0
@@ -1328,6 +1328,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 emitParticles(name: "LightningExplode", sprite: catNipBullet)
                 player.physicsBody?.categoryBitMask = PhysicsCategory.Invincible
                 run(powerUp)
+                notification.notificationOccurred(.warning)
                 catNipBullet.removeFromParent()
             }
             
