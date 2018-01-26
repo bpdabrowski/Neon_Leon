@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  DropCharge
+//  Neon Leon
 //
 //  Created by BDabrowski on 4/16/17.
-//  Copyright © 2017 Broski Studios. All rights reserved.
+//  Copyright © 2017 BD Creative. All rights reserved.
 //
 
 import UIKit

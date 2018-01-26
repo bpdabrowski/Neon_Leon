@@ -1,8 +1,9 @@
+//
 //  GameScene.swift
-//  DropCharge
+//  Neon Leon
 //
 //  Created by BDabrowski on 4/16/17.
-//  Copyright © 2017 Broski Studios. All rights reserved.
+//  Copyright © 2017 BD Creative. All rights reserved.
 //
 
 import SpriteKit
@@ -195,6 +196,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let notification = UINotificationFeedbackGenerator()
     
     var didLand = false
+    
+    let gameViewController = GameViewController()
     
     override func didMove(to view: SKView) {
         view.showsPhysics = false
@@ -1112,6 +1115,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.camera?.addChild(goSign)
             goSign.run(group)
             self.superBoostPlayer()
+            self.run(self.soundJump)
         })
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
@@ -1206,9 +1210,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let noAdsButton = self.setupButton(pictureBase: "NoAds_00000", pictureWidth: 335, pictureHeight: 357, buttonPositionX: 600, buttonPositionY: -600, zPosition: 8)
             
-            let noAdsButtonAnimation = self.buttonAnimation(animationBase: "NoAds_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 43, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
+            let noAdsButtonAnimation = self.buttonAnimation(animationBase: "NoAds_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 43, startTimePerFrame: 0.05/*0.035*/, foreverTimePerFrame: 0.05/*0.035*/)
             
-            let noAdsButtonTransparent = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00000", buttonAction: self.mainMenu.removeAds)
+            let noAdsButtonTransparent = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00000", buttonAction: self.gameViewController.removeAds)
             
             noAdsButtonTransparent.position = CGPoint(x: 385, y: -600)
             noAdsButtonTransparent.alpha = 0.01
