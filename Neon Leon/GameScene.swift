@@ -1265,9 +1265,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
             // Requests user to make a review after losing, doesn't happen everytime. It is controlled by Apple.
-            SKStoreReviewController.requestReview()
+            if #available(iOS 10.3, *) {
+                SKStoreReviewController.requestReview()
+            }
         })
     }
+        
     
     func setupLights(lights: Int) {
         //Lightning 1
