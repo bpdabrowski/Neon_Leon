@@ -1,9 +1,9 @@
 //
-//  RestartButton.swift
-//  KittyJump
+//  Button.swift
+//  Neon Leion
 //
 //  Created by BDabrowski on 5/20/17.
-//  Copyright © 2017 Broski Studios. All rights reserved.
+//  Copyright © 2018 BD Creative. All rights reserved.
 //
 
 import Foundation
@@ -38,7 +38,10 @@ class Button: SKNode {
         activeButton.isHidden = false
         defaultButton.isHidden = true
         notification.notificationOccurred(.success)
-        run(pressSound)
+        
+        //if GameViewController().soundOff == false {
+            run(pressSound)
+        //}
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -1,9 +1,9 @@
 //
 //  GameScene.swift
-//  Neon Leon
+//  Neon Leion
 //
 //  Created by BDabrowski on 4/16/17.
-//  Copyright © 2017 BD Creative. All rights reserved.
+//  Copyright © 2018 BD Creative. All rights reserved.
 //
 
 import SpriteKit
@@ -20,7 +20,7 @@ struct PhysicsCategory {
     static let PlatformMiddle: UInt32       = 0b10 // 2
     static let BackupLow: UInt32            = 0b100 // 4
     static let Lava: UInt32                 = 0b1000 // 8
-    static let powerUp: UInt32               = 0b10000 // 16
+    static let powerUp: UInt32              = 0b10000 // 16
     static let BackupMiddle: UInt32         = 0b100000 // 32
     static let BackupHigh: UInt32           = 0b1000000 // 64
     static let Mouse: UInt32                = 0b10000000 // 128
@@ -189,7 +189,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var wait3: SKAction!
     var wait5: SKAction!
     
-    let mainMenu = MainMenu()
+    let mm = MainMenu()
     
     var pointerHand: SKSpriteNode! = nil
     
@@ -197,7 +197,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var didLand = false
     
-    let gameViewController = GameViewController()
+    let gvc = GameViewController()
     
     override func didMove(to view: SKView) {
         view.showsPhysics = false
@@ -1115,7 +1115,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.camera?.addChild(goSign)
             goSign.run(group)
             self.superBoostPlayer()
-            self.run(self.soundJump)
+            //if self.gvc.soundOff == false {
+                self.run(self.soundJump)
+            //}
         })
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
@@ -1212,7 +1214,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let noAdsButtonAnimation = self.buttonAnimation(animationBase: "NoAds_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 43, startTimePerFrame: 0.05/*0.035*/, foreverTimePerFrame: 0.05/*0.035*/)
             
-            let noAdsButtonTransparent = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00000", buttonAction: self.gameViewController.removeAds)
+            let noAdsButtonTransparent = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00000", buttonAction: self.gvc.removeAds)
             
             noAdsButtonTransparent.position = CGPoint(x: 385, y: -600)
             noAdsButtonTransparent.alpha = 0.01
@@ -1261,14 +1263,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     SwiftyAd.shared.showInterstitial(from: viewController, withInterval: 5)
                 }
             }
-        })
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+            
             // Requests user to make a review after losing, doesn't happen everytime. It is controlled by Apple.
             if #available(iOS 10.3, *) {
                 SKStoreReviewController.requestReview()
             }
         })
+        
+        /*DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+            // Requests user to make a review after losing, doesn't happen everytime. It is controlled by Apple.
+            if #available(iOS 10.3, *) {
+                SKStoreReviewController.requestReview()
+            }
+        })*/
     }
         
     
@@ -1338,7 +1345,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 invincible = true
                 emitParticles(name: "LightningExplode", sprite: powerUpBullet)
                 player.physicsBody?.categoryBitMask = PhysicsCategory.Invincible
-                run(powerUp)
+                //if gvc.soundOff == false {
+                    run(powerUp)
+                //}
                 notification.notificationOccurred(.warning)
                 powerUpBullet.removeFromParent()
             }
@@ -1354,7 +1363,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     platformState = .low
                     onPlatform = true
                     jumpPlayer()
-                    run(soundJump)
+                    //if gvc.soundOff == false {
+                        run(soundJump)
+                    //}
                     platform.removeFromParent()
                     score += 1
                 }
@@ -1369,7 +1380,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .middle
-                    run(soundJump)
+                    //if gvc.soundOff == false {
+                        run(soundJump)
+                    //}
                     boostPlayer()
                     platform.removeFromParent()
                     score += 1
@@ -1386,7 +1399,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     playerPlatformSettings()
                     platformState = .high
                     superBoostPlayer()
-                    run(soundJump)
+                    //if gvc.soundOff == false {
+                        run(soundJump)
+                    //}
                     platform.removeFromParent()
                     score += 1
                 }
@@ -1402,7 +1417,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     platformState = .low
                     onPlatform = true
                     jumpPlayer()
-                    run(soundJump)
+                    //if gvc.soundOff == false {
+                        run(soundJump)
+                    //}
                 }
             
         case PhysicsCategory.BackupMiddle:
@@ -1413,7 +1430,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .middle
-                    run(soundJump)
+                    //if gvc.soundOff == false {
+                        run(soundJump)
+                    //}
                     boostPlayer()
                 }
             
@@ -1426,13 +1445,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     playerPlatformSettings()
                     platformState = .high
                     superBoostPlayer()
-                    run(soundJump)
+                    //if gvc.soundOff == false {
+                        run(soundJump)
+                    //}
                 }
             
         case PhysicsCategory.Spikes:
                     notification.notificationOccurred(.error)
                     gameOver()
-                    run(electricute)
+                    //if gvc.soundOff == false {
+                        run(electricute)
+                    //}
             
         case PhysicsCategory.Lava:
             if invincible == false {
@@ -1440,7 +1463,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 run(electricute)
             } else if invincible == true {
                 superBoostPlayer()
-                run(soundJump)
+                //if gvc.soundOff == false {
+                    run(soundJump)
+                //}
             }
             
         default:
@@ -1456,7 +1481,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         UserDefaults().set(score, forKey: "HIGHSCORE")
         
         if gameState == .gameOver {
-            run(highScoreSound)
+            //if gvc.soundOff == false {
+                run(highScoreSound)
+            //}
         }
     }
 
@@ -1467,7 +1494,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case PhysicsCategory.Mouse:
             if let mouse = other.node as? SKSpriteNode {
                 emitParticles(name: "MouseExplode", sprite: mouse)
-                run(mouseHit)
+                //if gvc.soundOff == false {
+                    run(mouseHit)
+                //}
                 score += 3
                 mouse.removeFromParent()
                 

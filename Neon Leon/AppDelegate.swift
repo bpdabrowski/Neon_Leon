@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleMobileAds
+import SwiftyStoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +26,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             interstitialID: "ca-app-pub-3940256099942544/4411468910",
             rewardedVideoID: ""
         )
+        
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            for purchase in purchases {
+                switch purchase.transaction.transactionState {
+                case .purchased, .restored:
+                    if purchase.needsFinishTransaction {
+                        // Deliver content from server, then:
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                    
+                    // Unlock content
+                case .failed, .purchasing, .deferred:
+                    break // do nothing
+                }
+            }
+        }
         
         return true
     }

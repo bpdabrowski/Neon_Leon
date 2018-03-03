@@ -16,12 +16,18 @@ import SwiftyStoreKit
 import StoreKit
 
 //within iTunes Connect > go to in app purchases > on the right select View shared secret > copy that and paste in quotes below
-var sharedSecret = "Place Holder"
+var sharedSecret = "30ca8d6c6cde4e7cb26fb382db93f14a"
 
-enum RegistesteredPurchase: String {
-    case Dolla10 = "10Dolla"
+enum RegisteredPurchase: String {
     case RemoveAds = "RemoveAds"
-    case autoRenewable = "AutoRenewable"
+    case purchase1
+    case purchase2
+    case nonConsumablePurchase
+    case consumablePurchase
+    case nonRenewingPurchase
+    case autoRenewableWeekly
+    case autoRenewableMonthly
+    case autoRenewableYearly
 }
 
 class NetworkActivityIndicatorManager: NSObject {
@@ -55,34 +61,29 @@ var backgroundMusicPlayer: AVAudioPlayer?
 
 class GameViewController: UIViewController, GADBannerViewDelegate {
     
-    @IBOutlet weak var moneyLbl: UILabel!
+    var removeAdsPurchased = false
+
+    var nonConsumablePurchaseMade = UserDefaults.standard.bool(forKey: "nonConsumablePurchaseMade")
     
-    var money = Int()
+    let bundleID = "com.BDCreative.NeonLeion"
     
-    let bundleID = "com.BDCreative.IAPTest"
+    var RemoveAds = RegisteredPurchase.RemoveAds
     
-    var Dolla10 = RegistesteredPurchase.Dolla10
-    var RemoveAds = RegistesteredPurchase.RemoveAds
-    
-    @IBAction func Consumable1(_ sender: Any) {
-        purchase(purchase: Dolla10)
-    }
+    var soundOff = false
     
     func removeAds() {
         print("removeAds is getting called")
-        purchase(purchase: RemoveAds)
-    }
-    
-    @IBAction func Renewable(_ sender: Any) {
-    }
-    
-    @IBAction func NonRenewable(_ sender: Any) {
+        print(nonConsumablePurchaseMade)
+        purchase(RemoveAds, atomically: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //SwiftyAd.shared.isRemoved = true //Bring this back if you want to turn off Ads for testing.
+        
         SwiftyAd.shared.showBanner(from: self)
+        print("NON CONSUMABLE PURCHASE MADE: \(nonConsumablePurchaseMade)")
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -92,19 +93,28 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
                 
                 // Present the scene
                 view.presentScene(scene)
-                
+            }
+            
+            if nonConsumablePurchaseMade == true {
+                SwiftyAd.shared.isRemoved = true
+            } else {
+                SwiftyAd.shared.isRemoved = false
             }
             
             let path = Bundle.main.path(forResource: "Spacebased_Full.mp3", ofType: nil)!
             let url = URL(fileURLWithPath: path)
             
-            do {
-                backgroundMusicPlayer = try AVAudioPlayer(contentsOf: url)
-                backgroundMusicPlayer?.numberOfLoops = -1
-                backgroundMusicPlayer?.prepareToPlay()
-                backgroundMusicPlayer?.play()
-            } catch {
-                // couldn't load file
+            if soundOff == true {
+                //change button to a sound with an x in it.
+            } else if soundOff == false {
+                do {
+                    backgroundMusicPlayer = try AVAudioPlayer(contentsOf: url)
+                    backgroundMusicPlayer?.numberOfLoops = -1
+                    backgroundMusicPlayer?.prepareToPlay()
+                    backgroundMusicPlayer?.play()
+                } catch {
+                    // couldn't load file
+                }
             }
             
             view.ignoresSiblingOrder = true
@@ -136,44 +146,61 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         return true
     }
     
-    func getInfo(purchase: RegistesteredPurchase) {
+    /*func toggleSound() {
+        soundOff = true
+        
+        if soundOff == false {
+            soundOff = true
+            MainMenu().soundImage.removeFromParent()
+            MainMenu().soundImage?.texture = SKTexture(imageNamed: "SoundOff_00000")
+            MainMenu().addChild(MainMenu().soundImage)
+            print("Sound Off should be true and it is: \(soundOff)")
+        } else if soundOff == true {
+            soundOff = false
+            MainMenu().soundImage.removeFromParent()
+            MainMenu().soundImage?.texture = SKTexture(imageNamed: "SoundOn_00000")
+            MainMenu().addChild(MainMenu().soundImage)
+            print("Sound Off should be false and it is: \(soundOff)")
+        }
+    }*/
+    
+    func getInfo(purchase: RegisteredPurchase) {
         NetworkActivityIndicatorManager.NetworkOperationStarted()
-        SwiftyStoreKit.retrieveProductsInfo([bundleID + "." + purchase.rawValue], completion: {
-            result in
+        SwiftyStoreKit.retrieveProductsInfo([bundleID + "." + purchase.rawValue]) { result in
             NetworkActivityIndicatorManager.NetworkOperationFinished()
             
             self.showAlert(alert: self.alertForProductRetrievalInfo(result: result))
             
-        })
+        }
     }
     
-    func purchase(purchase: RegistesteredPurchase) {
+    func purchase(_ purchase: RegisteredPurchase, atomically: Bool) {
         NetworkActivityIndicatorManager.NetworkOperationStarted()
-        SwiftyStoreKit.purchaseProduct(bundleID + "." + purchase.rawValue, completion: {
-            result in
+        SwiftyStoreKit.purchaseProduct(bundleID + "." + purchase.rawValue, atomically: atomically) { result in
             NetworkActivityIndicatorManager.NetworkOperationFinished()
             
             if case .success(let product) = result {
                 
-                if product.productId == self.bundleID + "." + "10Dolla" {
-                    
-                    self.money += 10
-                    self.moneyLbl.text = "\(self.money)"
-                    
-                }
-                
                 if product.productId == self.bundleID + "." + "RemoveAds" {
-                    self.money += 10
-                    self.moneyLbl.text = "\(self.money)"
+                    self.removeAdsPurchased = true
+                    if self.removeAdsPurchased == true {
+                        SwiftyAd.shared.isRemoved = true
+                        self.nonConsumablePurchaseMade = true
+                        UserDefaults.standard.set(self.nonConsumablePurchaseMade, forKey: "nonConsumablePurchaseMade")
+                    } else {
+                        SwiftyAd.shared.isRemoved = false
+                    }
                 }
                 
                 if product.needsFinishTransaction {
                     SwiftyStoreKit.finishTransaction(product.transaction)
                 }
-                self.showAlert(alert: self.alertForPurchaseResult(result)!)
+                if let alert = self.alertForPurchaseResult(result) {
+                    self.showAlert(alert: alert)
+                }
             }
             
-        })
+        }
     }
     
     func restorePurchases() {
@@ -195,37 +222,52 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
     
     func verifyReceipt() {
         NetworkActivityIndicatorManager.NetworkOperationStarted()
-        SwiftyStoreKit.verifyReceipt(using: sharedSecret as! ReceiptValidator, completion: {
-            result in
+        verifyReceipt { result in
             NetworkActivityIndicatorManager.NetworkOperationFinished()
             
             self.showAlert(alert: self.alertForVerifyReceipt(result: result))
-        })
+        }
     }
     
-    func verifyPurchase(product: RegistesteredPurchase) {
-        NetworkActivityIndicatorManager.NetworkOperationStarted()
-        SwiftyStoreKit.verifyReceipt(using: sharedSecret as! ReceiptValidator, completion: {
-            result in
-            NetworkActivityIndicatorManager.NetworkOperationFinished()
-            
-            switch result {
-            case .success(let receipt):
-                let productID = self.bundleID + "." + product.rawValue
+    func verifyReceipt(completion: @escaping (VerifyReceiptResult) -> Void) {
+        let appleValidator = AppleReceiptValidator(service: .production, sharedSecret: sharedSecret)
+        SwiftyStoreKit.verifyReceipt(using: appleValidator, completion: completion)
+    }
+    
+    func verifyPurchase(_ purchase: RegisteredPurchase) {
+            NetworkActivityIndicatorManager.NetworkOperationStarted()
+            verifyReceipt { result in
+                NetworkActivityIndicatorManager.NetworkOperationFinished()
                 
-                if product == .autoRenewable {
-                    let purchaseResult = SwiftyStoreKit.verifySubscription(type: .autoRenewable, productId: productID, inReceipt: receipt, validUntil: Date())
+                switch result {
+                case .success(let receipt):
+                    
+                    let productId = self.bundleID + "." + purchase.rawValue
+                
+                switch purchase {
+                case .autoRenewableWeekly, .autoRenewableMonthly, .autoRenewableYearly:
+                    let purchaseResult = SwiftyStoreKit.verifySubscription(
+                        ofType: .autoRenewable,
+                        productId: productId,
+                        inReceipt: receipt)
                     self.showAlert(alert: self.alertForVerifySubscription(result: purchaseResult))
-                }
-                else {
-                    let purchaseResult = SwiftyStoreKit.verifyPurchase(productId: productID, inReceipt: receipt)
+                case .nonRenewingPurchase:
+                    let purchaseResult = SwiftyStoreKit.verifySubscription(
+                        ofType: .nonRenewing(validDuration: 60),
+                        productId: productId,
+                        inReceipt: receipt)
+                    self.showAlert(alert: self.alertForVerifySubscription(result: purchaseResult))
+                default:
+                    let purchaseResult = SwiftyStoreKit.verifyPurchase(
+                        productId: productId,
+                        inReceipt: receipt)
                     self.showAlert(alert: self.alertForVerifyPurchase(result: purchaseResult))
                 }
-            case .error(let error):
-                self.showAlert(alert: self.alertForVerifyReceipt(result: result))
+                
+                case .error:
+                    self.showAlert(alert: self.alertForVerifyReceipt(result: result))
             }
-            
-        })
+        }
     }
 }
 
