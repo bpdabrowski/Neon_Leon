@@ -1059,18 +1059,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func startGame() {
-        
-        // Scale out title & ready label
-        let scale = SKAction.scale(to: 0, duration: 0.4)
-        fgNode.childNode(withName: "Title")!.run(scale)
-        fgNode.childNode(withName: "Ready")!.run(
-            SKAction.sequence(
-                [SKAction.wait(forDuration: 0.2), scale]))
-        fgNode.childNode(withName: "Dimmer")!.run(SKAction.scale(to: 0, duration: 0.2))
-        fgNode.childNode(withName: "Star")!.run(SKAction.scale(to: 0, duration: 0.2))
-        fgNode.childNode(withName: "NoAds")!.run(SKAction.scale(to: 0, duration: 0.2))
-        fgNode.childNode(withName: "Tutorial")!.run(SKAction.scale(to: 0, duration: 0.2))
-    
         gameState = .playing
         playerState = .idle
         platformState = .high
@@ -1115,9 +1103,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.camera?.addChild(goSign)
             goSign.run(group)
             self.superBoostPlayer()
-            //if self.gvc.soundOff == false {
-                self.run(self.soundJump)
-            //}
+            self.run(self.soundJump)
         })
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
@@ -1181,6 +1167,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if pointerHand != nil {
             pointerHand.removeFromParent()
+        }
+        
+        if score > userDefaults.integer(forKey: "HIGHSCORE") {
+            saveHighScore()
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
@@ -1263,11 +1253,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     SwiftyAd.shared.showInterstitial(from: viewController, withInterval: 5)
                 }
             }
-            
-            // Requests user to make a review after losing, doesn't happen everytime. It is controlled by Apple.
-            if #available(iOS 10.3, *) {
-                SKStoreReviewController.requestReview()
-            }
         })
         
         /*DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
@@ -1345,9 +1330,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 invincible = true
                 emitParticles(name: "LightningExplode", sprite: powerUpBullet)
                 player.physicsBody?.categoryBitMask = PhysicsCategory.Invincible
-                //if gvc.soundOff == false {
-                    run(powerUp)
-                //}
+                run(powerUp)
                 notification.notificationOccurred(.warning)
                 powerUpBullet.removeFromParent()
             }
@@ -1363,9 +1346,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     platformState = .low
                     onPlatform = true
                     jumpPlayer()
-                    //if gvc.soundOff == false {
-                        run(soundJump)
-                    //}
+                    run(soundJump)
                     platform.removeFromParent()
                     score += 1
                 }
@@ -1380,9 +1361,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .middle
-                    //if gvc.soundOff == false {
-                        run(soundJump)
-                    //}
+                    run(soundJump)
                     boostPlayer()
                     platform.removeFromParent()
                     score += 1
@@ -1399,9 +1378,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     playerPlatformSettings()
                     platformState = .high
                     superBoostPlayer()
-                    //if gvc.soundOff == false {
-                        run(soundJump)
-                    //}
+                    run(soundJump)
                     platform.removeFromParent()
                     score += 1
                 }
@@ -1417,9 +1394,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     platformState = .low
                     onPlatform = true
                     jumpPlayer()
-                    //if gvc.soundOff == false {
-                        run(soundJump)
-                    //}
+                    run(soundJump)
                 }
             
         case PhysicsCategory.BackupMiddle:
@@ -1430,9 +1405,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .middle
-                    //if gvc.soundOff == false {
-                        run(soundJump)
-                    //}
+                    run(soundJump)
                     boostPlayer()
                 }
             
@@ -1445,17 +1418,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     playerPlatformSettings()
                     platformState = .high
                     superBoostPlayer()
-                    //if gvc.soundOff == false {
-                        run(soundJump)
-                    //}
+                    run(soundJump)
                 }
             
         case PhysicsCategory.Spikes:
                     notification.notificationOccurred(.error)
                     gameOver()
-                    //if gvc.soundOff == false {
-                        run(electricute)
-                    //}
+                    run(electricute)
             
         case PhysicsCategory.Lava:
             if invincible == false {
@@ -1463,27 +1432,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 run(electricute)
             } else if invincible == true {
                 superBoostPlayer()
-                //if gvc.soundOff == false {
-                    run(soundJump)
-                //}
+                run(soundJump)
             }
             
         default:
             break
-        }
-        
-        if score > userDefaults.integer(forKey: "HIGHSCORE") {
-            saveHighScore()
         }
     }
     
     func saveHighScore() {
         UserDefaults().set(score, forKey: "HIGHSCORE")
         
+        let newHighScoreBanner = SKLabelNode(fontNamed: "NeonTubes2-Regular")
+        newHighScoreBanner.fontSize = 100
+        newHighScoreBanner.position = CGPoint(x: -1100, y: 875)
+        newHighScoreBanner.zPosition = 8
+        newHighScoreBanner.text = "NEW HIGH SCORE!"
+        
         if gameState == .gameOver {
-            //if gvc.soundOff == false {
-                run(highScoreSound)
-            //}
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                self.run(self.highScoreSound)
+                self.camera?.addChild(newHighScoreBanner)
+                newHighScoreBanner.run(SKAction.move(by: CGVector(dx: 3000, dy: 0), duration: 3))
+                
+                // Requests user to make a review after losing, doesn't happen everytime. It is controlled by Apple.
+                if #available(iOS 10.3, *) {
+                    SKStoreReviewController.requestReview()
+                }
+            })
         }
     }
 
@@ -1494,9 +1470,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case PhysicsCategory.Mouse:
             if let mouse = other.node as? SKSpriteNode {
                 emitParticles(name: "MouseExplode", sprite: mouse)
-                //if gvc.soundOff == false {
-                    run(mouseHit)
-                //}
+                run(mouseHit)
                 score += 3
                 mouse.removeFromParent()
                 

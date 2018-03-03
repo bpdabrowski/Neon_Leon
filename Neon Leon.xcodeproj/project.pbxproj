@@ -17,7 +17,6 @@
 		F21DE7421FF3152C00D97E9C /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DE7411FF3152C00D97E9C /* MainMenu.swift */; };
 		F21DE7441FF3153D00D97E9C /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21DE7431FF3153D00D97E9C /* MainMenu.sks */; };
 		F21DE7461FF41EDF00D97E9C /* Tutorial.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21DE7451FF41EDF00D97E9C /* Tutorial.sks */; };
-		F221D46B2026500500204B42 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = F221D46A2026500500204B42 /* Sound.swift */; };
 		F22208CF1FE74C24000FF105 /* LightningExplode.sks in Resources */ = {isa = PBXBuildFile; fileRef = F22208CE1FE74C24000FF105 /* LightningExplode.sks */; };
 		F22208D11FE74D99000FF105 /* InvincibleTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = F22208D01FE74D99000FF105 /* InvincibleTrail.sks */; };
 		F22208D31FE9F1F1000FF105 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F22208D21FE9F1F0000FF105 /* GoogleService-Info.plist */; };
@@ -86,7 +85,6 @@
 		F21DE7411FF3152C00D97E9C /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		F21DE7431FF3153D00D97E9C /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
 		F21DE7451FF41EDF00D97E9C /* Tutorial.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Tutorial.sks; sourceTree = "<group>"; };
-		F221D46A2026500500204B42 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		F22208CE1FE74C24000FF105 /* LightningExplode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = LightningExplode.sks; path = "../../2D_Apple_Games_by_Tutorials_3.0/17-juice-up-your-game/final/DropCharge/DropCharge/Particles/LightningExplode.sks"; sourceTree = "<group>"; };
 		F22208D01FE74D99000FF105 /* InvincibleTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = InvincibleTrail.sks; path = "../../2D_Apple_Games_by_Tutorials_3.0/17-juice-up-your-game/final/DropCharge/DropCharge/Particles/InvincibleTrail.sks"; sourceTree = "<group>"; };
 		F22208D21FE9F1F0000FF105 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -261,7 +259,6 @@
 				F2B3350A1EA4425C007801AC /* GameViewController.swift */,
 				F21DE7431FF3153D00D97E9C /* MainMenu.sks */,
 				F21DE7411FF3152C00D97E9C /* MainMenu.swift */,
-				F221D46A2026500500204B42 /* Sound.swift */,
 				F2B3350C1EA4425C007801AC /* Main.storyboard */,
 				F21DE7451FF41EDF00D97E9C /* Tutorial.sks */,
 				F2445DF6200ED3D500F076D8 /* Tutorial.swift */,
@@ -504,7 +501,6 @@
 				F2B335531EA6F92D007801AC /* Int+Extensions.swift in Sources */,
 				F2B335571EA6F92D007801AC /* SKNode+Extensions.swift in Sources */,
 				F21DE7421FF3152C00D97E9C /* MainMenu.swift in Sources */,
-				F221D46B2026500500204B42 /* Sound.swift in Sources */,
 				F2B335581EA6F92D007801AC /* SKTAudio.swift in Sources */,
 				F2B335501EA6F92D007801AC /* CGFloat+Extensions.swift in Sources */,
 				F2B3355B1EA6F92D007801AC /* Vector3.swift in Sources */,

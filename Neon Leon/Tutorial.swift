@@ -1,9 +1,9 @@
 //
 //  Tutorial.swift
-//  Neon Leon
+//  Neon Leion
 //
 //  Created by BDabrowski on 4/16/17.
-//  Copyright © 2017 BD Creative. All rights reserved.
+//  Copyright © 2018 BD Creative. All rights reserved.
 //
 
 import Foundation

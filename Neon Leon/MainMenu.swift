@@ -1,9 +1,9 @@
 //
 //  MainMenu.swift
-//  Neon Leon
+//  Neon Leion
 //
 //  Created by BDabrowski on 4/16/17.
-//  Copyright © 2017 BD Creative. All rights reserved.
+//  Copyright © 2018 BD Creative. All rights reserved.
 //
 
 import Foundation
@@ -78,16 +78,10 @@ class MainMenu: SKScene {
         tutorialButton.alpha = 0.01
         tutorialButton.zPosition = 10
         addChild(tutorialButton)
-        
-        /*settingsButton = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: showSettings)
-        settingsButton.position = CGPoint(x: 0, y: -705)
-        settingsButton.alpha = 0.01
-        settingsButton.zPosition = 10
-        addChild(settingsButton)*/
     }
     
     func appStorePage() {
-        let url = URL(string: "itms://itunes.apple.com/us/app/apple-store/id375380948?mt=8")
+        let url = URL(string: "itms://itunes.apple.com/us/app/neon-leion/id1352620219?ls=1&mt=8")
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         } else {
@@ -111,52 +105,4 @@ class MainMenu: SKScene {
         music.autoplayLooped = true
         addChild(music)
     }
-    
-    /*func showSettings() {
-        //Setup Buttons
-        //If settings button hasn't been pressed, flyout the settings. If it has bring them back in.
-        
-        let flyOutSound = SKAction.move(by: CGVector(dx: 150, dy: -145), duration: 0.25)
-        let flyInSound = SKAction.move(by: CGVector(dx: -150, dy: 145), duration: 0.25)
-        let flyOutRestore = SKAction.move(by: CGVector(dx: -150, dy: -145), duration: 0.25)
-        let flyInRestore = SKAction.move(by: CGVector(dx: 150, dy: 145), duration: 0.25)
-        let fadeOut = SKAction.fadeOut(withDuration: 0.1)
-        let fadeIn = SKAction.fadeIn(withDuration: 0.1)
-        
-        restoreIAPImage = childNode(withName: "RestoreIAP") as! SKSpriteNode
-        soundImage = childNode(withName: "Sound") as! SKSpriteNode
-        
-        if settingsButtonSelected == false {
-            settingsButtonSelected = true
-            soundButton = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: gameViewController.toggleSound)
-            soundButton.position = CGPoint(x: 150, y: -850)
-            soundButton.alpha = 0.01
-            soundButton.zPosition = 10
-            addChild(soundButton)
-            
-            restoreIAPButton = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: gameViewController.restorePurchases)
-            restoreIAPButton.position = CGPoint(x: -150, y: -850)
-            restoreIAPButton.alpha = 0.01
-            restoreIAPButton.zPosition = 10
-            addChild(restoreIAPButton)
-            
-            let flyOutSoundGroup = SKAction.group([flyOutSound,fadeIn])
-            let flyOutRestoreGroup = SKAction.group([flyOutRestore,fadeIn])
-            
-            soundImage?.run(flyOutSoundGroup)
-            restoreIAPImage?.run(flyOutRestoreGroup)
-            
-        } else if settingsButtonSelected == true {
-            let flyInSoundGroup = SKAction.group([flyInSound,fadeOut])
-            let flyInRestoreGroup = SKAction.group([flyInRestore,fadeOut])
-            
-            soundImage?.run(flyInSoundGroup)
-            restoreIAPImage?.run(flyInRestoreGroup)
-            
-            settingsButtonSelected = false
-            soundButton.removeFromParent()
-            restoreIAPButton.removeFromParent()
-            print(settingsButtonSelected)
-        }
-    }*/
 }

@@ -2,7 +2,7 @@
 //  Button.swift
 //  Neon Leion
 //
-//  Created by BDabrowski on 5/20/17.
+//  Created by BDabrowski on 4/16/17.
 //  Copyright © 2018 BD Creative. All rights reserved.
 //
 
@@ -38,10 +38,7 @@ class Button: SKNode {
         activeButton.isHidden = false
         defaultButton.isHidden = true
         notification.notificationOccurred(.success)
-        
-        //if GameViewController().soundOff == false {
-            run(pressSound)
-        //}
+        run(pressSound)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {

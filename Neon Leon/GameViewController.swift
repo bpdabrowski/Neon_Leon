@@ -1,9 +1,9 @@
 //
 //  GameViewController.swift
-//  Neon Leon
+//  Neon Leion
 //
 //  Created by BDabrowski on 4/16/17.
-//  Copyright © 2017 BD Creative. All rights reserved.
+//  Copyright © 2018 BD Creative. All rights reserved.
 //
 
 import UIKit
@@ -145,24 +145,6 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
-    /*func toggleSound() {
-        soundOff = true
-        
-        if soundOff == false {
-            soundOff = true
-            MainMenu().soundImage.removeFromParent()
-            MainMenu().soundImage?.texture = SKTexture(imageNamed: "SoundOff_00000")
-            MainMenu().addChild(MainMenu().soundImage)
-            print("Sound Off should be true and it is: \(soundOff)")
-        } else if soundOff == true {
-            soundOff = false
-            MainMenu().soundImage.removeFromParent()
-            MainMenu().soundImage?.texture = SKTexture(imageNamed: "SoundOn_00000")
-            MainMenu().addChild(MainMenu().soundImage)
-            print("Sound Off should be false and it is: \(soundOff)")
-        }
-    }*/
     
     func getInfo(purchase: RegisteredPurchase) {
         NetworkActivityIndicatorManager.NetworkOperationStarted()
