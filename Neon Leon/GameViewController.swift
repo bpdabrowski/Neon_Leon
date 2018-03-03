@@ -146,7 +146,7 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         return true
     }
     
-    /*func toggleSound() {
+    func toggleSound() {
         soundOff = true
         
         if soundOff == false {
@@ -162,7 +162,7 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
             MainMenu().addChild(MainMenu().soundImage)
             print("Sound Off should be false and it is: \(soundOff)")
         }
-    }*/
+    }
     
     func getInfo(purchase: RegisteredPurchase) {
         NetworkActivityIndicatorManager.NetworkOperationStarted()

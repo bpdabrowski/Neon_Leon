@@ -112,7 +112,7 @@ class MainMenu: SKScene {
         addChild(music)
     }
     
-    /*func showSettings() {
+    func showSettings() {
         //Setup Buttons
         //If settings button hasn't been pressed, flyout the settings. If it has bring them back in.
         
@@ -158,5 +158,5 @@ class MainMenu: SKScene {
             restoreIAPButton.removeFromParent()
             print(settingsButtonSelected)
         }
-    }*/
+    }
 }
