@@ -39,9 +39,9 @@ class Button: SKNode {
         defaultButton.isHidden = true
         notification.notificationOccurred(.success)
         
-        //if GameViewController().soundOff == false {
+        if GameViewController().soundOff == false {
             run(pressSound)
-        //}
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
