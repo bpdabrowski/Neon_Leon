@@ -78,6 +78,12 @@ class MainMenu: SKScene {
         tutorialButton.alpha = 0.01
         tutorialButton.zPosition = 10
         addChild(tutorialButton)
+        
+        restoreIAPButton = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: gameViewController.restorePurchases)
+        restoreIAPButton.position = CGPoint(x: 0, y: -705)
+        restoreIAPButton.alpha = 0.01
+        restoreIAPButton.zPosition = 10
+        addChild(restoreIAPButton)
     }
     
     func appStorePage() {
