@@ -77,6 +77,10 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         purchase(RemoveAds, atomically: true)
     }
     
+    override func loadView() {
+        self.view = SKView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -187,19 +191,23 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
     
     func restorePurchases() {
         NetworkActivityIndicatorManager.NetworkOperationStarted()
-        SwiftyStoreKit.restorePurchases(atomically: true, completion: {
-            result in
-            NetworkActivityIndicatorManager.NetworkOperationFinished()
-            
-            for product in result.restoredPurchases {
-                if product.needsFinishTransaction {
-                    SwiftyStoreKit.finishTransaction(product.transaction)
-                }
+        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            if results.restoreFailedPurchases.count > 0 {
+                print("Restore Failed: \(results.restoreFailedPurchases)")
+            }
+            else if results.restoredPurchases.count > 0 {
+                SwiftyAd.shared.isRemoved = true
+                self.nonConsumablePurchaseMade = true
+                print("Restore Success: \(results.restoredPurchases)")
+            }
+            else {
+                print("Nothing to Restore")
             }
             
-            self.showAlert(alert: self.alertForRestorePurchases(result: result))
+            print("skipped everything and just showing alert")
+            self.showAlert(alert: self.alertForRestorePurchases(result: results))
             
-        })
+        }
     }
     
     func verifyReceipt() {
@@ -263,7 +271,7 @@ extension GameViewController {
     
     func showAlert(alert: UIAlertController) {
         guard let _ = self.presentedViewController else {
-            self.present(alert, animated: true, completion: nil)
+            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
             return
         }
     }

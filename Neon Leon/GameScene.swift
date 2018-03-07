@@ -1232,6 +1232,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.camera?.addChild(mainMenuButton)
             mainMenuButton.run(SKAction.sequence([mainMenuMove,mainMenuButtonAnimation]))
             
+            let restoreIAPButton = self.setupButton(pictureBase: "RestoreIAP_00000", pictureWidth: 200, pictureHeight: 200, buttonPositionX: 0, buttonPositionY: -705, zPosition: 8)
+            
+            let restoreIAPButtonAnimation = self.buttonAnimation(animationBase: "RestoreIAP_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 15, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
+            
+            let restoreIAPButtonTransparent = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: self.gvc.restorePurchases)
+            
+            restoreIAPButtonTransparent.position = CGPoint(x: 0, y: -705)
+            restoreIAPButtonTransparent.alpha = 0.01
+            restoreIAPButtonTransparent.zPosition = 10
+            
+            self.camera?.addChild(restoreIAPButtonTransparent)
+            self.camera?.addChild(restoreIAPButton)
+            restoreIAPButton.run(SKAction.sequence([mainMenuMove,restoreIAPButtonAnimation]))
+            
             let dimmerSprite = SKSpriteNode(imageNamed: "Dimmer")
             dimmerSprite.position = self.camera!.position
             dimmerSprite.zPosition = 7
