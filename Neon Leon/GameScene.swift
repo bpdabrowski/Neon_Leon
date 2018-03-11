@@ -1085,7 +1085,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         pointerHand = SKSpriteNode(imageNamed: "PointerHand")
         pointerHand.zPosition = 100
-        pointerHand.position = CGPoint(x: -250, y: -650)
+        pointerHand.position = CGPoint(x: -250, y: 450 /*-650*/)
         pointerHand.setScale(0.5)
         camera?.addChild(pointerHand)
         let pointerMoveRight = SKAction.move(by: CGVector(dx: 500, dy: 0), duration: 0.5)
