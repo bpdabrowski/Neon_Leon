@@ -19,7 +19,6 @@
 		F21DE7461FF41EDF00D97E9C /* Tutorial.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21DE7451FF41EDF00D97E9C /* Tutorial.sks */; };
 		F22208CF1FE74C24000FF105 /* LightningExplode.sks in Resources */ = {isa = PBXBuildFile; fileRef = F22208CE1FE74C24000FF105 /* LightningExplode.sks */; };
 		F22208D11FE74D99000FF105 /* InvincibleTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = F22208D01FE74D99000FF105 /* InvincibleTrail.sks */; };
-		F22208D31FE9F1F1000FF105 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F22208D21FE9F1F0000FF105 /* GoogleService-Info.plist */; };
 		F2306C2C1F1EEBDB00648B30 /* Background.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2306C2B1F1EEBDB00648B30 /* Background.sks */; };
 		F2344DEF200EE17B00CAB45A /* MiamiTest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F2344DEE200EE17B00CAB45A /* MiamiTest.mp3 */; };
 		F2344DF3200EE9BD00CAB45A /* CoinCollect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F2344DF2200EE9BD00CAB45A /* CoinCollect.mp3 */; };
@@ -29,6 +28,7 @@
 		F2344DFD2010447A00CAB45A /* PowerUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2344DFC2010447A00CAB45A /* PowerUp.wav */; };
 		F2344DFF2010499E00CAB45A /* Spacebased2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F2344DFE2010499D00CAB45A /* Spacebased2.mp3 */; };
 		F2344E032011978D00CAB45A /* Button Press.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2344E022011978D00CAB45A /* Button Press.wav */; };
+		F2382B802055B36B0096206E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2382B7F2055B36B0096206E /* GoogleService-Info.plist */; };
 		F2445DF7200ED3D500F076D8 /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2445DF6200ED3D500F076D8 /* Tutorial.swift */; };
 		F258C6721F904D16004EB80E /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F258C6711F904D15004EB80E /* Button.swift */; };
 		F2660EB21FDDBFD8008CE74F /* Level5.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EB11FDDBFD8008CE74F /* Level5.sks */; };
@@ -87,7 +87,6 @@
 		F21DE7451FF41EDF00D97E9C /* Tutorial.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Tutorial.sks; sourceTree = "<group>"; };
 		F22208CE1FE74C24000FF105 /* LightningExplode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = LightningExplode.sks; path = "../../2D_Apple_Games_by_Tutorials_3.0/17-juice-up-your-game/final/DropCharge/DropCharge/Particles/LightningExplode.sks"; sourceTree = "<group>"; };
 		F22208D01FE74D99000FF105 /* InvincibleTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = InvincibleTrail.sks; path = "../../2D_Apple_Games_by_Tutorials_3.0/17-juice-up-your-game/final/DropCharge/DropCharge/Particles/InvincibleTrail.sks"; sourceTree = "<group>"; };
-		F22208D21FE9F1F0000FF105 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F2306C2B1F1EEBDB00648B30 /* Background.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background.sks; sourceTree = "<group>"; };
 		F2336DC4201B9CDC00F98729 /* Attributions */ = {isa = PBXFileReference; lastKnownFileType = text; path = Attributions; sourceTree = "<group>"; };
 		F2344DEE200EE17B00CAB45A /* MiamiTest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = MiamiTest.mp3; path = "../../../../../Creative Cloud Files/Neon Leon/Sounds/Background Music/MiamiTest.mp3"; sourceTree = "<group>"; };
@@ -98,6 +97,7 @@
 		F2344DFC2010447A00CAB45A /* PowerUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = PowerUp.wav; path = "../../../../../Creative Cloud Files/Neon Leon/Sounds/Electric Hit/PowerUp.wav"; sourceTree = "<group>"; };
 		F2344DFE2010499D00CAB45A /* Spacebased2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Spacebased2.mp3; path = "../../../../../Creative Cloud Files/Neon Leon/Sounds/Background Music/Spacebased2.mp3"; sourceTree = "<group>"; };
 		F2344E022011978D00CAB45A /* Button Press.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Button Press.wav"; path = "../../../../../Creative Cloud Files/Neon Leon/Sounds/Button Press/Button Press.wav"; sourceTree = "<group>"; };
+		F2382B7F2055B36B0096206E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F2445DF6200ED3D500F076D8 /* Tutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Tutorial.swift; path = "/Users/macair/Desktop/Swift/Neon Leon/Neon Leon/Tutorial.swift"; sourceTree = "<absolute>"; };
 		F258C6711F904D15004EB80E /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		F2660EB11FDDBFD8008CE74F /* Level5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level5.sks; path = "Neon Leon/Levels/Level5.sks"; sourceTree = "<group>"; };
@@ -264,7 +264,7 @@
 				F2445DF6200ED3D500F076D8 /* Tutorial.swift */,
 				F2CA79651F80411A00BDBF33 /* LaunchScreen.storyboard */,
 				F2B335141EA4425C007801AC /* Info.plist */,
-				F22208D21FE9F1F0000FF105 /* GoogleService-Info.plist */,
+				F2382B7F2055B36B0096206E /* GoogleService-Info.plist */,
 				F2336DC4201B9CDC00F98729 /* Attributions */,
 				F2751B051EB6B47B00B9F913 /* sounds */,
 				F2BE38471EB52F2200EF28F2 /* Particles */,
@@ -383,7 +383,6 @@
 				F2704C621FD0F58F00799629 /* Test.sks in Resources */,
 				F2344DF3200EE9BD00CAB45A /* CoinCollect.mp3 in Resources */,
 				F2B3350E1EA4425C007801AC /* Main.storyboard in Resources */,
-				F22208D31FE9F1F1000FF105 /* GoogleService-Info.plist in Resources */,
 				F2344E032011978D00CAB45A /* Button Press.wav in Resources */,
 				F2660EBC1FDE046C008CE74F /* Level10.sks in Resources */,
 				F2751B1E1EB6B47C00B9F913 /* coin1.wav in Resources */,
@@ -392,6 +391,7 @@
 				F2660EBA1FDDFAEA008CE74F /* Level9.sks in Resources */,
 				F2344DFD2010447A00CAB45A /* PowerUp.wav in Resources */,
 				F2344DFF2010499E00CAB45A /* Spacebased2.mp3 in Resources */,
+				F2382B802055B36B0096206E /* GoogleService-Info.plist in Resources */,
 				F21DE7461FF41EDF00D97E9C /* Tutorial.sks in Resources */,
 				F2DE527A1F37A9380062CCEF /* Level1.sks in Resources */,
 				F213C2921FDCF76300B941D8 /* (null) in Resources */,
