@@ -72,6 +72,9 @@
 		F2B3355B1EA6F92D007801AC /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3354F1EA6F92D007801AC /* Vector3.swift */; };
 		F2CB02831F734AA2005C28CF /* ItemCatalog.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2CB02821F734AA2005C28CF /* ItemCatalog.sks */; };
 		F2DE527A1F37A9380062CCEF /* Level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2DE52791F37A9380062CCEF /* Level1.sks */; };
+		F2EF1A1D2055C5E30056F3B2 /* ThreeArrows.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2EF1A1C2055C5E30056F3B2 /* ThreeArrows.sks */; };
+		F2EF1A1F2055F5890056F3B2 /* TwoArrows.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2EF1A1E2055F5890056F3B2 /* TwoArrows.sks */; };
+		F2EF1A212055F6040056F3B2 /* OneArrow.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2EF1A202055F6040056F3B2 /* OneArrow.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,6 +146,9 @@
 		F2CA79661F80411A00BDBF33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ../../DropCharge/DropCharge/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2CB02821F734AA2005C28CF /* ItemCatalog.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ItemCatalog.sks; sourceTree = "<group>"; };
 		F2DE52791F37A9380062CCEF /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level1.sks; path = "Neon Leon/Levels/Level1.sks"; sourceTree = "<group>"; };
+		F2EF1A1C2055C5E30056F3B2 /* ThreeArrows.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ThreeArrows.sks; sourceTree = "<group>"; };
+		F2EF1A1E2055F5890056F3B2 /* TwoArrows.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TwoArrows.sks; sourceTree = "<group>"; };
+		F2EF1A202055F6040056F3B2 /* OneArrow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OneArrow.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,6 +306,9 @@
 				F216137F1F251DBA00378FD3 /* Poison.sks */,
 				F2AF7D051FA528D400DC5D2A /* Assets.xcassets */,
 				F2A550B6200C00B4000B4159 /* MouseExplode.sks */,
+				F2EF1A1C2055C5E30056F3B2 /* ThreeArrows.sks */,
+				F2EF1A1E2055F5890056F3B2 /* TwoArrows.sks */,
+				F2EF1A202055F6040056F3B2 /* OneArrow.sks */,
 			);
 			name = Particles;
 			sourceTree = "<group>";
@@ -381,6 +390,7 @@
 				F2704C5C1FCE605000799629 /* Level3.sks in Resources */,
 				F2344DEF200EE17B00CAB45A /* MiamiTest.mp3 in Resources */,
 				F2704C621FD0F58F00799629 /* Test.sks in Resources */,
+				F2EF1A212055F6040056F3B2 /* OneArrow.sks in Resources */,
 				F2344DF3200EE9BD00CAB45A /* CoinCollect.mp3 in Resources */,
 				F2B3350E1EA4425C007801AC /* Main.storyboard in Resources */,
 				F2344E032011978D00CAB45A /* Button Press.wav in Resources */,
@@ -393,6 +403,7 @@
 				F2344DFF2010499E00CAB45A /* Spacebased2.mp3 in Resources */,
 				F2382B802055B36B0096206E /* GoogleService-Info.plist in Resources */,
 				F21DE7461FF41EDF00D97E9C /* Tutorial.sks in Resources */,
+				F2EF1A1D2055C5E30056F3B2 /* ThreeArrows.sks in Resources */,
 				F2DE527A1F37A9380062CCEF /* Level1.sks in Resources */,
 				F213C2921FDCF76300B941D8 /* (null) in Resources */,
 				F26C442E201520E200D12109 /* Spacebased_Full.mp3 in Resources */,
@@ -402,6 +413,7 @@
 				F2751B1F1EB6B47C00B9F913 /* coin4.wav in Resources */,
 				F2344DF7200EEAC100CAB45A /* Jump.mp3 in Resources */,
 				F2AF7D031FA4084A00DC5D2A /* NeonTubes2.otf in Resources */,
+				F2EF1A1F2055F5890056F3B2 /* TwoArrows.sks in Resources */,
 				F2B335071EA4425C007801AC /* Actions.sks in Resources */,
 				F21AAE221F4A42B700B41405 /* Assets.xcassets in Resources */,
 				F2B335401EA44D01007801AC /* StartPlatform.sks in Resources */,

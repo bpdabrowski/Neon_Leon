@@ -1358,6 +1358,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .low
+                    emitParticles(name: "OneArrow", sprite: platform)
                     onPlatform = true
                     jumpPlayer()
                     run(soundJump)
@@ -1375,6 +1376,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .middle
+                    emitParticles(name: "TwoArrows", sprite: platform)
                     run(soundJump)
                     boostPlayer()
                     platform.removeFromParent()
@@ -1391,6 +1393,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .high
+                    emitParticles(name: "ThreeArrows", sprite: platform)
                     superBoostPlayer()
                     run(soundJump)
                     platform.removeFromParent()
@@ -1403,37 +1406,46 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 player.physicsBody?.affectedByGravity = true
             }
             setupLights(lights: 1)
+            if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .low
+                    emitParticles(name: "OneArrow", sprite: platform)
                     onPlatform = true
                     jumpPlayer()
                     run(soundJump)
                 }
+            }
             
         case PhysicsCategory.BackupMiddle:
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
             setupLights(lights: 2)
+            if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .middle
+                    emitParticles(name: "TwoArrows", sprite: platform)
                     run(soundJump)
                     boostPlayer()
                 }
+            }
             
         case PhysicsCategory.BackupHigh:
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
+            if let platform = other.node as? SKSpriteNode {
             setupLights(lights: 3)
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .high
+                    emitParticles(name: "ThreeArrows", sprite: platform)
                     superBoostPlayer()
                     run(soundJump)
                 }
+            }
             
         case PhysicsCategory.Spikes:
                     notification.notificationOccurred(.error)
@@ -1518,7 +1530,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         particles.zPosition = 3
         fgNode.addChild(particles)
         particles.run(SKAction.removeFromParentAfterDelay(1.0))
-        sprite.run(SKAction.sequence([SKAction.scale(to: 0.0, duration: 0.5), SKAction.removeFromParent()]))
+        //sprite.run(SKAction.sequence([SKAction.scale(to: 0.0, duration: 0.5), SKAction.removeFromParent()]))
     }
     
     func isNodeVisible(_ node: SKNode, positionY: CGFloat) -> Bool {
