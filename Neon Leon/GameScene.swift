@@ -221,12 +221,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playerAnimationPlatform = setupAnimationWithPrefix("NLCat_Platform_", start: 1, end: 4, timePerFrame: 0.025)
 
         lightningOff = SKSpriteNode(imageNamed: "Lightning_00000")
-        lightningOff.size = CGSize(width: 300, height: 311)
+        lightningOff.size = CGSize(width: 375, height: 390)
         lightningOff.zPosition = 4
-        lightningOff.position = CGPoint(x: -150, y: 900)
+        lightningOff.position = CGPoint(x: -490, y: 975)
         camera?.addChild(lightningOff)
         
-        lightningOff2 = lightningOff.copy() as! SKSpriteNode
+
+        
+        animationLoopDown = setupAnimationWithPrefix("Lightning_00",
+                                                     start: 1,
+                                                     end: 201,
+                                                     timePerFrame: 0.035)
+        
+
+        
+        /*lightningOff2 = lightningOff.copy() as! SKSpriteNode
         lightningOff2.position = CGPoint(x: 0, y: 900)
         camera?.addChild(lightningOff2)
         
@@ -255,12 +264,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         lightningOff.run(SKAction.repeatForever(lightning1Sequence), withKey: "lightning1")
         lightningOff2.run(SKAction.repeatForever(lightning2Sequence), withKey: "lightning2")
-        lightningOff3.run(SKAction.repeatForever(lightning3Sequence), withKey: "lightning3")
+        lightningOff3.run(SKAction.repeatForever(lightning3Sequence), withKey: "lightning3")*/
         
         scoreLabel.fontColor = SKColor.white
         scoreLabel.fontSize = 200
         scoreLabel.zPosition = 8 //6
-        scoreLabel.position = CGPoint(x: 0, y: 600)//(x: 475, y: 850)
+        scoreLabel.position = CGPoint(x: 0, y: 900)//(x: 475, y: 850)
         camera?.addChild(scoreLabel)
 
         startGame()
@@ -354,7 +363,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func spawnPowerUp(moveDuration: TimeInterval) {
        
-            powerUpBullet = SKSpriteNode(imageNamed: "Lightning_00028")
+            powerUpBullet = SKSpriteNode(imageNamed: "Lightning_0028")
             
             powerUpBullet.position = CGPoint(
                 x: random(min: 300, max: 500),
@@ -807,6 +816,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             updatePlayer()
             updateLava(deltaTime)
             updateShooter(deltaTime)
+            
             if score >= 15 {
                 updatePowerUp(deltaTime)
             }
@@ -822,8 +832,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func endInvincible(_ dt: TimeInterval) {
         if invincible == true {
-                invincibleTime += dt
-                print("\(invincibleTime)")
+            invincibleTime += dt
+            print("\(invincibleTime)")
             if invincibleTime > 7 { //Invincible
                 invincible = false
                 player.physicsBody?.categoryBitMask = PhysicsCategory.Player
@@ -947,7 +957,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 default:
                     overlaySprite = level1
                 }
-            } else {
+                
+                createForegroundOverlay(overlaySprite, flipX: flipH)
+            }
+            /*else {
                 // Create breakable platform 25%
                 switch Int.random(min: 0, max: 19) {
                 case 0:
@@ -1001,8 +1014,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 default:
                     overlaySprite = level1
                 }
-            }
-            createForegroundOverlay(overlaySprite, flipX: flipH)
+            }*/
+            
         }
     }
 
@@ -1065,7 +1078,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         player.physicsBody!.isDynamic = true
         
-        let lightningBack = SKSpriteNode(imageNamed: "Lightning_00000")
+        /*let lightningBack = SKSpriteNode(imageNamed: "Lightning_00000")
         lightningBack.size = CGSize(width: 300, height: 311)
         lightningBack.zPosition = 4
         lightningBack.position = CGPoint(x: -150, y: 900)
@@ -1081,7 +1094,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         lightningOff.removeFromParent()
         lightningOff2.removeFromParent()
-        lightningOff3.removeFromParent()
+        lightningOff3.removeFromParent()*/
         
         pointerHand = SKSpriteNode(imageNamed: "PointerHand")
         pointerHand.zPosition = 100
@@ -1195,7 +1208,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let gameOverAnimation = self.buttonAnimation(animationBase: "GameOver_000", start: 1, end: 19, foreverStart: 20, foreverEnd: 35, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
             
-            let gameOverMove = SKAction.moveBy(x: 0, y: -775, duration: 0.5)
+            let gameOverMove = SKAction.moveBy(x: 0, y: -600/*-775*/, duration: 0.5)
             
             self.camera?.addChild(gameOverLabel)
             gameOverLabel.run(SKAction.sequence([gameOverMove,gameOverAnimation]))
@@ -1255,12 +1268,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 alarm.removeFromParent()
             }
             
-            let highScoreLabel = SKLabelNode(fontNamed: "NeonTubes2-Regular")
-            highScoreLabel.fontSize = 200
-            highScoreLabel.position = CGPoint(x: 0, y: -225)
+            let highScoreLabel = SKSpriteNode(imageNamed: "BestLabel_00000")
+            highScoreLabel.position = CGPoint(x: -200, y: -82)
             highScoreLabel.zPosition = 8
-            highScoreLabel.text = "BEST: \(UserDefaults().integer(forKey: "HIGHSCORE"))"
             self.camera?.addChild(highScoreLabel)
+            
+            let highScoreLabelAnimation = self.buttonAnimation(animationBase: "BestLabel_000", start: 1, end: 30, foreverStart: 31, foreverEnd: 60, startTimePerFrame: 0.06, foreverTimePerFrame: 0.06)
+            
+            highScoreLabel.run(highScoreLabelAnimation)
+            
+            let highScoreNumber = SKLabelNode(fontNamed: "NeonTubes2-Regular")
+            highScoreNumber.fontSize = 200
+            highScoreNumber.position = CGPoint(x: 300, y: -125)
+            highScoreNumber.zPosition = 8
+            highScoreNumber.text = "\(UserDefaults().integer(forKey: "HIGHSCORE"))"
+            self.camera?.addChild(highScoreNumber)
             
             if let viewController = self.view?.window?.rootViewController {
                 if SwiftyAd.shared.isInterstitialReady {
@@ -1278,7 +1300,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
         
     
-    func setupLights(lights: Int) {
+    /*func setupLights(lights: Int) {
         //Lightning 1
         let lightning1 = setupButton(pictureBase: "Lightning_00000", pictureWidth: 300, pictureHeight: 311, buttonPositionX: -150, buttonPositionY: 900, zPosition: 6)
         
@@ -1325,7 +1347,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 lightning3.removeFromParent()
             })
         }
-    }
+    }*/
     
     func playerPlatformSettings() {
         // When this is turned off, the player doesn't jump to the correct height
@@ -1345,6 +1367,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 emitParticles(name: "LightningExplode", sprite: powerUpBullet)
                 player.physicsBody?.categoryBitMask = PhysicsCategory.Invincible
                 run(powerUp)
+                lightningOff.run(animationLoopDown)
                 notification.notificationOccurred(.warning)
                 powerUpBullet.removeFromParent()
             }
@@ -1353,7 +1376,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
-            setupLights(lights: 1)
+            //setupLights(lights: 1)
             if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
@@ -1371,7 +1394,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
-            setupLights(lights: 2)
+            //setupLights(lights: 2)
             if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
@@ -1388,7 +1411,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
-            setupLights(lights: 3)
+            //setupLights(lights: 3)
             if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
@@ -1405,7 +1428,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
-            setupLights(lights: 1)
+            //setupLights(lights: 1)
             if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
@@ -1421,7 +1444,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
-            setupLights(lights: 2)
+            //setupLights(lights: 2)
             if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
@@ -1437,7 +1460,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 player.physicsBody?.affectedByGravity = true
             }
             if let platform = other.node as? SKSpriteNode {
-            setupLights(lights: 3)
+            //setupLights(lights: 3)
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .high
@@ -1471,7 +1494,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let newHighScoreBanner = SKLabelNode(fontNamed: "NeonTubes2-Regular")
         newHighScoreBanner.fontSize = 100
-        newHighScoreBanner.position = CGPoint(x: -1100, y: 875)
+        newHighScoreBanner.position = CGPoint(x: -1100, y: 750)
         newHighScoreBanner.zPosition = 8
         newHighScoreBanner.text = "NEW HIGH SCORE!"
         

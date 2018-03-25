@@ -48,10 +48,18 @@ class MainMenu: SKScene {
     }
     
     func showGameScene() {
-        let newScene = GameScene(fileNamed: "GameScene")
-        newScene!.scaleMode = .aspectFill
-        let reveal = SKTransition.fade(withDuration: 1.0)
-        self.view?.presentScene(newScene!, transition: reveal)
+        if userDefaults.integer(forKey: "HIGHSCORE") <= 5 {
+            let newScene = GameScene(fileNamed: "Controls")
+            newScene!.scaleMode = .aspectFill
+            let reveal = SKTransition.fade(withDuration: 1.0)
+            self.view?.presentScene(newScene!, transition: reveal)
+        } else {
+            let newScene = GameScene(fileNamed: "GameScene")
+            newScene!.scaleMode = .aspectFill
+            let reveal = SKTransition.fade(withDuration: 1.0)
+            self.view?.presentScene(newScene!, transition: reveal)
+        }
+
     }
     
     func setupNodes() {
@@ -96,7 +104,7 @@ class MainMenu: SKScene {
     }
     
     func showTutorialScene() {
-        let tutorialScene = GameScene(fileNamed: "Tutorial")
+        let tutorialScene = GameScene(fileNamed: "Controls")
         tutorialScene!.scaleMode = .aspectFill
         let fade = SKTransition.fade(withDuration: 1.0)
         self.view?.presentScene(tutorialScene!, transition: fade)
