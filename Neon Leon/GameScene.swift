@@ -82,6 +82,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var level8: SKSpriteNode!
     var level9: SKSpriteNode!
     var level10: SKSpriteNode!
+    var level11: SKSpriteNode!
     
     var lastOverlayPosition = CGPoint.zero
     var lastOverlayHeight: CGFloat = 0.0
@@ -168,10 +169,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var bluePlatformAnimation: SKAction!
     var yellowPlatformAnimation: SKAction!
     var pinkPlatformAnimation: SKAction!
+    var blueNSPlatformAnimation: SKAction!
+    var yellowNSPlatformAnimation: SKAction!
+    var pinkNSPlatformAnimation: SKAction!
     var deadPlatformAnimation: SKAction!
     var startPlatformAnimation: SKAction!
     var lightningTrapAnimation: SKAction!
     var deadFishAnimation: SKAction!
+    var platformMoveRight: SKAction!
+    var platformMoveLeft: SKAction!
+    var platformMoveSequence: SKAction!
+    var platformGroup: SKAction!
     
     let userDefaults = UserDefaults.standard
     
@@ -232,6 +240,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                      start: 1,
                                                      end: 201,
                                                      timePerFrame: 0.035)
+        
+        platformMoveRight = SKAction.move(by: CGVector(dx: 200, dy: 0), duration: 0.5)
+        platformMoveLeft = SKAction.move(by: CGVector(dx: -200, dy: 0), duration: 0.5)
+        platformMoveSequence = SKAction.sequence([platformMoveRight, platformMoveLeft])
         
 
         
@@ -297,6 +309,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         level8 = loadForegroundOverlayTemplate("Level8")
         level9 = loadForegroundOverlayTemplate("Level9")
         level10 = loadForegroundOverlayTemplate("Level10")
+        level11 = loadForegroundOverlayTemplate("Level11")
         
         addChild(cameraNode)
         camera = cameraNode
@@ -449,14 +462,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 node.removeFromParent()
         }
         
-        overlay.enumerateChildNodes(withName: "PlatformLow") { (node, stop) in
+        overlay.enumerateChildNodes(withName: "NSPlatformLow") { (node, stop) in
                     var newNode = SKSpriteNode()
-                    self.bluePlatformAnimation = self.setupAnimationWithPrefix("BluePlatformLt_000",
-                                                                         start: 15,
+                    self.blueNSPlatformAnimation = self.setupAnimationWithPrefix("BluePlatformNS_000",
+                                                                         start: 30,
                                                                          end: 45,
                                                                          timePerFrame: 0.02)
-                    newNode = SKSpriteNode(imageNamed: "BluePlatformLt_00015")
-                    newNode.run(SKAction.repeatForever(self.bluePlatformAnimation))
+                    //let platformGroup = SKAction.group([self.blueNSPlatformAnimation,self.platformMoveSequence])
+                    newNode = SKSpriteNode(imageNamed: "BluePlatformNS_00030")
+                    //newNode.run(SKAction.repeatForever(self.blueNSPlatformAnimation))
+                    //newNode.run(SKAction.repeatForever(self.platformMoveSequence))
                     newNode.size = CGSize(width: 350, height: 216)
                     newNode.zPosition = 1
                     newNode.position = node.position
@@ -479,6 +494,78 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                                        start: 00,
                                                                        end: 30,
                                                                        timePerFrame: 0.02)
+            newNode = SKSpriteNode(imageNamed: "YellowPlatformLt_0000")
+            newNode.run(SKAction.repeatForever(self.yellowPlatformAnimation))
+            newNode.size = CGSize(width: 350, height: 216)
+            newNode.zPosition = 1
+            newNode.position = node.position
+            
+            newNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 117, height: 90))
+            newNode.physicsBody?.isDynamic = false
+            newNode.physicsBody?.affectedByGravity = false
+            newNode.physicsBody?.allowsRotation = false
+            newNode.physicsBody!.categoryBitMask = PhysicsCategory.BackupMiddle
+            newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player | PhysicsCategory.Invincible
+            
+            overlay.addChild(newNode)
+            node.removeFromParent()
+            
+        }
+        
+        overlay.enumerateChildNodes(withName: "PlatformHigh") { (node, stop) in
+            var newNode = SKSpriteNode()
+            self.pinkPlatformAnimation = self.setupAnimationWithPrefix("PinkPlatformLt_000",
+                                                                       start: 30,
+                                                                       end: 60,
+                                                                       timePerFrame: 0.02)
+            newNode = SKSpriteNode(imageNamed: "PinkPlatformLt_00030")
+            newNode.run(SKAction.repeatForever(self.pinkPlatformAnimation))
+            newNode.size = CGSize(width: 350, height: 216)
+            newNode.zPosition = 1
+            newNode.position = node.position
+            
+            newNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 117, height: 90))
+            newNode.physicsBody?.isDynamic = false
+            newNode.physicsBody?.affectedByGravity = false
+            newNode.physicsBody?.allowsRotation = false
+            newNode.physicsBody!.categoryBitMask = PhysicsCategory.BackupHigh
+            newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player | PhysicsCategory.Invincible
+            
+            overlay.addChild(newNode)
+            node.removeFromParent()
+            
+        }
+        
+        overlay.enumerateChildNodes(withName: "PlatformLow") { (node, stop) in
+            var newNode = SKSpriteNode()
+            self.bluePlatformAnimation = self.setupAnimationWithPrefix("BluePlatformLt_000",
+                                                                       start: 15,
+                                                                       end: 45,
+                                                                       timePerFrame: 0.02)
+            newNode = SKSpriteNode(imageNamed: "BluePlatformLt_00015")
+            newNode.run(SKAction.repeatForever(self.bluePlatformAnimation))
+            newNode.size = CGSize(width: 350, height: 216)
+            newNode.zPosition = 1
+            newNode.position = node.position
+            
+            newNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 117, height: 90))
+            newNode.physicsBody?.isDynamic = false
+            newNode.physicsBody?.affectedByGravity = false
+            newNode.physicsBody?.allowsRotation = false
+            newNode.physicsBody!.categoryBitMask = PhysicsCategory.BackupLow
+            newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player | PhysicsCategory.Invincible
+            
+            overlay.addChild(newNode)
+            node.removeFromParent()
+            
+        }
+        
+        overlay.enumerateChildNodes(withName: "PlatformMid") { (node, stop) in
+            var newNode = SKSpriteNode()
+            self.yellowPlatformAnimation = self.setupAnimationWithPrefix("YellowPlatformLt_000",
+                                                                         start: 00,
+                                                                         end: 30,
+                                                                         timePerFrame: 0.02)
             newNode = SKSpriteNode(imageNamed: "YellowPlatformLt_0000")
             newNode.run(SKAction.repeatForever(self.yellowPlatformAnimation))
             newNode.size = CGSize(width: 350, height: 216)
@@ -960,62 +1047,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 createForegroundOverlay(overlaySprite, flipX: flipH)
             }
-            /*else {
-                // Create breakable platform 25%
-                switch Int.random(min: 0, max: 19) {
-                case 0:
-                    overlaySprite = level1
-                case 1:
-                    overlaySprite = level1
-                    flipH = true
-                case 2:
-                    overlaySprite = level2
-                case 3:
-                    overlaySprite = level2
-                    flipH = true
-                case 4:
-                    overlaySprite = level3
-                case 5:
-                    overlaySprite = level3
-                    flipH = true
-                case 6:
-                    overlaySprite = level4
-                case 7:
-                    overlaySprite = level4
-                    flipH = true
-                case 8:
-                    overlaySprite = level5
-                case 9:
-                    overlaySprite = level5
-                    flipH = true
-                case 10:
-                    overlaySprite = level6
-                case 11:
-                    overlaySprite = level6
-                    flipH = true
-                case 12:
-                    overlaySprite = level7
-                case 13:
-                    overlaySprite = level7
-                    flipH = true
-                case 14:
-                    overlaySprite = level8
-                case 15:
-                    overlaySprite = level8
-                case 16:
-                    overlaySprite = level9
-                case 17:
-                    overlaySprite = level9
-                case 18:
-                    overlaySprite = level10
-                case 19:
-                    overlaySprite = level10
-                    flipH = true
-                default:
-                    overlaySprite = level1
-                }
-            }*/
-            
         }
     }
 
