@@ -231,7 +231,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lightningOff = SKSpriteNode(imageNamed: "Lightning_00000")
         lightningOff.size = CGSize(width: 375, height: 390)
         lightningOff.zPosition = 4
-        lightningOff.position = CGPoint(x: -490, y: 975)
+        lightningOff.position = CGPoint(x: -450, y: 900)
         camera?.addChild(lightningOff)
         
 
@@ -281,7 +281,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.fontColor = SKColor.white
         scoreLabel.fontSize = 200
         scoreLabel.zPosition = 8 //6
-        scoreLabel.position = CGPoint(x: 0, y: 900)//(x: 475, y: 850)
+        scoreLabel.position = CGPoint(x: 0, y: 825)//(x: 475, y: 850)
         camera?.addChild(scoreLabel)
 
         startGame()
@@ -1525,7 +1525,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let newHighScoreBanner = SKLabelNode(fontNamed: "NeonTubes2-Regular")
         newHighScoreBanner.fontSize = 100
-        newHighScoreBanner.position = CGPoint(x: -1100, y: 750)
+        newHighScoreBanner.position = CGPoint(x: -1100, y: 725)
         newHighScoreBanner.zPosition = 8
         newHighScoreBanner.text = "NEW HIGH SCORE!"
         

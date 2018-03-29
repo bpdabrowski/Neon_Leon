@@ -21,9 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
+        //Be sure to make sure the code is the same here and SwiftyAd.swift.
         SwiftyAd.shared.setup(
-            withBannerID: "ca-app-pub-1397382354626971/2613363359", //"ca-app-pub-1397382354626971/3371077102",
-            interstitialID: "ca-app-pub-3940256099942544/4411468910", //"ca-app-pub-1397382354626971/2613363359",
+            withBannerID: "ca-app-pub-1397382354626971/3371077102", //"ca-app-pub-1397382354626971/3371077102",
+            interstitialID: "ca-app-pub-1397382354626971/2613363359", //"ca-app-pub-1397382354626971/2613363359",
             rewardedVideoID: ""
         )
         
