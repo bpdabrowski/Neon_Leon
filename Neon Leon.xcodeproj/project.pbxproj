@@ -56,6 +56,8 @@
 		F2AF7D031FA4084A00DC5D2A /* NeonTubes2.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2AF7D021FA4084A00DC5D2A /* NeonTubes2.otf */; };
 		F2AF7D071FA528D400DC5D2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2AF7D051FA528D400DC5D2A /* Assets.xcassets */; };
 		F2B173322068803B000B2405 /* Level11.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B173312068803B000B2405 /* Level11.sks */; };
+		F2B1733A20700CF5000B2405 /* Neon_LeonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B1733920700CF5000B2405 /* Neon_LeonUITests.swift */; };
+		F2B1734220700D2E000B2405 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B1734120700D2D000B2405 /* SnapshotHelper.swift */; };
 		F2B335031EA4425C007801AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B335021EA4425C007801AC /* AppDelegate.swift */; };
 		F2B335051EA4425C007801AC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B335041EA4425C007801AC /* GameScene.sks */; };
 		F2B335071EA4425C007801AC /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B335061EA4425C007801AC /* Actions.sks */; };
@@ -82,6 +84,16 @@
 		F2F9C639205F47DA001E58EE /* Controls.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2F9C638205F47DA001E58EE /* Controls.sks */; };
 		F2F9C63B205F47E2001E58EE /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F9C63A205F47E2001E58EE /* Controls.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F2B1733C20700CF5000B2405 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2B334F71EA4425C007801AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2B334FE1EA4425C007801AC;
+			remoteInfo = "Neon Leon";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		49F45A333F5EAF0FFD0E515F /* Pods-Neon Leon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neon Leon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Neon Leon/Pods-Neon Leon.debug.xcconfig"; sourceTree = "<group>"; };
@@ -133,6 +145,10 @@
 		F2AF7D021FA4084A00DC5D2A /* NeonTubes2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NeonTubes2.otf; sourceTree = "<group>"; };
 		F2AF7D051FA528D400DC5D2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2B173312068803B000B2405 /* Level11.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level11.sks; path = "Neon Leon/Levels/Level11.sks"; sourceTree = "<group>"; };
+		F2B1733720700CF5000B2405 /* Neon LeonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Neon LeonUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2B1733920700CF5000B2405 /* Neon_LeonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neon_LeonUITests.swift; sourceTree = "<group>"; };
+		F2B1733B20700CF5000B2405 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2B1734120700D2D000B2405 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		F2B334FF1EA4425C007801AC /* Neon Leon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Neon Leon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2B335021EA4425C007801AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2B335041EA4425C007801AC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -164,6 +180,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F2B1733420700CF5000B2405 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2B334FC1EA4425C007801AC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -258,11 +281,22 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		F2B1733820700CF5000B2405 /* Neon LeonUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F2B1734120700D2D000B2405 /* SnapshotHelper.swift */,
+				F2B1733920700CF5000B2405 /* Neon_LeonUITests.swift */,
+				F2B1733B20700CF5000B2405 /* Info.plist */,
+			);
+			path = "Neon LeonUITests";
+			sourceTree = "<group>";
+		};
 		F2B334F61EA4425C007801AC = {
 			isa = PBXGroup;
 			children = (
 				F21AAE211F4A42B700B41405 /* Assets.xcassets */,
 				F2B335011EA4425C007801AC /* Neon Leon */,
+				F2B1733820700CF5000B2405 /* Neon LeonUITests */,
 				F2B335001EA4425C007801AC /* Products */,
 				4213D0E337CADDC5614E6242 /* Pods */,
 				F0B6E5B2521858C1ABBF9C70 /* Frameworks */,
@@ -273,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				F2B334FF1EA4425C007801AC /* Neon Leon.app */,
+				F2B1733720700CF5000B2405 /* Neon LeonUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -342,6 +377,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F2B1733620700CF5000B2405 /* Neon LeonUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2B1734020700CF5000B2405 /* Build configuration list for PBXNativeTarget "Neon LeonUITests" */;
+			buildPhases = (
+				F2B1733320700CF5000B2405 /* Sources */,
+				F2B1733420700CF5000B2405 /* Frameworks */,
+				F2B1733520700CF5000B2405 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F2B1733D20700CF5000B2405 /* PBXTargetDependency */,
+			);
+			name = "Neon LeonUITests";
+			productName = "Neon LeonUITests";
+			productReference = F2B1733720700CF5000B2405 /* Neon LeonUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		F2B334FE1EA4425C007801AC /* Neon Leon */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F2B335171EA4425C007801AC /* Build configuration list for PBXNativeTarget "Neon Leon" */;
@@ -368,10 +421,16 @@
 		F2B334F71EA4425C007801AC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "BD Creative";
 				TargetAttributes = {
+					F2B1733620700CF5000B2405 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = 2T6B5WZ44S;
+						ProvisioningStyle = Automatic;
+						TestTargetID = F2B334FE1EA4425C007801AC;
+					};
 					F2B334FE1EA4425C007801AC = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = 2T6B5WZ44S;
@@ -399,11 +458,19 @@
 			projectRoot = "";
 			targets = (
 				F2B334FE1EA4425C007801AC /* Neon Leon */,
+				F2B1733620700CF5000B2405 /* Neon LeonUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F2B1733520700CF5000B2405 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2B334FD1EA4425C007801AC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -523,6 +590,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F2B1733320700CF5000B2405 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2B1733A20700CF5000B2405 /* Neon_LeonUITests.swift in Sources */,
+				F2B1734220700D2E000B2405 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2B334FB1EA4425C007801AC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -554,6 +630,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		F2B1733D20700CF5000B2405 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2B334FE1EA4425C007801AC /* Neon Leon */;
+			targetProxy = F2B1733C20700CF5000B2405 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		F2B3350C1EA4425C007801AC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -574,6 +658,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		F2B1733E20700CF5000B2405 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2T6B5WZ44S;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Neon LeonUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.BDCreative.Neon-LeonUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Neon Leon";
+			};
+			name = Debug;
+		};
+		F2B1733F20700CF5000B2405 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2T6B5WZ44S;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Neon LeonUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.BDCreative.Neon-LeonUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Neon Leon";
+			};
+			name = Release;
+		};
 		F2B335151EA4425C007801AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -730,6 +854,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F2B1734020700CF5000B2405 /* Build configuration list for PBXNativeTarget "Neon LeonUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2B1733E20700CF5000B2405 /* Debug */,
+				F2B1733F20700CF5000B2405 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F2B334FA1EA4425C007801AC /* Build configuration list for PBXProject "Neon Leon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
