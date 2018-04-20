@@ -9,4 +9,5 @@ target 'Neon Leon' do
 	pod 'Firebase/Core'
 	pod 'Google-Mobile-Ads-SDK'
         pod 'SwiftyStoreKit'
+	pod 'PushNotifications'
 end

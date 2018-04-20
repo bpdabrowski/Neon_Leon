@@ -10,11 +10,14 @@ import UIKit
 import Firebase
 import GoogleMobileAds
 import SwiftyStoreKit
+import UserNotifications
+import PushNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let pushNotifications = PushNotifications.shared
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -44,7 +47,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        self.pushNotifications.start(instanceId: "0aa1eb0f-eb63-42e9-8869-f9040ad044e6")
+        self.pushNotifications.registerForRemoteNotifications()
+        //registerForPushNotifications()
+        
         return true
+    }
+    
+    /*func registerForPushNotifications() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+            (granted, error) in
+            print("Permission granted: \(granted)")
+            
+            guard granted else { return }
+            self.getNotificationSettings()
+        }
+    }
+    
+    func getNotificationSettings() {
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            print("Notification settings: \(settings)")
+            guard settings.authorizationStatus == .authorized else { return }
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+    }*/
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+            self.pushNotifications.registerDeviceToken(deviceToken) {
+            try? self.pushNotifications.subscribe(interest: "hello")
+        
+        /*let tokenParts = deviceToken.map { data -> String in
+            return String(format: "%02.2hhx", data)
+        }
+        
+        let token = tokenParts.joined()
+        print("Device Token: \(token)")*/
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        
+        //print("Failed to register: \(error)")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -68,7 +111,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+  }
 }
 

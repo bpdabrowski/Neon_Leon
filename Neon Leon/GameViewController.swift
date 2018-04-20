@@ -73,7 +73,6 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
     
     func removeAds() {
         print("removeAds is getting called")
-        print(nonConsumablePurchaseMade)
         purchase(RemoveAds, atomically: true)
     }
     
@@ -83,11 +82,17 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        restorePurchases()
         
         //SwiftyAd.shared.isRemoved = true //Bring this back if you want to turn off Ads for testing.
         
-        SwiftyAd.shared.showBanner(from: self)
-        print("NON CONSUMABLE PURCHASE MADE: \(nonConsumablePurchaseMade)")
+        if nonConsumablePurchaseMade == true {
+            SwiftyAd.shared.isRemoved = true
+            print("NON CONSUMABLE PURCHASE MADE: \(nonConsumablePurchaseMade)")
+        } else {
+            SwiftyAd.shared.isRemoved = false
+            SwiftyAd.shared.showBanner(from: self)
+        }
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -97,12 +102,6 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
                 
                 // Present the scene
                 view.presentScene(scene)
-            }
-            
-            if nonConsumablePurchaseMade == true {
-                SwiftyAd.shared.isRemoved = true
-            } else {
-                SwiftyAd.shared.isRemoved = false
             }
             
             let path = Bundle.main.path(forResource: "Spacebased_Full.mp3", ofType: nil)!
@@ -205,8 +204,31 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
             }
             
             print("skipped everything and just showing alert")
-            self.showAlert(alert: self.alertForRestorePurchases(result: results))
+    
+            //self.showAlert(alert: self.alertForRestorePurchases(result: results))
+                
             
+        }
+    }
+    
+    func restorePurchasesWithAlert() {
+        NetworkActivityIndicatorManager.NetworkOperationStarted()
+        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            if results.restoreFailedPurchases.count > 0 {
+                print("Restore Failed: \(results.restoreFailedPurchases)")
+            }
+            else if results.restoredPurchases.count > 0 {
+                SwiftyAd.shared.isRemoved = true
+                self.nonConsumablePurchaseMade = true
+                print("Restore Success: \(results.restoredPurchases)")
+            }
+            else {
+                print("Nothing to Restore")
+            }
+            
+            print("skipped everything and just showing alert")
+            
+            self.showAlert(alert: self.alertForRestorePurchases(result: results))
         }
     }
     

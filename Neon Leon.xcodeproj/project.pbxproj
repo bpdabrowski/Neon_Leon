@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8B1BA74D9E267DB990570075 /* Pods_Neon_Leon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD3A69155B661F1E3B24F2C /* Pods_Neon_Leon.framework */; };
-		F213C2921FDCF76300B941D8 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		F213C2931FDCF76500B941D8 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		F213C2921FDCF76300B941D8 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		F213C2931FDCF76500B941D8 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		F216137E1F24F3E000378FD3 /* Level2.sks in Resources */ = {isa = PBXBuildFile; fileRef = F216137D1F24F3E000378FD3 /* Level2.sks */; };
 		F21613801F251DBA00378FD3 /* Poison.sks in Resources */ = {isa = PBXBuildFile; fileRef = F216137F1F251DBA00378FD3 /* Poison.sks */; };
 		F21AAE221F4A42B700B41405 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F21AAE211F4A42B700B41405 /* Assets.xcassets */; };
@@ -108,6 +108,7 @@
 		F22208CE1FE74C24000FF105 /* LightningExplode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = LightningExplode.sks; path = "../../2D_Apple_Games_by_Tutorials_3.0/17-juice-up-your-game/final/DropCharge/DropCharge/Particles/LightningExplode.sks"; sourceTree = "<group>"; };
 		F22208D01FE74D99000FF105 /* InvincibleTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = InvincibleTrail.sks; path = "../../2D_Apple_Games_by_Tutorials_3.0/17-juice-up-your-game/final/DropCharge/DropCharge/Particles/InvincibleTrail.sks"; sourceTree = "<group>"; };
 		F2306C2B1F1EEBDB00648B30 /* Background.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background.sks; sourceTree = "<group>"; };
+		F231DC372088158B00619DC8 /* Neon Leon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Neon Leon.entitlements"; sourceTree = "<group>"; };
 		F2336DC4201B9CDC00F98729 /* Attributions */ = {isa = PBXFileReference; lastKnownFileType = text; path = Attributions; sourceTree = "<group>"; };
 		F2344DEE200EE17B00CAB45A /* MiamiTest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = MiamiTest.mp3; path = "../../../../../Creative Cloud Files/Neon Leon/Sounds/Background Music/MiamiTest.mp3"; sourceTree = "<group>"; };
 		F2344DF2200EE9BD00CAB45A /* CoinCollect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CoinCollect.mp3; path = "../../../../../Creative Cloud Files/Neon Leon/Sounds/Mouse Coin/CoinCollect.mp3"; sourceTree = "<group>"; };
@@ -315,6 +316,7 @@
 		F2B335011EA4425C007801AC /* Neon Leon */ = {
 			isa = PBXGroup;
 			children = (
+				F231DC372088158B00619DC8 /* Neon Leon.entitlements */,
 				F2AF7D011FA4083100DC5D2A /* Font */,
 				F2B335431EA6F92D007801AC /* SKTUtils */,
 				F21AAE261F4BB77A00B41405 /* Levels */,
@@ -440,6 +442,9 @@
 							com.apple.InAppPurchase = {
 								enabled = 0;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -475,7 +480,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F213C2931FDCF76500B941D8 /* (null) in Resources */,
+				F213C2931FDCF76500B941D8 /* BuildFile in Resources */,
 				F21613801F251DBA00378FD3 /* Poison.sks in Resources */,
 				F277BD4A2063341900EA18C4 /* Platforms.sks in Resources */,
 				F2751B251EB6B47C00B9F913 /* jump.wav in Resources */,
@@ -500,7 +505,7 @@
 				F2382B802055B36B0096206E /* GoogleService-Info.plist in Resources */,
 				F2EF1A1D2055C5E30056F3B2 /* ThreeArrows.sks in Resources */,
 				F2DE527A1F37A9380062CCEF /* Level1.sks in Resources */,
-				F213C2921FDCF76300B941D8 /* (null) in Resources */,
+				F213C2921FDCF76300B941D8 /* BuildFile in Resources */,
 				F26C442E201520E200D12109 /* Spacebased_Full.mp3 in Resources */,
 				F2660EB81FDDF455008CE74F /* Level8.sks in Resources */,
 				F2A550B7200C00B4000B4159 /* MouseExplode.sks in Resources */,
@@ -540,12 +545,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Neon Leon/Pods-Neon Leon-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/PushNotifications/PushNotifications.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PushNotifications.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -814,6 +821,7 @@
 			baseConfigurationReference = 49F45A333F5EAF0FFD0E515F /* Pods-Neon Leon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Neon Leon/Neon Leon.entitlements";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -835,6 +843,7 @@
 			baseConfigurationReference = EC1242CCEE1E2EAA302E7193 /* Pods-Neon Leon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Neon Leon/Neon Leon.entitlements";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;

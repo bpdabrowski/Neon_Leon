@@ -1280,7 +1280,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let restoreIAPButtonAnimation = self.buttonAnimation(animationBase: "RestoreIAP_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 15, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
             
-            let restoreIAPButtonTransparent = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: self.gvc.restorePurchases)
+            let restoreIAPButtonTransparent = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: self.gvc.restorePurchasesWithAlert)
             
             restoreIAPButtonTransparent.position = CGPoint(x: 0, y: -705)
             restoreIAPButtonTransparent.alpha = 0.01
