@@ -36,7 +36,6 @@
 		F26C442E201520E200D12109 /* Spacebased_Full.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F26C442D201520E200D12109 /* Spacebased_Full.mp3 */; };
 		F2704C5C1FCE605000799629 /* Level3.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2704C5B1FCE605000799629 /* Level3.sks */; };
 		F2704C601FCF942200799629 /* Level4.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2704C5F1FCF942200799629 /* Level4.sks */; };
-		F2704C621FD0F58F00799629 /* Test.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2704C611FD0F58F00799629 /* Test.sks */; };
 		F2751B191EB6B47C00B9F913 /* attribution.txt in Resources */ = {isa = PBXBuildFile; fileRef = F2751B071EB6B47B00B9F913 /* attribution.txt */; };
 		F2751B1C1EB6B47C00B9F913 /* boost.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2751B0A1EB6B47B00B9F913 /* boost.wav */; };
 		F2751B1E1EB6B47C00B9F913 /* coin1.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2751B0C1EB6B47B00B9F913 /* coin1.wav */; };
@@ -112,7 +111,6 @@
 		F26C442D201520E200D12109 /* Spacebased_Full.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Spacebased_Full.mp3; sourceTree = "<group>"; };
 		F2704C5B1FCE605000799629 /* Level3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level3.sks; path = "Neon Leon/Levels/Level3.sks"; sourceTree = "<group>"; };
 		F2704C5F1FCF942200799629 /* Level4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level4.sks; path = "Neon Leon/Levels/Level4.sks"; sourceTree = "<group>"; };
-		F2704C611FD0F58F00799629 /* Test.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Test.sks; sourceTree = "<group>"; };
 		F2751B071EB6B47B00B9F913 /* attribution.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = attribution.txt; sourceTree = "<group>"; };
 		F2751B0A1EB6B47B00B9F913 /* boost.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = boost.wav; sourceTree = "<group>"; };
 		F2751B0C1EB6B47B00B9F913 /* coin1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin1.wav; sourceTree = "<group>"; };
@@ -202,7 +200,6 @@
 				F2704C5B1FCE605000799629 /* Level3.sks */,
 				F216137D1F24F3E000378FD3 /* Level2.sks */,
 				F2DE52791F37A9380062CCEF /* Level1.sks */,
-				F2704C611FD0F58F00799629 /* Test.sks */,
 			);
 			name = Levels;
 			path = ..;
@@ -410,7 +407,6 @@
 				F2704C5C1FCE605000799629 /* Level3.sks in Resources */,
 				F277BD522063349600EA18C4 /* Hazards.sks in Resources */,
 				F2B173322068803B000B2405 /* Level11.sks in Resources */,
-				F2704C621FD0F58F00799629 /* Test.sks in Resources */,
 				F2EF1A212055F6040056F3B2 /* OneArrow.sks in Resources */,
 				F2344DF3200EE9BD00CAB45A /* CoinCollect.mp3 in Resources */,
 				F2B3350E1EA4425C007801AC /* Main.storyboard in Resources */,
