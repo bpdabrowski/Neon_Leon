@@ -1,0 +1,22 @@
+https://dash.pusher.com/
+Run this in terminal to send push notifications
+
+curl -H "Content-Type: application/json" \
+     -H "Authorization: Bearer DC8AA86D0926FAAA23A859CAB5444CA" \
+     -X POST "https://0aa1eb0f-eb63-42e9-8869-f9040ad044e6.pushnotifications.pusher.com/publish_api/v1/instances/0aa1eb0f-eb63-42e9-8869-f9040ad044e6/publishes" \
+     -d '{
+            "interests":["hello"],
+            "apns":
+                {
+                    "aps":
+                        {
+                            "alert":
+                                {
+                                "body":"Fun Fact: Cats sleep 70% of their lives!"
+                                }
+                        }
+                }
+        }'
+
+        Fun facts about cats
+        https://www.buzzfeed.com/chelseamarshall/meows?utm_term=.jb7rw1rEn#.evA5d45Q7

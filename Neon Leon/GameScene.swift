@@ -147,8 +147,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var coinAnimationSpecial: SKAction!
     
     var breakAnimation: SKAction!
-    var poisonBeakerMove: SKAction!
-    var poisonBeakerSequence: SKAction!
     
     var lightningAnimation: SKAction!
     
