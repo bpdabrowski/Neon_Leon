@@ -1,15 +1,16 @@
 import Foundation
 
+typealias CompletionHandler<T> = (_ result: T?) -> Void
+
 protocol PushNotificationsNetworkable {
-    func register(deviceToken: Data, instanceId: String, completion: @escaping (String) -> Void)
+    func register(url: URL, deviceToken: Data, instanceId: String, completion: @escaping CompletionHandler<Device>)
 
-    func subscribe(completion: @escaping () -> Void)
-    func setSubscriptions(interests: Array<String>, completion: @escaping () -> Void)
+    func subscribe(url: URL, completion: @escaping CompletionHandler<String>)
+    func setSubscriptions(url: URL, interests: [String], completion: @escaping CompletionHandler<String>)
 
-    func unsubscribe(completion: @escaping () -> Void)
-    func unsubscribeAll(completion: @escaping () -> Void)
+    func unsubscribe(url: URL, completion: @escaping CompletionHandler<String>)
 
-    func track(userInfo: [AnyHashable: Any], eventType: String, deviceId: String)
+    func track(url: URL, eventType: ReportEventType, completion: @escaping CompletionHandler<String>)
 
-    func syncMetadata()
+    func syncMetadata(url: URL, completion: @escaping CompletionHandler<String>)
 }
