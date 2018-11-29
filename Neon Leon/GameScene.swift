@@ -34,7 +34,6 @@ struct PhysicsCategory {
 // MARK: - Game States
 enum GameStatus: Int {
     case waitingForTap = 0
-    //case waitingForBomb = 1
     case playing = 1
     case gameOver = 2
 }
@@ -143,9 +142,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var tapCount: Int!
     
-    var coinAnimationNormal: SKAction!
-    var coinAnimationSpecial: SKAction!
-    
     var breakAnimation: SKAction!
     
     var lightningAnimation: SKAction!
@@ -208,12 +204,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         view.showsPhysics = false
         
-        // Add this back when you want to enable pausing
-        //addObservers()
-        
-        coinAnimationNormal = setupAnimationWithPrefix("powerup05_", start: 1, end: 6, timePerFrame: 0.1)
-        coinAnimationSpecial = setupAnimationWithPrefix("powerup01_", start: 1, end: 6, timePerFrame: 0.1)
-        
         setupNodes()
         setupLevel()
         setupPlayer()
@@ -239,62 +229,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                      end: 201,
                                                      timePerFrame: 0.035)
         
-        platformMoveRight = SKAction.move(by: CGVector(dx: 200, dy: 0), duration: 0.5)
-        platformMoveLeft = SKAction.move(by: CGVector(dx: -200, dy: 0), duration: 0.5)
-        platformMoveSequence = SKAction.sequence([platformMoveRight, platformMoveLeft])
-        
-
-        
-        /*lightningOff2 = lightningOff.copy() as! SKSpriteNode
-        lightningOff2.position = CGPoint(x: 0, y: 900)
-        camera?.addChild(lightningOff2)
-        
-        lightningOff3 = lightningOff.copy() as! SKSpriteNode
-        lightningOff3.position = CGPoint(x: 150, y: 900)
-        camera?.addChild(lightningOff3)
-        
-        animationLoopUp = setupAnimationWithPrefix("Lightning_000",
-                                                     start: 1,
-                                                     end: 30,
-                                                     timePerFrame: 0.02)
-        
-        animationLoopDown = setupAnimationWithPrefix("Lightning_000",
-                                                         start: 31,
-                                                         end: 45,
-                                                         timePerFrame: 0.04)
-        
-        wait5 = SKAction.wait(forDuration: 5)
-        wait3 = SKAction.wait(forDuration: 3)
-        wait2 = SKAction.wait(forDuration: 2)
-        wait1 = SKAction.wait(forDuration: 1)
-        
-        let lightning1Sequence = SKAction.sequence([animationLoopUp, wait5, animationLoopDown, wait1])
-        let lightning2Sequence = SKAction.sequence([wait1, animationLoopUp, wait3, animationLoopDown, wait2])
-        let lightning3Sequence = SKAction.sequence([wait2, animationLoopUp, wait1, animationLoopDown, wait3])
-        
-        lightningOff.run(SKAction.repeatForever(lightning1Sequence), withKey: "lightning1")
-        lightningOff2.run(SKAction.repeatForever(lightning2Sequence), withKey: "lightning2")
-        lightningOff3.run(SKAction.repeatForever(lightning3Sequence), withKey: "lightning3")*/
-        
         scoreLabel.fontColor = SKColor.white
         scoreLabel.fontSize = 200
-        scoreLabel.zPosition = 8 //6
-        scoreLabel.position = CGPoint(x: 0, y: 825)//(x: 475, y: 850)
+        scoreLabel.zPosition = 8
+        scoreLabel.position = CGPoint(x: 0, y: 825)
         camera?.addChild(scoreLabel)
 
         startGame()
-
-        
     }
     
     func setupNodes() {
         let worldNode = childNode(withName: "World")!
         bgNode = worldNode.childNode(withName: "Background")!
-        backgroundOverlayTemplate = bgNode.childNode(withName: "Overlay")!.copy() as! SKNode
+        backgroundOverlayTemplate = bgNode.childNode(withName: "Overlay")!.copy() as? SKNode
         backgroundOverlayHeight = backgroundOverlayTemplate.calculateAccumulatedFrame().height
         fgNode = worldNode.childNode(withName: "Foreground")!
-        player = fgNode.childNode(withName: "Player") as! SKSpriteNode
-        
+        player = fgNode.childNode(withName: "Player") as? SKSpriteNode
         
         startPlatform = loadForegroundOverlayTemplate("StartPlatform")
         level1 = loadForegroundOverlayTemplate("Level1")
@@ -311,8 +261,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(cameraNode)
         camera = cameraNode
-        
-        
         
         setupLava()
         setupBackground("Background.sks")
@@ -362,12 +310,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setupLava() {
-        lava = fgNode.childNode(withName: "Lava") as! SKSpriteNode
+        lava = fgNode.childNode(withName: "Lava") as? SKSpriteNode
     }
     
     func setupBackground(_ fileName: String) {
         let emitter = SKEmitterNode(fileNamed: fileName)!
-        emitter.particlePositionRange = CGVector(dx: size.width * 1.125, dy: size.height * 2)//505.0)
+        emitter.particlePositionRange = CGVector(dx: size.width * 1.125, dy: size.height * 2)
         emitter.advanceSimulationTime(3.0)
         camera?.addChild(emitter)
     }
@@ -402,16 +350,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if !isNodeVisible(powerUpBullet, positionY: powerUpBullet.position.y) {
                 powerUpBullet.removeFromParent()
             }
-            
-            //print("Cat Nip Category: \(String(describing: powerUpBullet.physicsBody?.categoryBitMask))")
         }
-    
     
     func spawnShooter(moveDuration: TimeInterval) {
         deadFishBullet = SKSpriteNode(imageNamed: "DeadFish_00015")
         
         deadFishBullet.position = CGPoint(
-            x: random(min: 300, max: 500),//self.size.width),
+            x: random(min: 300, max: 500),
             y: self.size.height + camera!.position.y - 768)
         
         deadFishBullet.physicsBody = SKPhysicsBody(circleOfRadius: deadFishBullet.size.width/7)
@@ -444,46 +389,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addAnimationToOverlay(overlay: SKSpriteNode) {
-
         overlay.enumerateChildNodes(withName: "SpikeOutline") { (node, stop) in
             let newNode = SKSpriteNode()
-                        let spikeBodyTexture = SKTexture(imageNamed: "SpikeOutline")
-                        newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 190/*196*/, height: 100/*120*/))
-                        newNode.physicsBody?.isDynamic = false
-                        newNode.physicsBody?.affectedByGravity = false
-                        newNode.physicsBody?.allowsRotation = false
-                        newNode.physicsBody!.categoryBitMask = PhysicsCategory.Spikes
-                        newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
+            let spikeBodyTexture = SKTexture(imageNamed: "SpikeOutline")
+            newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 190/*196*/, height: 100/*120*/))
+            newNode.physicsBody?.isDynamic = false
+            newNode.physicsBody?.affectedByGravity = false
+            newNode.physicsBody?.allowsRotation = false
+            newNode.physicsBody!.categoryBitMask = PhysicsCategory.Spikes
+            newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
 
-                newNode.position = node.position
-                overlay.addChild(newNode)
-                node.removeFromParent()
+            newNode.position = node.position
+            overlay.addChild(newNode)
+            node.removeFromParent()
         }
         
         overlay.enumerateChildNodes(withName: "NSPlatformLow") { (node, stop) in
-                    var newNode = SKSpriteNode()
-                    self.blueNSPlatformAnimation = self.setupAnimationWithPrefix("BluePlatformNS_000",
-                                                                         start: 30,
-                                                                         end: 45,
-                                                                         timePerFrame: 0.02)
-                    //let platformGroup = SKAction.group([self.blueNSPlatformAnimation,self.platformMoveSequence])
-                    newNode = SKSpriteNode(imageNamed: "BluePlatformNS_00030")
-                    //newNode.run(SKAction.repeatForever(self.blueNSPlatformAnimation))
-                    //newNode.run(SKAction.repeatForever(self.platformMoveSequence))
-                    newNode.size = CGSize(width: 350, height: 216)
-                    newNode.zPosition = 1
-                    newNode.position = node.position
-            
-                    newNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 117, height: 90))
-                    newNode.physicsBody?.isDynamic = false
-                    newNode.physicsBody?.affectedByGravity = false
-                    newNode.physicsBody?.allowsRotation = false
-                    newNode.physicsBody!.categoryBitMask = PhysicsCategory.BackupLow
-                    newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player | PhysicsCategory.Invincible
-            
-                    overlay.addChild(newNode)
-                    node.removeFromParent()
-            
+            var newNode = SKSpriteNode()
+            self.blueNSPlatformAnimation = self.setupAnimationWithPrefix("BluePlatformNS_000",
+                                                                 start: 30,
+                                                                 end: 45,
+                                                                 timePerFrame: 0.02)
+            newNode = SKSpriteNode(imageNamed: "BluePlatformNS_00030")
+            newNode.size = CGSize(width: 350, height: 216)
+            newNode.zPosition = 1
+            newNode.position = node.position
+    
+            newNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 117, height: 90))
+            newNode.physicsBody?.isDynamic = false
+            newNode.physicsBody?.affectedByGravity = false
+            newNode.physicsBody?.allowsRotation = false
+            newNode.physicsBody!.categoryBitMask = PhysicsCategory.BackupLow
+            newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player | PhysicsCategory.Invincible
+    
+            overlay.addChild(newNode)
+            node.removeFromParent()
         }
         
         overlay.enumerateChildNodes(withName: "PlatformMid") { (node, stop) in
@@ -507,7 +447,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             overlay.addChild(newNode)
             node.removeFromParent()
-            
         }
         
         overlay.enumerateChildNodes(withName: "PlatformHigh") { (node, stop) in
@@ -607,22 +546,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
        
-            overlay.enumerateChildNodes(withName: "PlatformDead") { (node, stop) in
-                let newNode = SKSpriteNode()
-                    self.deadPlatformAnimation = self.setupAnimationWithPrefix("DeadPlatformLt_000",
-                                                                               start: 0,
-                                                                               end: 30,
-                                                                               timePerFrame: 0.02)
-                    
-                    newNode.run(SKAction.repeatForever(self.deadPlatformAnimation))
-                    newNode.size = CGSize(width: 350, height: 250)
-                    newNode.zPosition = 1
-                    newNode.position = node.position
-                    newNode.anchorPoint = CGPoint(x: 0.5, y: 0.42)
-                
-                overlay.addChild(newNode)
-                node.removeFromParent()
-            }
+        overlay.enumerateChildNodes(withName: "PlatformDead") { (node, stop) in
+            let newNode = SKSpriteNode()
+            self.deadPlatformAnimation = self.setupAnimationWithPrefix("DeadPlatformLt_000",
+                                                                       start: 0,
+                                                                       end: 30,
+                                                                       timePerFrame: 0.02)
+            newNode.run(SKAction.repeatForever(self.deadPlatformAnimation))
+            newNode.size = CGSize(width: 350, height: 250)
+            newNode.zPosition = 1
+            newNode.position = node.position
+            newNode.anchorPoint = CGPoint(x: 0.5, y: 0.42)
+            
+            overlay.addChild(newNode)
+            node.removeFromParent()
+        }
         
         overlay.enumerateChildNodes(withName: "Mouse") { (node, stop) in
             var newNode = SKSpriteNode()
@@ -646,8 +584,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
             node.removeFromParent()
         }
-
-        
     }
     
     func setupAnimationWithPrefix(_ prefix: String, start: Int, end: Int, timePerFrame: TimeInterval) -> SKAction {
@@ -689,8 +625,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             playerPosition = convert(CGPoint(x: leftLimit, y: 0.0), to: fgNode)
             player.position.x = playerPosition.x
         }
+        
         // Check player state
-        //Turn this back on when you want to add player trail
+        // Turn this back on when you want to add player trail
         if player.physicsBody!.velocity.dy < CGFloat(0.0) && playerState != .fall {
             playerState = .fall
         } else if player.physicsBody!.velocity.dy > CGFloat(0.0) && playerState != .jump {
@@ -698,29 +635,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         // Animate player
-        if playerState == .jump {
+        switch playerState {
+        case .jump:
             if abs(player.physicsBody!.velocity.dx) > 100.0 {
-                if player.physicsBody!.velocity.dx > 0 {
-                } else {
-                }
-            } else {
                 runPlayerAnimation(playerAnimationJump)
             }
-            } else if playerState == .fall {
-                runPlayerAnimation(playerAnimationFall)
-            } else if playerState == .idle {
-                runPlayerAnimation(playerAnimationPlatform)
-            }
+        case .fall:
+            runPlayerAnimation(playerAnimationFall)
+        case .idle:
+            runPlayerAnimation(playerAnimationPlatform)
+        case .lava:
+            break
+        case .dead:
+            break
+        }
         
-            if invincible == true {
-                invincibleTrail = addTrail(name: "InvincibleTrail")
-                invincibleTrailAttached = true
-            } else if invincible == false && invincibleTrailAttached == true {
-                player.removeAllChildren()
-                player.physicsBody?.categoryBitMask = PhysicsCategory.Player
-                invincibleTrailAttached = false
+        if invincible == true {
+            invincibleTrail = addTrail(name: "InvincibleTrail")
+            invincibleTrailAttached = true
+        } else if invincible == false && invincibleTrailAttached == true {
+            player.removeAllChildren()
+            player.physicsBody?.categoryBitMask = PhysicsCategory.Player
+            invincibleTrailAttached = false
         }
-        }
+    }
     
     func updateCamera() {
         let cameraTarget = convert(player.position, from: fgNode)
@@ -736,11 +674,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func updateLava(_ dt: TimeInterval) {
-        
         let bottomOfScreenY = camera!.position.y - (size.height / 2)
-        
         let bottomOfScreenYFg = convert(CGPoint(x: 0, y: bottomOfScreenY), to: fgNode).y
-        
         var lavaVelocityY = CGFloat(0)
         
         switch score {
@@ -769,11 +704,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         default:
             lavaVelocityY = CGFloat(300)
         }
+        
         let lavaStep = lavaVelocityY * CGFloat(dt)
         var newLavaPositionY = lava.position.y + lavaStep
         
         newLavaPositionY = max(newLavaPositionY, (bottomOfScreenYFg - 125.0))
-        
         lava.position.y = newLavaPositionY
     }
     
@@ -814,7 +749,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             powerUpTimeSinceLastShot = 0
-            
             spawnPowerUp(moveDuration: powerUpMoveDuration)
         }
     }
@@ -860,7 +794,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             deadFishTimeSinceLastShot = 0
-            
             spawnShooter(moveDuration: deadFishMoveDuration)
         }
     }
@@ -883,12 +816,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-
         if lastUpdateTimeInterval > 0 {
             deltaTime = currentTime - lastUpdateTimeInterval
         } else {
             deltaTime = 0
         }
+        
         lastUpdateTimeInterval = currentTime
         
         if isPaused {
@@ -924,13 +857,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 player.physicsBody?.categoryBitMask = PhysicsCategory.Player
                 invincibleTime = 0
             }
-            
         }
     }
     
     func setPlayerVelocity(_ amount: CGFloat) {
-        player.physicsBody!.velocity.dy =
-            max(player.physicsBody!.velocity.dy, amount * gameGain)
+        player.physicsBody!.velocity.dy = max(player.physicsBody!.velocity.dy, amount * gameGain)
     }
     
     func jumpPlayer() {
@@ -1058,10 +989,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Events
     
     func showNewScene() {
-            let newScene = GameScene(fileNamed: "GameScene")
-            newScene!.scaleMode = .aspectFill
-            let fade = SKTransition.fade(withDuration: 0.5)
-            self.view?.presentScene(newScene!, transition: fade)
+        let newScene = GameScene(fileNamed: "GameScene")
+        newScene!.scaleMode = .aspectFill
+        let fade = SKTransition.fade(withDuration: 0.5)
+        self.view?.presentScene(newScene!, transition: fade)
     }
     
     func showMainMenu() {
@@ -1090,7 +1021,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         for touch in touches {
             if selectedNodes[touch] != nil {
                 selectedNodes[touch] = nil
@@ -1106,24 +1036,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         platformState = .high
         
         player.physicsBody!.isDynamic = true
-        
-        /*let lightningBack = SKSpriteNode(imageNamed: "Lightning_00000")
-        lightningBack.size = CGSize(width: 300, height: 311)
-        lightningBack.zPosition = 4
-        lightningBack.position = CGPoint(x: -150, y: 900)
-        camera?.addChild(lightningBack)
-        
-        let lightningBack2 = lightningBack.copy() as! SKSpriteNode
-        lightningBack2.position = CGPoint(x: 0, y: 900)
-        camera?.addChild(lightningBack2)
-        
-        let lightningBack3 = lightningBack.copy() as! SKSpriteNode
-        lightningBack3.position = CGPoint(x: 150, y: 900)
-        camera?.addChild(lightningBack3)
-        
-        lightningOff.removeFromParent()
-        lightningOff2.removeFromParent()
-        lightningOff3.removeFromParent()*/
         
         pointerHand = SKSpriteNode(imageNamed: "PointerHand")
         pointerHand.zPosition = 100
@@ -1188,7 +1100,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func gameOver() {
-        
         gameState = .gameOver
         playerState = .dead
         
@@ -1237,14 +1148,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let gameOverAnimation = self.buttonAnimation(animationBase: "GameOver_000", start: 1, end: 19, foreverStart: 20, foreverEnd: 35, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
             
-            let gameOverMove = SKAction.moveBy(x: 0, y: -600/*-775*/, duration: 0.5)
+            let gameOverMove = SKAction.moveBy(x: 0, y: -600, duration: 0.5)
             
             self.camera?.addChild(gameOverLabel)
             gameOverLabel.run(SKAction.sequence([gameOverMove,gameOverAnimation]))
             
             let noAdsButton = self.setupButton(pictureBase: "NoAds_00000", pictureWidth: 335, pictureHeight: 357, buttonPositionX: 600, buttonPositionY: -600, zPosition: 8)
             
-            let noAdsButtonAnimation = self.buttonAnimation(animationBase: "NoAds_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 43, startTimePerFrame: 0.05/*0.035*/, foreverTimePerFrame: 0.05/*0.035*/)
+            let noAdsButtonAnimation = self.buttonAnimation(animationBase: "NoAds_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 43, startTimePerFrame: 0.05, foreverTimePerFrame: 0.05)
             
             let noAdsButtonTransparent = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00000", buttonAction: self.gvc.removeAds)
             
@@ -1319,64 +1230,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         })
-        
-        /*DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-            // Requests user to make a review after losing, doesn't happen everytime. It is controlled by Apple.
-            if #available(iOS 10.3, *) {
-                SKStoreReviewController.requestReview()
-            }
-        })*/
     }
-        
-    
-    /*func setupLights(lights: Int) {
-        //Lightning 1
-        let lightning1 = setupButton(pictureBase: "Lightning_00000", pictureWidth: 300, pictureHeight: 311, buttonPositionX: -150, buttonPositionY: 900, zPosition: 6)
-        
-        //Lightning 2
-        let lightning2 = setupButton(pictureBase: "Lightning_00000", pictureWidth: 300, pictureHeight: 311, buttonPositionX: 0, buttonPositionY: 900, zPosition: 6)
-        
-        //Lightning 3
-        let lightning3 = setupButton(pictureBase: "Lightning_00000", pictureWidth: 300, pictureHeight: 311, buttonPositionX: 150, buttonPositionY: 900, zPosition: 6)
-        
-        if lights == 1 {
-            if onPlatform == true {
-                camera?.addChild(lightning1)
-                lightning1.run(animationLoopUp)
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                lightning1.removeFromParent()
-            })
-        } else if lights == 2 {
-            
-            camera?.addChild(lightning1)
-            lightning1.run(animationLoopUp)
-            
-            camera?.addChild(lightning2)
-            lightning2.run(animationLoopUp)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                lightning1.removeFromParent()
-                lightning2.removeFromParent()
-            })
-        } else if lights == 3 {
-            //Lightning 3
-            camera?.addChild(lightning1)
-            lightning1.run(animationLoopUp)
-            
-            camera?.addChild(lightning2)
-            lightning2.run(animationLoopUp)
-            
-            camera?.addChild(lightning3)
-            lightning3.run(animationLoopUp)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                lightning1.removeFromParent()
-                lightning2.removeFromParent()
-                lightning3.removeFromParent()
-            })
-        }
-    }*/
     
     func playerPlatformSettings() {
         // When this is turned off, the player doesn't jump to the correct height
@@ -1405,7 +1259,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
-            //setupLights(lights: 1)
             if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
@@ -1423,7 +1276,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
-            //setupLights(lights: 2)
             if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
@@ -1440,7 +1292,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
-            //setupLights(lights: 3)
             if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
@@ -1457,7 +1308,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
-            //setupLights(lights: 1)
             if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
@@ -1473,7 +1323,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if playerState == .jump {
                 player.physicsBody?.affectedByGravity = true
             }
-            //setupLights(lights: 2)
             if let platform = other.node as? SKSpriteNode {
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
@@ -1489,7 +1338,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 player.physicsBody?.affectedByGravity = true
             }
             if let platform = other.node as? SKSpriteNode {
-            //setupLights(lights: 3)
                 if player.physicsBody!.velocity.dy < 0 {
                     playerPlatformSettings()
                     platformState = .high
@@ -1551,9 +1399,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 run(mouseHit)
                 score += 3
                 mouse.removeFromParent()
-                
-                //print("Player Category: \(String(describing: player.physicsBody?.categoryBitMask))")
-                //print("Mouse Category: \(String(describing: mouse.physicsBody?.categoryBitMask))")
             }
             
         default:
@@ -1582,7 +1427,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         particles.zPosition = 3
         fgNode.addChild(particles)
         particles.run(SKAction.removeFromParentAfterDelay(1.0))
-        //sprite.run(SKAction.sequence([SKAction.scale(to: 0.0, duration: 0.5), SKAction.removeFromParent()]))
     }
     
     func isNodeVisible(_ node: SKNode, positionY: CGFloat) -> Bool {
@@ -1605,45 +1449,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let action = SKAction.move(by: moveVector, duration: 4)
         sprite.run(action)
     }
-}
-
-// MARK: - Notifications
-
-
-
-extension GameScene {
-    // Add this back when you want to enable pausing
-    
-    /*func applicationDidBecomeActive() {
-        print("* applicationDidBecomeActive")
-    }
-    
-    func applicationWillResignActive() {
-        print("* applicationWillResignActive")
-    }
-    
-    func applicationDidEnterBackground() {
-        print("* applicationDidEnterBackground")
-    }
-    
-    func addObservers() {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(forName: .UIApplicationDidBecomeActive,
-                                       object: nil,
-                                       queue: nil) { [weak self] _ in
-                                        self?.applicationDidBecomeActive()
-        }
-        notificationCenter.addObserver(forName: .UIApplicationWillResignActive,
-                                       object: nil,
-                                       queue: nil) { [weak self] _ in
-                                        self?.applicationWillResignActive()
-        }
-        notificationCenter.addObserver(forName: .UIApplicationWillResignActive,
-                                       object: nil,
-                                       queue: nil) { [weak self] _ in
-                                        self?.applicationDidEnterBackground()
-        }
-    }*/
     
     func distance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
         let xDist = a.x - b.x

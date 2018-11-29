@@ -15,7 +15,7 @@ import AVFoundation
 import SwiftyStoreKit
 import StoreKit
 
-//within iTunes Connect > go to in app purchases > on the right select View shared secret > copy that and paste in quotes below
+// within iTunes Connect > go to in app purchases > on the right select View shared secret > copy that and paste in quotes below
 var sharedSecret = "30ca8d6c6cde4e7cb26fb382db93f14a"
 
 enum RegisteredPurchase: String {
@@ -141,8 +141,6 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
-        print("******** MEMORY WARNING!")
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -322,21 +320,21 @@ extension GameViewController {
             print("Purchase Failed: \(error)")
             switch error.code {
             case .unknown: return alertWithTitle(title: "Purchase failed", message: error.localizedDescription)
-            case .clientInvalid: // client is not allowed to issue the request, etc.
+            case .clientInvalid:
                 return alertWithTitle(title: "Purchase failed", message: "Not allowed to make the payment")
-            case .paymentCancelled: // user cancelled the request, etc.
+            case .paymentCancelled:
                 return nil
-            case .paymentInvalid: // purchase identifier was invalid, etc.
+            case .paymentInvalid:
                 return alertWithTitle(title: "Purchase failed", message: "The purchase identifier was invalid")
-            case .paymentNotAllowed: // this device is not allowed to make the payment
+            case .paymentNotAllowed:
                 return alertWithTitle(title: "Purchase failed", message: "The device is not allowed to make the payment")
-            case .storeProductNotAvailable: // Product is not available in the current storefront
+            case .storeProductNotAvailable:
                 return alertWithTitle(title: "Purchase failed", message: "The product is not available in the current storefront")
-            case .cloudServicePermissionDenied: // user has not allowed access to cloud service information
+            case .cloudServicePermissionDenied:
                 return alertWithTitle(title: "Purchase failed", message: "Access to cloud service information is not allowed")
-            case .cloudServiceNetworkConnectionFailed: // the device could not connect to the nework
+            case .cloudServiceNetworkConnectionFailed:
                 return alertWithTitle(title: "Purchase failed", message: "Could not connect to the network")
-            case .cloudServiceRevoked: // user has revoked permission to use this cloud service
+            case .cloudServiceRevoked:
                 return alertWithTitle(title: "Purchase failed", message: "Cloud service was revoked")
             }
         }
@@ -357,7 +355,7 @@ extension GameViewController {
     
     func alertForVerifyReceipt(result: VerifyReceiptResult) -> UIAlertController {
         switch result {
-        case.success(let receipt):
+        case .success:
             return alertWithTitle(title: "Receipt Verified", message: "Receipt Verified Remotely")
         case .error(let error):
             switch error {
@@ -389,4 +387,3 @@ extension GameViewController {
         }
     }
 }
-

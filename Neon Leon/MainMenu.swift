@@ -32,7 +32,7 @@ class MainMenu: SKScene {
         setupNodes()
         
         if userDefaults.integer(forKey: "HIGHSCORE") <= 5 {
-            tutorialButtonImage = childNode(withName: "Tutorial") as! SKSpriteNode
+            tutorialButtonImage = childNode(withName: "Tutorial") as? SKSpriteNode
             let bounceUp = SKAction.move(by: CGVector(dx: 0, dy: 40), duration: 0.3)
             let dropDown = SKAction.move(by: CGVector(dx: 0, dy: -40), duration: 0.17)
             let bounceSequence = SKAction.sequence([bounceUp,dropDown,bounceUp,dropDown])
