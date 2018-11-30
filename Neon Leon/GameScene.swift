@@ -388,14 +388,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func physicsBodySettings(for physicsBody: SKPhysicsBody) -> SKPhysicsBody {
+        physicsBody.isDynamic = false
+        physicsBody.affectedByGravity = false
+        physicsBody.allowsRotation = false
+        return physicsBody
+    }
+    
     func addAnimationToOverlay(overlay: SKSpriteNode) {
         overlay.enumerateChildNodes(withName: "SpikeOutline") { (node, stop) in
             let newNode = SKSpriteNode()
             let spikeBodyTexture = SKTexture(imageNamed: "SpikeOutline")
-            newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 190/*196*/, height: 100/*120*/))
-            newNode.physicsBody?.isDynamic = false
-            newNode.physicsBody?.affectedByGravity = false
-            newNode.physicsBody?.allowsRotation = false
+            newNode.physicsBody = SKPhysicsBody(texture: spikeBodyTexture, size: CGSize(width: 190, height: 100))
+            newNode.physicsBody = self.physicsBodySettings(for: newNode.physicsBody!)
             newNode.physicsBody!.categoryBitMask = PhysicsCategory.Spikes
             newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
 
@@ -470,7 +475,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             overlay.addChild(newNode)
             node.removeFromParent()
-            
         }
         
         overlay.enumerateChildNodes(withName: "PlatformLow") { (node, stop) in
@@ -494,7 +498,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             overlay.addChild(newNode)
             node.removeFromParent()
-            
         }
         
         overlay.enumerateChildNodes(withName: "PlatformMid") { (node, stop) in
@@ -518,7 +521,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             overlay.addChild(newNode)
             node.removeFromParent()
-            
         }
         
         overlay.enumerateChildNodes(withName: "PlatformHigh") { (node, stop) in
@@ -542,7 +544,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             overlay.addChild(newNode)
             node.removeFromParent()
-            
         }
         
        
