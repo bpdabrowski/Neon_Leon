@@ -10,7 +10,6 @@
 		8B1BA74D9E267DB990570075 /* Pods_Neon_Leon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD3A69155B661F1E3B24F2C /* Pods_Neon_Leon.framework */; };
 		F213C2921FDCF76300B941D8 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		F213C2931FDCF76500B941D8 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		F216137E1F24F3E000378FD3 /* Level2.sks in Resources */ = {isa = PBXBuildFile; fileRef = F216137D1F24F3E000378FD3 /* Level2.sks */; };
 		F21AAE221F4A42B700B41405 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F21AAE211F4A42B700B41405 /* Assets.xcassets */; };
 		F21DE7341FEC9C5400D97E9C /* SwiftyAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DE7331FEC9C5400D97E9C /* SwiftyAd.swift */; };
 		F21DE7421FF3152C00D97E9C /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DE7411FF3152C00D97E9C /* MainMenu.swift */; };
@@ -25,15 +24,7 @@
 		F2344E032011978D00CAB45A /* Button Press.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2344E022011978D00CAB45A /* Button Press.wav */; };
 		F2382B802055B36B0096206E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2382B7F2055B36B0096206E /* GoogleService-Info.plist */; };
 		F258C6721F904D16004EB80E /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F258C6711F904D15004EB80E /* Button.swift */; };
-		F2660EB21FDDBFD8008CE74F /* Level5.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EB11FDDBFD8008CE74F /* Level5.sks */; };
-		F2660EB41FDDD6E4008CE74F /* Level6.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EB31FDDD6E4008CE74F /* Level6.sks */; };
-		F2660EB61FDDE8FB008CE74F /* Level7.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EB51FDDE8FB008CE74F /* Level7.sks */; };
-		F2660EB81FDDF455008CE74F /* Level8.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EB71FDDF455008CE74F /* Level8.sks */; };
-		F2660EBA1FDDFAEA008CE74F /* Level9.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EB91FDDFAEA008CE74F /* Level9.sks */; };
-		F2660EBC1FDE046C008CE74F /* Level10.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EBB1FDE046C008CE74F /* Level10.sks */; };
 		F26C442E201520E200D12109 /* Spacebased_Full.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F26C442D201520E200D12109 /* Spacebased_Full.mp3 */; };
-		F2704C5C1FCE605000799629 /* Level3.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2704C5B1FCE605000799629 /* Level3.sks */; };
-		F2704C601FCF942200799629 /* Level4.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2704C5F1FCF942200799629 /* Level4.sks */; };
 		F2751B191EB6B47C00B9F913 /* attribution.txt in Resources */ = {isa = PBXBuildFile; fileRef = F2751B071EB6B47B00B9F913 /* attribution.txt */; };
 		F2751B1C1EB6B47C00B9F913 /* boost.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2751B0A1EB6B47B00B9F913 /* boost.wav */; };
 		F2751B1E1EB6B47C00B9F913 /* coin1.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2751B0C1EB6B47B00B9F913 /* coin1.wav */; };
@@ -47,7 +38,6 @@
 		F2A550B7200C00B4000B4159 /* MouseExplode.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2A550B6200C00B4000B4159 /* MouseExplode.sks */; };
 		F2AF7D031FA4084A00DC5D2A /* NeonTubes2.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2AF7D021FA4084A00DC5D2A /* NeonTubes2.otf */; };
 		F2AF7D071FA528D400DC5D2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2AF7D051FA528D400DC5D2A /* Assets.xcassets */; };
-		F2B173322068803B000B2405 /* Level11.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B173312068803B000B2405 /* Level11.sks */; };
 		F2B335031EA4425C007801AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B335021EA4425C007801AC /* AppDelegate.swift */; };
 		F2B335051EA4425C007801AC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B335041EA4425C007801AC /* GameScene.sks */; };
 		F2B335071EA4425C007801AC /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B335061EA4425C007801AC /* Actions.sks */; };
@@ -82,7 +72,6 @@
 		49F45A333F5EAF0FFD0E515F /* Pods-Neon Leon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neon Leon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Neon Leon/Pods-Neon Leon.debug.xcconfig"; sourceTree = "<group>"; };
 		8FD3A69155B661F1E3B24F2C /* Pods_Neon_Leon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Neon_Leon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC1242CCEE1E2EAA302E7193 /* Pods-Neon Leon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neon Leon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Neon Leon/Pods-Neon Leon.release.xcconfig"; sourceTree = "<group>"; };
-		F216137D1F24F3E000378FD3 /* Level2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level2.sks; path = "Neon Leon/Levels/Level2.sks"; sourceTree = "<group>"; };
 		F21AAE211F4A42B700B41405 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F21DE7331FEC9C5400D97E9C /* SwiftyAd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyAd.swift; sourceTree = "<group>"; };
 		F21DE7411FF3152C00D97E9C /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
@@ -99,15 +88,7 @@
 		F2344E022011978D00CAB45A /* Button Press.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Button Press.wav"; sourceTree = "<group>"; };
 		F2382B7F2055B36B0096206E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F258C6711F904D15004EB80E /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
-		F2660EB11FDDBFD8008CE74F /* Level5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level5.sks; path = "Neon Leon/Levels/Level5.sks"; sourceTree = "<group>"; };
-		F2660EB31FDDD6E4008CE74F /* Level6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level6.sks; path = "Neon Leon/Levels/Level6.sks"; sourceTree = "<group>"; };
-		F2660EB51FDDE8FB008CE74F /* Level7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level7.sks; path = "Neon Leon/Levels/Level7.sks"; sourceTree = "<group>"; };
-		F2660EB71FDDF455008CE74F /* Level8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level8.sks; path = "Neon Leon/Levels/Level8.sks"; sourceTree = "<group>"; };
-		F2660EB91FDDFAEA008CE74F /* Level9.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level9.sks; path = "Neon Leon/Levels/Level9.sks"; sourceTree = "<group>"; };
-		F2660EBB1FDE046C008CE74F /* Level10.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level10.sks; path = "Neon Leon/Levels/Level10.sks"; sourceTree = "<group>"; };
 		F26C442D201520E200D12109 /* Spacebased_Full.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Spacebased_Full.mp3; sourceTree = "<group>"; };
-		F2704C5B1FCE605000799629 /* Level3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level3.sks; path = "Neon Leon/Levels/Level3.sks"; sourceTree = "<group>"; };
-		F2704C5F1FCF942200799629 /* Level4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level4.sks; path = "Neon Leon/Levels/Level4.sks"; sourceTree = "<group>"; };
 		F2751B071EB6B47B00B9F913 /* attribution.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = attribution.txt; sourceTree = "<group>"; };
 		F2751B0A1EB6B47B00B9F913 /* boost.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = boost.wav; sourceTree = "<group>"; };
 		F2751B0C1EB6B47B00B9F913 /* coin1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin1.wav; sourceTree = "<group>"; };
@@ -121,7 +102,6 @@
 		F2A550B6200C00B4000B4159 /* MouseExplode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MouseExplode.sks; sourceTree = "<group>"; };
 		F2AF7D021FA4084A00DC5D2A /* NeonTubes2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NeonTubes2.otf; sourceTree = "<group>"; };
 		F2AF7D051FA528D400DC5D2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F2B173312068803B000B2405 /* Level11.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level11.sks; path = "Neon Leon/Levels/Level11.sks"; sourceTree = "<group>"; };
 		F2B334FF1EA4425C007801AC /* Neon Leon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Neon Leon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2B335021EA4425C007801AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2B335041EA4425C007801AC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -187,16 +167,6 @@
 			isa = PBXGroup;
 			children = (
 				F2B3353F1EA44D01007801AC /* StartPlatform.sks */,
-				F2B173312068803B000B2405 /* Level11.sks */,
-				F2660EBB1FDE046C008CE74F /* Level10.sks */,
-				F2660EB91FDDFAEA008CE74F /* Level9.sks */,
-				F2660EB71FDDF455008CE74F /* Level8.sks */,
-				F2660EB51FDDE8FB008CE74F /* Level7.sks */,
-				F2660EB31FDDD6E4008CE74F /* Level6.sks */,
-				F2660EB11FDDBFD8008CE74F /* Level5.sks */,
-				F2704C5F1FCF942200799629 /* Level4.sks */,
-				F2704C5B1FCE605000799629 /* Level3.sks */,
-				F216137D1F24F3E000378FD3 /* Level2.sks */,
 				F2DE52791F37A9380062CCEF /* Level1.sks */,
 			);
 			name = Levels;
@@ -400,25 +370,19 @@
 				F213C2931FDCF76500B941D8 /* (null) in Resources */,
 				F277BD4A2063341900EA18C4 /* Platforms.sks in Resources */,
 				F2751B251EB6B47C00B9F913 /* jump.wav in Resources */,
-				F2660EB61FDDE8FB008CE74F /* Level7.sks in Resources */,
-				F2704C5C1FCE605000799629 /* Level3.sks in Resources */,
 				F277BD522063349600EA18C4 /* Hazards.sks in Resources */,
-				F2B173322068803B000B2405 /* Level11.sks in Resources */,
 				F2EF1A212055F6040056F3B2 /* OneArrow.sks in Resources */,
 				F2344DF3200EE9BD00CAB45A /* CoinCollect.mp3 in Resources */,
 				F2B3350E1EA4425C007801AC /* Main.storyboard in Resources */,
 				F2344E032011978D00CAB45A /* Button Press.wav in Resources */,
-				F2660EBC1FDE046C008CE74F /* Level10.sks in Resources */,
 				F2751B1E1EB6B47C00B9F913 /* coin1.wav in Resources */,
 				F2344DF5200EEA2600CAB45A /* New Record.mp3 in Resources */,
 				F2B335051EA4425C007801AC /* GameScene.sks in Resources */,
-				F2660EBA1FDDFAEA008CE74F /* Level9.sks in Resources */,
 				F2382B802055B36B0096206E /* GoogleService-Info.plist in Resources */,
 				F2EF1A1D2055C5E30056F3B2 /* ThreeArrows.sks in Resources */,
 				F2DE527A1F37A9380062CCEF /* Level1.sks in Resources */,
 				F213C2921FDCF76300B941D8 /* (null) in Resources */,
 				F26C442E201520E200D12109 /* Spacebased_Full.mp3 in Resources */,
-				F2660EB81FDDF455008CE74F /* Level8.sks in Resources */,
 				F2A550B7200C00B4000B4159 /* MouseExplode.sks in Resources */,
 				F2751B191EB6B47C00B9F913 /* attribution.txt in Resources */,
 				F2344DF7200EEAC100CAB45A /* Jump.mp3 in Resources */,
@@ -427,15 +391,11 @@
 				F2B335071EA4425C007801AC /* Actions.sks in Resources */,
 				F21AAE221F4A42B700B41405 /* Assets.xcassets in Resources */,
 				F2B335401EA44D01007801AC /* StartPlatform.sks in Resources */,
-				F216137E1F24F3E000378FD3 /* Level2.sks in Resources */,
 				F22208D11FE74D99000FF105 /* InvincibleTrail.sks in Resources */,
 				F22208CF1FE74C24000FF105 /* LightningExplode.sks in Resources */,
 				F277BD502063348100EA18C4 /* PowerUps.sks in Resources */,
 				FFB4BE6F21AE3DF100DBBA44 /* LaunchScreen.storyboard in Resources */,
 				F2344DFB20103CC000CAB45A /* GameOver.mp3 in Resources */,
-				F2660EB41FDDD6E4008CE74F /* Level6.sks in Resources */,
-				F2660EB21FDDBFD8008CE74F /* Level5.sks in Resources */,
-				F2704C601FCF942200799629 /* Level4.sks in Resources */,
 				F2AF7D071FA528D400DC5D2A /* Assets.xcassets in Resources */,
 				F2F9C639205F47DA001E58EE /* Controls.sks in Resources */,
 				F2751B1C1EB6B47C00B9F913 /* boost.wav in Resources */,

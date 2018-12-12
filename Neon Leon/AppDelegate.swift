@@ -21,16 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        FirebaseApp.configure()
-        
-        // Be sure to make sure the code is the same here and SwiftyAd.swift.
-        SwiftyAd.shared.setup(
-            withBannerID: "ca-app-pub-1397382354626971/3371077102", //"ca-app-pub-1397382354626971/3371077102",
-            interstitialID: "ca-app-pub-1397382354626971/2613363359", //"ca-app-pub-1397382354626971/2613363359",
-            rewardedVideoID: ""
-        )
-        
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {
                 switch purchase.transaction.transactionState {
@@ -40,12 +30,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         SwiftyStoreKit.finishTransaction(purchase.transaction)
                     }
                     
-                    // Unlock content
+                // Unlock content
                 case .failed, .purchasing, .deferred:
                     break // do nothing
                 }
             }
         }
+        
+        // Override point for customization after application launch.
+        FirebaseApp.configure()
+        
+        // Be sure to make sure the code is the same here and SwiftyAd.swift.
+        SwiftyAd.shared.setup(
+            withBannerID: "ca-app-pub-1397382354626971/3371077102", //"ca-app-pub-1397382354626971/3371077102",
+            interstitialID: "ca-app-pub-1397382354626971/2613363359", //"ca-app-pub-1397382354626971/2613363359",
+            rewardedVideoID: ""
+        )
         
         self.pushNotifications.start(instanceId: "0aa1eb0f-eb63-42e9-8869-f9040ad044e6")
         self.pushNotifications.registerForRemoteNotifications()

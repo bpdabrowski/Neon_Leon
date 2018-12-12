@@ -27,9 +27,12 @@ class MainMenu: SKScene {
     var settingsButtonSelected = false
     
     let gameViewController = GameViewController()
+    let gameScene = GameScene(fileNamed: "GameScene")
     
     override func didMove(to view: SKView) {
-        setupNodes()
+        self.setupNodes()
+        
+        self.gameScene?.sceneDidLoad()
         
         if userDefaults.integer(forKey: "HIGHSCORE") <= 5 {
             tutorialButtonImage = childNode(withName: "Tutorial") as? SKSpriteNode
@@ -54,22 +57,19 @@ class MainMenu: SKScene {
             let reveal = SKTransition.fade(withDuration: 1.0)
             self.view?.presentScene(newScene!, transition: reveal)
         } else {
-            let newScene = GameScene(fileNamed: "GameScene")
-            newScene!.scaleMode = .aspectFill
-            let reveal = SKTransition.fade(withDuration: 1.0)
-            self.view?.presentScene(newScene!, transition: reveal)
+            self.gameScene?.scaleMode = .aspectFill
+            self.view?.presentScene(self.gameScene!, transition: SKTransition.fade(withDuration: 1.0))
         }
-
     }
     
     func setupNodes() {
-        playButton = Button(defaultButtonImage: "PlayButton_00000", activeButtonImage: "PlayButton_00024", buttonAction: showGameScene)
+        playButton = Button(defaultButtonImage: "PlayButton_00000", activeButtonImage: "PlayButton_00024", buttonAction: self.showGameScene)
         playButton.position = CGPoint(x: 0, y: -150)
         playButton.alpha = 0.01
         playButton.zPosition = 10
         addChild(playButton)
         
-        reviewButton = Button(defaultButtonImage: "ReviewStar_00000", activeButtonImage: "ReviewStar_00024", buttonAction: appStorePage)
+        reviewButton = Button(defaultButtonImage: "ReviewStar_00000", activeButtonImage: "ReviewStar_00024", buttonAction: self.appStorePage)
         reviewButton.position = CGPoint(x: -385, y: -600)
         reviewButton.alpha = 0.01
         reviewButton.zPosition = 10
@@ -81,7 +81,7 @@ class MainMenu: SKScene {
         noAdsButton.zPosition = 10
         addChild(noAdsButton)
         
-        tutorialButton = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: showTutorialScene)
+        tutorialButton = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: self.showTutorialScene)
         tutorialButton.position = CGPoint(x: 0, y: -505)
         tutorialButton.alpha = 0.01
         tutorialButton.zPosition = 10
