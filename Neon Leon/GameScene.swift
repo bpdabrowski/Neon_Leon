@@ -176,7 +176,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let userDefaults = UserDefaults.standard
     
-    var invincible = false //Invincible
+    var isInvincible = false
     
     var powerUpBullet: SKSpriteNode!
     var deadFishBullet: SKSpriteNode!
@@ -199,6 +199,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var didLand = false
     
     let gvc = GameViewController()
+
+    // MARK: - Static Properties
+
+    static let playerAndInvincibleContactMask: UInt32 = 4097
     
     override func didMove(to view: SKView) {
         view.showsPhysics = false
@@ -580,8 +584,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             newNode.physicsBody?.affectedByGravity = false
             newNode.physicsBody?.allowsRotation = false
             newNode.physicsBody!.categoryBitMask = PhysicsCategory.Mouse
-            newNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
-        
+            newNode.physicsBody!.contactTestBitMask = Self.playerAndInvincibleContactMask
+
             node.removeFromParent()
         }
     }
@@ -652,10 +656,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func togglePlayerInvincibility() {
-        if self.invincible {
+        if self.isInvincible {
             self.invincibleTrail = self.addTrail(name: "InvincibleTrail")
             self.invincibleTrailAttached = true
-        } else if !self.invincible && self.invincibleTrailAttached {
+        } else if self.isInvincible && self.invincibleTrailAttached {
             self.player.removeAllChildren()
             self.player.physicsBody?.categoryBitMask = PhysicsCategory.Player
             self.invincibleTrailAttached = false
@@ -866,11 +870,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func endInvincible(_ dt: TimeInterval) {
-        if invincible == true {
+        if self.isInvincible {
             invincibleTime += dt
-            print("\(invincibleTime)")
-            if invincibleTime > 7 { //Invincible
-                invincible = false
+
+            if invincibleTime > 7 {
+                self.isInvincible = false
                 player.physicsBody?.categoryBitMask = PhysicsCategory.Player
                 invincibleTime = 0
             }
@@ -924,7 +928,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         addAnimationToOverlay(overlay: foregroundOverlay)
         fgNode.addChild(foregroundOverlay)
-        
+
         foregroundOverlay.isPaused = false
     }
     
@@ -1262,8 +1266,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             PhysicsCategory.Player ? contact.bodyB : contact.bodyA
         switch other.categoryBitMask {
         case PhysicsCategory.powerUp:
-            if invincible == false {
-                invincible = true
+            if !self.isInvincible {
+                self.isInvincible = true
                 emitParticles(name: "LightningExplode", sprite: powerUpBullet)
                 player.physicsBody?.categoryBitMask = PhysicsCategory.Invincible
                 run(powerUp)
@@ -1370,14 +1374,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     run(electricute)
             
         case PhysicsCategory.Lava:
-            if invincible == false {
+            if !self.isInvincible {
                 gameOver()
                 run(electricute)
-            } else if invincible == true {
+            } else if self.isInvincible {
                 superBoostPlayer()
                 run(soundJump)
             }
             
+        default:
+            break
+        }
+    }
+
+    func didEnd(_ contact: SKPhysicsContact) {
+        let other: SKPhysicsBody?
+
+        if contact.bodyA.categoryBitMask == PhysicsCategory.Player || contact.bodyA.categoryBitMask == PhysicsCategory.Invincible {
+            other = contact.bodyB
+        } else {
+            other = contact.bodyA
+        }
+
+        switch other?.categoryBitMask {
+        case PhysicsCategory.Mouse:
+            if let mouse = other?.node as? SKSpriteNode {
+                emitParticles(name: "MouseExplode", sprite: mouse)
+                run(mouseHit)
+                score += 2
+                mouse.removeFromParent()
+            }
+
         default:
             break
         }
@@ -1406,23 +1433,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    func didEnd(_ contact: SKPhysicsContact) {
-        let other = contact.bodyA.categoryBitMask ==
-            PhysicsCategory.Player ? contact.bodyB : contact.bodyA
-        switch other.categoryBitMask {
-        case PhysicsCategory.Mouse:
-            if let mouse = other.node as? SKSpriteNode {
-                emitParticles(name: "MouseExplode", sprite: mouse)
-                run(mouseHit)
-                score += 2
-                mouse.removeFromParent()
-            }
-            
-        default:
-            break
-            }
-        }
-    
     func addTrail(name: String) -> SKEmitterNode {
         let trail = SKEmitterNode(fileNamed: name)!
         trail.zPosition = -1
