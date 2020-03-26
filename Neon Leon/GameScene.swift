@@ -11,7 +11,6 @@ import GameplayKit
 import AVFoundation
 import StoreKit
 import Firebase
-import GoogleMobileAds
 
 
 struct PhysicsCategory {
@@ -1154,21 +1153,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.camera?.addChild(gameOverLabel)
             gameOverLabel.run(SKAction.sequence([gameOverMove,gameOverAnimation]))
             
-            let noAdsButton = self.setupButton(pictureBase: "NoAds_00000", pictureWidth: 335, pictureHeight: 357, buttonPositionX: 600, buttonPositionY: -600, zPosition: 8)
-            
-            let noAdsButtonAnimation = self.buttonAnimation(animationBase: "NoAds_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 43, startTimePerFrame: 0.05, foreverTimePerFrame: 0.05)
-            
-            let noAdsButtonTransparent = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00000", buttonAction: self.gvc.removeAds)
-            
-            noAdsButtonTransparent.position = CGPoint(x: 385, y: -600)
-            noAdsButtonTransparent.alpha = 0.01
-            noAdsButtonTransparent.zPosition = 10
-            
-            let noAdsMove = SKAction.moveBy(x: -215, y: 0, duration: 0.5)
-            
-            self.camera?.addChild(noAdsButtonTransparent)
-            self.camera?.addChild(noAdsButton)
-            noAdsButton.run(SKAction.sequence([noAdsMove,noAdsButtonAnimation]))
+//            let noAdsButton = self.setupButton(pictureBase: "NoAds_00000", pictureWidth: 335, pictureHeight: 357, buttonPositionX: 600, buttonPositionY: -600, zPosition: 8)
+//
+//            let noAdsButtonAnimation = self.buttonAnimation(animationBase: "NoAds_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 43, startTimePerFrame: 0.05, foreverTimePerFrame: 0.05)
+//
+//            let noAdsButtonTransparent = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00000", buttonAction: self.gvc.removeAds)
+//
+//            noAdsButtonTransparent.position = CGPoint(x: 385, y: -600)
+//            noAdsButtonTransparent.alpha = 0.01
+//            noAdsButtonTransparent.zPosition = 10
+//
+//            let noAdsMove = SKAction.moveBy(x: -215, y: 0, duration: 0.5)
+//
+//            self.camera?.addChild(noAdsButtonTransparent)
+//            self.camera?.addChild(noAdsButton)
+//            noAdsButton.run(SKAction.sequence([noAdsMove,noAdsButtonAnimation]))
             
             let mainMenuButton = self.setupButton(pictureBase: "HomeButton_00030", pictureWidth: 200, pictureHeight: 200, buttonPositionX: 0, buttonPositionY: -505, zPosition: 8)
             
@@ -1186,19 +1185,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.camera?.addChild(mainMenuButton)
             mainMenuButton.run(SKAction.sequence([mainMenuMove,mainMenuButtonAnimation]))
             
-            let restoreIAPButton = self.setupButton(pictureBase: "RestoreIAP_00000", pictureWidth: 200, pictureHeight: 200, buttonPositionX: 0, buttonPositionY: -705, zPosition: 8)
+//            let restoreIAPButton = self.setupButton(pictureBase: "RestoreIAP_00000", pictureWidth: 200, pictureHeight: 200, buttonPositionX: 0, buttonPositionY: -705, zPosition: 8)
             
-            let restoreIAPButtonAnimation = self.buttonAnimation(animationBase: "RestoreIAP_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 15, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
+//            let restoreIAPButtonAnimation = self.buttonAnimation(animationBase: "RestoreIAP_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 15, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
+//
+//            let restoreIAPButtonTransparent = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: self.gvc.restorePurchasesWithAlert)
+//
+//            restoreIAPButtonTransparent.position = CGPoint(x: 0, y: -705)
+//            restoreIAPButtonTransparent.alpha = 0.01
+//            restoreIAPButtonTransparent.zPosition = 10
             
-            let restoreIAPButtonTransparent = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: self.gvc.restorePurchasesWithAlert)
-            
-            restoreIAPButtonTransparent.position = CGPoint(x: 0, y: -705)
-            restoreIAPButtonTransparent.alpha = 0.01
-            restoreIAPButtonTransparent.zPosition = 10
-            
-            self.camera?.addChild(restoreIAPButtonTransparent)
-            self.camera?.addChild(restoreIAPButton)
-            restoreIAPButton.run(SKAction.sequence([mainMenuMove,restoreIAPButtonAnimation]))
+//            self.camera?.addChild(restoreIAPButtonTransparent)
+//            self.camera?.addChild(restoreIAPButton)
+//            restoreIAPButton.run(SKAction.sequence([mainMenuMove,restoreIAPButtonAnimation]))
             
             let dimmerSprite = SKSpriteNode(imageNamed: "Dimmer")
             dimmerSprite.position = self.camera!.position
@@ -1226,9 +1225,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.camera?.addChild(highScoreNumber)
             
             if let viewController = self.view?.window?.rootViewController {
-                if SwiftyAd.shared.isInterstitialReady {
-                    SwiftyAd.shared.showInterstitial(from: viewController, withInterval: 5)
-                }
+//                if SwiftyAd.shared.isInterstitialReady {
+//                    SwiftyAd.shared.showInterstitial(from: viewController, withInterval: 5)
+//                }
             }
         })
     }

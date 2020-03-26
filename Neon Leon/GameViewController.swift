@@ -10,10 +10,10 @@ import UIKit
 import SpriteKit
 import GameplayKit
 import Firebase
-import GoogleMobileAds
 import AVFoundation
 import SwiftyStoreKit
 import StoreKit
+import FBAudienceNetwork
 
 // within iTunes Connect > go to in app purchases > on the right select View shared secret > copy that and paste in quotes below
 var sharedSecret = "30ca8d6c6cde4e7cb26fb382db93f14a"
@@ -59,7 +59,7 @@ extension Notification.Name {
 
 var backgroundMusicPlayer: AVAudioPlayer?
 
-class GameViewController: UIViewController, GADBannerViewDelegate {
+class GameViewController: UIViewController, FBAdViewDelegate {
     
     var removeAdsPurchased = false
 
@@ -70,6 +70,10 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
     var RemoveAds = RegisteredPurchase.RemoveAds
     
     var soundOff = false
+
+    var adContainer: UIView!
+
+    var adView: FBAdView?
     
     func removeAds() {
         print("removeAds is getting called")
@@ -82,17 +86,29 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        restorePurchases()
+//        restorePurchases()
+
+        self.adContainer = UIView()
+        self.view.addSubview(self.adContainer)
+
+        self.adContainer.translatesAutoresizingMaskIntoConstraints = false
+        self.adContainer.widthAnchor.constraint(equalToConstant: 320).isActive = true
+        self.adContainer.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.adContainer.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        self.adContainer.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+
+        self.adView = FBAdView(placementID: "522128718497279_522129065163911", adSize: kFBAdSizeHeight50Banner, rootViewController: self)
+        self.adView?.frame = CGRect(x: 0, y: 0, width: 320, height: 50)
+        self.adView?.delegate = self
+        self.adView?.loadAd()
         
-        //SwiftyAd.shared.isRemoved = true //Bring this back if you want to turn off Ads for testing.
-        
-        if nonConsumablePurchaseMade == true {
-            SwiftyAd.shared.isRemoved = true
-            print("NON CONSUMABLE PURCHASE MADE: \(nonConsumablePurchaseMade)")
-        } else {
-            SwiftyAd.shared.isRemoved = false
-            SwiftyAd.shared.showBanner(from: self)
-        }
+//        if nonConsumablePurchaseMade == true {
+//            SwiftyAd.shared.isRemoved = true
+//            print("NON CONSUMABLE PURCHASE MADE: \(nonConsumablePurchaseMade)")
+//        } else {
+//            SwiftyAd.shared.isRemoved = false
+//            SwiftyAd.shared.showBanner(from: self)
+//        }
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -125,6 +141,26 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
             view.showsFPS = false
             view.showsNodeCount = false
         }
+    }
+
+    func adView(_ adView: FBAdView, didFailWithError: Error) {
+        print("Ad failed to load \(didFailWithError)")
+    }
+
+    func adViewDidLoad(_ adView: FBAdView) {
+        print("Ad was loaded and ready to display")
+
+        guard let adContainer = self.adContainer else {
+            print("Ad Container is nil")
+            return
+        }
+
+        guard let adView = self.adView, adView.isAdValid else {
+            print("Ad view is either nil or is not valid.")
+            return
+        }
+
+        adContainer.addSubview(adView)
     }
 
     override var shouldAutorotate: Bool {
@@ -167,11 +203,11 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
                 if product.productId == self.bundleID + "." + "RemoveAds" {
                     self.removeAdsPurchased = true
                     if self.removeAdsPurchased == true {
-                        SwiftyAd.shared.isRemoved = true
+//                        SwiftyAd.shared.isRemoved = true
                         self.nonConsumablePurchaseMade = true
                         UserDefaults.standard.set(self.nonConsumablePurchaseMade, forKey: "nonConsumablePurchaseMade")
                     } else {
-                        SwiftyAd.shared.isRemoved = false
+//                        SwiftyAd.shared.isRemoved = false
                     }
                 }
                 
@@ -193,7 +229,7 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
                 print("Restore Failed: \(results.restoreFailedPurchases)")
             }
             else if results.restoredPurchases.count > 0 {
-                SwiftyAd.shared.isRemoved = true
+//                SwiftyAd.shared.isRemoved = true
                 self.nonConsumablePurchaseMade = true
                 print("Restore Success: \(results.restoredPurchases)")
             }
@@ -216,7 +252,7 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
                 print("Restore Failed: \(results.restoreFailedPurchases)")
             }
             else if results.restoredPurchases.count > 0 {
-                SwiftyAd.shared.isRemoved = true
+//                SwiftyAd.shared.isRemoved = true
                 self.nonConsumablePurchaseMade = true
                 print("Restore Success: \(results.restoredPurchases)")
             }
@@ -336,6 +372,13 @@ extension GameViewController {
                 return alertWithTitle(title: "Purchase failed", message: "Could not connect to the network")
             case .cloudServiceRevoked:
                 return alertWithTitle(title: "Purchase failed", message: "Cloud service was revoked")
+            case .privacyAcknowledgementRequired,
+                 .unauthorizedRequestData,
+                 .invalidOfferIdentifier,
+                 .invalidSignature,
+                 .missingOfferParams,
+                 .invalidOfferPrice:
+                return alertWithTitle(title: "Purchase failed", message: "Please contact support. Sorry for the inconvenience.")
             }
         }
     }

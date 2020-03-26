@@ -5,9 +5,9 @@
       location = "group:/Users/macair/Desktop/Swift/Neon Leon/Neon Leon.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Pods/Pods.xcodeproj">
+      location = "group:Neon Leon.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Neon Leon.xcodeproj">
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
