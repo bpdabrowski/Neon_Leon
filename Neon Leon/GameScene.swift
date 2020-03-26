@@ -613,50 +613,67 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func updatePlayer() {
-        // Wrap player around edges of screen
-        var playerPosition = convert(player.position, from: fgNode)
-        let leftLimit = sceneCropAmount()/2 - player.size.width/2
-        let rightLimit = size.width - sceneCropAmount()/2 + player.size.width/2
-        if playerPosition.x < leftLimit {
-            playerPosition = convert(CGPoint(x: rightLimit, y: 0.0), to: fgNode)
-            player.position.x = playerPosition.x
+        self.wrapPlayerAroundEdges()
+        self.playJumpingAnimation()
+        self.togglePlayerInvincibility()
+    }
+
+    private func playJumpingAnimation() {
+        guard let physicsBody = self.player.physicsBody else {
+            print("Unable to get a reference to the players physics body.")
+            return
         }
-        else if playerPosition.x > rightLimit {
-            playerPosition = convert(CGPoint(x: leftLimit, y: 0.0), to: fgNode)
-            player.position.x = playerPosition.x
-        }
-        
+
+         let playerVerticalVelocity = physicsBody.velocity.dy
+
         // Check player state
         // Turn this back on when you want to add player trail
-        if player.physicsBody!.velocity.dy < CGFloat(0.0) && playerState != .fall {
-            playerState = .fall
-        } else if player.physicsBody!.velocity.dy > CGFloat(0.0) && playerState != .jump {
-            playerState = .jump
+        if playerVerticalVelocity < CGFloat(0.0) && self.playerState != .fall {
+            self.playerState = .fall
+        } else if playerVerticalVelocity > CGFloat(0.0) && self.playerState != .jump {
+            self.playerState = .jump
         }
-        
+
         // Animate player
         switch playerState {
         case .jump:
-            if abs(player.physicsBody!.velocity.dx) > 100.0 {
-                runPlayerAnimation(playerAnimationJump)
+            if abs(playerVerticalVelocity) > 100.0 {
+                self.runPlayerAnimation(playerAnimationJump)
             }
         case .fall:
-            runPlayerAnimation(playerAnimationFall)
+            self.runPlayerAnimation(self.playerAnimationFall)
         case .idle:
-            runPlayerAnimation(playerAnimationPlatform)
+            self.runPlayerAnimation(self.playerAnimationPlatform)
         case .lava:
             break
         case .dead:
             break
         }
-        
-        if invincible == true {
-            invincibleTrail = addTrail(name: "InvincibleTrail")
-            invincibleTrailAttached = true
-        } else if invincible == false && invincibleTrailAttached == true {
-            player.removeAllChildren()
-            player.physicsBody?.categoryBitMask = PhysicsCategory.Player
-            invincibleTrailAttached = false
+    }
+
+    private func togglePlayerInvincibility() {
+        if self.invincible {
+            self.invincibleTrail = self.addTrail(name: "InvincibleTrail")
+            self.invincibleTrailAttached = true
+        } else if !self.invincible && self.invincibleTrailAttached {
+            self.player.removeAllChildren()
+            self.player.physicsBody?.categoryBitMask = PhysicsCategory.Player
+            self.invincibleTrailAttached = false
+        }
+    }
+
+    private func wrapPlayerAroundEdges() {
+        // Wrap player around edges of screen
+        var playerPosition = convert(player.position, from: fgNode)
+        let leftLimit = sceneCropAmount() / 2 - player.size.width / 2
+        let rightLimit = size.width - sceneCropAmount() / 2 + player.size.width / 2
+
+        if playerPosition.x < leftLimit {
+            playerPosition = convert(CGPoint(x: rightLimit, y: 0.0), to: fgNode)
+            self.player.position.x = playerPosition.x
+        } else if playerPosition.x > rightLimit {
+            playerPosition = convert(CGPoint(x: leftLimit, y: 0.0), to: fgNode)
+            self.player.position.x = playerPosition.x
         }
     }
     
