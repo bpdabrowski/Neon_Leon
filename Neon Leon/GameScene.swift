@@ -1397,7 +1397,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if let mouse = other.node as? SKSpriteNode {
                 emitParticles(name: "MouseExplode", sprite: mouse)
                 run(mouseHit)
-                score += 3
+                score += 2
                 mouse.removeFromParent()
             }
             
