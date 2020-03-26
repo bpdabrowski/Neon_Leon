@@ -13,13 +13,13 @@ class MainMenu: SKScene {
     
     var playButton: Button!
     var reviewButton: Button!
-    var noAdsButton: Button!
+//    var noAdsButton: Button!
     var tutorialButton: Button!
     var settingsButton: Button!
     var soundButton: Button!
-    var restoreIAPButton: Button!
+//    var restoreIAPButton: Button!
     var soundImage: SKSpriteNode!
-    var restoreIAPImage: SKSpriteNode!
+//    var restoreIAPImage: SKSpriteNode!
     let userDefaults = UserDefaults.standard
     var tutorialButtonImage: SKSpriteNode!
     let notification = UINotificationFeedbackGenerator()
@@ -75,11 +75,11 @@ class MainMenu: SKScene {
         reviewButton.zPosition = 10
         addChild(reviewButton)
         
-        noAdsButton = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00024", buttonAction: gameViewController.removeAds)
-        noAdsButton.position = CGPoint(x: 385, y: -600)
-        noAdsButton.alpha = 0.01
-        noAdsButton.zPosition = 10
-        addChild(noAdsButton)
+//        noAdsButton = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00024", buttonAction: gameViewController.removeAds)
+//        noAdsButton.position = CGPoint(x: 385, y: -600)
+//        noAdsButton.alpha = 0.01
+//        noAdsButton.zPosition = 10
+//        addChild(noAdsButton)
         
         tutorialButton = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: showTutorialScene)
         tutorialButton.position = CGPoint(x: 0, y: -505)
@@ -87,11 +87,13 @@ class MainMenu: SKScene {
         tutorialButton.zPosition = 10
         addChild(tutorialButton)
         
-        restoreIAPButton = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: gameViewController.restorePurchases)
-        restoreIAPButton.position = CGPoint(x: 0, y: -705)
-        restoreIAPButton.alpha = 0.01
-        restoreIAPButton.zPosition = 10
-        addChild(restoreIAPButton)
+//        restoreIAPButton = Button(defaultButtonImage: "SmallButtonCircle",
+//                                  activeButtonImage: "SmallButtonCircle",
+//                                  buttonAction: gameViewController.restorePurchases)
+//        restoreIAPButton.position = CGPoint(x: 0, y: -705)
+//        restoreIAPButton.alpha = 0.01
+//        restoreIAPButton.zPosition = 10
+//        addChild(restoreIAPButton)
     }
     
     func appStorePage() {

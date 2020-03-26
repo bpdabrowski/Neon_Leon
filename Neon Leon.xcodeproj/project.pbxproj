@@ -8,11 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8B1BA74D9E267DB990570075 /* Pods_Neon_Leon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD3A69155B661F1E3B24F2C /* Pods_Neon_Leon.framework */; };
-		F213C2921FDCF76300B941D8 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		F213C2931FDCF76500B941D8 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		F213C2921FDCF76300B941D8 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		F213C2931FDCF76500B941D8 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		F216137E1F24F3E000378FD3 /* Level2.sks in Resources */ = {isa = PBXBuildFile; fileRef = F216137D1F24F3E000378FD3 /* Level2.sks */; };
 		F21AAE221F4A42B700B41405 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F21AAE211F4A42B700B41405 /* Assets.xcassets */; };
-		F21DE7341FEC9C5400D97E9C /* SwiftyAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DE7331FEC9C5400D97E9C /* SwiftyAd.swift */; };
 		F21DE7421FF3152C00D97E9C /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DE7411FF3152C00D97E9C /* MainMenu.swift */; };
 		F21DE7441FF3153D00D97E9C /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21DE7431FF3153D00D97E9C /* MainMenu.sks */; };
 		F22208CF1FE74C24000FF105 /* LightningExplode.sks in Resources */ = {isa = PBXBuildFile; fileRef = F22208CE1FE74C24000FF105 /* LightningExplode.sks */; };
@@ -23,7 +22,6 @@
 		F2344DF7200EEAC100CAB45A /* Jump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F2344DF6200EEAC000CAB45A /* Jump.mp3 */; };
 		F2344DFB20103CC000CAB45A /* GameOver.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F2344DFA20103CC000CAB45A /* GameOver.mp3 */; };
 		F2344E032011978D00CAB45A /* Button Press.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2344E022011978D00CAB45A /* Button Press.wav */; };
-		F2382B802055B36B0096206E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2382B7F2055B36B0096206E /* GoogleService-Info.plist */; };
 		F258C6721F904D16004EB80E /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F258C6711F904D15004EB80E /* Button.swift */; };
 		F2660EB21FDDBFD8008CE74F /* Level5.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EB11FDDBFD8008CE74F /* Level5.sks */; };
 		F2660EB41FDDD6E4008CE74F /* Level6.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2660EB31FDDD6E4008CE74F /* Level6.sks */; };
@@ -74,9 +72,112 @@
 		F2F9C639205F47DA001E58EE /* Controls.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2F9C638205F47DA001E58EE /* Controls.sks */; };
 		F2F9C63B205F47E2001E58EE /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F9C63A205F47E2001E58EE /* Controls.swift */; };
 		FF67A7F921AE472100F1479D /* PowerUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF67A7F821AE472100F1479D /* PowerUp.wav */; };
-		FFB4BE6C21AE254D00DBBA44 /* SwiftyAdConsentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB4BE6B21AE254D00DBBA44 /* SwiftyAdConsentManager.swift */; };
+		FF7437DC242B083700DA8006 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF7437DB242B083700DA8006 /* GoogleService-Info.plist */; };
 		FFB4BE6F21AE3DF100DBBA44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFB4BE6E21AE3DF100DBBA44 /* LaunchScreen.storyboard */; };
+		FFCB2C14242ADB4A0088B80C /* licenses in Resources */ = {isa = PBXBuildFile; fileRef = FFCB2C00242ADB4A0088B80C /* licenses */; };
+		FFCB2C15242ADB4A0088B80C /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFCB2C02242ADB4A0088B80C /* FBAudienceNetwork.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FFCB2BEE242AD8300088B80C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 271B0AC4311E0F7E418C355F497209C6;
+			remoteInfo = FirebaseCore;
+		};
+		FFCB2BF0242AD8300088B80C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A570F24A883F7B814073F5D83D141043;
+			remoteInfo = GoogleUtilities;
+		};
+		FFCB2BF2242AD8300088B80C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F235384B501EC177572F8290E4153F48;
+			remoteInfo = nanopb;
+		};
+		FFCB2BF4242AD8300088B80C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1C7311E35C0D4D5372765D7C9230B488;
+			remoteInfo = PersonalizedAdConsent;
+		};
+		FFCB2BF6242AD8300088B80C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DF49E27DDF73D77A5B5E1557C19B27E7;
+			remoteInfo = "PersonalizedAdConsent-PersonalizedAdConsent";
+		};
+		FFCB2BF8242AD8300088B80C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DE970C06B3D84A853FF495D2DFD95B6;
+			remoteInfo = "Pods-Neon Leon";
+		};
+		FFCB2BFA242AD8300088B80C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1230D5628C1093255B875A34669F0BAF;
+			remoteInfo = PushNotifications;
+		};
+		FFCB2BFC242AD8300088B80C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 72D42AF596E27F539641AD80C4821C27;
+			remoteInfo = SwiftyStoreKit;
+		};
+		FFCB2C12242ADB4A0088B80C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC8F4D0BE3B0C192EBA4A93F8887D89F;
+			remoteInfo = FBSDKCoreKit;
+		};
+		FFF6E61B242AEA1300BD40C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8CC9178C366942FD6FF6A115604EAD58;
+			remoteInfo = FirebaseCoreDiagnostics;
+		};
+		FFF6E61D242AEA1300BD40C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 13C8C8B254851998F9289F71229B28A2;
+			remoteInfo = FirebaseInstallations;
+		};
+		FFF6E61F242AEA1300BD40C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 856B5CD56F194FAD26EA91620B66D614;
+			remoteInfo = GoogleDataTransport;
+		};
+		FFF6E621242AEA1300BD40C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6942351307BC1F54575D9853307EAE0E;
+			remoteInfo = GoogleDataTransportCCTSupport;
+		};
+		FFF6E623242AEA1300BD40C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3347A1AB6546F0A3977529B8F199DC41;
+			remoteInfo = PromisesObjC;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		49F45A333F5EAF0FFD0E515F /* Pods-Neon Leon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neon Leon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Neon Leon/Pods-Neon Leon.debug.xcconfig"; sourceTree = "<group>"; };
@@ -84,7 +185,6 @@
 		EC1242CCEE1E2EAA302E7193 /* Pods-Neon Leon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neon Leon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Neon Leon/Pods-Neon Leon.release.xcconfig"; sourceTree = "<group>"; };
 		F216137D1F24F3E000378FD3 /* Level2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level2.sks; path = "Neon Leon/Levels/Level2.sks"; sourceTree = "<group>"; };
 		F21AAE211F4A42B700B41405 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F21DE7331FEC9C5400D97E9C /* SwiftyAd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyAd.swift; sourceTree = "<group>"; };
 		F21DE7411FF3152C00D97E9C /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		F21DE7431FF3153D00D97E9C /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
 		F22208CE1FE74C24000FF105 /* LightningExplode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LightningExplode.sks; sourceTree = "<group>"; };
@@ -97,7 +197,6 @@
 		F2344DF6200EEAC000CAB45A /* Jump.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jump.mp3; sourceTree = "<group>"; };
 		F2344DFA20103CC000CAB45A /* GameOver.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GameOver.mp3; sourceTree = "<group>"; };
 		F2344E022011978D00CAB45A /* Button Press.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Button Press.wav"; sourceTree = "<group>"; };
-		F2382B7F2055B36B0096206E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F258C6711F904D15004EB80E /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		F2660EB11FDDBFD8008CE74F /* Level5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level5.sks; path = "Neon Leon/Levels/Level5.sks"; sourceTree = "<group>"; };
 		F2660EB31FDDD6E4008CE74F /* Level6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level6.sks; path = "Neon Leon/Levels/Level6.sks"; sourceTree = "<group>"; };
@@ -150,8 +249,11 @@
 		F2F9C638205F47DA001E58EE /* Controls.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Controls.sks; sourceTree = "<group>"; };
 		F2F9C63A205F47E2001E58EE /* Controls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
 		FF67A7F821AE472100F1479D /* PowerUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PowerUp.wav; sourceTree = "<group>"; };
-		FFB4BE6B21AE254D00DBBA44 /* SwiftyAdConsentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyAdConsentManager.swift; path = "../../../../../Downloads/swifty-ad-master/SwiftyAd/SwiftyAdConsentManager.swift"; sourceTree = "<group>"; };
+		FF7437DB242B083700DA8006 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FFB4BE6E21AE3DF100DBBA44 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
+		FFCB2C00242ADB4A0088B80C /* licenses */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = licenses; sourceTree = "<group>"; };
+		FFCB2C02242ADB4A0088B80C /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B1BA74D9E267DB990570075 /* Pods_Neon_Leon.framework in Frameworks */,
+				FFCB2C15242ADB4A0088B80C /* FBAudienceNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +350,7 @@
 		F2B334F61EA4425C007801AC = {
 			isa = PBXGroup;
 			children = (
+				FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */,
 				F21AAE211F4A42B700B41405 /* Assets.xcassets */,
 				F2B335011EA4425C007801AC /* Neon Leon */,
 				F2B335001EA4425C007801AC /* Products */,
@@ -266,6 +370,7 @@
 		F2B335011EA4425C007801AC /* Neon Leon */ = {
 			isa = PBXGroup;
 			children = (
+				FFCB2BFF242ADB4A0088B80C /* FBAudienceNetwork */,
 				F231DC372088158B00619DC8 /* Neon Leon.entitlements */,
 				F2AF7D011FA4083100DC5D2A /* Font */,
 				F2B335431EA6F92D007801AC /* SKTUtils */,
@@ -276,16 +381,14 @@
 				F2B335061EA4425C007801AC /* Actions.sks */,
 				F2B335021EA4425C007801AC /* AppDelegate.swift */,
 				F258C6711F904D15004EB80E /* Button.swift */,
-				F21DE7331FEC9C5400D97E9C /* SwiftyAd.swift */,
-				FFB4BE6B21AE254D00DBBA44 /* SwiftyAdConsentManager.swift */,
 				F2B3350A1EA4425C007801AC /* GameViewController.swift */,
 				F21DE7431FF3153D00D97E9C /* MainMenu.sks */,
 				F21DE7411FF3152C00D97E9C /* MainMenu.swift */,
 				F2B3350C1EA4425C007801AC /* Main.storyboard */,
 				FFB4BE6E21AE3DF100DBBA44 /* LaunchScreen.storyboard */,
 				F2B335141EA4425C007801AC /* Info.plist */,
-				F2382B7F2055B36B0096206E /* GoogleService-Info.plist */,
 				F2336DC4201B9CDC00F98729 /* Attributions */,
+				FF7437DB242B083700DA8006 /* GoogleService-Info.plist */,
 				F2751B051EB6B47B00B9F913 /* sounds */,
 				F2BE38471EB52F2200EF28F2 /* Particles */,
 			);
@@ -324,6 +427,45 @@
 				F2EF1A202055F6040056F3B2 /* OneArrow.sks */,
 			);
 			name = Particles;
+			sourceTree = "<group>";
+		};
+		FFCB2BE4242AD8300088B80C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FFCB2C13242ADB4A0088B80C /* FBSDKCoreKit.framework */,
+				FFCB2BEF242AD8300088B80C /* FirebaseCore.framework */,
+				FFF6E61C242AEA1300BD40C8 /* FirebaseCoreDiagnostics.framework */,
+				FFF6E61E242AEA1300BD40C8 /* FirebaseInstallations.framework */,
+				FFF6E620242AEA1300BD40C8 /* GoogleDataTransport.framework */,
+				FFF6E622242AEA1300BD40C8 /* GoogleDataTransportCCTSupport.framework */,
+				FFCB2BF1242AD8300088B80C /* GoogleUtilities.framework */,
+				FFCB2BF3242AD8300088B80C /* nanopb.framework */,
+				FFCB2BF5242AD8300088B80C /* PersonalizedAdConsent.framework */,
+				FFCB2BF7242AD8300088B80C /* PersonalizedAdConsent.bundle */,
+				FFCB2BF9242AD8300088B80C /* Pods_Neon_Leon.framework */,
+				FFF6E624242AEA1300BD40C8 /* FBLPromises.framework */,
+				FFCB2BFB242AD8300088B80C /* PushNotifications.framework */,
+				FFCB2BFD242AD8300088B80C /* SwiftyStoreKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FFCB2BFF242ADB4A0088B80C /* FBAudienceNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				FFCB2C00242ADB4A0088B80C /* licenses */,
+				FFCB2C01242ADB4A0088B80C /* Static */,
+			);
+			name = FBAudienceNetwork;
+			path = Pods/FBAudienceNetwork;
+			sourceTree = SOURCE_ROOT;
+		};
+		FFCB2C01242ADB4A0088B80C /* Static */ = {
+			isa = PBXGroup;
+			children = (
+				FFCB2C02242ADB4A0088B80C /* FBAudienceNetwork.framework */,
+			);
+			path = Static;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,12 +521,19 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
 			mainGroup = F2B334F61EA4425C007801AC;
 			productRefGroup = F2B335001EA4425C007801AC /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FFCB2BE4242AD8300088B80C /* Products */;
+					ProjectRef = FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				F2B334FE1EA4425C007801AC /* Neon Leon */,
@@ -392,12 +541,113 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		FFCB2BEF242AD8300088B80C /* FirebaseCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseCore.framework;
+			remoteRef = FFCB2BEE242AD8300088B80C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FFCB2BF1242AD8300088B80C /* GoogleUtilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleUtilities.framework;
+			remoteRef = FFCB2BF0242AD8300088B80C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FFCB2BF3242AD8300088B80C /* nanopb.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = nanopb.framework;
+			remoteRef = FFCB2BF2242AD8300088B80C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FFCB2BF5242AD8300088B80C /* PersonalizedAdConsent.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PersonalizedAdConsent.framework;
+			remoteRef = FFCB2BF4242AD8300088B80C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FFCB2BF7242AD8300088B80C /* PersonalizedAdConsent.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PersonalizedAdConsent.bundle;
+			remoteRef = FFCB2BF6242AD8300088B80C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FFCB2BF9242AD8300088B80C /* Pods_Neon_Leon.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_Neon_Leon.framework;
+			remoteRef = FFCB2BF8242AD8300088B80C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FFCB2BFB242AD8300088B80C /* PushNotifications.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PushNotifications.framework;
+			remoteRef = FFCB2BFA242AD8300088B80C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FFCB2BFD242AD8300088B80C /* SwiftyStoreKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyStoreKit.framework;
+			remoteRef = FFCB2BFC242AD8300088B80C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FFCB2C13242ADB4A0088B80C /* FBSDKCoreKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FBSDKCoreKit.framework;
+			remoteRef = FFCB2C12242ADB4A0088B80C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FFF6E61C242AEA1300BD40C8 /* FirebaseCoreDiagnostics.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseCoreDiagnostics.framework;
+			remoteRef = FFF6E61B242AEA1300BD40C8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FFF6E61E242AEA1300BD40C8 /* FirebaseInstallations.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseInstallations.framework;
+			remoteRef = FFF6E61D242AEA1300BD40C8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FFF6E620242AEA1300BD40C8 /* GoogleDataTransport.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleDataTransport.framework;
+			remoteRef = FFF6E61F242AEA1300BD40C8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FFF6E622242AEA1300BD40C8 /* GoogleDataTransportCCTSupport.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleDataTransportCCTSupport.framework;
+			remoteRef = FFF6E621242AEA1300BD40C8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FFF6E624242AEA1300BD40C8 /* FBLPromises.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FBLPromises.framework;
+			remoteRef = FFF6E623242AEA1300BD40C8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		F2B334FD1EA4425C007801AC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F213C2931FDCF76500B941D8 /* (null) in Resources */,
+				F213C2931FDCF76500B941D8 /* BuildFile in Resources */,
 				F277BD4A2063341900EA18C4 /* Platforms.sks in Resources */,
 				F2751B251EB6B47C00B9F913 /* jump.wav in Resources */,
 				F2660EB61FDDE8FB008CE74F /* Level7.sks in Resources */,
@@ -413,14 +663,15 @@
 				F2344DF5200EEA2600CAB45A /* New Record.mp3 in Resources */,
 				F2B335051EA4425C007801AC /* GameScene.sks in Resources */,
 				F2660EBA1FDDFAEA008CE74F /* Level9.sks in Resources */,
-				F2382B802055B36B0096206E /* GoogleService-Info.plist in Resources */,
 				F2EF1A1D2055C5E30056F3B2 /* ThreeArrows.sks in Resources */,
 				F2DE527A1F37A9380062CCEF /* Level1.sks in Resources */,
-				F213C2921FDCF76300B941D8 /* (null) in Resources */,
+				F213C2921FDCF76300B941D8 /* BuildFile in Resources */,
+				FF7437DC242B083700DA8006 /* GoogleService-Info.plist in Resources */,
 				F26C442E201520E200D12109 /* Spacebased_Full.mp3 in Resources */,
 				F2660EB81FDDF455008CE74F /* Level8.sks in Resources */,
 				F2A550B7200C00B4000B4159 /* MouseExplode.sks in Resources */,
 				F2751B191EB6B47C00B9F913 /* attribution.txt in Resources */,
+				FFCB2C14242ADB4A0088B80C /* licenses in Resources */,
 				F2344DF7200EEAC100CAB45A /* Jump.mp3 in Resources */,
 				F2AF7D031FA4084A00DC5D2A /* NeonTubes2.otf in Resources */,
 				F2EF1A1F2055F5890056F3B2 /* TwoArrows.sks in Resources */,
@@ -454,24 +705,24 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Neon Leon/Pods-Neon Leon-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Neon Leon/Pods-Neon Leon-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/PersonalizedAdConsent/PersonalizedAdConsent.framework",
-				"${BUILT_PRODUCTS_DIR}/PushNotifications/PushNotifications.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PersonalizedAdConsent.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PushNotifications.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Neon Leon/Pods-Neon Leon-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Neon Leon/Pods-Neon Leon-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3919B14546322995F869D805 /* [CP] Check Pods Manifest.lock */ = {
@@ -501,14 +752,12 @@
 			files = (
 				F2B335091EA4425C007801AC /* GameScene.swift in Sources */,
 				F2B335511EA6F92D007801AC /* CGPoint+Extensions.swift in Sources */,
-				FFB4BE6C21AE254D00DBBA44 /* SwiftyAdConsentManager.swift in Sources */,
 				F2B3355A1EA6F92D007801AC /* SKTTimingFunctions.swift in Sources */,
 				F258C6721F904D16004EB80E /* Button.swift in Sources */,
 				F277BD4E2063347300EA18C4 /* PowerUps.swift in Sources */,
 				F277BD542063349F00EA18C4 /* Hazards.swift in Sources */,
 				F2B335591EA6F92D007801AC /* SKTEffects.swift in Sources */,
 				F2B335551EA6F92D007801AC /* SKAction+SpecialEffects.swift in Sources */,
-				F21DE7341FEC9C5400D97E9C /* SwiftyAd.swift in Sources */,
 				F2B335521EA6F92D007801AC /* CGVector+Extensions.swift in Sources */,
 				F2B335541EA6F92D007801AC /* SKAction+Extensions.swift in Sources */,
 				F2B335561EA6F92D007801AC /* SKColor+Extensions.swift in Sources */,
@@ -660,6 +909,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2T6B5WZ44S;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/FBAudienceNetwork/Static",
+				);
 				INFOPLIST_FILE = "Neon Leon/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -682,6 +935,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2T6B5WZ44S;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/FBAudienceNetwork/Static",
+				);
 				INFOPLIST_FILE = "Neon Leon/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

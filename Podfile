@@ -7,9 +7,6 @@ target 'Neon Leon' do
 
   # Pods for Neon Leon
 	pod 'Firebase/Core'
-	pod 'Google-Mobile-Ads-SDK'
-    pod 'SwiftyStoreKit'
-	pod 'PushNotifications'
-    pod 'Google-Mobile-Ads-SDK'
-    pod 'PersonalizedAdConsent'
+  pod 'FBAudienceNetwork'
+  pod 'SwiftyStoreKit'
 end
