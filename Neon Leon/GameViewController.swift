@@ -74,6 +74,8 @@ class GameViewController: UIViewController, FBAdViewDelegate {
     var adContainer: UIView!
 
     var adView: FBAdView?
+
+    var highScore = 0
     
     func removeAds() {
         print("removeAds is getting called")
@@ -101,7 +103,7 @@ class GameViewController: UIViewController, FBAdViewDelegate {
         self.adView?.frame = CGRect(x: 0, y: 0, width: 320, height: 50)
         self.adView?.delegate = self
         self.adView?.loadAd()
-        
+
 //        if nonConsumablePurchaseMade == true {
 //            SwiftyAd.shared.isRemoved = true
 //            print("NON CONSUMABLE PURCHASE MADE: \(nonConsumablePurchaseMade)")
@@ -315,10 +317,29 @@ class GameViewController: UIViewController, FBAdViewDelegate {
             }
         }
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let socialShareViewController = segue.destination as? SocialShareViewController {
+            socialShareViewController.highScore = self.highScore
+            socialShareViewController.dismissCompletion = {
+                let alert = UIAlertController(title: "Share Challenge With Everyone!",
+                                              message: "We have also saved a screenshot of the challenge to your photos. Please share to all your social networks to encourage people to donate to the CDC Foundation.",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                alert.addAction(UIAlertAction(title: "Open Photos", style: .default) { _ in
+                    guard let photosUrl = URL(string:"photos-redirect://") else {
+                        return
+                    }
+                    UIApplication.shared.open(photosUrl)
+                })
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
 }
 
 extension GameViewController {
-    
+
     func alertWithTitle(title: String, message: String) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))

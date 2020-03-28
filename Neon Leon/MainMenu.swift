@@ -13,6 +13,7 @@ class MainMenu: SKScene {
     
     var playButton: Button!
     var reviewButton: Button!
+    var quarantineChallengeButton: Button!
 //    var noAdsButton: Button!
     var tutorialButton: Button!
     var settingsButton: Button!
@@ -26,8 +27,10 @@ class MainMenu: SKScene {
     
     var settingsButtonSelected = false
     
-    let gameViewController = GameViewController()
-    
+//    let gameViewController = GameViewController()
+
+    static let appStoreLink = URL(string: "https://apps.apple.com/us/app/neon-leion/id1352620219?ls=1")
+
     override func didMove(to view: SKView) {
         setupNodes()
         
@@ -47,57 +50,51 @@ class MainMenu: SKScene {
         }
     }
     
-    func showGameScene() {
-        if userDefaults.integer(forKey: "HIGHSCORE") <= 5 {
-            let newScene = GameScene(fileNamed: "Controls")
-            newScene!.scaleMode = .aspectFill
-            let reveal = SKTransition.fade(withDuration: 1.0)
-            self.view?.presentScene(newScene!, transition: reveal)
-        } else {
-            let newScene = GameScene(fileNamed: "GameScene")
-            newScene!.scaleMode = .aspectFill
-            let reveal = SKTransition.fade(withDuration: 1.0)
-            self.view?.presentScene(newScene!, transition: reveal)
+    func showGameScene(isQuarantineChallenge: Bool = false) {
+        var newScene = GameScene(fileNamed: "GameScene")
+
+        if userDefaults.integer(forKey: "HIGHSCORE") <= 3 {
+            newScene = GameScene(fileNamed: "Controls")
         }
 
+        newScene?.isQuarantineChallenge = isQuarantineChallenge
+        newScene!.scaleMode = .aspectFill
+        let reveal = SKTransition.fade(withDuration: 1.0)
+        self.view?.presentScene(newScene!, transition: reveal)
     }
     
     func setupNodes() {
-        playButton = Button(defaultButtonImage: "PlayButton_00000", activeButtonImage: "PlayButton_00024", buttonAction: showGameScene)
-        playButton.position = CGPoint(x: 0, y: -150)
-        playButton.alpha = 0.01
+        playButton = Button(defaultButtonImage: "PlayButton", activeButtonImage: "PlayButton_Selected", buttonAction: {
+            self.showGameScene()
+        })
+        playButton.position = CGPoint(x: 0, y: 75)
+        playButton.alpha = 1
         playButton.zPosition = 10
         addChild(playButton)
         
-        reviewButton = Button(defaultButtonImage: "ReviewStar_00000", activeButtonImage: "ReviewStar_00024", buttonAction: appStorePage)
-        reviewButton.position = CGPoint(x: -385, y: -600)
-        reviewButton.alpha = 0.01
+        reviewButton = Button(defaultButtonImage: "ReviewButton", activeButtonImage: "ReviewButton_Selected", buttonAction: appStorePage)
+        reviewButton.position = CGPoint(x: 0, y: -825)
+        reviewButton.alpha = 1
         reviewButton.zPosition = 10
         addChild(reviewButton)
-        
-//        noAdsButton = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00024", buttonAction: gameViewController.removeAds)
-//        noAdsButton.position = CGPoint(x: 385, y: -600)
-//        noAdsButton.alpha = 0.01
-//        noAdsButton.zPosition = 10
-//        addChild(noAdsButton)
-        
-        tutorialButton = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: showTutorialScene)
-        tutorialButton.position = CGPoint(x: 0, y: -505)
-        tutorialButton.alpha = 0.01
+
+        self.quarantineChallengeButton = Button(defaultButtonImage: "QChalButton", activeButtonImage: "QChalButton_Selected", buttonAction: {
+            self.showGameScene(isQuarantineChallenge: true)
+        })
+        self.quarantineChallengeButton.position = CGPoint(x: 0, y: -225)
+        self.quarantineChallengeButton.alpha = 1
+        self.quarantineChallengeButton.zPosition = 10
+        self.addChild(self.quarantineChallengeButton)
+
+        tutorialButton = Button(defaultButtonImage: "TutorialButton", activeButtonImage: "TutorialButton_Selected", buttonAction: showTutorialScene)
+        tutorialButton.position = CGPoint(x: 0, y: -525)
+        tutorialButton.alpha = 1
         tutorialButton.zPosition = 10
         addChild(tutorialButton)
-        
-//        restoreIAPButton = Button(defaultButtonImage: "SmallButtonCircle",
-//                                  activeButtonImage: "SmallButtonCircle",
-//                                  buttonAction: gameViewController.restorePurchases)
-//        restoreIAPButton.position = CGPoint(x: 0, y: -705)
-//        restoreIAPButton.alpha = 0.01
-//        restoreIAPButton.zPosition = 10
-//        addChild(restoreIAPButton)
     }
     
     func appStorePage() {
-        let url = URL(string: "itms://itunes.apple.com/us/app/neon-leion/id1352620219?ls=1&mt=8")
+        let url = Self.appStoreLink
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         } else {

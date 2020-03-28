@@ -98,7 +98,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastUpdateTimeInterval: TimeInterval = 0
     var deltaTime: TimeInterval = 0
     
-    var lives = 1
+    var lives: Int?
     
     let soundBoost = SKAction.playSoundFileNamed("boost.wav", waitForCompletion: false)
     let soundJump = SKAction.playSoundFileNamed("jump.wav", waitForCompletion: false)
@@ -142,15 +142,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var tapCount: Int!
     
     var breakAnimation: SKAction!
-    
-    var lightningAnimation: SKAction!
-    
+
     var platformProbes: SKSpriteNode!
     
     var avPlayer: AVPlayer!
     var video: SKVideoNode!
     
-    var playButton: Button!
     var reviewButton: Button!
     var noAdsStart: Button!
     var tutorialButton: Button!
@@ -175,8 +172,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var platformGroup: SKAction!
     
     let userDefaults = UserDefaults.standard
-    
-    var isInvincible = false
+
+    var isInvincible: Bool {
+        return player.physicsBody?.categoryBitMask == 4096
+    }
     
     var powerUpBullet: SKSpriteNode!
     var deadFishBullet: SKSpriteNode!
@@ -198,12 +197,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var didLand = false
     
-    let gvc = GameViewController()
+    let gameViewController = GameViewController()
+
+    var isQuarantineChallenge = false
+
+    var lifeNode1: SKSpriteNode!
+
+    var lifeNode2: SKSpriteNode!
 
     // MARK: - Static Properties
 
     static let playerAndInvincibleContactMask: UInt32 = 4097
-    
+
     override func didMove(to view: SKView) {
         view.showsPhysics = false
         
@@ -224,9 +229,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lightningOff.zPosition = 4
         lightningOff.position = CGPoint(x: -450, y: 900)
         camera?.addChild(lightningOff)
-        
 
-        
         animationLoopDown = setupAnimationWithPrefix("Lightning_00",
                                                      start: 1,
                                                      end: 201,
@@ -238,7 +241,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.position = CGPoint(x: 0, y: 825)
         camera?.addChild(scoreLabel)
 
+        if self.isQuarantineChallenge {
+            self.createLivesTracker()
+            self.lives = 2
+        } else {
+            self.lives = 1
+        }
+
         startGame()
+    }
+
+    private func createLivesTracker() {
+        let lifeNode1 = self.createNode(with: SKTexture(image: #imageLiteral(resourceName: "Lightning_0035")))
+        lifeNode1.position = CGPoint(x: 450, y: 900)
+        self.lifeNode1 = lifeNode1
+
+        let lifeNode2 = self.createNode(with: SKTexture(image: #imageLiteral(resourceName: "Lightning_0035")))
+        lifeNode2.position = CGPoint(x: 525, y: 900)
+        self.lifeNode2 = lifeNode2
+    }
+
+    private func createNode(with texture: SKTexture) -> SKSpriteNode {
+        let node = SKSpriteNode(texture: texture)
+        node.zPosition = 4
+        node.size = CGSize(width: 375, height: 390)
+        node.xScale = 0.5
+        node.yScale = 0.5
+        self.camera?.addChild(node)
+        return node
     }
     
     func setupNodes() {
@@ -589,6 +619,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             node.removeFromParent()
         }
     }
+
+    private func playLightningAnimation(startFrame: Int = 1, timePerFrame: TimeInterval = 0.01) -> SKAction {
+
+        return self.setupAnimationWithPrefix("Lightning_00",
+                                             start: startFrame,
+                                             end: 201,
+                                             timePerFrame: timePerFrame)
+    }
     
     func setupAnimationWithPrefix(_ prefix: String, start: Int, end: Int, timePerFrame: TimeInterval) -> SKAction {
         var textures = [SKTexture]()
@@ -732,21 +770,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         newLavaPositionY = max(newLavaPositionY, (bottomOfScreenYFg - 125.0))
         lava.position.y = newLavaPositionY
     }
-    
-    func updateCollisionLava() {
-        if player.position.y < lava.position.y - 500 {
-            if playerState != .lava {
-                playerState = .lava
-                playerTrail.particleBirthRate = 0
-            }
-            boostPlayer()
-            lives -= 1
-            if lives <= 0 {
-                gameOver()
-            }
-        }
-    }
-    
+
     func updatePowerUp(_ dt: TimeInterval) {
         powerUpTimeSinceLastShot += dt
         
@@ -874,7 +898,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             invincibleTime += dt
 
             if invincibleTime > 7 {
-                self.isInvincible = false
                 player.physicsBody?.categoryBitMask = PhysicsCategory.Player
                 invincibleTime = 0
             }
@@ -1060,7 +1083,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         pointerHand = SKSpriteNode(imageNamed: "PointerHand")
         pointerHand.zPosition = 100
-        pointerHand.position = CGPoint(x: -250, y: 450 /*-650*/)
+        pointerHand.position = CGPoint(x: -250, y: 450)
         pointerHand.setScale(0.5)
         camera?.addChild(pointerHand)
         let pointerMoveRight = SKAction.move(by: CGVector(dx: 500, dy: 0), duration: 0.5)
@@ -1119,7 +1142,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         return button
     }
-    
+
+    func subtractLife() {
+        self.lives! -= 1
+
+        if self.isQuarantineChallenge {
+            if let lifeNode1 = self.lifeNode1, self.lives == 1 {
+                lifeNode1.run(self.playLightningAnimation(startFrame: 35))
+                self.handleRecoveryPeriod()
+            } else if let lifeNode2 = self.lifeNode2, self.lives == 0 {
+                lifeNode2.run(self.playLightningAnimation(startFrame: 35))
+                self.gameOver()
+            }
+        } else {
+            self.gameOver()
+        }
+    }
+
+    func handleRecoveryPeriod() {
+        self.player.physicsBody?.categoryBitMask = PhysicsCategory.Invincible
+        player.run(setupAnimationWithPrefix("NLCat_Off_", start: 1, end: 5, timePerFrame: 0.15))
+
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+            self.player.physicsBody?.categoryBitMask = PhysicsCategory.Player
+            timer.invalidate()
+        }
+
+        self.boostPlayer()
+    }
+
     func gameOver() {
         gameState = .gameOver
         playerState = .dead
@@ -1146,7 +1197,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if score > userDefaults.integer(forKey: "HIGHSCORE") {
             saveHighScore()
         }
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
             
             let restartButton = self.setupButton(pictureBase: "RestartButton_00040", pictureWidth: 335, pictureHeight: 357, buttonPositionX: -600, buttonPositionY: -600, zPosition: 8)
@@ -1244,11 +1295,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             highScoreNumber.zPosition = 8
             highScoreNumber.text = "\(UserDefaults().integer(forKey: "HIGHSCORE"))"
             self.camera?.addChild(highScoreNumber)
-            
-            if let viewController = self.view?.window?.rootViewController {
-//                if SwiftyAd.shared.isInterstitialReady {
-//                    SwiftyAd.shared.showInterstitial(from: viewController, withInterval: 5)
-//                }
+
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
+                guard let self = self else { return }
+
+                if self.isQuarantineChallenge == true && self.score >= 50 {
+                    guard let gameViewController = self.view?.window?.rootViewController as? GameViewController else {
+                        return
+                    }
+                    gameViewController.highScore = self.score
+                    gameViewController.performSegue(withIdentifier: "SocialShareSegue", sender: gameViewController)
+                }
+                timer.invalidate()
             }
         })
     }
@@ -1267,11 +1325,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch other.categoryBitMask {
         case PhysicsCategory.powerUp:
             if !self.isInvincible {
-                self.isInvincible = true
                 emitParticles(name: "LightningExplode", sprite: powerUpBullet)
                 player.physicsBody?.categoryBitMask = PhysicsCategory.Invincible
                 run(powerUp)
-                lightningOff.run(animationLoopDown)
+                lightningOff.run(self.playLightningAnimation(timePerFrame: 0.035))
                 notification.notificationOccurred(.warning)
                 powerUpBullet.removeFromParent()
             }
@@ -1369,13 +1426,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
         case PhysicsCategory.Spikes:
-                    notification.notificationOccurred(.error)
-                    gameOver()
-                    run(electricute)
+            print("Hi BD! Spikes got hit at \(Date().timeIntervalSince1970), what is the players physics body set to \(player.physicsBody?.categoryBitMask)")
+            notification.notificationOccurred(.error)
+            if !self.isInvincible {
+                self.subtractLife()
+            }
+            run(electricute)
             
         case PhysicsCategory.Lava:
+            print("Hi BD! Lava got hit at \(Date().timeIntervalSince1970)")
             if !self.isInvincible {
-                gameOver()
+                self.subtractLife()
                 run(electricute)
             } else if self.isInvincible {
                 superBoostPlayer()
@@ -1425,7 +1486,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.camera?.addChild(newHighScoreBanner)
                 newHighScoreBanner.run(SKAction.move(by: CGVector(dx: 3000, dy: 0), duration: 3))
                 
-                // Requests user to make a review after losing, doesn't happen everytime. It is controlled by Apple.
                 if #available(iOS 10.3, *) {
                     SKStoreReviewController.requestReview()
                 }

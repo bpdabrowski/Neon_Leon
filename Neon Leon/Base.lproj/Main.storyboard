@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Muli.ttf">
+            <string>Muli</string>
+        </array>
+        <array key="NeonTubes2.otf">
+            <string>NeonTubes2-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -16,15 +24,105 @@
                         <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
                     </layoutGuides>
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleAspectFill" id="3se-qz-xqx" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <segue destination="2k9-F6-Mh7" kind="show" identifier="SocialShareSegue" id="9Hy-Yt-xFd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="117.59999999999999" y="118.22660098522168"/>
+            <point key="canvasLocation" x="356" y="116"/>
+        </scene>
+        <!--Social Share View Controller-->
+        <scene sceneID="z5t-ou-M5e">
+            <objects>
+                <viewController id="2k9-F6-Mh7" customClass="SocialShareViewController" customModule="Neon_Leon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eix-fV-jHu"/>
+                        <viewControllerLayoutGuide type="bottom" id="4YE-x9-i9e"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bb9-e6-1Qr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CongratsSign" translatesAutoresizingMaskIntoConstraints="NO" id="bUZ-nf-vdc">
+                                <rect key="frame" x="35.5" y="100" width="304" height="244.5"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eal-1C-pnK">
+                                <rect key="frame" x="16" y="573" width="343" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="343.32999999999998" id="1xa-QJ-1MU"/>
+                                    <constraint firstAttribute="height" constant="54" id="nRm-p8-d0b"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="SocialShareButton">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                </state>
+                                <connections>
+                                    <action selector="showActivityView:" destination="2k9-F6-Mh7" eventType="touchUpInside" id="CFJ-Gy-S5X"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHx-4c-2TH">
+                                <rect key="frame" x="20" y="408" width="335" height="144"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="144" id="IPp-PG-okO"/>
+                                </constraints>
+                                <string key="text">Try to get 50 points in 3 tries on Neon Leion. If you do, post a photo of your high score. If you don’t, donate $3 to the CDC Foundation to help the fight against COVID-19. Then post your 'I Donated' photo. Tag 3 friends to challenge. Let’s make the fight against the virus go viral!</string>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="Muli" family="Muli" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyp-tx-kZ5">
+                                <rect key="frame" x="336.5" y="20" width="22.5" height="22.5"/>
+                                <state key="normal" image="CloseButton"/>
+                                <connections>
+                                    <action selector="dismissView:" destination="2k9-F6-Mh7" eventType="touchUpInside" id="01d-Pp-aMx"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zmu-VO-5AF">
+                                <rect key="frame" x="137" y="364" width="101.5" height="26"/>
+                                <fontDescription key="fontDescription" name="NeonTubes2-Regular" family="Neon Tubes 2" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="gyp-tx-kZ5" secondAttribute="trailing" id="20D-BE-SWl"/>
+                            <constraint firstItem="qHx-4c-2TH" firstAttribute="centerX" secondItem="bb9-e6-1Qr" secondAttribute="centerX" id="4ov-GZ-5AI"/>
+                            <constraint firstItem="Zmu-VO-5AF" firstAttribute="top" secondItem="bUZ-nf-vdc" secondAttribute="bottom" constant="19.5" id="Jip-lY-FsB"/>
+                            <constraint firstItem="gyp-tx-kZ5" firstAttribute="top" secondItem="eix-fV-jHu" secondAttribute="bottom" constant="20" id="KgO-tL-0YO"/>
+                            <constraint firstItem="qHx-4c-2TH" firstAttribute="leading" secondItem="bb9-e6-1Qr" secondAttribute="leading" constant="20" id="LSK-l6-XyD"/>
+                            <constraint firstItem="bUZ-nf-vdc" firstAttribute="top" secondItem="eix-fV-jHu" secondAttribute="bottom" constant="100" id="P16-FB-AwA"/>
+                            <constraint firstItem="qHx-4c-2TH" firstAttribute="top" secondItem="Zmu-VO-5AF" secondAttribute="bottom" constant="18" id="PAR-Qu-jUV"/>
+                            <constraint firstItem="bUZ-nf-vdc" firstAttribute="centerX" secondItem="bb9-e6-1Qr" secondAttribute="centerX" id="V1S-b3-0UC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bUZ-nf-vdc" secondAttribute="trailing" constant="19.5" id="eXm-tT-2zb"/>
+                            <constraint firstItem="bUZ-nf-vdc" firstAttribute="leading" secondItem="bb9-e6-1Qr" secondAttribute="leadingMargin" constant="19.5" id="hZs-Cc-QDZ"/>
+                            <constraint firstAttribute="trailing" secondItem="qHx-4c-2TH" secondAttribute="trailing" constant="20" id="iXo-x2-hWC"/>
+                            <constraint firstItem="Zmu-VO-5AF" firstAttribute="centerX" secondItem="bb9-e6-1Qr" secondAttribute="centerX" id="lMT-vH-Ec5"/>
+                            <constraint firstItem="4YE-x9-i9e" firstAttribute="top" secondItem="Eal-1C-pnK" secondAttribute="bottom" constant="20" id="o6l-0O-Rzi"/>
+                            <constraint firstItem="Eal-1C-pnK" firstAttribute="centerX" secondItem="bb9-e6-1Qr" secondAttribute="centerX" id="qRb-vg-MhB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="fdL-dr-eGc"/>
+                    <connections>
+                        <outlet property="challengeScore" destination="Zmu-VO-5AF" id="fU0-E6-Kln"/>
+                        <outlet property="closeButton" destination="gyp-tx-kZ5" id="oPe-NZ-fls"/>
+                        <outlet property="shareButton" destination="Eal-1C-pnK" id="ZDT-RV-ymc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ync-Ye-ypG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1369" y="116"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="CloseButton" width="22.5" height="22.5"/>
+        <image name="CongratsSign" width="304.5" height="244.5"/>
+        <image name="SocialShareButton" width="343.5" height="53.5"/>
+    </resources>
 </document>
