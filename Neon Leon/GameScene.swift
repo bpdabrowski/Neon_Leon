@@ -188,16 +188,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var wait2: SKAction!
     var wait3: SKAction!
     var wait5: SKAction!
-    
-    let mm = MainMenuScene()
-    
+
     var pointerHand: SKSpriteNode! = nil
     
     let notification = UINotificationFeedbackGenerator()
     
     var didLand = false
-    
-    let gameViewController = GameViewController()
 
     var isQuarantineChallenge = false
 
@@ -241,14 +237,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.position = CGPoint(x: 0, y: 825)
         camera?.addChild(scoreLabel)
 
-        if self.isQuarantineChallenge {
-            self.createLivesTracker()
-            self.lives = 2
-        } else {
-            self.lives = 1
-        }
-
-//        startGame()
+        self.createLivesTracker()
     }
 
     private func createLivesTracker() {
@@ -259,6 +248,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let lifeNode2 = self.createNode(with: SKTexture(image: #imageLiteral(resourceName: "Lightning_0035")))
         lifeNode2.position = CGPoint(x: 525, y: 900)
         self.lifeNode2 = lifeNode2
+
+        self.lifeNode1.isHidden = true
+        self.lifeNode2.isHidden = true
     }
 
     private func createNode(with texture: SKTexture) -> SKSpriteNode {
@@ -1073,8 +1065,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         isFingerOnCat = false
     }
+
+    func setupQuarantineChallengeIfNeeded() {
+        if self.isQuarantineChallenge {
+            self.lifeNode1.isHidden = false
+            self.lifeNode2.isHidden = false
+            self.lives = 2
+        } else {
+            self.lives = 1
+        }
+    }
     
     func startGame() {
+        self.setupQuarantineChallengeIfNeeded()
+
         gameState = .playing
         playerState = .idle
         platformState = .high
@@ -1185,9 +1189,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
          let moveUp = SKAction.moveBy(x: 0.0, y: 200, duration: 0.2)
          moveUp.timingMode = .easeOut
          let moveDown = SKAction.moveBy(x: 0.0,
-         y: -(size.height * 1.5),
-         duration: 1.0)
-         moveDown.timingMode = .easeIn
+                                        y: -(size.height * 1.5),
+                                        duration: 1.0)
+        moveDown.timingMode = .easeIn
          player.run(SKAction.sequence([wait, moveUp, moveDown]))
         
         if pointerHand != nil {

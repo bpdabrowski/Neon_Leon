@@ -24,45 +24,12 @@ class GameViewController: NeonLeonViewController {
 
     var gameScene: SKScene?
 
-    override func loadView() {
-        self.view = SKView()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var isQuarantineChallenge = false
 
-        if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
-                self.gameScene = scene
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                
-                // Present the scene
-                view.presentScene(scene)
-            }
-            
-            let path = Bundle.main.path(forResource: "Spacebased_Full.mp3", ofType: nil)!
-            let url = URL(fileURLWithPath: path)
-            
-            if soundOff == true {
-                //change button to a sound with an x in it.
-            } else if soundOff == false {
-                do {
-                    backgroundMusicPlayer = try AVAudioPlayer(contentsOf: url)
-                    backgroundMusicPlayer?.numberOfLoops = -1
-                    backgroundMusicPlayer?.prepareToPlay()
-                    backgroundMusicPlayer?.play()
-                } catch {
-                    // couldn't load file
-                }
-            }
-            
-            view.ignoresSiblingOrder = true
-            
-            view.showsFPS = false
-            view.showsNodeCount = false
-        }
+    override func viewDidLoad() {
+        self.gameScene = SKScene(fileNamed: "GameScene")
+        self.setupGameScene()
+        super.viewDidLoad()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -70,10 +37,37 @@ class GameViewController: NeonLeonViewController {
             print("Unable to get a reference to GameScene")
             return
         }
-
         gameScene.startGame()
 
         super.viewDidAppear(true)
+    }
+
+    func setupGameScene() {
+        guard let gameScene = self.gameScene as? GameScene else {
+            return
+        }
+
+        // Set the scale mode to scale to fit the window
+        gameScene.scaleMode = .aspectFill
+        self.spriteKitView.presentScene(gameScene)
+    }
+
+    func setupSound() {
+        let path = Bundle.main.path(forResource: "Spacebased_Full.mp3", ofType: nil)!
+        let url = URL(fileURLWithPath: path)
+
+        if soundOff == true {
+            //change button to a sound with an x in it.
+        } else if soundOff == false {
+            do {
+                backgroundMusicPlayer = try AVAudioPlayer(contentsOf: url)
+                backgroundMusicPlayer?.numberOfLoops = -1
+                backgroundMusicPlayer?.prepareToPlay()
+                backgroundMusicPlayer?.play()
+            } catch {
+                // couldn't load file
+            }
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

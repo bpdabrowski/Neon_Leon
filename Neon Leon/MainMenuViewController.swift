@@ -38,6 +38,10 @@ class MainMenuViewController: NeonLeonViewController {
         mainMenuScene.showGameView = { [weak self] in
             self?.showGameView()
         }
+
+        mainMenuScene.showGameViewQuarantineChallenge = { [weak self] in
+            self?.showGameView(isQuarantineChallenge: true)
+        }
     }
 
     func preLoadedGameView() -> UIViewController {
@@ -51,10 +55,10 @@ class MainMenuViewController: NeonLeonViewController {
         return gameViewController
     }
 
-    func showGameView() {
-        if let gameViewController = self.gameViewController {
+    func showGameView(isQuarantineChallenge: Bool = false) {
+        if let gameViewController = self.gameViewController, let gameScene = gameViewController.gameScene as? GameScene {
+            gameScene.isQuarantineChallenge = isQuarantineChallenge
             self.present(gameViewController, animated: true, completion: nil)
         }
-//        self.performSegue(withIdentifier: "showGameView", sender: self)
     }
 }

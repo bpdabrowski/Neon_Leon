@@ -13,22 +13,19 @@ class MainMenuScene: SKScene {
     var playButton: Button!
     var reviewButton: Button!
     var quarantineChallengeButton: Button!
-//    var noAdsButton: Button!
     var tutorialButton: Button!
     var settingsButton: Button!
     var soundButton: Button!
-//    var restoreIAPButton: Button!
     var soundImage: SKSpriteNode!
-//    var restoreIAPImage: SKSpriteNode!
     let userDefaults = UserDefaults.standard
     var tutorialButtonImage: SKSpriteNode!
     let notification = UINotificationFeedbackGenerator()
 
     var showGameView: (() -> Void)?
+
+    var showGameViewQuarantineChallenge: (() -> Void)?
     
     var settingsButtonSelected = false
-    
-//    let gameViewController = GameViewController()
 
     static let appStoreLink = URL(string: "https://apps.apple.com/us/app/neon-leion/id1352620219?ls=1")
 
@@ -66,7 +63,6 @@ class MainMenuScene: SKScene {
     
     func setupNodes() {
         playButton = Button(defaultButtonImage: "PlayButton", activeButtonImage: "PlayButton_Selected", buttonAction: {
-//            self.showGameScene()
             self.showGameView?()
         })
         playButton.position = CGPoint(x: 0, y: 75)
@@ -81,8 +77,7 @@ class MainMenuScene: SKScene {
         addChild(reviewButton)
 
         self.quarantineChallengeButton = Button(defaultButtonImage: "QChalButton", activeButtonImage: "QChalButton_Selected", buttonAction: {
-//            self.showGameScene(isQuarantineChallenge: true)
-            self.showGameView?()
+            self.showGameViewQuarantineChallenge?()
         })
         self.quarantineChallengeButton.position = CGPoint(x: 0, y: -225)
         self.quarantineChallengeButton.alpha = 1
