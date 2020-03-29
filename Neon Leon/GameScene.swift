@@ -189,7 +189,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var wait3: SKAction!
     var wait5: SKAction!
     
-    let mm = MainMenu()
+    let mm = MainMenuScene()
     
     var pointerHand: SKSpriteNode! = nil
     
@@ -248,7 +248,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.lives = 1
         }
 
-        startGame()
+//        startGame()
     }
 
     private func createLivesTracker() {

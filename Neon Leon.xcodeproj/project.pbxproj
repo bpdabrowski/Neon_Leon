@@ -12,8 +12,8 @@
 		F213C2931FDCF76500B941D8 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		F216137E1F24F3E000378FD3 /* Level2.sks in Resources */ = {isa = PBXBuildFile; fileRef = F216137D1F24F3E000378FD3 /* Level2.sks */; };
 		F21AAE221F4A42B700B41405 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F21AAE211F4A42B700B41405 /* Assets.xcassets */; };
-		F21DE7421FF3152C00D97E9C /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DE7411FF3152C00D97E9C /* MainMenu.swift */; };
-		F21DE7441FF3153D00D97E9C /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21DE7431FF3153D00D97E9C /* MainMenu.sks */; };
+		F21DE7421FF3152C00D97E9C /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DE7411FF3152C00D97E9C /* MainMenuScene.swift */; };
+		F21DE7441FF3153D00D97E9C /* MainMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F21DE7431FF3153D00D97E9C /* MainMenuScene.sks */; };
 		F22208CF1FE74C24000FF105 /* LightningExplode.sks in Resources */ = {isa = PBXBuildFile; fileRef = F22208CE1FE74C24000FF105 /* LightningExplode.sks */; };
 		F22208D11FE74D99000FF105 /* InvincibleTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = F22208D01FE74D99000FF105 /* InvincibleTrail.sks */; };
 		F2306C2C1F1EEBDB00648B30 /* Background.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2306C2B1F1EEBDB00648B30 /* Background.sks */; };
@@ -77,6 +77,10 @@
 		FF67A7F921AE472100F1479D /* PowerUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF67A7F821AE472100F1479D /* PowerUp.wav */; };
 		FF7437DC242B083700DA8006 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF7437DB242B083700DA8006 /* GoogleService-Info.plist */; };
 		FFB4BE6F21AE3DF100DBBA44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFB4BE6E21AE3DF100DBBA44 /* LaunchScreen.storyboard */; };
+		FFB5942A24300A7A0080B2D5 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB5942924300A7A0080B2D5 /* MainMenuViewController.swift */; };
+		FFB5943E243052270080B2D5 /* InAppPurchaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB5943D243052270080B2D5 /* InAppPurchaseHandler.swift */; };
+		FFB59440243053770080B2D5 /* NetworkActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB5943F243053770080B2D5 /* NetworkActivityIndicatorManager.swift */; };
+		FFB59442243054C00080B2D5 /* NeonLeonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB59441243054C00080B2D5 /* NeonLeonViewController.swift */; };
 		FFCB2C14242ADB4A0088B80C /* licenses in Resources */ = {isa = PBXBuildFile; fileRef = FFCB2C00242ADB4A0088B80C /* licenses */; };
 		FFCB2C15242ADB4A0088B80C /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFCB2C02242ADB4A0088B80C /* FBAudienceNetwork.framework */; };
 /* End PBXBuildFile section */
@@ -167,8 +171,8 @@
 		EC1242CCEE1E2EAA302E7193 /* Pods-Neon Leon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neon Leon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Neon Leon/Pods-Neon Leon.release.xcconfig"; sourceTree = "<group>"; };
 		F216137D1F24F3E000378FD3 /* Level2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level2.sks; path = "Neon Leon/Levels/Level2.sks"; sourceTree = "<group>"; };
 		F21AAE211F4A42B700B41405 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F21DE7411FF3152C00D97E9C /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
-		F21DE7431FF3153D00D97E9C /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
+		F21DE7411FF3152C00D97E9C /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
+		F21DE7431FF3153D00D97E9C /* MainMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenuScene.sks; sourceTree = "<group>"; };
 		F22208CE1FE74C24000FF105 /* LightningExplode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LightningExplode.sks; sourceTree = "<group>"; };
 		F22208D01FE74D99000FF105 /* InvincibleTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = InvincibleTrail.sks; sourceTree = "<group>"; };
 		F2306C2B1F1EEBDB00648B30 /* Background.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background.sks; sourceTree = "<group>"; };
@@ -236,6 +240,10 @@
 		FF67A7F821AE472100F1479D /* PowerUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PowerUp.wav; sourceTree = "<group>"; };
 		FF7437DB242B083700DA8006 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FFB4BE6E21AE3DF100DBBA44 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FFB5942924300A7A0080B2D5 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		FFB5943D243052270080B2D5 /* InAppPurchaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseHandler.swift; sourceTree = "<group>"; };
+		FFB5943F243053770080B2D5 /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
+		FFB59441243054C00080B2D5 /* NeonLeonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeonLeonViewController.swift; sourceTree = "<group>"; };
 		FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		FFCB2C00242ADB4A0088B80C /* licenses */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = licenses; sourceTree = "<group>"; };
 		FFCB2C02242ADB4A0088B80C /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
@@ -356,29 +364,33 @@
 		F2B335011EA4425C007801AC /* Neon Leon */ = {
 			isa = PBXGroup;
 			children = (
-				FFCB2BFF242ADB4A0088B80C /* FBAudienceNetwork */,
+				F2336DC4201B9CDC00F98729 /* Attributions */,
 				F231DC372088158B00619DC8 /* Neon Leon.entitlements */,
-				F2AF7D011FA4083100DC5D2A /* Font */,
-				F2B335431EA6F92D007801AC /* SKTUtils */,
-				F21AAE261F4BB77A00B41405 /* Levels */,
-				F277BD482063335800EA18C4 /* Tutorial */,
-				F2B335041EA4425C007801AC /* GameScene.sks */,
-				F2B335081EA4425C007801AC /* GameScene.swift */,
-				FF524662242EDEE200C68F81 /* InstagramActivity.swift */,
+				FF7437DB242B083700DA8006 /* GoogleService-Info.plist */,
+				F2B335141EA4425C007801AC /* Info.plist */,
 				F2B335061EA4425C007801AC /* Actions.sks */,
+				F2B335041EA4425C007801AC /* GameScene.sks */,
+				F21DE7431FF3153D00D97E9C /* MainMenuScene.sks */,
+				FFB4BE6E21AE3DF100DBBA44 /* LaunchScreen.storyboard */,
 				F2B335021EA4425C007801AC /* AppDelegate.swift */,
 				F258C6711F904D15004EB80E /* Button.swift */,
+				F2B335081EA4425C007801AC /* GameScene.swift */,
 				F2B3350A1EA4425C007801AC /* GameViewController.swift */,
-				F21DE7431FF3153D00D97E9C /* MainMenu.sks */,
-				F21DE7411FF3152C00D97E9C /* MainMenu.swift */,
-				F2B3350C1EA4425C007801AC /* Main.storyboard */,
-				FFB4BE6E21AE3DF100DBBA44 /* LaunchScreen.storyboard */,
-				F2B335141EA4425C007801AC /* Info.plist */,
-				F2336DC4201B9CDC00F98729 /* Attributions */,
-				FF7437DB242B083700DA8006 /* GoogleService-Info.plist */,
-				F2751B051EB6B47B00B9F913 /* sounds */,
-				F2BE38471EB52F2200EF28F2 /* Particles */,
+				FFB5943D243052270080B2D5 /* InAppPurchaseHandler.swift */,
+				FF524662242EDEE200C68F81 /* InstagramActivity.swift */,
+				F21DE7411FF3152C00D97E9C /* MainMenuScene.swift */,
+				FFB5942924300A7A0080B2D5 /* MainMenuViewController.swift */,
+				FFB59441243054C00080B2D5 /* NeonLeonViewController.swift */,
+				FFB5943F243053770080B2D5 /* NetworkActivityIndicatorManager.swift */,
 				FF524667242EEF4A00C68F81 /* SocialShareViewController.swift */,
+				FFCB2BFF242ADB4A0088B80C /* FBAudienceNetwork */,
+				F2AF7D011FA4083100DC5D2A /* Font */,
+				F21AAE261F4BB77A00B41405 /* Levels */,
+				F2B3350C1EA4425C007801AC /* Main.storyboard */,
+				F2BE38471EB52F2200EF28F2 /* Particles */,
+				F2B335431EA6F92D007801AC /* SKTUtils */,
+				F2751B051EB6B47B00B9F913 /* sounds */,
+				F277BD482063335800EA18C4 /* Tutorial */,
 			);
 			path = "Neon Leon";
 			sourceTree = "<group>";
@@ -656,7 +668,7 @@
 				F2F9C639205F47DA001E58EE /* Controls.sks in Resources */,
 				F2751B1C1EB6B47C00B9F913 /* boost.wav in Resources */,
 				FF67A7F921AE472100F1479D /* PowerUp.wav in Resources */,
-				F21DE7441FF3153D00D97E9C /* MainMenu.sks in Resources */,
+				F21DE7441FF3153D00D97E9C /* MainMenuScene.sks in Resources */,
 				F2306C2C1F1EEBDB00648B30 /* Background.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -715,8 +727,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFB5942A24300A7A0080B2D5 /* MainMenuViewController.swift in Sources */,
 				F2B335091EA4425C007801AC /* GameScene.swift in Sources */,
 				F2B335511EA6F92D007801AC /* CGPoint+Extensions.swift in Sources */,
+				FFB59440243053770080B2D5 /* NetworkActivityIndicatorManager.swift in Sources */,
 				F2B3355A1EA6F92D007801AC /* SKTTimingFunctions.swift in Sources */,
 				FF524663242EDEE200C68F81 /* InstagramActivity.swift in Sources */,
 				F258C6721F904D16004EB80E /* Button.swift in Sources */,
@@ -731,11 +745,13 @@
 				F2B335531EA6F92D007801AC /* Int+Extensions.swift in Sources */,
 				F2B335571EA6F92D007801AC /* SKNode+Extensions.swift in Sources */,
 				FF524668242EEF4A00C68F81 /* SocialShareViewController.swift in Sources */,
-				F21DE7421FF3152C00D97E9C /* MainMenu.swift in Sources */,
+				F21DE7421FF3152C00D97E9C /* MainMenuScene.swift in Sources */,
 				F2B335581EA6F92D007801AC /* SKTAudio.swift in Sources */,
 				F2B335501EA6F92D007801AC /* CGFloat+Extensions.swift in Sources */,
 				F277BD4C2063342B00EA18C4 /* Platforms.swift in Sources */,
 				F2F9C63B205F47E2001E58EE /* Controls.swift in Sources */,
+				FFB59442243054C00080B2D5 /* NeonLeonViewController.swift in Sources */,
+				FFB5943E243052270080B2D5 /* InAppPurchaseHandler.swift in Sources */,
 				F2B3355B1EA6F92D007801AC /* Vector3.swift in Sources */,
 				F2B335031EA4425C007801AC /* AppDelegate.swift in Sources */,
 			);
