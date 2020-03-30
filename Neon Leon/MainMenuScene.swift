@@ -62,8 +62,8 @@ class MainMenuScene: SKScene {
     }
     
     func setupNodes() {
-        playButton = Button(defaultButtonImage: "PlayButton", activeButtonImage: "PlayButton_Selected", buttonAction: {
-            self.showGameView?()
+        playButton = Button(defaultButtonImage: "PlayButton", activeButtonImage: "PlayButton_Selected", buttonAction: { [weak self] in
+            self?.showGameView?()
         })
         playButton.position = CGPoint(x: 0, y: 75)
         playButton.alpha = 1
@@ -76,8 +76,8 @@ class MainMenuScene: SKScene {
         reviewButton.zPosition = 10
         addChild(reviewButton)
 
-        self.quarantineChallengeButton = Button(defaultButtonImage: "QChalButton", activeButtonImage: "QChalButton_Selected", buttonAction: {
-            self.showGameViewQuarantineChallenge?()
+        self.quarantineChallengeButton = Button(defaultButtonImage: "QChalButton", activeButtonImage: "QChalButton_Selected", buttonAction: { [weak self] in
+            self?.showGameViewQuarantineChallenge?()
         })
         self.quarantineChallengeButton.position = CGPoint(x: 0, y: -225)
         self.quarantineChallengeButton.alpha = 1

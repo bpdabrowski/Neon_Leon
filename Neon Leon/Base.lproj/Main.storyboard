@@ -23,6 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </skView>
+                    <navigationItem key="navigationItem" id="86q-Ce-4Oz"/>
                     <connections>
                         <outlet property="spriteKitView" destination="FmC-ax-EJC" id="ukb-cP-Ntk"/>
                         <segue destination="BV1-FR-VrT" kind="showDetail" identifier="showGameView" id="cZV-vv-E09"/>
@@ -44,11 +45,28 @@
                     <connections>
                         <outlet property="spriteKitView" destination="lWS-Zp-zEP" id="lSo-K1-pJR"/>
                         <segue destination="2k9-F6-Mh7" kind="show" identifier="SocialShareSegue" id="9Hy-Yt-xFd"/>
+                        <segue destination="KqR-Cm-O3o" kind="showDetail" id="eCx-ay-38A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="356" y="116"/>
+        </scene>
+        <!--Game Over View Controller-->
+        <scene sceneID="Nkh-ZW-2J4">
+            <objects>
+                <viewController storyboardIdentifier="GameOverViewController" modalPresentationStyle="fullScreen" id="KqR-Cm-O3o" customClass="GameOverViewController" customModule="Neon_Leon" customModuleProvider="target" sceneMemberID="viewController">
+                    <skView key="view" contentMode="scaleToFill" id="5OZ-el-LVO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </skView>
+                    <connections>
+                        <outlet property="spriteKitView" destination="5OZ-el-LVO" id="LXi-Xq-uvH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f8y-Hy-dQ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="356" y="964"/>
         </scene>
         <!--Social Share View Controller-->
         <scene sceneID="z5t-ou-M5e">

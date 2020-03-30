@@ -81,6 +81,10 @@
 		FFB5943E243052270080B2D5 /* InAppPurchaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB5943D243052270080B2D5 /* InAppPurchaseHandler.swift */; };
 		FFB59440243053770080B2D5 /* NetworkActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB5943F243053770080B2D5 /* NetworkActivityIndicatorManager.swift */; };
 		FFB59442243054C00080B2D5 /* NeonLeonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB59441243054C00080B2D5 /* NeonLeonViewController.swift */; };
+		FFB59468243111DB0080B2D5 /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB59467243111DB0080B2D5 /* GameOverViewController.swift */; };
+		FFB5946A243117F80080B2D5 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FFB59469243117F80080B2D5 /* GameOverScene.sks */; };
+		FFB5946C2431194D0080B2D5 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB5946B2431194D0080B2D5 /* GameOverScene.swift */; };
+		FFB5946E243120760080B2D5 /* NodePictureAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB5946D243120760080B2D5 /* NodePictureAnimator.swift */; };
 		FFCB2C14242ADB4A0088B80C /* licenses in Resources */ = {isa = PBXBuildFile; fileRef = FFCB2C00242ADB4A0088B80C /* licenses */; };
 		FFCB2C15242ADB4A0088B80C /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFCB2C02242ADB4A0088B80C /* FBAudienceNetwork.framework */; };
 /* End PBXBuildFile section */
@@ -244,6 +248,10 @@
 		FFB5943D243052270080B2D5 /* InAppPurchaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseHandler.swift; sourceTree = "<group>"; };
 		FFB5943F243053770080B2D5 /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
 		FFB59441243054C00080B2D5 /* NeonLeonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeonLeonViewController.swift; sourceTree = "<group>"; };
+		FFB59467243111DB0080B2D5 /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
+		FFB59469243117F80080B2D5 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
+		FFB5946B2431194D0080B2D5 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		FFB5946D243120760080B2D5 /* NodePictureAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodePictureAnimator.swift; sourceTree = "<group>"; };
 		FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		FFCB2C00242ADB4A0088B80C /* licenses */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = licenses; sourceTree = "<group>"; };
 		FFCB2C02242ADB4A0088B80C /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
@@ -369,11 +377,14 @@
 				FF7437DB242B083700DA8006 /* GoogleService-Info.plist */,
 				F2B335141EA4425C007801AC /* Info.plist */,
 				F2B335061EA4425C007801AC /* Actions.sks */,
+				FFB59469243117F80080B2D5 /* GameOverScene.sks */,
 				F2B335041EA4425C007801AC /* GameScene.sks */,
 				F21DE7431FF3153D00D97E9C /* MainMenuScene.sks */,
 				FFB4BE6E21AE3DF100DBBA44 /* LaunchScreen.storyboard */,
 				F2B335021EA4425C007801AC /* AppDelegate.swift */,
 				F258C6711F904D15004EB80E /* Button.swift */,
+				FFB5946B2431194D0080B2D5 /* GameOverScene.swift */,
+				FFB59467243111DB0080B2D5 /* GameOverViewController.swift */,
 				F2B335081EA4425C007801AC /* GameScene.swift */,
 				F2B3350A1EA4425C007801AC /* GameViewController.swift */,
 				FFB5943D243052270080B2D5 /* InAppPurchaseHandler.swift */,
@@ -391,6 +402,7 @@
 				F2B335431EA6F92D007801AC /* SKTUtils */,
 				F2751B051EB6B47B00B9F913 /* sounds */,
 				F277BD482063335800EA18C4 /* Tutorial */,
+				FFB5946D243120760080B2D5 /* NodePictureAnimator.swift */,
 			);
 			path = "Neon Leon";
 			sourceTree = "<group>";
@@ -627,6 +639,7 @@
 				F277BD4A2063341900EA18C4 /* Platforms.sks in Resources */,
 				F2751B251EB6B47C00B9F913 /* jump.wav in Resources */,
 				F2660EB61FDDE8FB008CE74F /* Level7.sks in Resources */,
+				FFB5946A243117F80080B2D5 /* GameOverScene.sks in Resources */,
 				F2704C5C1FCE605000799629 /* Level3.sks in Resources */,
 				F277BD522063349600EA18C4 /* Hazards.sks in Resources */,
 				F2B173322068803B000B2405 /* Level11.sks in Resources */,
@@ -731,6 +744,7 @@
 				F2B335091EA4425C007801AC /* GameScene.swift in Sources */,
 				F2B335511EA6F92D007801AC /* CGPoint+Extensions.swift in Sources */,
 				FFB59440243053770080B2D5 /* NetworkActivityIndicatorManager.swift in Sources */,
+				FFB59468243111DB0080B2D5 /* GameOverViewController.swift in Sources */,
 				F2B3355A1EA6F92D007801AC /* SKTTimingFunctions.swift in Sources */,
 				FF524663242EDEE200C68F81 /* InstagramActivity.swift in Sources */,
 				F258C6721F904D16004EB80E /* Button.swift in Sources */,
@@ -746,10 +760,12 @@
 				F2B335571EA6F92D007801AC /* SKNode+Extensions.swift in Sources */,
 				FF524668242EEF4A00C68F81 /* SocialShareViewController.swift in Sources */,
 				F21DE7421FF3152C00D97E9C /* MainMenuScene.swift in Sources */,
+				FFB5946C2431194D0080B2D5 /* GameOverScene.swift in Sources */,
 				F2B335581EA6F92D007801AC /* SKTAudio.swift in Sources */,
 				F2B335501EA6F92D007801AC /* CGFloat+Extensions.swift in Sources */,
 				F277BD4C2063342B00EA18C4 /* Platforms.swift in Sources */,
 				F2F9C63B205F47E2001E58EE /* Controls.swift in Sources */,
+				FFB5946E243120760080B2D5 /* NodePictureAnimator.swift in Sources */,
 				FFB59442243054C00080B2D5 /* NeonLeonViewController.swift in Sources */,
 				FFB5943E243052270080B2D5 /* InAppPurchaseHandler.swift in Sources */,
 				F2B3355B1EA6F92D007801AC /* Vector3.swift in Sources */,

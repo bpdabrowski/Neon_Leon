@@ -26,10 +26,15 @@ class GameViewController: NeonLeonViewController {
 
     var isQuarantineChallenge = false
 
+    var gameOverViewController: GameOverViewController?
+
     override func viewDidLoad() {
-        self.gameScene = SKScene(fileNamed: "GameScene")
-        self.setupGameScene()
         super.viewDidLoad()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setupGameScene()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -37,18 +42,36 @@ class GameViewController: NeonLeonViewController {
             print("Unable to get a reference to GameScene")
             return
         }
+
+        gameScene.isQuarantineChallenge = isQuarantineChallenge
         gameScene.startGame()
 
         super.viewDidAppear(true)
     }
 
     func setupGameScene() {
+        self.gameScene = SKScene(fileNamed: "GameScene")
+        
         guard let gameScene = self.gameScene as? GameScene else {
+            return
+        }
+
+        if self.gameOverViewController == nil {
+            self.gameOverViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GameOverViewController") as? GameOverViewController
+        }
+
+        guard let gameOverViewController = self.gameOverViewController else {
             return
         }
 
         // Set the scale mode to scale to fit the window
         gameScene.scaleMode = .aspectFill
+        gameScene.gameOverAction = { [weak self] in
+            self?.present(gameOverViewController, animated: true) { [weak self] in
+                self?.gameScene = nil
+            }
+        }
+
         self.spriteKitView.presentScene(gameScene)
     }
 

@@ -15,6 +15,12 @@ class MainMenuViewController: NeonLeonViewController {
 
     private var gameViewController: GameViewController?
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.gameViewController = self.preLoadedGameView() as? GameViewController
+        self.setupMainMenuButtonActions()
+    }
+
     override func viewDidLoad() {
         self.setupMainMenuScene()
         super.viewDidLoad()
@@ -23,11 +29,8 @@ class MainMenuViewController: NeonLeonViewController {
     func setupMainMenuScene() {
         // Set the scale mode to scale to fit the window
         self.mainMenuScene?.scaleMode = .aspectFill
-        self.setupMainMenuButtonActions()
 
         self.spriteKitView.presentScene(self.mainMenuScene)
-
-        self.gameViewController = self.preLoadedGameView() as? GameViewController
     }
 
     func setupMainMenuButtonActions() {
@@ -51,13 +54,15 @@ class MainMenuViewController: NeonLeonViewController {
         }
 
         gameViewController.loadViewIfNeeded()
+        gameViewController.setupGameScene()
 
         return gameViewController
     }
 
     func showGameView(isQuarantineChallenge: Bool = false) {
         if let gameViewController = self.gameViewController, let gameScene = gameViewController.gameScene as? GameScene {
-            gameScene.isQuarantineChallenge = isQuarantineChallenge
+            gameViewController.isQuarantineChallenge = isQuarantineChallenge
+
             self.present(gameViewController, animated: true, completion: nil)
         }
     }
