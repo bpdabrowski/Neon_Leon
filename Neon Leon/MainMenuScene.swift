@@ -31,7 +31,7 @@ class MainMenuScene: SKScene {
 
     override func didMove(to view: SKView) {
         setupNodes()
-        
+
         if userDefaults.integer(forKey: "HIGHSCORE") <= 5 {
             tutorialButtonImage = childNode(withName: "Tutorial") as? SKSpriteNode
             let bounceUp = SKAction.move(by: CGVector(dx: 0, dy: 40), duration: 0.3)
@@ -101,12 +101,12 @@ class MainMenuScene: SKScene {
     }
     
     func showTutorialScene() {
-        let tutorialScene = GameScene(fileNamed: "Controls")
+        let tutorialScene = SKScene(fileNamed: "Controls")
         tutorialScene!.scaleMode = .aspectFill
         let fade = SKTransition.fade(withDuration: 1.0)
         self.view?.presentScene(tutorialScene!, transition: fade)
     }
-    
+
     func playBackgroundMusic(name: String) {
         if let backgroundMusic = childNode(withName: "backgroundMusic") {
             backgroundMusic.removeFromParent()

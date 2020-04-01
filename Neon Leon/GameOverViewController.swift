@@ -8,14 +8,25 @@
 
 import UIKit
 import SpriteKit
+import StoreKit
 
 class GameOverViewController: NeonLeonViewController {
 
     private var gameOverScene = SKScene(fileNamed: "GameOverScene")
 
+    var isQuarantineChallenge = false
+
+    var lastGameScore: Int = 0
+
     override func viewDidLoad() {
         self.setupGameOverScene()
+
         super.viewDidLoad()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        self.handleNewHighScoreIfNeeded()
+        super.viewDidAppear(animated)
     }
 
     func setupGameOverScene() {
@@ -32,19 +43,24 @@ class GameOverViewController: NeonLeonViewController {
         self.spriteKitView.presentScene(self.gameOverScene)
     }
 
-    func showChallengeWonView() {
-//            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
-//                guard let self = self else { return }
-//
-//                if self.isQuarantineChallenge == true && self.score >= 50 {
-//                    guard let gameViewController = self.view?.window?.rootViewController as? GameViewController else {
-//                        return
-//                    }
-//                    gameViewController.highScore = self.score
-//                    gameViewController.performSegue(withIdentifier: "SocialShareSegue", sender: gameViewController)
-//                }
-//                timer.invalidate()
-//            }
-//        })
+    func handleNewHighScoreIfNeeded() {
+        guard let gameOverScene = self.gameOverScene as? GameOverScene else {
+            return
+        }
+
+        if self.lastGameScore > UserDefaults.standard.integer(forKey: "HIGHSCORE") {
+            gameOverScene.highScore = self.lastGameScore
+            gameOverScene.playNewHighScoreAnimation()
+            UserDefaults().set(self.lastGameScore, forKey: "HIGHSCORE")
+
+            if #available(iOS 10.3, *) {
+                Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+                    SKStoreReviewController.requestReview()
+                    timer.invalidate()
+                }
+            }
+        } else {
+            gameOverScene.highScore = UserDefaults.standard.integer(forKey: "HIGHSCORE")
+        }
     }
 }

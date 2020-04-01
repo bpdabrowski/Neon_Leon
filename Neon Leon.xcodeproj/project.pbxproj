@@ -72,7 +72,7 @@
 		F2F9C639205F47DA001E58EE /* Controls.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2F9C638205F47DA001E58EE /* Controls.sks */; };
 		F2F9C63B205F47E2001E58EE /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F9C63A205F47E2001E58EE /* Controls.swift */; };
 		FF524663242EDEE200C68F81 /* InstagramActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF524662242EDEE200C68F81 /* InstagramActivity.swift */; };
-		FF524668242EEF4A00C68F81 /* SocialShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF524667242EEF4A00C68F81 /* SocialShareViewController.swift */; };
+		FF524668242EEF4A00C68F81 /* WonChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF524667242EEF4A00C68F81 /* WonChallengeViewController.swift */; };
 		FF52466A242EF9C000C68F81 /* Muli.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF524669242EF9C000C68F81 /* Muli.ttf */; };
 		FF67A7F921AE472100F1479D /* PowerUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF67A7F821AE472100F1479D /* PowerUp.wav */; };
 		FF7437DC242B083700DA8006 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF7437DB242B083700DA8006 /* GoogleService-Info.plist */; };
@@ -85,6 +85,8 @@
 		FFB5946A243117F80080B2D5 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FFB59469243117F80080B2D5 /* GameOverScene.sks */; };
 		FFB5946C2431194D0080B2D5 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB5946B2431194D0080B2D5 /* GameOverScene.swift */; };
 		FFB5946E243120760080B2D5 /* NodePictureAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB5946D243120760080B2D5 /* NodePictureAnimator.swift */; };
+		FFBC358F2432D8F70036BE44 /* QuarantineChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBC358E2432D8F70036BE44 /* QuarantineChallengeViewController.swift */; };
+		FFBC35A12432E2150036BE44 /* LostChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBC35A02432E2150036BE44 /* LostChallengeViewController.swift */; };
 		FFCB2C14242ADB4A0088B80C /* licenses in Resources */ = {isa = PBXBuildFile; fileRef = FFCB2C00242ADB4A0088B80C /* licenses */; };
 		FFCB2C15242ADB4A0088B80C /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFCB2C02242ADB4A0088B80C /* FBAudienceNetwork.framework */; };
 /* End PBXBuildFile section */
@@ -239,7 +241,7 @@
 		F2F9C638205F47DA001E58EE /* Controls.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Controls.sks; sourceTree = "<group>"; };
 		F2F9C63A205F47E2001E58EE /* Controls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
 		FF524662242EDEE200C68F81 /* InstagramActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramActivity.swift; sourceTree = "<group>"; };
-		FF524667242EEF4A00C68F81 /* SocialShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialShareViewController.swift; sourceTree = "<group>"; };
+		FF524667242EEF4A00C68F81 /* WonChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WonChallengeViewController.swift; sourceTree = "<group>"; };
 		FF524669242EF9C000C68F81 /* Muli.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Muli.ttf; sourceTree = "<group>"; };
 		FF67A7F821AE472100F1479D /* PowerUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PowerUp.wav; sourceTree = "<group>"; };
 		FF7437DB242B083700DA8006 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -252,6 +254,8 @@
 		FFB59469243117F80080B2D5 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		FFB5946B2431194D0080B2D5 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		FFB5946D243120760080B2D5 /* NodePictureAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodePictureAnimator.swift; sourceTree = "<group>"; };
+		FFBC358E2432D8F70036BE44 /* QuarantineChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuarantineChallengeViewController.swift; sourceTree = "<group>"; };
+		FFBC35A02432E2150036BE44 /* LostChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostChallengeViewController.swift; sourceTree = "<group>"; };
 		FFCB2BE3242AD8300088B80C /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		FFCB2C00242ADB4A0088B80C /* licenses */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = licenses; sourceTree = "<group>"; };
 		FFCB2C02242ADB4A0088B80C /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
@@ -389,11 +393,14 @@
 				F2B3350A1EA4425C007801AC /* GameViewController.swift */,
 				FFB5943D243052270080B2D5 /* InAppPurchaseHandler.swift */,
 				FF524662242EDEE200C68F81 /* InstagramActivity.swift */,
+				FFBC35A02432E2150036BE44 /* LostChallengeViewController.swift */,
 				F21DE7411FF3152C00D97E9C /* MainMenuScene.swift */,
 				FFB5942924300A7A0080B2D5 /* MainMenuViewController.swift */,
 				FFB59441243054C00080B2D5 /* NeonLeonViewController.swift */,
 				FFB5943F243053770080B2D5 /* NetworkActivityIndicatorManager.swift */,
-				FF524667242EEF4A00C68F81 /* SocialShareViewController.swift */,
+				FFB5946D243120760080B2D5 /* NodePictureAnimator.swift */,
+				FFBC358E2432D8F70036BE44 /* QuarantineChallengeViewController.swift */,
+				FF524667242EEF4A00C68F81 /* WonChallengeViewController.swift */,
 				FFCB2BFF242ADB4A0088B80C /* FBAudienceNetwork */,
 				F2AF7D011FA4083100DC5D2A /* Font */,
 				F21AAE261F4BB77A00B41405 /* Levels */,
@@ -402,7 +409,6 @@
 				F2B335431EA6F92D007801AC /* SKTUtils */,
 				F2751B051EB6B47B00B9F913 /* sounds */,
 				F277BD482063335800EA18C4 /* Tutorial */,
-				FFB5946D243120760080B2D5 /* NodePictureAnimator.swift */,
 			);
 			path = "Neon Leon";
 			sourceTree = "<group>";
@@ -740,6 +746,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFBC35A12432E2150036BE44 /* LostChallengeViewController.swift in Sources */,
 				FFB5942A24300A7A0080B2D5 /* MainMenuViewController.swift in Sources */,
 				F2B335091EA4425C007801AC /* GameScene.swift in Sources */,
 				F2B335511EA6F92D007801AC /* CGPoint+Extensions.swift in Sources */,
@@ -758,13 +765,14 @@
 				F2B3350B1EA4425C007801AC /* GameViewController.swift in Sources */,
 				F2B335531EA6F92D007801AC /* Int+Extensions.swift in Sources */,
 				F2B335571EA6F92D007801AC /* SKNode+Extensions.swift in Sources */,
-				FF524668242EEF4A00C68F81 /* SocialShareViewController.swift in Sources */,
+				FF524668242EEF4A00C68F81 /* WonChallengeViewController.swift in Sources */,
 				F21DE7421FF3152C00D97E9C /* MainMenuScene.swift in Sources */,
 				FFB5946C2431194D0080B2D5 /* GameOverScene.swift in Sources */,
 				F2B335581EA6F92D007801AC /* SKTAudio.swift in Sources */,
 				F2B335501EA6F92D007801AC /* CGFloat+Extensions.swift in Sources */,
 				F277BD4C2063342B00EA18C4 /* Platforms.swift in Sources */,
 				F2F9C63B205F47E2001E58EE /* Controls.swift in Sources */,
+				FFBC358F2432D8F70036BE44 /* QuarantineChallengeViewController.swift in Sources */,
 				FFB5946E243120760080B2D5 /* NodePictureAnimator.swift in Sources */,
 				FFB59442243054C00080B2D5 /* NeonLeonViewController.swift in Sources */,
 				FFB5943E243052270080B2D5 /* InAppPurchaseHandler.swift in Sources */,

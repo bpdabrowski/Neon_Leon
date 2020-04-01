@@ -19,7 +19,7 @@ class Platforms: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let newScene = GameScene(fileNamed: "PowerUps")
+        let newScene = SKScene(fileNamed: "PowerUps")
         newScene!.scaleMode = .aspectFill
         let fade = SKTransition.fade(withDuration: 0.5)
         self.view?.presentScene(newScene!, transition: fade)

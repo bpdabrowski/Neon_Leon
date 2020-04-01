@@ -9,7 +9,6 @@
 import SpriteKit
 import GameplayKit
 import AVFoundation
-import StoreKit
 import Firebase
 
 
@@ -104,7 +103,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let soundJump = SKAction.playSoundFileNamed("jump.wav", waitForCompletion: false)
     let soundCoin = SKAction.playSoundFileNamed("coin1.wav", waitForCompletion: false)
     let mouseHit = SKAction.playSoundFileNamed("CoinCollect.mp3", waitForCompletion: false)
-    let highScoreSound = SKAction.playSoundFileNamed("New Record.mp3", waitForCompletion: false)
+
     let electricute = SKAction.playSoundFileNamed("GameOver.mp3", waitForCompletion: false)
     let powerUp = SKAction.playSoundFileNamed("PowerUp.wav", waitForCompletion: false)
     
@@ -201,7 +200,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var lifeNode2: SKSpriteNode!
 
-    var gameOverAction: (() -> Void)?
+    var gameOverAction: ((Int) -> Void)?
 
     // MARK: - Static Properties
 
@@ -1201,122 +1200,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if pointerHand != nil {
             pointerHand.removeFromParent()
         }
-        
-        if score > userDefaults.integer(forKey: "HIGHSCORE") {
-            saveHighScore()
-        }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-            self.gameOverAction?()
-
-//            let restartButton = self.setupButton(pictureBase: "RestartButton_00040", pictureWidth: 335, pictureHeight: 357, buttonPositionX: -600, buttonPositionY: -600, zPosition: 8)
-//
-//            let restartButtonAnimation = self.buttonAnimation(animationBase: "RestartButton_000", start: 40, end: 45, foreverStart: 46, foreverEnd: 60, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
-//
-//            let restartButtonTransparent = Button(defaultButtonImage: "NoAds_00010", activeButtonImage: "RestartButton_00030", buttonAction: self.showNewScene)
-//            restartButtonTransparent.position = CGPoint(x: -385, y: -600)
-//            restartButtonTransparent.alpha = 0.01
-//            restartButtonTransparent.zPosition = 10
-//
-//            let restartMove = SKAction.moveBy(x: 215, y: 0, duration: 0.5)
-//
-//            self.camera?.addChild(restartButtonTransparent)
-//            self.camera?.addChild(restartButton)
-//            restartButton.run(SKAction.sequence([restartMove,restartButtonAnimation]))
-//
-//
-//            let gameOverLabel = self.setupButton(pictureBase: "GameOver_00000", pictureWidth: 1100, pictureHeight: 600, buttonPositionX: -50, buttonPositionY: 1100, zPosition: 8)
-//
-//            let gameOverAnimation = self.buttonAnimation(animationBase: "GameOver_000", start: 1, end: 19, foreverStart: 20, foreverEnd: 35, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
-//
-//            let gameOverMove = SKAction.moveBy(x: 0, y: -600, duration: 0.5)
-//
-//            self.camera?.addChild(gameOverLabel)
-//            gameOverLabel.run(SKAction.sequence([gameOverMove,gameOverAnimation]))
-//
-////            let noAdsButton = self.setupButton(pictureBase: "NoAds_00000", pictureWidth: 335, pictureHeight: 357, buttonPositionX: 600, buttonPositionY: -600, zPosition: 8)
-////
-////            let noAdsButtonAnimation = self.buttonAnimation(animationBase: "NoAds_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 43, startTimePerFrame: 0.05, foreverTimePerFrame: 0.05)
-////
-////            let noAdsButtonTransparent = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00000", buttonAction: self.gvc.removeAds)
-////
-////            noAdsButtonTransparent.position = CGPoint(x: 385, y: -600)
-////            noAdsButtonTransparent.alpha = 0.01
-////            noAdsButtonTransparent.zPosition = 10
-////
-////            let noAdsMove = SKAction.moveBy(x: -215, y: 0, duration: 0.5)
-////
-////            self.camera?.addChild(noAdsButtonTransparent)
-////            self.camera?.addChild(noAdsButton)
-////            noAdsButton.run(SKAction.sequence([noAdsMove,noAdsButtonAnimation]))
-//
-//            let mainMenuButton = self.setupButton(pictureBase: "HomeButton_00030", pictureWidth: 200, pictureHeight: 200, buttonPositionX: 0, buttonPositionY: -505, zPosition: 8)
-//
-//            let mainMenuButtonAnimation = self.buttonAnimation(animationBase: "HomeButton_000", start: 30, end: 31, foreverStart: 32, foreverEnd: 60, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
-//
-//            let mainMenuButtonTransparent = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: self.showMainMenu)
-//
-//            mainMenuButtonTransparent.position = CGPoint(x: 0, y: -505)
-//            mainMenuButtonTransparent.alpha = 0.01
-//            mainMenuButtonTransparent.zPosition = 10
-//
-//            let mainMenuMove = SKAction.moveBy(x: 0, y: 0, duration: 0.5)
-//
-//            self.camera?.addChild(mainMenuButtonTransparent)
-//            self.camera?.addChild(mainMenuButton)
-//            mainMenuButton.run(SKAction.sequence([mainMenuMove,mainMenuButtonAnimation]))
-//
-////            let restoreIAPButton = self.setupButton(pictureBase: "RestoreIAP_00000", pictureWidth: 200, pictureHeight: 200, buttonPositionX: 0, buttonPositionY: -705, zPosition: 8)
-//
-////            let restoreIAPButtonAnimation = self.buttonAnimation(animationBase: "RestoreIAP_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 15, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
-////
-////            let restoreIAPButtonTransparent = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: self.gvc.restorePurchasesWithAlert)
-////
-////            restoreIAPButtonTransparent.position = CGPoint(x: 0, y: -705)
-////            restoreIAPButtonTransparent.alpha = 0.01
-////            restoreIAPButtonTransparent.zPosition = 10
-//
-////            self.camera?.addChild(restoreIAPButtonTransparent)
-////            self.camera?.addChild(restoreIAPButton)
-////            restoreIAPButton.run(SKAction.sequence([mainMenuMove,restoreIAPButtonAnimation]))
-//
-//            let dimmerSprite = SKSpriteNode(imageNamed: "Dimmer")
-//            dimmerSprite.position = self.camera!.position
-//            dimmerSprite.zPosition = 7
-//            self.addChild(dimmerSprite)
-//
-//            if let alarm = self.childNode(withName: "alarm") {
-//                alarm.removeFromParent()
-//            }
-//
-//            let highScoreLabel = SKSpriteNode(imageNamed: "BestLabel_00000")
-//            highScoreLabel.position = CGPoint(x: -200, y: -82)
-//            highScoreLabel.zPosition = 8
-//            self.camera?.addChild(highScoreLabel)
-//
-//            let highScoreLabelAnimation = self.buttonAnimation(animationBase: "BestLabel_000", start: 1, end: 30, foreverStart: 31, foreverEnd: 60, startTimePerFrame: 0.06, foreverTimePerFrame: 0.06)
-//
-//            highScoreLabel.run(highScoreLabelAnimation)
-//
-//            let highScoreNumber = SKLabelNode(fontNamed: "NeonTubes2-Regular")
-//            highScoreNumber.fontSize = 200
-//            highScoreNumber.position = CGPoint(x: 300, y: -125)
-//            highScoreNumber.zPosition = 8
-//            highScoreNumber.text = "\(UserDefaults().integer(forKey: "HIGHSCORE"))"
-//            self.camera?.addChild(highScoreNumber)
-//
-//            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
-//                guard let self = self else { return }
-//
-//                if self.isQuarantineChallenge == true && self.score >= 50 {
-//                    guard let gameViewController = self.view?.window?.rootViewController as? GameViewController else {
-//                        return
-//                    }
-//                    gameViewController.highScore = self.score
-//                    gameViewController.performSegue(withIdentifier: "SocialShareSegue", sender: gameViewController)
-//                }
-//                timer.invalidate()
-//            }
+            self.gameOverAction?(self.score)
         })
     }
     
@@ -1477,28 +1363,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         default:
             break
-        }
-    }
-    
-    func saveHighScore() {
-        UserDefaults().set(score, forKey: "HIGHSCORE")
-        
-        let newHighScoreBanner = SKLabelNode(fontNamed: "NeonTubes2-Regular")
-        newHighScoreBanner.fontSize = 100
-        newHighScoreBanner.position = CGPoint(x: -1100, y: 725)
-        newHighScoreBanner.zPosition = 8
-        newHighScoreBanner.text = "NEW HIGH SCORE!"
-        
-        if gameState == .gameOver {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                self.run(self.highScoreSound)
-                self.camera?.addChild(newHighScoreBanner)
-                newHighScoreBanner.run(SKAction.move(by: CGVector(dx: 3000, dy: 0), duration: 3))
-                
-                if #available(iOS 10.3, *) {
-                    SKStoreReviewController.requestReview()
-                }
-            })
         }
     }
 

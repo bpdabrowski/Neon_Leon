@@ -20,6 +20,8 @@ class GameViewController: NeonLeonViewController {
 
     var soundOff = false
 
+    var lastGameScore = 0
+
     var highScore = 0
 
     var gameScene: SKScene?
@@ -43,7 +45,7 @@ class GameViewController: NeonLeonViewController {
             return
         }
 
-        gameScene.isQuarantineChallenge = isQuarantineChallenge
+        gameScene.isQuarantineChallenge = self.isQuarantineChallenge
         gameScene.startGame()
 
         super.viewDidAppear(true)
@@ -64,15 +66,36 @@ class GameViewController: NeonLeonViewController {
             return
         }
 
+        gameOverViewController.isQuarantineChallenge = self.isQuarantineChallenge
+
         // Set the scale mode to scale to fit the window
         gameScene.scaleMode = .aspectFill
-        gameScene.gameOverAction = { [weak self] in
-            self?.present(gameOverViewController, animated: true) { [weak self] in
-                self?.gameScene = nil
+        gameScene.gameOverAction = { [weak self] score in
+            guard let self = self else { return }
+
+            self.lastGameScore = score
+            if self.isQuarantineChallenge == true {
+                if score >= 50 {
+                    self.performSegue(withIdentifier: "ChallengeWonSegue", sender: self)
+                } else {
+                    self.performSegue(withIdentifier: "ChallengeLostSegue", sender: self)
+                }
+            } else {
+                self.performSegue(withIdentifier: "GameOverSegue", sender: self)
             }
+
+            self.gameScene = nil
         }
 
         self.spriteKitView.presentScene(gameScene)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let quarantineChallengeViewController = segue.destination as? QuarantineChallengeViewController {
+            quarantineChallengeViewController.lastGameScore = self.lastGameScore
+        } else if let gameOverViewController = segue.destination as? GameOverViewController {
+            gameOverViewController.lastGameScore = self.lastGameScore
+        }
     }
 
     func setupSound() {
@@ -89,25 +112,6 @@ class GameViewController: NeonLeonViewController {
                 backgroundMusicPlayer?.play()
             } catch {
                 // couldn't load file
-            }
-        }
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let socialShareViewController = segue.destination as? SocialShareViewController {
-            socialShareViewController.highScore = self.highScore
-            socialShareViewController.dismissCompletion = {
-                let alert = UIAlertController(title: "Share Challenge With Everyone!",
-                                              message: "We have also saved a screenshot of the challenge to your photos. Please share to all your social networks to encourage people to donate to the CDC Foundation.",
-                                              preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                alert.addAction(UIAlertAction(title: "Open Photos", style: .default) { _ in
-                    guard let photosUrl = URL(string:"photos-redirect://") else {
-                        return
-                    }
-                    UIApplication.shared.open(photosUrl)
-                })
-                self.present(alert, animated: true, completion: nil)
             }
         }
     }

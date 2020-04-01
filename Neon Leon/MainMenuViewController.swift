@@ -23,7 +23,34 @@ class MainMenuViewController: NeonLeonViewController {
 
     override func viewDidLoad() {
         self.setupMainMenuScene()
+        NotificationCenter.default.addObserver(self, selector: #selector(removeTutorialFromView(_:)),
+                                               name: Hazards.tutorialDoneNotification,
+                                               object: nil)
         super.viewDidLoad()
+    }
+
+    @objc
+    func removeTutorialFromView(_ notification: Notification) {
+        // This needs to be fixed, right now we create a new instance of the mainMenuScene everytime the tutorial is finished.
+        // Just leaving as technical debt because this workflow will not likely be hit often.
+        self.mainMenuScene = nil
+
+        guard let mainMenuScene = SKScene(fileNamed: "MainMenuScene") as? MainMenuScene else {
+            return
+        }
+
+        mainMenuScene.scaleMode = .aspectFill
+        self.mainMenuScene = mainMenuScene
+
+        mainMenuScene.showGameView = { [weak self] in
+            self?.showGameView()
+        }
+
+        mainMenuScene.showGameViewQuarantineChallenge = { [weak self] in
+            self?.showGameView(isQuarantineChallenge: true)
+        }
+
+        self.spriteKitView.presentScene(mainMenuScene)
     }
 
     func setupMainMenuScene() {

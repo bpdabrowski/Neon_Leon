@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gPC-RW-Jt8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gPC-RW-Jt8">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -44,8 +44,9 @@
                     <navigationItem key="navigationItem" id="w69-9i-Svj"/>
                     <connections>
                         <outlet property="spriteKitView" destination="lWS-Zp-zEP" id="lSo-K1-pJR"/>
-                        <segue destination="2k9-F6-Mh7" kind="show" identifier="SocialShareSegue" id="9Hy-Yt-xFd"/>
-                        <segue destination="KqR-Cm-O3o" kind="showDetail" id="eCx-ay-38A"/>
+                        <segue destination="KqR-Cm-O3o" kind="showDetail" identifier="GameOverSegue" id="eCx-ay-38A"/>
+                        <segue destination="Lhf-tM-Cuq" kind="showDetail" identifier="ChallengeWonSegue" id="Www-Y5-DDz"/>
+                        <segue destination="WvE-dp-BmH" kind="showDetail" identifier="ChallengeLostSegue" id="qRu-gF-dMZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -66,56 +67,73 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f8y-Hy-dQ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="356" y="964"/>
+            <point key="canvasLocation" x="356" y="959"/>
         </scene>
-        <!--Social Share View Controller-->
-        <scene sceneID="z5t-ou-M5e">
+        <!--Won Challenge View Controller-->
+        <scene sceneID="XZG-mM-zUF">
             <objects>
-                <viewController id="2k9-F6-Mh7" customClass="SocialShareViewController" customModule="Neon_Leon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="Lhf-tM-Cuq" customClass="WonChallengeViewController" customModule="Neon_Leon" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eix-fV-jHu"/>
-                        <viewControllerLayoutGuide type="bottom" id="4YE-x9-i9e"/>
+                        <viewControllerLayoutGuide type="top" id="5rw-PD-DTd"/>
+                        <viewControllerLayoutGuide type="bottom" id="ckw-7B-ZkV"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="bb9-e6-1Qr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                    <view key="view" contentMode="scaleToFill" id="alf-NB-HfX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CongratsSign" translatesAutoresizingMaskIntoConstraints="NO" id="bUZ-nf-vdc">
-                                <rect key="frame" x="35.5" y="100" width="304" height="489"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CongratsSign" translatesAutoresizingMaskIntoConstraints="NO" id="nLY-oE-kbv">
+                                <rect key="frame" x="35.5" y="110" width="304" height="244.5"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eal-1C-pnK">
-                                <rect key="frame" x="16" y="573" width="343" height="54"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8W-ne-QRs">
+                                <rect key="frame" x="205" y="593" width="154" height="54"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="343.32999999999998" id="1xa-QJ-1MU"/>
-                                    <constraint firstAttribute="height" constant="54" id="nRm-p8-d0b"/>
+                                    <constraint firstAttribute="height" constant="54" id="3BM-Mx-RvT"/>
+                                    <constraint firstAttribute="width" constant="154" id="nd5-xU-y31"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="SocialShareButton">
+                                <state key="normal" backgroundImage="ShareButton">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                 </state>
                                 <connections>
-                                    <action selector="showActivityView:" destination="2k9-F6-Mh7" eventType="touchUpInside" id="CFJ-Gy-S5X"/>
+                                    <action selector="showActivityView:" destination="Lhf-tM-Cuq" eventType="touchUpInside" id="Sn4-Wu-b4O"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHx-4c-2TH">
-                                <rect key="frame" x="20" y="652.5" width="335" height="144"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTX-di-b0T">
+                                <rect key="frame" x="16" y="418" width="343" height="144"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="144" id="IPp-PG-okO"/>
+                                    <constraint firstAttribute="height" constant="144" id="BRP-Tc-duY"/>
                                 </constraints>
-                                <string key="text">Try to get 50 points in 3 tries on Neon Leion. If you do, post a photo of your high score. If you don’t, donate $3 to the CDC Foundation to help the fight against COVID-19. Then post your 'I Donated' photo. Tag 3 friends to challenge. Let’s make the fight against the virus go viral!</string>
+                                <string key="text">Try to get 50 points on Neon Leion. If you do, post a photo of your high score. If you don’t, donate $3 to the CDC Foundation to help the fight against COVID-19. Then post your 'I Donated' photo. Tag 3 friends to challenge. Let’s make the fight against the virus go viral!</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Muli" family="Muli" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyp-tx-kZ5">
-                                <rect key="frame" x="314" y="20" width="45" height="45"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YPM-Kr-QWi">
+                                <rect key="frame" x="315" y="20" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="4gv-Ib-WCR"/>
+                                    <constraint firstAttribute="height" constant="44" id="9El-An-V6R"/>
+                                </constraints>
                                 <state key="normal" image="CloseButton"/>
                                 <connections>
-                                    <action selector="dismissView:" destination="2k9-F6-Mh7" eventType="touchUpInside" id="01d-Pp-aMx"/>
+                                    <action selector="dismissView:" destination="Lhf-tM-Cuq" eventType="touchUpInside" id="vms-UA-Uv9"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zmu-VO-5AF">
-                                <rect key="frame" x="146.5" y="608.5" width="82" height="26"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ye-29-Ywp">
+                                <rect key="frame" x="16" y="593" width="154" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="154" id="3dU-6r-cym"/>
+                                    <constraint firstAttribute="height" constant="54" id="ukb-S9-5Y9"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="DonateButton">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                </state>
+                                <connections>
+                                    <action selector="showDonationView:" destination="Lhf-tM-Cuq" eventType="touchUpInside" id="hoM-mP-wcc"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ho2-7t-Tf9">
+                                <rect key="frame" x="146.5" y="374" width="82" height="26"/>
                                 <fontDescription key="fontDescription" name="NeonTubes2-Regular" family="Neon Tubes 2" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -123,37 +141,135 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="gyp-tx-kZ5" secondAttribute="trailing" id="20D-BE-SWl"/>
-                            <constraint firstItem="qHx-4c-2TH" firstAttribute="centerX" secondItem="bb9-e6-1Qr" secondAttribute="centerX" id="4ov-GZ-5AI"/>
-                            <constraint firstItem="Zmu-VO-5AF" firstAttribute="top" secondItem="bUZ-nf-vdc" secondAttribute="bottom" constant="19.5" id="Jip-lY-FsB"/>
-                            <constraint firstItem="gyp-tx-kZ5" firstAttribute="top" secondItem="eix-fV-jHu" secondAttribute="bottom" constant="20" id="KgO-tL-0YO"/>
-                            <constraint firstItem="qHx-4c-2TH" firstAttribute="leading" secondItem="bb9-e6-1Qr" secondAttribute="leading" constant="20" id="LSK-l6-XyD"/>
-                            <constraint firstItem="bUZ-nf-vdc" firstAttribute="top" secondItem="eix-fV-jHu" secondAttribute="bottom" constant="100" id="P16-FB-AwA"/>
-                            <constraint firstItem="qHx-4c-2TH" firstAttribute="top" secondItem="Zmu-VO-5AF" secondAttribute="bottom" constant="18" id="PAR-Qu-jUV"/>
-                            <constraint firstItem="bUZ-nf-vdc" firstAttribute="centerX" secondItem="bb9-e6-1Qr" secondAttribute="centerX" id="V1S-b3-0UC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bUZ-nf-vdc" secondAttribute="trailing" constant="19.5" id="eXm-tT-2zb"/>
-                            <constraint firstItem="bUZ-nf-vdc" firstAttribute="leading" secondItem="bb9-e6-1Qr" secondAttribute="leadingMargin" constant="19.5" id="hZs-Cc-QDZ"/>
-                            <constraint firstAttribute="trailing" secondItem="qHx-4c-2TH" secondAttribute="trailing" constant="20" id="iXo-x2-hWC"/>
-                            <constraint firstItem="Zmu-VO-5AF" firstAttribute="centerX" secondItem="bb9-e6-1Qr" secondAttribute="centerX" id="lMT-vH-Ec5"/>
-                            <constraint firstItem="4YE-x9-i9e" firstAttribute="top" secondItem="Eal-1C-pnK" secondAttribute="bottom" constant="20" id="o6l-0O-Rzi"/>
-                            <constraint firstItem="Eal-1C-pnK" firstAttribute="centerX" secondItem="bb9-e6-1Qr" secondAttribute="centerX" id="qRb-vg-MhB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="P8W-ne-QRs" secondAttribute="trailing" id="714-1x-uqj"/>
+                            <constraint firstItem="YPM-Kr-QWi" firstAttribute="trailing" secondItem="alf-NB-HfX" secondAttribute="trailingMargin" id="7xw-sF-OCl"/>
+                            <constraint firstItem="ho2-7t-Tf9" firstAttribute="centerX" secondItem="alf-NB-HfX" secondAttribute="centerX" id="Hb8-AE-RdY"/>
+                            <constraint firstItem="pTX-di-b0T" firstAttribute="leading" secondItem="alf-NB-HfX" secondAttribute="leadingMargin" id="IPp-46-Crq"/>
+                            <constraint firstItem="nLY-oE-kbv" firstAttribute="centerX" secondItem="alf-NB-HfX" secondAttribute="centerX" id="J2c-E2-6xN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pTX-di-b0T" secondAttribute="trailing" id="Ssk-LM-oAA"/>
+                            <constraint firstItem="pTX-di-b0T" firstAttribute="top" secondItem="ho2-7t-Tf9" secondAttribute="bottom" constant="18" id="XNg-yd-AtG"/>
+                            <constraint firstItem="ckw-7B-ZkV" firstAttribute="top" secondItem="7Ye-29-Ywp" secondAttribute="bottom" constant="20" id="YeF-92-wux"/>
+                            <constraint firstItem="ckw-7B-ZkV" firstAttribute="top" secondItem="P8W-ne-QRs" secondAttribute="bottom" constant="20" id="baV-iC-tTW"/>
+                            <constraint firstItem="YPM-Kr-QWi" firstAttribute="top" secondItem="5rw-PD-DTd" secondAttribute="bottom" constant="20" id="h1k-dQ-PME"/>
+                            <constraint firstItem="nLY-oE-kbv" firstAttribute="top" secondItem="5rw-PD-DTd" secondAttribute="bottom" constant="110" id="klU-Gw-HUM"/>
+                            <constraint firstItem="7Ye-29-Ywp" firstAttribute="leading" secondItem="alf-NB-HfX" secondAttribute="leadingMargin" id="lg3-ml-Nhh"/>
+                            <constraint firstItem="pTX-di-b0T" firstAttribute="centerX" secondItem="alf-NB-HfX" secondAttribute="centerX" id="q0B-xE-vVB"/>
+                            <constraint firstItem="ho2-7t-Tf9" firstAttribute="top" secondItem="nLY-oE-kbv" secondAttribute="bottom" constant="19.5" id="rEo-sG-c71"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="fdL-dr-eGc"/>
                     <connections>
-                        <outlet property="challengeScore" destination="Zmu-VO-5AF" id="fU0-E6-Kln"/>
-                        <outlet property="closeButton" destination="gyp-tx-kZ5" id="oPe-NZ-fls"/>
-                        <outlet property="shareButton" destination="Eal-1C-pnK" id="ZDT-RV-ymc"/>
+                        <outlet property="challengeScore" destination="ho2-7t-Tf9" id="bpA-2B-CkM"/>
+                        <outlet property="closeButton" destination="YPM-Kr-QWi" id="fAa-UK-tB9"/>
+                        <outlet property="mainImageView" destination="nLY-oE-kbv" id="lxV-gO-Yss"/>
+                        <outlet property="shareButton" destination="P8W-ne-QRs" id="msz-ir-aNj"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ync-Ye-ypG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IFX-x3-55w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1369" y="116"/>
+            <point key="canvasLocation" x="1426" y="116"/>
+        </scene>
+        <!--Lost Challenge View Controller-->
+        <scene sceneID="ojF-Om-VeI">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="WvE-dp-BmH" customClass="LostChallengeViewController" customModule="Neon_Leon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="r38-SQ-1Hn"/>
+                        <viewControllerLayoutGuide type="bottom" id="ECZ-Ob-swu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i37-Tb-PKl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LostQChalHeading" translatesAutoresizingMaskIntoConstraints="NO" id="65c-r0-IZ9">
+                                <rect key="frame" x="31.5" y="100" width="312.5" height="253.5"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bI0-NF-zy3">
+                                <rect key="frame" x="20" y="417" width="335" height="144"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="144" id="PHV-jQ-6GW"/>
+                                </constraints>
+                                <string key="text">Try to get 50 points on Neon Leion. If you do, post a photo of your high score. If you don’t, donate $3 to the CDC Foundation to help the fight against COVID-19. Then post your 'I Donated' photo. Tag 3 friends to challenge. Let’s make the fight against the virus go viral!</string>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="Muli" family="Muli" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pVo-dT-LYg">
+                                <rect key="frame" x="16" y="593" width="154" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="154" id="HkQ-g8-0cU"/>
+                                    <constraint firstAttribute="height" constant="54" id="igJ-Pw-dRF"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="DonateButton"/>
+                                <connections>
+                                    <action selector="showDonationView:" destination="WvE-dp-BmH" eventType="touchUpInside" id="ocT-Fz-iu4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2H-RM-nC9">
+                                <rect key="frame" x="205" y="593" width="154" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="154" id="MQU-3N-JY3"/>
+                                    <constraint firstAttribute="height" constant="54" id="ySc-iJ-TUk"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="TryAgainButton"/>
+                                <connections>
+                                    <action selector="tryAgainTapped:" destination="WvE-dp-BmH" eventType="touchUpInside" id="mbN-AK-yhg"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3eR-Zo-pnR">
+                                <rect key="frame" x="146.5" y="373" width="82" height="26"/>
+                                <fontDescription key="fontDescription" name="NeonTubes2-Regular" family="Neon Tubes 2" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qT-A8-0Ml">
+                                <rect key="frame" x="315" y="20" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="Pm6-g3-XST"/>
+                                    <constraint firstAttribute="height" constant="44" id="Z0d-C5-7RJ"/>
+                                </constraints>
+                                <state key="normal" image="CloseButton"/>
+                                <connections>
+                                    <action selector="dismissView:" destination="WvE-dp-BmH" eventType="touchUpInside" id="TJK-0e-NeV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3eR-Zo-pnR" firstAttribute="top" secondItem="65c-r0-IZ9" secondAttribute="bottom" constant="19.5" id="0Oy-5x-BUf"/>
+                            <constraint firstItem="bI0-NF-zy3" firstAttribute="top" secondItem="3eR-Zo-pnR" secondAttribute="bottom" constant="18" id="0uS-RZ-i0P"/>
+                            <constraint firstItem="65c-r0-IZ9" firstAttribute="top" secondItem="r38-SQ-1Hn" secondAttribute="bottom" constant="100" id="3gK-0E-GY4"/>
+                            <constraint firstAttribute="trailing" secondItem="bI0-NF-zy3" secondAttribute="trailing" constant="20" id="HVA-4o-sLK"/>
+                            <constraint firstItem="3eR-Zo-pnR" firstAttribute="centerX" secondItem="i37-Tb-PKl" secondAttribute="centerX" id="Knb-XH-zV1"/>
+                            <constraint firstItem="ECZ-Ob-swu" firstAttribute="top" secondItem="d2H-RM-nC9" secondAttribute="bottom" constant="20" id="RSx-MU-yk7"/>
+                            <constraint firstItem="pVo-dT-LYg" firstAttribute="leading" secondItem="i37-Tb-PKl" secondAttribute="leadingMargin" id="Wo2-Q6-Al9"/>
+                            <constraint firstItem="2qT-A8-0Ml" firstAttribute="top" secondItem="r38-SQ-1Hn" secondAttribute="bottom" constant="20" id="ZfX-X3-4Ae"/>
+                            <constraint firstItem="65c-r0-IZ9" firstAttribute="centerX" secondItem="i37-Tb-PKl" secondAttribute="centerX" id="aRY-xd-qYS"/>
+                            <constraint firstItem="2qT-A8-0Ml" firstAttribute="trailing" secondItem="i37-Tb-PKl" secondAttribute="trailingMargin" id="gT0-ie-zwQ"/>
+                            <constraint firstItem="bI0-NF-zy3" firstAttribute="leading" secondItem="i37-Tb-PKl" secondAttribute="leading" constant="20" id="pCc-Zj-FjO"/>
+                            <constraint firstItem="ECZ-Ob-swu" firstAttribute="top" secondItem="pVo-dT-LYg" secondAttribute="bottom" constant="20" id="qbp-zD-2tI"/>
+                            <constraint firstItem="bI0-NF-zy3" firstAttribute="centerX" secondItem="i37-Tb-PKl" secondAttribute="centerX" id="vg0-OI-pq7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="d2H-RM-nC9" secondAttribute="trailing" id="whJ-wz-QJB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="challengeScore" destination="3eR-Zo-pnR" id="B0t-67-TPW"/>
+                        <outlet property="closeButton" destination="2qT-A8-0Ml" id="v5I-rY-68j"/>
+                        <outlet property="mainImageView" destination="65c-r0-IZ9" id="NHK-bI-4mw"/>
+                        <outlet property="tryAgainButton" destination="d2H-RM-nC9" id="ytk-mj-2Rd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ers-XE-aLQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1425" y="-635"/>
         </scene>
     </scenes>
     <resources>
         <image name="CloseButton" width="22.5" height="22.5"/>
         <image name="CongratsSign" width="304.5" height="244.5"/>
-        <image name="SocialShareButton" width="343.5" height="53.5"/>
+        <image name="DonateButton" width="154.5" height="53.5"/>
+        <image name="LostQChalHeading" width="312.5" height="253.5"/>
+        <image name="ShareButton" width="154" height="53.5"/>
+        <image name="TryAgainButton" width="154.5" height="53.5"/>
     </resources>
 </document>

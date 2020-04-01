@@ -20,7 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(backToRootViewController(_:)), name: GameOverScene.mainMenuPressedNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(backToRootViewController(_:)),
+                                               name: GameOverScene.mainMenuPressedNotification,
+                                               object: nil)
 
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {
