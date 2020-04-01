@@ -27,7 +27,6 @@ class Hazards: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let newScene = GameScene(fileNamed: "GameScene")
         newScene!.scaleMode = .aspectFill
-        let fade = SKTransition.fade(withDuration: 0.5)
         NotificationCenter.default.post(name: Self.tutorialDoneNotification, object: nil)
     }
     

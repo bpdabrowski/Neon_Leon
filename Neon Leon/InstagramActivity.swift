@@ -4,8 +4,8 @@ import UIKit
 private let InstagramAppURL = URL(string: "instagram://app")!
 
 class InstagramActivity: UIActivity, UIDocumentInteractionControllerDelegate {
-    override class var activityCategory: UIActivityCategory { return .share }
-    override var activityType: UIActivityType? { return UIActivityType("postToInstagram") }
+    override class var activityCategory: UIActivity.Category { return .share }
+    override var activityType: UIActivity.ActivityType? { return UIActivity.ActivityType("postToInstagram") }
     override var activityTitle: String? { return "Instagram" }
     override var activityImage: UIImage? { return #imageLiteral(resourceName: "instagram_activity") }
 
@@ -28,7 +28,7 @@ class InstagramActivity: UIActivity, UIDocumentInteractionControllerDelegate {
         guard UIApplication.shared.canOpenURL(InstagramAppURL),
             let image = activityItems.first(where: { $0 is UIImage }) as? UIImage,
             let docsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
-            let data = UIImageJPEGRepresentation(image, 0.7) else { return false }
+            let data = image.jpegData(compressionQuality: 0.7) else { return false }
 
         imageUrl = docsUrl.appendingPathComponent("to-share.ig")
         do {

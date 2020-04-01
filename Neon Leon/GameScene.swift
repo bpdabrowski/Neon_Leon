@@ -1321,7 +1321,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
         case PhysicsCategory.Spikes:
-            print("Hi BD! Spikes got hit at \(Date().timeIntervalSince1970), what is the players physics body set to \(player.physicsBody?.categoryBitMask)")
             notification.notificationOccurred(.error)
             if !self.isInvincible {
                 self.subtractLife()
@@ -1329,7 +1328,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             run(electricute)
             
         case PhysicsCategory.Lava:
-            print("Hi BD! Lava got hit at \(Date().timeIntervalSince1970)")
             if !self.isInvincible {
                 self.subtractLife()
                 run(electricute)
