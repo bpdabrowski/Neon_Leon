@@ -14,6 +14,8 @@ class Hazards: SKScene {
     var lastUpdateTimeInterval: TimeInterval = 0
     var deltaTime: TimeInterval = 0
     var fallTime: TimeInterval = 0
+
+    public static let tutorialDoneNotification = Notification.Name("tutorialDone")
     
     override func didMove(to view: SKView) {
         let dimmer = SKSpriteNode(imageNamed: "Dimmer")
@@ -26,7 +28,7 @@ class Hazards: SKScene {
         let newScene = GameScene(fileNamed: "GameScene")
         newScene!.scaleMode = .aspectFill
         let fade = SKTransition.fade(withDuration: 0.5)
-        self.view?.presentScene(newScene!, transition: fade)
+        NotificationCenter.default.post(name: Self.tutorialDoneNotification, object: nil)
     }
     
     override func update(_ currentTime: TimeInterval) {

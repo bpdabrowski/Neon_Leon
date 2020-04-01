@@ -9,7 +9,6 @@
 import SpriteKit
 import GameplayKit
 import AVFoundation
-import StoreKit
 import Firebase
 
 
@@ -98,13 +97,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastUpdateTimeInterval: TimeInterval = 0
     var deltaTime: TimeInterval = 0
     
-    var lives = 1
+    var lives: Int?
     
     let soundBoost = SKAction.playSoundFileNamed("boost.wav", waitForCompletion: false)
     let soundJump = SKAction.playSoundFileNamed("jump.wav", waitForCompletion: false)
     let soundCoin = SKAction.playSoundFileNamed("coin1.wav", waitForCompletion: false)
     let mouseHit = SKAction.playSoundFileNamed("CoinCollect.mp3", waitForCompletion: false)
-    let highScoreSound = SKAction.playSoundFileNamed("New Record.mp3", waitForCompletion: false)
+
     let electricute = SKAction.playSoundFileNamed("GameOver.mp3", waitForCompletion: false)
     let powerUp = SKAction.playSoundFileNamed("PowerUp.wav", waitForCompletion: false)
     
@@ -142,15 +141,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var tapCount: Int!
     
     var breakAnimation: SKAction!
-    
-    var lightningAnimation: SKAction!
-    
+
     var platformProbes: SKSpriteNode!
     
     var avPlayer: AVPlayer!
     var video: SKVideoNode!
     
-    var playButton: Button!
     var reviewButton: Button!
     var noAdsStart: Button!
     var tutorialButton: Button!
@@ -175,8 +171,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var platformGroup: SKAction!
     
     let userDefaults = UserDefaults.standard
-    
-    var isInvincible = false
+
+    var isInvincible: Bool {
+        return player.physicsBody?.categoryBitMask == 4096
+    }
     
     var powerUpBullet: SKSpriteNode!
     var deadFishBullet: SKSpriteNode!
@@ -189,32 +187,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var wait2: SKAction!
     var wait3: SKAction!
     var wait5: SKAction!
-    
-    let mm = MainMenu()
-    
+
     var pointerHand: SKSpriteNode! = nil
     
     let notification = UINotificationFeedbackGenerator()
     
     var didLand = false
-    
-    let gvc = GameViewController()
+
+    var isQuarantineChallenge = false
+
+    var lifeNode1: SKSpriteNode!
+
+    var lifeNode2: SKSpriteNode!
+
+    var gameOverAction: ((Int) -> Void)?
 
     // MARK: - Static Properties
 
     static let playerAndInvincibleContactMask: UInt32 = 4097
-    
+
     override func didMove(to view: SKView) {
-        view.showsPhysics = false
-        
+        self.setupGameScene()
+    }
+
+    func setupGameScene() {
         setupNodes()
         setupLevel()
         setupPlayer()
-        
+
         physicsWorld.contactDelegate = self
-        
+
         camera?.position = CGPoint(x: size.width/2, y: size.height/2)
-        
+
         playerAnimationJump = setupAnimationWithPrefix("NLCat_Jump_", start: 1, end: 4, timePerFrame: 0.025)
         playerAnimationFall = setupAnimationWithPrefix("NLCat_Fall_", start: 1, end: 6, timePerFrame: 0.025)
         playerAnimationPlatform = setupAnimationWithPrefix("NLCat_Platform_", start: 1, end: 4, timePerFrame: 0.025)
@@ -224,21 +228,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lightningOff.zPosition = 4
         lightningOff.position = CGPoint(x: -450, y: 900)
         camera?.addChild(lightningOff)
-        
 
-        
         animationLoopDown = setupAnimationWithPrefix("Lightning_00",
                                                      start: 1,
                                                      end: 201,
                                                      timePerFrame: 0.035)
-        
+
         scoreLabel.fontColor = SKColor.white
         scoreLabel.fontSize = 200
         scoreLabel.zPosition = 8
         scoreLabel.position = CGPoint(x: 0, y: 825)
         camera?.addChild(scoreLabel)
 
-        startGame()
+        self.createLivesTracker()
+    }
+
+    private func createLivesTracker() {
+        let lifeNode1 = self.createNode(with: SKTexture(image: #imageLiteral(resourceName: "Lightning_0035")))
+        lifeNode1.position = CGPoint(x: 450, y: 900)
+        self.lifeNode1 = lifeNode1
+
+        let lifeNode2 = self.createNode(with: SKTexture(image: #imageLiteral(resourceName: "Lightning_0035")))
+        lifeNode2.position = CGPoint(x: 525, y: 900)
+        self.lifeNode2 = lifeNode2
+
+        self.lifeNode1.isHidden = true
+        self.lifeNode2.isHidden = true
+    }
+
+    private func createNode(with texture: SKTexture) -> SKSpriteNode {
+        let node = SKSpriteNode(texture: texture)
+        node.zPosition = 4
+        node.size = CGSize(width: 375, height: 390)
+        node.xScale = 0.5
+        node.yScale = 0.5
+        self.camera?.addChild(node)
+        return node
     }
     
     func setupNodes() {
@@ -589,6 +614,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             node.removeFromParent()
         }
     }
+
+    private func playLightningAnimation(startFrame: Int = 1, timePerFrame: TimeInterval = 0.01) -> SKAction {
+
+        return self.setupAnimationWithPrefix("Lightning_00",
+                                             start: startFrame,
+                                             end: 201,
+                                             timePerFrame: timePerFrame)
+    }
     
     func setupAnimationWithPrefix(_ prefix: String, start: Int, end: Int, timePerFrame: TimeInterval) -> SKAction {
         var textures = [SKTexture]()
@@ -732,21 +765,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         newLavaPositionY = max(newLavaPositionY, (bottomOfScreenYFg - 125.0))
         lava.position.y = newLavaPositionY
     }
-    
-    func updateCollisionLava() {
-        if player.position.y < lava.position.y - 500 {
-            if playerState != .lava {
-                playerState = .lava
-                playerTrail.particleBirthRate = 0
-            }
-            boostPlayer()
-            lives -= 1
-            if lives <= 0 {
-                gameOver()
-            }
-        }
-    }
-    
+
     func updatePowerUp(_ dt: TimeInterval) {
         powerUpTimeSinceLastShot += dt
         
@@ -874,7 +893,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             invincibleTime += dt
 
             if invincibleTime > 7 {
-                self.isInvincible = false
                 player.physicsBody?.categoryBitMask = PhysicsCategory.Player
                 invincibleTime = 0
             }
@@ -1050,8 +1068,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         isFingerOnCat = false
     }
+
+    func setupQuarantineChallengeIfNeeded() {
+        if self.isQuarantineChallenge {
+            self.lifeNode1.isHidden = false
+            self.lifeNode2.isHidden = false
+            self.lives = 2
+        } else {
+            self.lives = 1
+        }
+    }
     
     func startGame() {
+        self.setupQuarantineChallengeIfNeeded()
+
         gameState = .playing
         playerState = .idle
         platformState = .high
@@ -1060,7 +1090,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         pointerHand = SKSpriteNode(imageNamed: "PointerHand")
         pointerHand.zPosition = 100
-        pointerHand.position = CGPoint(x: -250, y: 450 /*-650*/)
+        pointerHand.position = CGPoint(x: -250, y: 450)
         pointerHand.setScale(0.5)
         camera?.addChild(pointerHand)
         let pointerMoveRight = SKAction.move(by: CGVector(dx: 500, dy: 0), duration: 0.5)
@@ -1119,7 +1149,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         return button
     }
-    
+
+    func subtractLife() {
+        self.lives! -= 1
+
+        if self.isQuarantineChallenge {
+            if let lifeNode1 = self.lifeNode1, self.lives == 1 {
+                lifeNode1.run(self.playLightningAnimation(startFrame: 35))
+                self.handleRecoveryPeriod()
+            } else if let lifeNode2 = self.lifeNode2, self.lives == 0 {
+                lifeNode2.run(self.playLightningAnimation(startFrame: 35))
+                self.gameOver()
+            }
+        } else {
+            self.gameOver()
+        }
+    }
+
+    func handleRecoveryPeriod() {
+        self.player.physicsBody?.categoryBitMask = PhysicsCategory.Invincible
+        player.run(setupAnimationWithPrefix("NLCat_Off_", start: 1, end: 5, timePerFrame: 0.15))
+
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+            self.player.physicsBody?.categoryBitMask = PhysicsCategory.Player
+            timer.invalidate()
+        }
+
+        self.boostPlayer()
+    }
+
     func gameOver() {
         gameState = .gameOver
         playerState = .dead
@@ -1134,122 +1192,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
          let moveUp = SKAction.moveBy(x: 0.0, y: 200, duration: 0.2)
          moveUp.timingMode = .easeOut
          let moveDown = SKAction.moveBy(x: 0.0,
-         y: -(size.height * 1.5),
-         duration: 1.0)
-         moveDown.timingMode = .easeIn
+                                        y: -(size.height * 1.5),
+                                        duration: 1.0)
+        moveDown.timingMode = .easeIn
          player.run(SKAction.sequence([wait, moveUp, moveDown]))
         
         if pointerHand != nil {
             pointerHand.removeFromParent()
         }
-        
-        if score > userDefaults.integer(forKey: "HIGHSCORE") {
-            saveHighScore()
-        }
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-            
-            let restartButton = self.setupButton(pictureBase: "RestartButton_00040", pictureWidth: 335, pictureHeight: 357, buttonPositionX: -600, buttonPositionY: -600, zPosition: 8)
-            
-            let restartButtonAnimation = self.buttonAnimation(animationBase: "RestartButton_000", start: 40, end: 45, foreverStart: 46, foreverEnd: 60, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
-            
-            let restartButtonTransparent = Button(defaultButtonImage: "NoAds_00010", activeButtonImage: "RestartButton_00030", buttonAction: self.showNewScene)
-            restartButtonTransparent.position = CGPoint(x: -385, y: -600)
-            restartButtonTransparent.alpha = 0.01
-            restartButtonTransparent.zPosition = 10
-            
-            let restartMove = SKAction.moveBy(x: 215, y: 0, duration: 0.5)
-            
-            self.camera?.addChild(restartButtonTransparent)
-            self.camera?.addChild(restartButton)
-            restartButton.run(SKAction.sequence([restartMove,restartButtonAnimation]))
-            
-            
-            let gameOverLabel = self.setupButton(pictureBase: "GameOver_00000", pictureWidth: 1100, pictureHeight: 600, buttonPositionX: -50, buttonPositionY: 1100, zPosition: 8)
-            
-            let gameOverAnimation = self.buttonAnimation(animationBase: "GameOver_000", start: 1, end: 19, foreverStart: 20, foreverEnd: 35, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
-            
-            let gameOverMove = SKAction.moveBy(x: 0, y: -600, duration: 0.5)
-            
-            self.camera?.addChild(gameOverLabel)
-            gameOverLabel.run(SKAction.sequence([gameOverMove,gameOverAnimation]))
-            
-//            let noAdsButton = self.setupButton(pictureBase: "NoAds_00000", pictureWidth: 335, pictureHeight: 357, buttonPositionX: 600, buttonPositionY: -600, zPosition: 8)
-//
-//            let noAdsButtonAnimation = self.buttonAnimation(animationBase: "NoAds_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 43, startTimePerFrame: 0.05, foreverTimePerFrame: 0.05)
-//
-//            let noAdsButtonTransparent = Button(defaultButtonImage: "NoAds_00000", activeButtonImage: "NoAds_00000", buttonAction: self.gvc.removeAds)
-//
-//            noAdsButtonTransparent.position = CGPoint(x: 385, y: -600)
-//            noAdsButtonTransparent.alpha = 0.01
-//            noAdsButtonTransparent.zPosition = 10
-//
-//            let noAdsMove = SKAction.moveBy(x: -215, y: 0, duration: 0.5)
-//
-//            self.camera?.addChild(noAdsButtonTransparent)
-//            self.camera?.addChild(noAdsButton)
-//            noAdsButton.run(SKAction.sequence([noAdsMove,noAdsButtonAnimation]))
-            
-            let mainMenuButton = self.setupButton(pictureBase: "HomeButton_00030", pictureWidth: 200, pictureHeight: 200, buttonPositionX: 0, buttonPositionY: -505, zPosition: 8)
-            
-            let mainMenuButtonAnimation = self.buttonAnimation(animationBase: "HomeButton_000", start: 30, end: 31, foreverStart: 32, foreverEnd: 60, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
-            
-            let mainMenuButtonTransparent = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: self.showMainMenu)
-            
-            mainMenuButtonTransparent.position = CGPoint(x: 0, y: -505)
-            mainMenuButtonTransparent.alpha = 0.01
-            mainMenuButtonTransparent.zPosition = 10
-            
-            let mainMenuMove = SKAction.moveBy(x: 0, y: 0, duration: 0.5)
-            
-            self.camera?.addChild(mainMenuButtonTransparent)
-            self.camera?.addChild(mainMenuButton)
-            mainMenuButton.run(SKAction.sequence([mainMenuMove,mainMenuButtonAnimation]))
-            
-//            let restoreIAPButton = self.setupButton(pictureBase: "RestoreIAP_00000", pictureWidth: 200, pictureHeight: 200, buttonPositionX: 0, buttonPositionY: -705, zPosition: 8)
-            
-//            let restoreIAPButtonAnimation = self.buttonAnimation(animationBase: "RestoreIAP_000", start: 1, end: 2, foreverStart: 3, foreverEnd: 15, startTimePerFrame: 0.035, foreverTimePerFrame: 0.035)
-//
-//            let restoreIAPButtonTransparent = Button(defaultButtonImage: "SmallButtonCircle", activeButtonImage: "SmallButtonCircle", buttonAction: self.gvc.restorePurchasesWithAlert)
-//
-//            restoreIAPButtonTransparent.position = CGPoint(x: 0, y: -705)
-//            restoreIAPButtonTransparent.alpha = 0.01
-//            restoreIAPButtonTransparent.zPosition = 10
-            
-//            self.camera?.addChild(restoreIAPButtonTransparent)
-//            self.camera?.addChild(restoreIAPButton)
-//            restoreIAPButton.run(SKAction.sequence([mainMenuMove,restoreIAPButtonAnimation]))
-            
-            let dimmerSprite = SKSpriteNode(imageNamed: "Dimmer")
-            dimmerSprite.position = self.camera!.position
-            dimmerSprite.zPosition = 7
-            self.addChild(dimmerSprite)
-            
-            if let alarm = self.childNode(withName: "alarm") {
-                alarm.removeFromParent()
-            }
-            
-            let highScoreLabel = SKSpriteNode(imageNamed: "BestLabel_00000")
-            highScoreLabel.position = CGPoint(x: -200, y: -82)
-            highScoreLabel.zPosition = 8
-            self.camera?.addChild(highScoreLabel)
-            
-            let highScoreLabelAnimation = self.buttonAnimation(animationBase: "BestLabel_000", start: 1, end: 30, foreverStart: 31, foreverEnd: 60, startTimePerFrame: 0.06, foreverTimePerFrame: 0.06)
-            
-            highScoreLabel.run(highScoreLabelAnimation)
-            
-            let highScoreNumber = SKLabelNode(fontNamed: "NeonTubes2-Regular")
-            highScoreNumber.fontSize = 200
-            highScoreNumber.position = CGPoint(x: 300, y: -125)
-            highScoreNumber.zPosition = 8
-            highScoreNumber.text = "\(UserDefaults().integer(forKey: "HIGHSCORE"))"
-            self.camera?.addChild(highScoreNumber)
-            
-            if let viewController = self.view?.window?.rootViewController {
-//                if SwiftyAd.shared.isInterstitialReady {
-//                    SwiftyAd.shared.showInterstitial(from: viewController, withInterval: 5)
-//                }
-            }
+            self.gameOverAction?(self.score)
         })
     }
     
@@ -1267,11 +1220,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch other.categoryBitMask {
         case PhysicsCategory.powerUp:
             if !self.isInvincible {
-                self.isInvincible = true
                 emitParticles(name: "LightningExplode", sprite: powerUpBullet)
                 player.physicsBody?.categoryBitMask = PhysicsCategory.Invincible
                 run(powerUp)
-                lightningOff.run(animationLoopDown)
+                lightningOff.run(self.playLightningAnimation(timePerFrame: 0.035))
                 notification.notificationOccurred(.warning)
                 powerUpBullet.removeFromParent()
             }
@@ -1369,13 +1321,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
         case PhysicsCategory.Spikes:
-                    notification.notificationOccurred(.error)
-                    gameOver()
-                    run(electricute)
+            print("Hi BD! Spikes got hit at \(Date().timeIntervalSince1970), what is the players physics body set to \(player.physicsBody?.categoryBitMask)")
+            notification.notificationOccurred(.error)
+            if !self.isInvincible {
+                self.subtractLife()
+            }
+            run(electricute)
             
         case PhysicsCategory.Lava:
+            print("Hi BD! Lava got hit at \(Date().timeIntervalSince1970)")
             if !self.isInvincible {
-                gameOver()
+                self.subtractLife()
                 run(electricute)
             } else if self.isInvincible {
                 superBoostPlayer()
@@ -1407,29 +1363,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         default:
             break
-        }
-    }
-    
-    func saveHighScore() {
-        UserDefaults().set(score, forKey: "HIGHSCORE")
-        
-        let newHighScoreBanner = SKLabelNode(fontNamed: "NeonTubes2-Regular")
-        newHighScoreBanner.fontSize = 100
-        newHighScoreBanner.position = CGPoint(x: -1100, y: 725)
-        newHighScoreBanner.zPosition = 8
-        newHighScoreBanner.text = "NEW HIGH SCORE!"
-        
-        if gameState == .gameOver {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                self.run(self.highScoreSound)
-                self.camera?.addChild(newHighScoreBanner)
-                newHighScoreBanner.run(SKAction.move(by: CGVector(dx: 3000, dy: 0), duration: 3))
-                
-                // Requests user to make a review after losing, doesn't happen everytime. It is controlled by Apple.
-                if #available(iOS 10.3, *) {
-                    SKStoreReviewController.requestReview()
-                }
-            })
         }
     }
 
