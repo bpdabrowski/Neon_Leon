@@ -105,7 +105,7 @@ class GameOverScene: SKScene {
     }
 
     func playNewHighScoreAnimation() {
-        let scaleIn = SKAction.scale(to: 4.5, duration: 0.5)
+        let scaleIn = SKAction.scale(to: 3.75, duration: 0.5)
         let scaleOut = SKAction.scale(to: 0, duration: 2)
         self.run(SKAction.playSoundFileNamed("New Record.mp3", waitForCompletion: false))
         self.newHighScoreSign?.run(scaleIn)
