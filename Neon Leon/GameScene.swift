@@ -245,11 +245,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func createLivesTracker() {
         let lifeNode1 = self.createNode(with: SKTexture(image: #imageLiteral(resourceName: "Lightning_0035")))
-        lifeNode1.position = CGPoint(x: 450, y: 900)
+        lifeNode1.position = CGPoint(x: 400, y: 900)
         self.lifeNode1 = lifeNode1
 
         let lifeNode2 = self.createNode(with: SKTexture(image: #imageLiteral(resourceName: "Lightning_0035")))
-        lifeNode2.position = CGPoint(x: 525, y: 900)
+        lifeNode2.position = CGPoint(x: 475, y: 900)
         self.lifeNode2 = lifeNode2
 
         self.lifeNode1.isHidden = true
