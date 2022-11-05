@@ -46,10 +46,6 @@ class MainMenuViewController: NeonLeonViewController {
             self?.showGameView()
         }
 
-        mainMenuScene.showGameViewQuarantineChallenge = { [weak self] in
-            self?.showGameView(isQuarantineChallenge: true)
-        }
-
         self.spriteKitView.presentScene(mainMenuScene)
     }
 
@@ -68,10 +64,6 @@ class MainMenuViewController: NeonLeonViewController {
         mainMenuScene.showGameView = { [weak self] in
             self?.showGameView()
         }
-
-        mainMenuScene.showGameViewQuarantineChallenge = { [weak self] in
-            self?.showGameView(isQuarantineChallenge: true)
-        }
     }
 
     func preLoadedGameView() -> UIViewController {
@@ -88,8 +80,6 @@ class MainMenuViewController: NeonLeonViewController {
 
     func showGameView(isQuarantineChallenge: Bool = false) {
         if let gameViewController = self.gameViewController {
-            gameViewController.isQuarantineChallenge = isQuarantineChallenge
-
             self.present(gameViewController, animated: true, completion: nil)
         }
     }

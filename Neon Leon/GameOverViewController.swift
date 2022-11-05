@@ -14,8 +14,6 @@ class GameOverViewController: NeonLeonViewController {
 
     private var gameOverScene = SKScene(fileNamed: "GameOverScene")
 
-    var isQuarantineChallenge = false
-
     var lastGameScore: Int = 0
 
     override func viewDidLoad() {

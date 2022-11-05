@@ -9,8 +9,6 @@
 import SpriteKit
 import GameplayKit
 import AVFoundation
-import Firebase
-
 
 struct PhysicsCategory {
     static let None: UInt32                 = 0
@@ -193,8 +191,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let notification = UINotificationFeedbackGenerator()
     
     var didLand = false
-
-    var isQuarantineChallenge = false
 
     var lifeNode1: SKSpriteNode!
 
@@ -1068,19 +1064,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         isFingerOnCat = false
     }
-
-    func setupQuarantineChallengeIfNeeded() {
-        if self.isQuarantineChallenge {
-            self.lifeNode1.isHidden = false
-            self.lifeNode2.isHidden = false
-            self.lives = 2
-        } else {
-            self.lives = 1
-        }
-    }
     
     func startGame() {
-        self.setupQuarantineChallengeIfNeeded()
+        self.lives = 1
 
         gameState = .playing
         playerState = .idle
@@ -1153,17 +1139,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func subtractLife() {
         self.lives! -= 1
 
-        if self.isQuarantineChallenge {
-            if let lifeNode1 = self.lifeNode1, self.lives == 1 {
-                lifeNode1.run(self.playLightningAnimation(startFrame: 35))
-                self.handleRecoveryPeriod()
-            } else if let lifeNode2 = self.lifeNode2, self.lives == 0 {
-                lifeNode2.run(self.playLightningAnimation(startFrame: 35))
-                self.gameOver()
-            }
-        } else {
-            self.gameOver()
-        }
+        self.gameOver()
     }
 
     func handleRecoveryPeriod() {

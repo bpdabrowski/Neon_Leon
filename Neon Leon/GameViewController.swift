@@ -9,9 +9,7 @@
 import UIKit
 import SpriteKit
 import GameplayKit
-import Firebase
 import AVFoundation
-import SwiftyStoreKit
 import StoreKit
 
 var backgroundMusicPlayer: AVAudioPlayer?
@@ -25,8 +23,6 @@ class GameViewController: NeonLeonViewController {
     var highScore = 0
 
     var gameScene: SKScene?
-
-    var isQuarantineChallenge = false
 
     var gameOverViewController: GameOverViewController?
 
@@ -45,7 +41,6 @@ class GameViewController: NeonLeonViewController {
             return
         }
 
-        gameScene.isQuarantineChallenge = self.isQuarantineChallenge
         gameScene.startGame()
 
         super.viewDidAppear(true)
@@ -62,27 +57,13 @@ class GameViewController: NeonLeonViewController {
             self.gameOverViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GameOverViewController") as? GameOverViewController
         }
 
-        guard let gameOverViewController = self.gameOverViewController else {
-            return
-        }
-
-        gameOverViewController.isQuarantineChallenge = self.isQuarantineChallenge
-
         // Set the scale mode to scale to fit the window
         gameScene.scaleMode = .aspectFill
         gameScene.gameOverAction = { [weak self] score in
             guard let self = self else { return }
 
             self.lastGameScore = score
-            if self.isQuarantineChallenge == true {
-                if score >= 50 {
-                    self.performSegue(withIdentifier: "ChallengeWonSegue", sender: self)
-                } else {
-                    self.performSegue(withIdentifier: "ChallengeLostSegue", sender: self)
-                }
-            } else {
-                self.performSegue(withIdentifier: "GameOverSegue", sender: self)
-            }
+            self.performSegue(withIdentifier: "GameOverSegue", sender: self)
 
             self.gameScene = nil
         }
@@ -91,9 +72,7 @@ class GameViewController: NeonLeonViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let quarantineChallengeViewController = segue.destination as? QuarantineChallengeViewController {
-            quarantineChallengeViewController.lastGameScore = self.lastGameScore
-        } else if let gameOverViewController = segue.destination as? GameOverViewController {
+        if let gameOverViewController = segue.destination as? GameOverViewController {
             gameOverViewController.lastGameScore = self.lastGameScore
         }
     }

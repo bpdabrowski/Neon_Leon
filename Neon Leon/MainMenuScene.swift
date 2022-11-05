@@ -12,7 +12,6 @@ class MainMenuScene: SKScene {
     
     var playButton: Button!
     var reviewButton: Button!
-    var quarantineChallengeButton: Button!
     var tutorialButton: Button!
     var settingsButton: Button!
     var soundButton: Button!
@@ -20,11 +19,7 @@ class MainMenuScene: SKScene {
     let userDefaults = UserDefaults.standard
     var tutorialButtonImage: SKSpriteNode!
     let notification = UINotificationFeedbackGenerator()
-
     var showGameView: (() -> Void)?
-
-    var showGameViewQuarantineChallenge: (() -> Void)?
-    
     var settingsButtonSelected = false
 
     static let appStoreLink = URL(string: "https://apps.apple.com/us/app/neon-leion/id1352620219?ls=1")
@@ -55,7 +50,6 @@ class MainMenuScene: SKScene {
             newScene = GameScene(fileNamed: "Controls")
         }
 
-        newScene?.isQuarantineChallenge = isQuarantineChallenge
         newScene!.scaleMode = .aspectFill
         let reveal = SKTransition.fade(withDuration: 1.0)
         self.view?.presentScene(newScene!, transition: reveal)
@@ -69,20 +63,6 @@ class MainMenuScene: SKScene {
         playButton.alpha = 1
         playButton.zPosition = 10
         addChild(playButton)
-        
-        reviewButton = Button(defaultButtonImage: "ReviewButton", activeButtonImage: "ReviewButton_Selected", buttonAction: appStorePage)
-        reviewButton.position = CGPoint(x: 0, y: -825)
-        reviewButton.alpha = 1
-        reviewButton.zPosition = 10
-        addChild(reviewButton)
-
-        self.quarantineChallengeButton = Button(defaultButtonImage: "QChalButton", activeButtonImage: "QChalButton_Selected", buttonAction: { [weak self] in
-            self?.showGameViewQuarantineChallenge?()
-        })
-        self.quarantineChallengeButton.position = CGPoint(x: 0, y: -225)
-        self.quarantineChallengeButton.alpha = 1
-        self.quarantineChallengeButton.zPosition = 10
-        self.addChild(self.quarantineChallengeButton)
 
         tutorialButton = Button(defaultButtonImage: "TutorialButton", activeButtonImage: "TutorialButton_Selected", buttonAction: showTutorialScene)
         tutorialButton.position = CGPoint(x: 0, y: -525)
