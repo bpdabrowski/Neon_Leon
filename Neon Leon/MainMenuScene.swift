@@ -43,7 +43,7 @@ class MainMenuScene: SKScene {
         }
     }
     
-    func showGameScene(isQuarantineChallenge: Bool = false) {
+    func showGameScene() {
         var newScene = GameScene(fileNamed: "GameScene")
 
         if userDefaults.integer(forKey: "HIGHSCORE") <= 3 {

@@ -45,6 +45,8 @@
 		F2AF7D031FA4084A00DC5D2A /* NeonTubes2.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2AF7D021FA4084A00DC5D2A /* NeonTubes2.otf */; };
 		F2AF7D071FA528D400DC5D2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2AF7D051FA528D400DC5D2A /* Assets.xcassets */; };
 		F2B173322068803B000B2405 /* Level11.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B173312068803B000B2405 /* Level11.sks */; };
+		F2B250772916FE5400627F1A /* GameSceneContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B250762916FE5400627F1A /* GameSceneContactDelegate.swift */; };
+		F2B2507A2917074800627F1A /* NeonLeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B250792917074800627F1A /* NeonLeon.swift */; };
 		F2B335031EA4425C007801AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B335021EA4425C007801AC /* AppDelegate.swift */; };
 		F2B335051EA4425C007801AC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B335041EA4425C007801AC /* GameScene.sks */; };
 		F2B335071EA4425C007801AC /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B335061EA4425C007801AC /* Actions.sks */; };
@@ -123,6 +125,8 @@
 		F2AF7D021FA4084A00DC5D2A /* NeonTubes2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NeonTubes2.otf; sourceTree = "<group>"; };
 		F2AF7D051FA528D400DC5D2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2B173312068803B000B2405 /* Level11.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level11.sks; path = "Neon Leon/Levels/Level11.sks"; sourceTree = "<group>"; };
+		F2B250762916FE5400627F1A /* GameSceneContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneContactDelegate.swift; sourceTree = "<group>"; };
+		F2B250792917074800627F1A /* NeonLeon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeonLeon.swift; sourceTree = "<group>"; };
 		F2B334FF1EA4425C007801AC /* Neon Leon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Neon Leon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2B335021EA4425C007801AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2B335041EA4425C007801AC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -237,6 +241,22 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		F2B250752916FE4000627F1A /* ContactDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				F2B250762916FE5400627F1A /* GameSceneContactDelegate.swift */,
+			);
+			path = ContactDelegate;
+			sourceTree = "<group>";
+		};
+		F2B250782917071B00627F1A /* CharacterNodes */ = {
+			isa = PBXGroup;
+			children = (
+				F2B250792917074800627F1A /* NeonLeon.swift */,
+			);
+			path = CharacterNodes;
+			sourceTree = "<group>";
+		};
 		F2B334F61EA4425C007801AC = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +277,8 @@
 		F2B335011EA4425C007801AC /* Neon Leon */ = {
 			isa = PBXGroup;
 			children = (
+				F2B250782917071B00627F1A /* CharacterNodes */,
+				F2B250752916FE4000627F1A /* ContactDelegate */,
 				F2336DC4201B9CDC00F98729 /* Attributions */,
 				F231DC372088158B00619DC8 /* Neon Leon.entitlements */,
 				FF7437DB242B083700DA8006 /* GoogleService-Info.plist */,
@@ -451,6 +473,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFB5942A24300A7A0080B2D5 /* MainMenuViewController.swift in Sources */,
+				F2B2507A2917074800627F1A /* NeonLeon.swift in Sources */,
+				F2B250772916FE5400627F1A /* GameSceneContactDelegate.swift in Sources */,
 				F2B335091EA4425C007801AC /* GameScene.swift in Sources */,
 				F2B335511EA6F92D007801AC /* CGPoint+Extensions.swift in Sources */,
 				FFB59440243053770080B2D5 /* NetworkActivityIndicatorManager.swift in Sources */,

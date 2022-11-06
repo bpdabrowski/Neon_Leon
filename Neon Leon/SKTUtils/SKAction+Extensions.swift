@@ -54,4 +54,12 @@ public extension SKAction {
       node.position = CGPoint(x: originalPosition.x, y: originalPosition.y + yOffset)
     }
   }
+    
+    class func animate(withPrefix prefix: String, start: Int, end: Int, timePerFrame: TimeInterval) -> SKAction {
+        var textures = [SKTexture]()
+        for i in start...end {
+            textures.append(SKTexture(imageNamed: "\(prefix)\(i)"))
+        }
+        return SKAction.animate(with: textures, timePerFrame: timePerFrame)
+    }
 }

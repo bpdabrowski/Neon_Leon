@@ -78,7 +78,7 @@ class MainMenuViewController: NeonLeonViewController {
         return gameViewController
     }
 
-    func showGameView(isQuarantineChallenge: Bool = false) {
+    func showGameView() {
         if let gameViewController = self.gameViewController {
             self.present(gameViewController, animated: true, completion: nil)
         }
