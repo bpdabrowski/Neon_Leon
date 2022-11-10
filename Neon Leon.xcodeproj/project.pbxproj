@@ -47,6 +47,7 @@
 		F2B173322068803B000B2405 /* Level11.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B173312068803B000B2405 /* Level11.sks */; };
 		F2B250772916FE5400627F1A /* GameSceneContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B250762916FE5400627F1A /* GameSceneContactDelegate.swift */; };
 		F2B2507A2917074800627F1A /* NeonLeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B250792917074800627F1A /* NeonLeon.swift */; };
+		F2B2507C29177E7900627F1A /* GameEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B2507B29177E7900627F1A /* GameEnvironment.swift */; };
 		F2B335031EA4425C007801AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B335021EA4425C007801AC /* AppDelegate.swift */; };
 		F2B335051EA4425C007801AC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B335041EA4425C007801AC /* GameScene.sks */; };
 		F2B335071EA4425C007801AC /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B335061EA4425C007801AC /* Actions.sks */; };
@@ -127,6 +128,7 @@
 		F2B173312068803B000B2405 /* Level11.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Level11.sks; path = "Neon Leon/Levels/Level11.sks"; sourceTree = "<group>"; };
 		F2B250762916FE5400627F1A /* GameSceneContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneContactDelegate.swift; sourceTree = "<group>"; };
 		F2B250792917074800627F1A /* NeonLeon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeonLeon.swift; sourceTree = "<group>"; };
+		F2B2507B29177E7900627F1A /* GameEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEnvironment.swift; sourceTree = "<group>"; };
 		F2B334FF1EA4425C007801AC /* Neon Leon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Neon Leon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2B335021EA4425C007801AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2B335041EA4425C007801AC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				FFB4BE6E21AE3DF100DBBA44 /* LaunchScreen.storyboard */,
 				F2B335021EA4425C007801AC /* AppDelegate.swift */,
 				F258C6711F904D15004EB80E /* Button.swift */,
+				F2B2507B29177E7900627F1A /* GameEnvironment.swift */,
 				FFB5946B2431194D0080B2D5 /* GameOverScene.swift */,
 				FFB59467243111DB0080B2D5 /* GameOverViewController.swift */,
 				F2B335081EA4425C007801AC /* GameScene.swift */,
@@ -477,6 +480,7 @@
 				F2B250772916FE5400627F1A /* GameSceneContactDelegate.swift in Sources */,
 				F2B335091EA4425C007801AC /* GameScene.swift in Sources */,
 				F2B335511EA6F92D007801AC /* CGPoint+Extensions.swift in Sources */,
+				F2B2507C29177E7900627F1A /* GameEnvironment.swift in Sources */,
 				FFB59440243053770080B2D5 /* NetworkActivityIndicatorManager.swift in Sources */,
 				FFB59468243111DB0080B2D5 /* GameOverViewController.swift in Sources */,
 				F2B3355A1EA6F92D007801AC /* SKTTimingFunctions.swift in Sources */,
